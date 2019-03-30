@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。[toc]">
+    <meta name="description" content="2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。">
 <meta name="keywords" content="博客有关">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博客搭建">
 <meta property="og:url" content="http://yoursite.com/2019/03/29/博客搭建/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
-<meta property="og:description" content="2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。[toc]">
+<meta property="og:description" content="2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-03-29T15:52:17.058Z">
+<meta property="og:updated_time" content="2019-03-30T02:31:29.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客搭建">
-<meta name="twitter:description" content="2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。[toc]">
+<meta name="twitter:description" content="2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -166,9 +166,17 @@
             
         </h1>
         <div class="content">
-            <p>2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。<br>[toc]</p>
+            <p>2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。</p>
 <a id="more"></a>
-<h2 id="1-搭建步骤"><a href="#1-搭建步骤" class="headerlink" title="1.搭建步骤"></a>1.搭建步骤</h2><p>参考博客<a href="https://www.cnblogs.com/trista222/p/8017300.html" target="_blank" rel="noopener">：结合hexo在GitHub上搭建个人博客——全过程）</a></p>
+<!-- toc -->
+<ul>
+<li><a href="#1搭建步骤">1.搭建步骤</a></li>
+<li><a href="#2-安装主题">2 安装主题</a></li>
+<li><a href="#3-设置主题">3. 设置主题</a></li>
+<li><a href="#4编辑博客">4.编辑博客</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="1搭建步骤">1.搭建步骤</span></h2><p>参考博客<a href="https://www.cnblogs.com/trista222/p/8017300.html" target="_blank" rel="noopener">：结合hexo在GitHub上搭建个人博客——全过程）</a></p>
 <p>参考博客：<a href="https://zhuanlan.zhihu.com/p/35668237" target="_blank" rel="noopener">超详细Hexo+Github博客搭建小白教程</a></p>
 <p>搭建过程不难，主要过程为</p>
 <ul>
@@ -182,7 +190,7 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">XuZhikang@DESKTOP-U2I0R4H MINGW64 /e/Blog</span><br><span class="line">$ cd ~/.ssh</span><br><span class="line">bash: cd: /c/Users/XuZhikang/.ssh: No such file or directory</span><br></pre></td></tr></table></figure>
 <p>原因是安装git后没有ssh</p>
 <p>解决方法参考博客：<br><a href="https://blog.csdn.net/efine_dxq/article/details/79094613" target="_blank" rel="noopener">在windows7下安装git后没有ssh</a></p>
-<h2 id="2-安装主题"><a href="#2-安装主题" class="headerlink" title="2 安装主题"></a>2 安装主题</h2><p>主题下载网站：<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+<h2><span id="2-安装主题">2 安装主题</span></h2><p>主题下载网站：<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
 <p>期间遇到一个问题：我最先下载的主题是hexo-theme-A-RSnippet,但是这个好像有问题，还是我没有设置正确，不能正常更新主题。</p>
 <p>推荐另外的一个主题是：icuras</p>
 <p>主题的安装的方法：</p>
@@ -193,7 +201,7 @@
 </ul>
 <p>更改主题后：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo g 生成静态网页</span><br><span class="line">hexo s 打开本地服务器</span><br><span class="line">hexo clean 清除缓存</span><br><span class="line">hexo d 上传到github</span><br></pre></td></tr></table></figure></p>
 <p>有一个技巧就是不必要每次更改之后都关闭本地服务器，再重新打开本地无服务，*<em>直接刷新网页，可能更改就已经生效</em>。</p>
-<h2 id="3-设置主题"><a href="#3-设置主题" class="headerlink" title="3. 设置主题"></a>3. 设置主题</h2><p>主题安装之后，需要改变E:\Blog\themes\icarus下的_config.yml参数</p>
+<h2><span id="3-设置主题">3. 设置主题</span></h2><p>主题安装之后，需要改变E:\Blog\themes\icarus下的_config.yml参数</p>
 <p>我改动的项为：</p>
 <ul>
 <li>menu:下英文改为中文 主页 归类 分类 标签</li>
@@ -204,7 +212,7 @@
 </ul>
 <p>icarus的可玩性貌似没有那么高，如果想更多的去添加博客的网页的功能，可以试一试Next这个主题。</p>
 <p>bilibili上有专门讲解的<a href="https://www.bilibili.com/video/av17653359/?p=23" target="_blank" rel="noopener">使用Hexo博客搭建的个人博客，使用Next主题来进行优化改造</a></p>
-<h2 id="4-编辑博客"><a href="#4-编辑博客" class="headerlink" title="4.编辑博客"></a>4.编辑博客</h2><p>在E:\Blog\source_posts目录下打开Git bash, 创建新文章：</p>
+<h2><span id="4编辑博客">4.编辑博客</span></h2><p>在E:\Blog\source_posts目录下打开Git bash, 创建新文章：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;博客搭建&quot;</span><br></pre></td></tr></table></figure>
 <p>这里提供一些基本方法</p>
 <p>博客的开头你需要更改才能适配到分类和标签下</p>
@@ -245,13 +253,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/03/29/我的第一篇文章/">
-                <span class="level-item">我的第一篇文章</span>
-                <i class="level-item fas fa-chevron-right"></i>
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/03/30/博客使用/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">博客使用</span>
             </a>
         </div>
+        
         
     </div>
 </div>
@@ -310,7 +318,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        1
                     </p>
                 </div>
             </div>
@@ -388,15 +396,7 @@
                 <span class="level-item">博客</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/杂项/">
-            <span class="level-start">
-                <span class="level-item">杂项</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -410,7 +410,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a>
+        <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a>
     </div>
 </div>
 
@@ -427,6 +427,25 @@
         
         <article class="media">
             
+            <a href="/2019/03/30/博客使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="博客使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-30T01:33:01.000Z">2019-03-30</time></div>
+                    <a href="/2019/03/30/博客使用/" class="has-link-black-ter is-size-6">博客使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/博客/">博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/29/博客搭建/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="博客搭建">
@@ -439,25 +458,6 @@
                     <a href="/2019/03/29/博客搭建/" class="has-link-black-ter is-size-6">博客搭建</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/博客/">博客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/29/我的第一篇文章/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="我的第一篇文章">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T14:53:19.000Z">2019-03-29</time></div>
-                    <a href="/2019/03/29/我的第一篇文章/" class="has-link-black-ter is-size-6">我的第一篇文章</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/杂项/">杂项</a>
                     </p>
                 </div>
             </div>
@@ -500,15 +500,15 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/其他/">
-                        <span class="tag">其他</span>
+                    <a class="tags has-addons" href="/tags/博客有关/">
+                        <span class="tag">博客有关</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/博客有关/">
-                        <span class="tag">博客有关</span>
+                    <a class="tags has-addons" href="/tags/博客遇到的问题/">
+                        <span class="tag">博客遇到的问题</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -538,6 +538,25 @@
         
         <article class="media">
             
+            <a href="/2019/03/30/博客使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="博客使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-30T01:33:01.000Z">2019-03-30</time></div>
+                    <a href="/2019/03/30/博客使用/" class="has-link-black-ter is-size-6">博客使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/博客/">博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/29/博客搭建/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="博客搭建">
@@ -550,25 +569,6 @@
                     <a href="/2019/03/29/博客搭建/" class="has-link-black-ter is-size-6">博客搭建</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/博客/">博客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/29/我的第一篇文章/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="我的第一篇文章">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T14:53:19.000Z">2019-03-29</time></div>
-                    <a href="/2019/03/29/我的第一篇文章/" class="has-link-black-ter is-size-6">我的第一篇文章</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/杂项/">杂项</a>
                     </p>
                 </div>
             </div>
@@ -611,15 +611,15 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/其他/">
-                        <span class="tag">其他</span>
+                    <a class="tags has-addons" href="/tags/博客有关/">
+                        <span class="tag">博客有关</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/博客有关/">
-                        <span class="tag">博客有关</span>
+                    <a class="tags has-addons" href="/tags/博客遇到的问题/">
+                        <span class="tag">博客遇到的问题</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

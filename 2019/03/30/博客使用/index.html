@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: 其他 - 徐志康的技术博客</title>
+<title>博客使用 - 徐志康的技术博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="徐志康的技术博客">
-<meta property="og:url" content="http://yoursite.com/tags/其他/index.html">
+    <meta name="description" content="记录下博客使用过程中遇到的问题">
+<meta name="keywords" content="博客遇到的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="博客使用">
+<meta property="og:url" content="http://yoursite.com/2019/03/30/博客使用/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="记录下博客使用过程中遇到的问题">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-03-30T02:31:08.747Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="徐志康的技术博客">
+<meta name="twitter:title" content="博客使用">
+<meta name="twitter:description" content="记录下博客使用过程中遇到的问题">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                <img src="/images/logo.svg" alt="博客使用" height="28">
             
             </a>
         </div>
@@ -133,33 +138,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">其他</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-29T14:53:19.000Z">2019-03-29</time>
+                <time class="level-item has-text-grey" datetime="2019-03-30T01:33:01.000Z">2019-03-30</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/杂项/">杂项</a>
+                <a class="has-link-grey -link" href="/categories/博客/">博客</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 13 个字)
+                    2 分钟 读完 (大约 300 个字)
                 </span>
                 
                 
@@ -168,11 +162,41 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/03/29/我的第一篇文章/">我的第一篇文章</a>
+                博客使用
             
         </h1>
         <div class="content">
-            <h1 id="这是我的第一篇文章"><a href="#这是我的第一篇文章" class="headerlink" title="这是我的第一篇文章"></a>这是我的第一篇文章</h1><h2 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h2>
+            <p>记录下博客使用过程中遇到的问题<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#1hexo-d后-error-deployer-not-found-git">1.hexo d后 ERROR Deployer not found: git</a></li>
+<li><a href="#2hexo添加toc支持生成文章目录">2.Hexo添加Toc支持，生成文章目录</a></li>
+<li><a href="#3使用本地的markdown编辑器">3.使用本地的Markdown编辑器</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="1hexo-d后-error-deployer-not-found-git">1.hexo d后 ERROR Deployer not found: git</span></h2><p>解决办法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<p>即可</p>
+<h2><span id="2hexo添加toc支持生成文章目录">2.Hexo添加Toc支持，生成文章目录</span></h2><p>Hexo本身是不支持生成文章目录的，通过如下的方法</p>
+<p>参考博客<br><a href="https://imys.net/20150514/hexo-toc.html" target="_blank" rel="noopener">Hexo添加Toc支持，生成文章目录</a></p>
+<p>后面发现不能支持生成目录，是在markdown的笔记中写法不对</p>
+<p>开头应该是：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- toc --&gt;</span><br></pre></td></tr></table></figure></p>
+<p>而不是有道云中的[toc]</p>
+<h2><span id="3使用本地的markdown编辑器">3.使用本地的Markdown编辑器</span></h2><p>原来用有道云打开，但是这个蛋疼的是，不会保存本地，只能上传。于是乎下载一个编辑器。</p>
+<p>逛了一圈，有收费的还有英文不支持中文的，还有没法调实时显示的。还是用很多人用的MarkdownPad吧。<br><a href="http://markdownpad.com/download.html" title="MarkdonwPad下载地址" target="_blank" rel="noopener">下载地址</a></p>
+<p>安装之后蛋疼的是，右侧也没法实时显示，一直提示有个Bug。</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9ed41a469f7.png" alt="1.png" title="1.png"></p>
+<p>win8和win10,没法实时渲染。解决办法：<br><a href="https://www.jianshu.com/p/38415413ea46" target="_blank" rel="noopener">win10下MarkdownPad 2的html渲染出错解决</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/博客遇到的问题/">博客遇到的问题</a>
+                </div>
+            </div>
         </div>
         
         
@@ -182,9 +206,30 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/03/29/博客搭建/">
+                <span class="level-item">博客搭建</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -240,7 +285,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        1
                     </p>
                 </div>
             </div>
@@ -318,15 +363,7 @@
                 <span class="level-item">博客</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/杂项/">
-            <span class="level-start">
-                <span class="level-item">杂项</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -340,7 +377,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a>
+        <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a>
     </div>
 </div>
 
@@ -357,6 +394,25 @@
         
         <article class="media">
             
+            <a href="/2019/03/30/博客使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="博客使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-30T01:33:01.000Z">2019-03-30</time></div>
+                    <a href="/2019/03/30/博客使用/" class="has-link-black-ter is-size-6">博客使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/博客/">博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/29/博客搭建/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="博客搭建">
@@ -369,25 +425,6 @@
                     <a href="/2019/03/29/博客搭建/" class="has-link-black-ter is-size-6">博客搭建</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/博客/">博客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/29/我的第一篇文章/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="我的第一篇文章">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T14:53:19.000Z">2019-03-29</time></div>
-                    <a href="/2019/03/29/我的第一篇文章/" class="has-link-black-ter is-size-6">我的第一篇文章</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/杂项/">杂项</a>
                     </p>
                 </div>
             </div>
@@ -430,15 +467,15 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/其他/">
-                        <span class="tag">其他</span>
+                    <a class="tags has-addons" href="/tags/博客有关/">
+                        <span class="tag">博客有关</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/博客有关/">
-                        <span class="tag">博客有关</span>
+                    <a class="tags has-addons" href="/tags/博客遇到的问题/">
+                        <span class="tag">博客遇到的问题</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -468,6 +505,25 @@
         
         <article class="media">
             
+            <a href="/2019/03/30/博客使用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="博客使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-30T01:33:01.000Z">2019-03-30</time></div>
+                    <a href="/2019/03/30/博客使用/" class="has-link-black-ter is-size-6">博客使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/博客/">博客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/29/博客搭建/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="博客搭建">
@@ -480,25 +536,6 @@
                     <a href="/2019/03/29/博客搭建/" class="has-link-black-ter is-size-6">博客搭建</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/博客/">博客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/29/我的第一篇文章/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="我的第一篇文章">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-29T14:53:19.000Z">2019-03-29</time></div>
-                    <a href="/2019/03/29/我的第一篇文章/" class="has-link-black-ter is-size-6">我的第一篇文章</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/杂项/">杂项</a>
                     </p>
                 </div>
             </div>
@@ -541,15 +578,15 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/其他/">
-                        <span class="tag">其他</span>
+                    <a class="tags has-addons" href="/tags/博客有关/">
+                        <span class="tag">博客有关</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/博客有关/">
-                        <span class="tag">博客有关</span>
+                    <a class="tags has-addons" href="/tags/博客遇到的问题/">
+                        <span class="tag">博客遇到的问题</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -571,7 +608,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                    <img src="/images/logo.svg" alt="博客使用" height="28">
                 
                 </a>
                 <p class="is-size-7">
