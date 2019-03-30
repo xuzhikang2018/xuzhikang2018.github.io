@@ -16,7 +16,7 @@
 <meta property="og:description" content="主要来自知乎的整理">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-03-30T02:54:51.543Z">
+<meta property="og:updated_time" content="2019-03-30T03:29:05.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字IC设计面试100题">
 <meta name="twitter:description" content="主要来自知乎的整理">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    24 分钟 读完 (大约 3593 个字)
+                    28 分钟 读完 (大约 4200 个字)
                 </span>
                 
                 
@@ -186,6 +186,9 @@
 <li><a href="#14fpga芯片内有哪两种的存储器资源">14.FPGA芯片内有哪两种的存储器资源？</a></li>
 <li><a href="#15什么是时钟抖动">15.什么是时钟抖动？</a></li>
 <li><a href="#16fpga设计中对时钟的使用">16.FPGA设计中对时钟的使用</a></li>
+<li><a href="#17-fpga设计中如何实现同步时序电路的延时">17: FPGA设计中如何实现同步时序电路的延时</a></li>
+<li><a href="#18fpga中可以综合实现为ramromcam的三种资源及其他注意事项">18.FPGA中可以综合实现为RAM/ROM/CAM的三种资源及其他注意事项？</a></li>
+<li><a href="#19-xilinx中与全局时钟资源和dll相关的硬件原语">19: Xilinx中与全局时钟资源和DLL相关的硬件原语</a></li>
 </ul>
 <!-- tocstop -->
 <p>原文地址<a href="https://zhuanlan.zhihu.com/p/42201263" target="_blank" rel="noopener">ictown_数字IC设计工程师笔试面试经典100题-有答案陈恩</a></p>
@@ -250,7 +253,17 @@
 <h3><span id="14fpga芯片内有哪两种的存储器资源">14.FPGA芯片内有哪两种的存储器资源？</span></h3><p>答：FPGA芯片内部有两种存储器资源：一种是BLOCK RAM，另一种是由LUT配置成的内部存储器（分布式RAM）。</p>
 <p>BLOCK RAM是由一定数量固定大小的存储块构成的，使用BLOCK RAM资源不占额外的逻辑资源，而且速度快。但是使用的时候消耗的BLOCK RAM资源是其块大小的整数倍。</p>
 <h3><span id="15什么是时钟抖动">15.什么是时钟抖动？</span></h3><p>答：时钟抖动是指芯片的某一个点上时钟周期发生暂时性的变化，也就是时钟周期在不同的周期上可能加长或者缩短。它是一个平均值为0的平均变量。</p>
-<h3><span id="16fpga设计中对时钟的使用">16.FPGA设计中对时钟的使用</span></h3><p>答</p>
+<h3><span id="16fpga设计中对时钟的使用">16.FPGA设计中对时钟的使用</span></h3><p>答：FPGA芯片有固有的时钟路由，这些路由能有减少时钟抖动和偏差。需要对时钟进行相位移动和变频的时候，一般不允许对时钟进行逻辑操作，这样会增加时钟的偏差和抖动，还会使时钟带上毛刺，<u>一般的处理方法是采用FPGA芯片自带的时钟管理器PLL,DLL或DCM，或者把逻辑转换到触发器的D输入</u>（这些也是对时钟逻辑操作的替代方案）</p>
+<h3><span id="17-fpga设计中如何实现同步时序电路的延时">17: FPGA设计中如何实现同步时序电路的延时</span></h3><p>答：首先异步电路的延时实现：异步电路一半是通过加Buffer、两级与非门等来实现延时，但这不是很适合同步电路实现延时。<u>在同步电路中，对于比较大的和特殊的要求的延时，一般是通过高速时钟产生计数器，通过计数器来控制延时，对于比较小的延时，可以通过触发器打一拍，不过这样只能延迟一个时钟周期。</u></p>
+<h3><span id="18fpga中可以综合实现为ramromcam的三种资源及其他注意事项">18.FPGA中可以综合实现为RAM/ROM/CAM的三种资源及其他注意事项？</span></h3><p>答：<u>三种资源：BLOCK RAM，触发器（FF），查找表（LUT）;</u></p>
+<p>注意事项：</p>
+<ol>
+<li>在生成RAM等存储单元时，应该首选BLOCK RAM；原因有二：第一：使用BLOCK RAM等资源，可以节约更多的FF和4-LUT等底层可编程单元。使用BLOCK RAM可以说是“不用白不用”，是最大程度发挥器件性能，节约成本的一种体现。第二：BLOCK RAM是一种可以配置的硬件结构，其可靠性和速度与用LUT和Register构建的存储更有优势的。</li>
+<li>弄清FPGA的硬件结构，合理使用BLOCK RAM资源。</li>
+<li>分析BLOCK RAM容量，高效使用BLOC RAM资源。</li>
+<li>分布式RAM资源（Distribute RAM）</li>
+</ol>
+<h3><span id="19-xilinx中与全局时钟资源和dll相关的硬件原语">19: Xilinx中与全局时钟资源和DLL相关的硬件原语</span></h3><p>答：常用的与全局时钟资源有关的Xilinx器件原语包括：<br>IBUFG,IBUFGS,BUFG,BUFGP,BUFGCE,BUFGMX,BUFGDLL,DCM等，关于各个器件原语的解释可以参考《FPGA设计指导准则》p50部分</p>
 
         </div>
         
