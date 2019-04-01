@@ -16,7 +16,7 @@
 <meta property="og:description" content="主要来自知乎的整理">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-03-30T03:29:05.721Z">
+<meta property="og:updated_time" content="2019-04-01T08:06:46.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字IC设计面试100题">
 <meta name="twitter:description" content="主要来自知乎的整理">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    28 分钟 读完 (大约 4200 个字)
+                    38 分钟 读完 (大约 5647 个字)
                 </span>
                 
                 
@@ -188,7 +188,13 @@
 <li><a href="#16fpga设计中对时钟的使用">16.FPGA设计中对时钟的使用</a></li>
 <li><a href="#17-fpga设计中如何实现同步时序电路的延时">17: FPGA设计中如何实现同步时序电路的延时</a></li>
 <li><a href="#18fpga中可以综合实现为ramromcam的三种资源及其他注意事项">18.FPGA中可以综合实现为RAM/ROM/CAM的三种资源及其他注意事项？</a></li>
-<li><a href="#19-xilinx中与全局时钟资源和dll相关的硬件原语">19: Xilinx中与全局时钟资源和DLL相关的硬件原语</a></li>
+<li><a href="#19-xilinx中与全局时钟资源和dll相关的硬件原语">19. Xilinx中与全局时钟资源和DLL相关的硬件原语</a></li>
+<li><a href="#20-hdl语言的层次概念">20. HDL语言的层次概念？</a></li>
+<li><a href="#21查找表的原理与结构">21:查找表的原理与结构？</a></li>
+<li><a href="#22ic设计前端到后端的流程的eda工具">22.IC设计前端到后端的流程的EDA工具？</a></li>
+<li><a href="#23寄生电容效应在ic设计中怎样克服和利用">*23.寄生电容效应在IC设计中怎样克服和利用</a></li>
+<li><a href="#24设计题1-用触发器和逻辑门设计一个一位加法器">24.设计题1–用触发器和逻辑门设计一个一位加法器</a></li>
+<li><a href="#25-设计自动饮料贩卖机">25. 设计自动饮料贩卖机</a></li>
 </ul>
 <!-- tocstop -->
 <p>原文地址<a href="https://zhuanlan.zhihu.com/p/42201263" target="_blank" rel="noopener">ictown_数字IC设计工程师笔试面试经典100题-有答案陈恩</a></p>
@@ -263,7 +269,38 @@
 <li>分析BLOCK RAM容量，高效使用BLOC RAM资源。</li>
 <li>分布式RAM资源（Distribute RAM）</li>
 </ol>
-<h3><span id="19-xilinx中与全局时钟资源和dll相关的硬件原语">19: Xilinx中与全局时钟资源和DLL相关的硬件原语</span></h3><p>答：常用的与全局时钟资源有关的Xilinx器件原语包括：<br>IBUFG,IBUFGS,BUFG,BUFGP,BUFGCE,BUFGMX,BUFGDLL,DCM等，关于各个器件原语的解释可以参考《FPGA设计指导准则》p50部分</p>
+<h3><span id="19-xilinx中与全局时钟资源和dll相关的硬件原语">19. Xilinx中与全局时钟资源和DLL相关的硬件原语</span></h3><p>答：常用的与全局时钟资源有关的Xilinx器件原语包括：<br>IBUFG,IBUFGS,BUFG,BUFGP,BUFGCE,BUFGMX,BUFGDLL,DCM等，关于各个器件原语的解释可以参考《FPGA设计指导准则》p50部分</p>
+<h3><span id="20-hdl语言的层次概念">20. HDL语言的层次概念？</span></h3><p>答：HDL语言是分层次的、类型的，最常用的层次概念有系统与标准级，行为级，寄存器传输级和门级。</p>
+<p>系统级，算法级，RTL级(行为级)，门级，开关级。</p>
+<h3><span id="21查找表的原理与结构">21:查找表的原理与结构？</span></h3><p>答：查找表（Look up table）简称LUT, <u>LUT本质上就是一个RAM</u>。目前FPGA中多使用4输入LUT,所以每一个LUT可以看成一个有4位地址线的16x1的RAM。当用户通过原理图或者HDL语言描述了一个逻辑电路，PLD/FPGA开发软件会自动计算逻辑电路的所有可能的结果，并把结果事先写入RAM，每输入一个信号进行逻辑运算就等于输入一个地址进行查表，找出地址对应的内容，然后输出即可。</p>
+<h3><span id="22ic设计前端到后端的流程的eda工具">22.IC设计前端到后端的流程的EDA工具？</span></h3><p>答：<u>设计前端也称为逻辑设计，后端也称为物理设计，两者并没有严格的界限，一般涉及与工艺有关的设计就是后端设计。</u>  </p>
+<ol>
+<li>规格制定：客户向芯片设计公司提出设计要求。</li>
+<li>详细设计：芯片设计公司（Fabless）根据客户提出的规格要求，拿出设计解决方案和具体实现架构，划分模块功能。目前架构的验证一般基于systemC语言，对价后模型的仿真可以使用systemC的仿真工具。例如CoCentric和Visual Elite等。</li>
+<li>HDL编码：设计输入工具：ultra， visiual VHDL等</li>
+<li>仿真验证：modelsim</li>
+<li>逻辑综合：synplify</li>
+<li>静态时序分析：synopsys的Prime Time</li>
+<li>形式验证：Synopsys的Formality</li>
+</ol>
+<h3><span id="23寄生电容效应在ic设计中怎样克服和利用">*23.寄生电容效应在IC设计中怎样克服和利用</span></h3><p>或者，IC设计过程中将寄生效应怎样反馈影响设计师的设计方案？<br>答：所谓寄生效应就是那些溜进你的PCB并在电路中大破坏、令人头疼、原因不明的小故障。他们就是<u>渗入高速电路中隐藏的寄生电容和寄生电感。</u>其中包括由封装引脚和印制线过长形成的寄生电感；<strong>焊盘到地、焊盘到电源平面和焊盘到印制线之间形成的寄生电容</strong>；通孔之间的相互影响，以及许多其它可能的寄生效应。</p>
+<p>理想状态下，导线是没有电阻，电容和电感的。而在实际中，导线用到了金属铜，它有一定的电阻率，如果导线足够长，积累的电阻也相当可观。两条平行的导线，如果互相之间有电压差异，就相当于形成了一个<strong>平行板电容器</strong>。通电的导线周围会形成磁场（特别是电流变化时），磁场会产生感生电场，会对电子的移动产生影响，可以说每条实际的导线包括元器件的管脚都会产生<strong>感生电动势</strong>，这也就是寄生电感。</p>
+<p>在直流或者低频情况下，这种寄生效应看不太出来。<strong>而在交流特别是高频交流条件下，影响就非常巨大</strong>了。根据复阻抗公式，电容、电感会在交流情况下会对电流的移动产生巨大阻碍，也就可以折算成阻抗。这种寄生效应很难克服，也难摸到。只能通过<strong>优化线路，尽量使用管脚短的SMT元器件来减少其影响</strong>，要完全消除是不可能的。</p>
+<h3><span id="24设计题1用触发器和逻辑门设计一个一位加法器">24.设计题1–用触发器和逻辑门设计一个一位加法器</span></h3><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">module</span> (clk, rst_n, current_stage, carryin,next_stage,carryout);</span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;<span class="hljs-comment">//时钟和复位，复位低电平有效</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">input</span> current_stage; <span class="hljs-comment">//输人加数 </span></span><br><span class="line"><span class="hljs-keyword">input</span> carryin; <span class="hljs-comment">//输入进位</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> next_stage; <span class="hljs-comment">//加法输出</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> carryout;<span class="hljs-comment">// 输出进位标识</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> rst_n)<span class="hljs-keyword">begin</span><span class="hljs-comment">//触发器</span></span><br><span class="line">	<span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">		carryout &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">		next_stage &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">	<span class="hljs-keyword">end</span></span><br><span class="line">	<span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">		carryout &lt;= carryin &amp;&amp; current_stage; <span class="hljs-comment">//与门</span></span><br><span class="line">		next_stage &lt;= (~carryin&amp;&amp;current_stage)||(carryin&amp;&amp;~current_stage); <span class="hljs-comment">//两个与门加上或门</span></span><br><span class="line">		</span><br><span class="line">	<span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line">		</span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="25-设计自动饮料贩卖机">25. 设计自动饮料贩卖机</span></h3><p>要求：饮料10分钱，硬币有5分钱和10分钱两种，并考虑找零 </p>
+<ol>
+<li>画出fsm(有限状态机)</li>
+<li>用verilog编程，语法要符合FPGA设计的要求</li>
+<li>设计工程中可食用的工具及设计过程</li>
+</ol>
+<p>设计过程：  </p>
+<ul>
+<li>首先确定输入输出，A=1表示投入10分，B=1表示投入5分，Y=1表示弹出饮料，Z=1表示找零</li>
+<li>画出电路的状态，S0表示没有进行投币，S1表示已有的5分硬币</li>
+<li>画出状态转移图</li>
+</ul>
+<figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">module</span> test(clk, rst_n, a, b, y, z);</span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;</span><br><span class="line"><span class="hljs-keyword">input</span> a, b; <span class="hljs-comment">//a, 投入5分；b, 投入10分</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> y; <span class="hljs-comment">//弹出饮料</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> z; <span class="hljs-comment">//找零</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">reg</span> state, next_state; <span class="hljs-comment">//两段式状态机写法</span></span><br><span class="line"><span class="hljs-keyword">parameter</span> s0 = <span class="hljs-number">1'b0</span>, s1 = <span class="hljs-number">1'b1</span>;<span class="hljs-comment">//s0: 没有进行投币， s1,已经有5分硬币</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) </span><br><span class="line">	state &lt;= s0; </span><br><span class="line"><span class="hljs-keyword">else</span> </span><br><span class="line">	state &lt;= next_state;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">	y &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">	z &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">	<span class="hljs-keyword">case</span>(state)</span><br><span class="line">		s0: <span class="hljs-keyword">if</span>(a&amp;&amp;!b) next_state &lt;= s1; <span class="hljs-comment">//投入了5分</span></span><br><span class="line">			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!a&amp;&amp;b) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//投入了10分</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span></span><br><span class="line">			<span class="hljs-keyword">else</span> next_state &lt;= s0;</span><br><span class="line">		s1: <span class="hljs-keyword">if</span>(a&amp;&amp;!b) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//再投入5分</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span>	</span><br><span class="line">			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!a&amp;&amp;b) <span class="hljs-keyword">begin</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">				z &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span></span><br><span class="line">			<span class="hljs-keyword">else</span> next_state &lt;= s1;</span><br><span class="line">		<span class="hljs-keyword">default</span> : next_state &lt;= s0;</span><br><span class="line">	<span class="hljs-keyword">endcase</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>状态转移图如下所示：<br><img src="https://i.loli.net/2019/04/01/5ca1c5cbcd28c.png" alt="状态转移图.png" title="状态转移图.png"></p>
 
         </div>
         
@@ -296,6 +333,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/04/01/Intel概率计算报道/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Intel概率计算报道</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -352,7 +396,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        3
+                        4
                     </p>
                 </div>
             </div>
@@ -362,7 +406,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        3
                     </p>
                 </div>
             </div>
@@ -372,7 +416,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        3
+                        4
                     </p>
                 </div>
             </div>
@@ -435,6 +479,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Intel与概率计算/">
+            <span class="level-start">
+                <span class="level-item">Intel与概率计算</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/博客/">
             <span class="level-start">
                 <span class="level-item">博客</span>
@@ -462,7 +514,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a>
+        <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 10px;">项目</a>
     </div>
 </div>
 
@@ -476,6 +528,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/01/Intel概率计算报道/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Intel概率计算报道">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T09:37:54.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/Intel概率计算报道/" class="has-link-black-ter is-size-6">Intel概率计算报道</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -547,6 +618,17 @@
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/03/">
                 <span class="level-start">
                     <span class="level-item">三月 2019</span>
@@ -587,6 +669,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/求职/">
                         <span class="tag">求职</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/项目/">
+                        <span class="tag">项目</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -616,6 +705,25 @@
         
         <article class="media">
             
+            <a href="/2019/04/01/Intel概率计算报道/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Intel概率计算报道">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T09:37:54.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/Intel概率计算报道/" class="has-link-black-ter is-size-6">Intel概率计算报道</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/30/数字IC设计面试100题/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="数字IC设计面试100题">
@@ -684,6 +792,17 @@
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/03/">
                 <span class="level-start">
                     <span class="level-item">三月 2019</span>
@@ -724,6 +843,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/求职/">
                         <span class="tag">求职</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/项目/">
+                        <span class="tag">项目</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
