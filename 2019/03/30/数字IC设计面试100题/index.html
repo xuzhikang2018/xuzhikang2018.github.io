@@ -16,7 +16,7 @@
 <meta property="og:description" content="主要来自知乎的整理">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-07T02:14:30.861Z">
+<meta property="og:updated_time" content="2019-04-08T01:43:56.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字IC设计面试100题">
 <meta name="twitter:description" content="主要来自知乎的整理">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 9207 个字)
+                    1 小时 读完 (大约 9950 个字)
                 </span>
                 
                 
@@ -220,6 +220,11 @@
 <li><a href="#48用你熟悉的设计方式设计一个可以预置初值的7进制循环计数器15进制呢">48.用你熟悉的设计方式设计一个可以预置初值的7进制循环计数器，15进制呢？</a></li>
 <li><a href="#49你知道的可编程逻辑器件有哪些">49.你知道的可编程逻辑器件有哪些？</a></li>
 <li><a href="#50用verilog或vhdl写一段代码实现消除一个glitch毛刺">50.用Verilog或VHDL写一段代码，实现消除一个glitch(毛刺)？</a></li>
+<li><a href="#51-sram-flash-memory-dram-ssram和sdram有什么区别">51. SRAM、FLASH、Memory, DRAM, SSRAM和SDRAM有什么区别？</a></li>
+<li><a href="#52有四种复用方式频分多路复用写出另外三种">52.有四种复用方式，频分多路复用，写出另外三种？</a></li>
+<li><a href="#未解答53asic设计流程中什么时候修正setup-time-violation-和hold-time-violation如何修正解释setup和hold-time-violation画图说明并说明解决办法">未解答53.ASIC设计流程中什么时候修正Setup time violation 和Hold time violation?如何修正？解释setup和hold time violation，画图说明，并说明解决办法。</a></li>
+<li><a href="#54给出一个组合逻辑电路要求分析逻辑功能">54.给出一个组合逻辑电路，要求分析逻辑功能。</a></li>
+<li><a href="#55如何防止亚稳态">55：如何防止亚稳态？</a></li>
 </ul>
 <!-- tocstop -->
 <p>原文地址<a href="https://zhuanlan.zhihu.com/p/42201263" target="_blank" rel="noopener">ictown_数字IC设计工程师笔试面试经典100题-有答案陈恩</a></p>
@@ -429,6 +434,27 @@
 <p>15进制循环计算器，对应的将上面位宽加1，计数满和达到计数值改为14</p>
 <h3><span id="49你知道的可编程逻辑器件有哪些">49.你知道的可编程逻辑器件有哪些？</span></h3><p>答：PAL，PLA，GAL，CPLD，FPGA</p>
 <h3><span id="50用verilog或vhdl写一段代码实现消除一个glitch毛刺">50.用Verilog或VHDL写一段代码，实现消除一个glitch(毛刺)？</span></h3><p>答：将通过传输过来的信号经过两级触发器就可以消除毛刺（这种消除毛刺的方式是需要满足一定的条件的，并不能保证一定可以消除）<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> (clk, rst_n, data_in, data_out);</span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;</span><br><span class="line"><span class="hljs-keyword">input</span> data_in;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">output</span> data_out;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">reg</span> data_r1, data_r2;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">	data_r1 &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">	data_r2 &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">	data_r1 &lt;= data_in;</span><br><span class="line">	data_r2 &lt;= data_r1;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">assign</span> data_out &lt;= data_r2;</span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
+<h3><span id="51-sram-flash-memory-dram-ssram和sdram有什么区别">51. SRAM、FLASH、Memory, DRAM, SSRAM和SDRAM有什么区别？</span></h3><p>答：SRAM:静态随机存储，存取速度快，但是容量小，掉电后数据会丢失，不像DRAM那样需要不停的REFLASH，制造成本比较高，通常用来作为(CACHE)记忆体使用。</p>
+<p>FLASH:闪存，存取速度慢，容量大，掉电后数据不会丢失</p>
+<p>DRAM:动态随机存储器，必须不断的更新加强（REFRESHED）电位差，否则电位差将降低至无法有足够的能力表现每一个记忆体单位处于何种状态。价格是比SRAM便宜，但是访问速度慢，耗电量较大，常用作计算机的内存使用。</p>
+<p>SSRAM:即同步静态随机存储器。对于SSRAM的所有访问都在时钟的上升、下降沿启动。地址、数据输入和其他控制信号均于时钟信号相关。</p>
+<p>SDRAM:即同步动态随机存取存储器</p>
+<h3><span id="52有四种复用方式频分多路复用写出另外三种">52.有四种复用方式，频分多路复用，写出另外三种？</span></h3><p>答：四种复用方式，频分多路复用（FDMA），时分多路复用（TDMA），码分多路复用（CDMA），波分多路复用（WCDMA）。</p>
+<h3><span id="未解答53asic设计流程中什么时候修正setup-time-violation-和hold-time-violation如何修正解释setup和hold-time-violation画图说明并说明解决办法">未解答53.ASIC设计流程中什么时候修正Setup time violation 和Hold time violation?如何修正？解释setup和hold time violation，画图说明，并说明解决办法。</span></h3><h3><span id="54给出一个组合逻辑电路要求分析逻辑功能">54.给出一个组合逻辑电路，要求分析逻辑功能。</span></h3><p>答：所谓组合逻辑电路的分析，就是要找出给定逻辑电路输入和输出的关系，并指定电路的逻辑功能。</p>
+<p>分析的过程一般按以下的步骤进行：</p>
+<ol>
+<li>根据给定的逻辑电路，从输入端开始，逐级的推导出输出端的逻辑函数表达式。</li>
+<li>根据输出函数的表达式列出真值表</li>
+<li>用文字概括电路的逻辑功能</li>
+</ol>
+<h3><span id="55如何防止亚稳态">55：如何防止亚稳态？</span></h3><p>答：亚稳态是指触发器无法在某个规定时间段内达到一个可以确认的状态，当一个触发器进入亚稳态时，即无法预测该单元的输出电平，也无法预测何时输出才能稳定在某个正确的电平。在这个稳定期间，触发器输出一些中间级电平，或者可能处于震荡状态，并且这种无用的输出电平可以沿信号通道上的各个触发器级联式传播下去。</p>
+<p>解决方法：</p>
+<ol>
+<li>降低系统的时钟频率</li>
+<li>用更快的FF</li>
+<li>引入同步机制，防止亚稳态（可以用两级触发器）</li>
+<li>改善时钟质量，用边沿变化更快的时钟信号</li>
+</ol>
 
         </div>
         
@@ -534,7 +560,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        5
+                        4
                     </p>
                 </div>
             </div>
@@ -628,20 +654,12 @@
                 <span class="level-item">其他</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数字IC设计/">
             <span class="level-start">
                 <span class="level-item">数字IC设计</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/软件工具/">
-            <span class="level-start">
-                <span class="level-item">软件工具</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -658,7 +676,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/概率计算/" style="font-size: 20px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/概率计算/" style="font-size: 20px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
     </div>
 </div>
 
@@ -762,7 +780,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time></div>
                     <a href="/2019/04/02/实用工具/" class="has-link-black-ter is-size-6">实用工具</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/软件工具/">软件工具</a>
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
                     </p>
                 </div>
             </div>
@@ -823,13 +841,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/其他/">
-                        <span class="tag">其他</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/博客有关/">
                         <span class="tag">博客有关</span>
                         <span class="tag is-grey">1</span>
@@ -839,6 +850,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/博客遇到的问题/">
                         <span class="tag">博客遇到的问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/实用工具/">
+                        <span class="tag">实用工具</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -976,7 +994,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time></div>
                     <a href="/2019/04/02/实用工具/" class="has-link-black-ter is-size-6">实用工具</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/软件工具/">软件工具</a>
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
                     </p>
                 </div>
             </div>
@@ -1037,13 +1055,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/其他/">
-                        <span class="tag">其他</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/博客有关/">
                         <span class="tag">博客有关</span>
                         <span class="tag is-grey">1</span>
@@ -1053,6 +1064,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/博客遇到的问题/">
                         <span class="tag">博客遇到的问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/实用工具/">
+                        <span class="tag">实用工具</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

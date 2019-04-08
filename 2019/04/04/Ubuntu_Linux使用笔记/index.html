@@ -7,16 +7,19 @@
 
 
 
-    <meta name="keywords" content="Linux使用">
+    <meta name="description" content="Ubuntu使用过程遇到的问题所做的笔记">
+<meta name="keywords" content="Linux使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu_Linux使用笔记">
 <meta property="og:url" content="http://yoursite.com/2019/04/04/Ubuntu_Linux使用笔记/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="Ubuntu使用过程遇到的问题所做的笔记">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-07T13:17:32.210Z">
+<meta property="og:updated_time" content="2019-04-07T13:22:34.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu_Linux使用笔记">
+<meta name="twitter:description" content="Ubuntu使用过程遇到的问题所做的笔记">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -150,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 2 个字)
+                    1 分钟 读完 (大约 219 个字)
                 </span>
                 
                 
@@ -163,9 +166,21 @@
             
         </h1>
         <div class="content">
-            <a id="more"></a>
+            <p>Ubuntu使用过程遇到的问题所做的笔记<br><a id="more"></a></p>
 <!-- toc -->
+<ul>
+<li><a href="#ubuntu-解决无法获得锁-varlibdpkglock-open-11资源暂时不可用的方法">ubuntu 解决“无法获得锁 /var/lib/dpkg/lock -open （11：资源暂时不可用）”的方法</a></li>
+</ul>
 <!-- tocstop -->
+<h2><span id="ubuntu-解决无法获得锁-varlibdpkglock-open-11资源暂时不可用的方法">ubuntu 解决“无法获得锁 /var/lib/dpkg/lock -open （11：资源暂时不可用）”的方法</span></h2><p>在ubuntu系统的termial下，用apt-get install 安装软件的时候，如果在未完成下载的情况下将terminal close。此时 apt-get进程可能没有结束。结果，如果再次运行apt-get install 命令安装如今，可能会发生下面的提示：</p>
+<p>无法获得锁 /var/lib/dpkg/lock - open (11: 资源暂时不可用)<br>无法锁定管理目录(/var/lib/dpkg/)，是否有其他进程正占用它？</p>
+<p>解决办法如下：</p>
+<ol>
+<li><p>终端输入 ps  aux ，列出进程。找到含有apt-get的进程，直接sudo kill PID。</p>
+</li>
+<li><p>强制解锁,命令<br>sudo rm /var/cache/apt/archives/lock<br>sudo rm /var/lib/dpkg/lock</p>
+</li>
+</ol>
 
         </div>
         
@@ -264,7 +279,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        5
+                        4
                     </p>
                 </div>
             </div>
@@ -358,20 +373,12 @@
                 <span class="level-item">其他</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数字IC设计/">
             <span class="level-start">
                 <span class="level-item">数字IC设计</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/软件工具/">
-            <span class="level-start">
-                <span class="level-item">软件工具</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -388,7 +395,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/概率计算/" style="font-size: 20px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/概率计算/" style="font-size: 20px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
     </div>
 </div>
 
@@ -492,7 +499,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time></div>
                     <a href="/2019/04/02/实用工具/" class="has-link-black-ter is-size-6">实用工具</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/软件工具/">软件工具</a>
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
                     </p>
                 </div>
             </div>
@@ -553,13 +560,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/其他/">
-                        <span class="tag">其他</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/博客有关/">
                         <span class="tag">博客有关</span>
                         <span class="tag is-grey">1</span>
@@ -569,6 +569,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/博客遇到的问题/">
                         <span class="tag">博客遇到的问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/实用工具/">
+                        <span class="tag">实用工具</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -706,7 +713,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time></div>
                     <a href="/2019/04/02/实用工具/" class="has-link-black-ter is-size-6">实用工具</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/软件工具/">软件工具</a>
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
                     </p>
                 </div>
             </div>
@@ -767,13 +774,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/其他/">
-                        <span class="tag">其他</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/博客有关/">
                         <span class="tag">博客有关</span>
                         <span class="tag is-grey">1</span>
@@ -783,6 +783,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/博客遇到的问题/">
                         <span class="tag">博客遇到的问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/实用工具/">
+                        <span class="tag">实用工具</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
