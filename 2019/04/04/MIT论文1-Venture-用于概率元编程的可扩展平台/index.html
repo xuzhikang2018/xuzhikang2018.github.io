@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>MIT论文1-Venture:用于概率元编程的可扩展平台 - 徐志康的技术博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="《Venture: an extensible platform for probabilistic meta-programming》">
+<meta name="keywords" content="概率计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT论文1-Venture:用于概率元编程的可扩展平台">
+<meta property="og:url" content="http://yoursite.com/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/index.html">
+<meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="《Venture: an extensible platform for probabilistic meta-programming》">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-07T12:55:49.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MIT论文1-Venture:用于概率元编程的可扩展平台">
+<meta name="twitter:description" content="《Venture: an extensible platform for probabilistic meta-programming》">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">主页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/categories">分类</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 小时 读完 (大约 18315 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                MIT论文1-Venture:用于概率元编程的可扩展平台
+            
+        </h1>
+        <div class="content">
+            <p>《Venture: an extensible platform for probabilistic meta-programming》<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#概率密度的元程序">概率密度的元程序</a><ul>
+<li><a href="#21标准分布的密度和模拟器">2.1标准分布的密度和模拟器</a></li>
+<li><a href="#22-贝叶斯规则作为概率元程序">2.2 贝叶斯规则作为概率元程序</a></li>
+<li><a href="#23-隐藏马尔可夫模型的优化边缘密度">2.3 隐藏马尔可夫模型的优化边缘密度</a></li>
+</ul>
+</li>
+<li><a href="#3probabilistic-execution-traces">3.Probabilistic execution traces</a><ul>
+<li><a href="#31-跟踪作为概率空间的元素">3.1 跟踪作为概率空间的元素</a></li>
+<li><a href="#32-概率执行跟踪的接口">3.2 概率执行跟踪的接口</a><ul>
+<li><a href="#33-stochastic-regeneration-of-trace-fragments">3.3 Stochastic regeneration of trace fragments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4meta-programs-for-stochastic-inference">4.Meta-programs for stochastic inference</a><ul>
+<li><a href="#41-exact-stochastic-inference-via-rejection-sampling">4.1 Exact stochastic inference via rejection sampling</a></li>
+<li><a href="#42-approximate-stochastic-inference-via-metropolis-hastings">4.2 Approximate stochastic inference via Metropolis-Hastings</a></li>
+<li><a href="#43-custom-model-specific-inference-meta-programs">4.3 Custom model-specific inference meta-programs</a><ul>
+<li><a href="#431-custom-metropolis-hastings-samplers">4.3.1 Custom Metropolis-Hastings samplers</a></li>
+</ul>
+</li>
+<li><a href="#44-scaling-of-stochastic-regeneration-for-approximate-inference">4.4 Scaling of stochastic regeneration for approximate inference</a></li>
+</ul>
+</li>
+<li><a href="#5-stochastic-procedures">5 Stochastic procedures</a><ul>
+<li><a href="#51-generic-stochastic-procedures">5.1 Generic stochastic procedures</a></li>
+<li><a href="#52-simple-stochastic-procedures">5.2 “Simple” stochastic procedures</a></li>
+<li><a href="#53-tail-assessable-stochastic-procedures">5.3 “Tail-assessable” stochastic procedures</a></li>
+<li><a href="#tradeoffs-between-different-representations-of-the-beta-bernoulli-process">Tradeoffs between different representations of the Beta-Bernoulli process</a></li>
+<li><a href="#55-memoization-as-a-user-space-stochastic-procedure">5.5 Memoization as a user-space stochastic procedure</a></li>
+</ul>
+</li>
+<li><a href="#6-discussion">6 Discussion</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="abstract">Abstract</span></h1><p>本文描述了Venture，一个用于概率元编程的可扩展平台。 在Venture中，概率生成模型，概率密度函数和概率推理算法都是第一类对象。任何随机选择的Venture程序都可以被视为在程序可能执行的空间中定义的概率模型。这些概率模型程序也可以在记录它们所做的随机选择的同时运行。Venture中的建模和推理涉及两类额外的概率程序。第一，概率密度元程序部分地描述了概率模型程序的输入 - 输出行为。第二个随机推理元程序在给定随机约束的情况下识别模型程序的可能执行，并且通常使用密度元程序作为指导。与其他概率编程平台不同，Venture允许将模型程序，密度元程序和推理元程序编写为单个概率编程语言中的用户空间代码。Venture本质上是一种类似Lisp的高阶语言，增加了两个新颖的抽象：（i）概率执行轨迹，表示概率程序产生的随机选择序列的第一类对象，以及（ii）随机过程， 封装了允许简单概率分布，用户空间VentureScript程序和外来的概率程序所需的概率程序和元程序，它们被统一视为概率计算的组成部分。Venture还为执行跟踪片段的随机再生提供运行时支持，该跟踪片段利用在执行原始跟踪程序期间调用的所有随机过程的程序和元程序。本文描述了Venture的一个新的原型实现，结合了这些想法，并通过为Church和其他概率语言内置的原语和推理策略提供简洁的用户空间实现来说明Venture的灵活性。</p>
+<h1><span id="introduction">Introduction</span></h1><p>概率编程是一个新兴领域，旨在使用编程语言和系统软件的思想形式化和简化概率建模和推理。几种早期的概率编程语言[5] [9] [13] [11] [3]侧重于概率生成建模，其中使用随机选择的程序来定义概率模型。在这些语言中，以及随后开发的大多数语言中，概率推断是通过用户空间程序无法替换或扩展的语言中的内置机制来完成的。</p>
+<p>本文描述了Venture，一个用于概率元编程的可扩展平台。在Venture中，概率生成模型，概率密度函数和概率推理算法都是一级的对象。任何随机选择的Venture程序都可以被视为在程序可能执行的空间中定义的概率模型。这种“概率模型程序”也可以在记录它们所做的随机选择的同时运行。这种“跟踪执行”作为普通的原始过程暴露给最终用户，并且是用于概率推理的蒙特卡罗技术的核心，但对于检查和调试也是有用的。</p>
+<p>本文使用术语“元程序”来指代描述，检查，创建和/或转换其他程序的文本或执行的程序。在Venture，到目前为止我们已经看到了两种类型的元程序的需求：</p>
+<p><strong>1.概率密度元程序</strong>：这些部分描述了概率模型程序的输入 - 输出行为。密度有时可以通过简单的分析公式给出，但有时它们本身由复杂的算法组成。例如，可以通过简单的动态程序计算来自隐马尔可夫模型[12]的输出符号序列的边际概率密度; 在Venture中，这个程序是一个有效的元程序，可以与一个程序相关联，该程序对潜在序列及其产生的观察结果进行采样。贝叶斯规则可以被视为用于评估后验密度的密度元程序，给出两个密度元程序 - 一个用于先验，一个用于可能性 - 以及（数据依赖）值的边际概率。先前和可能密度下的数据。</p>
+<p><strong>2.随机推理元程序。</strong>这些元程序在给定随机约束的情况下发现模型程序的可能执行，并且通常使用密度元程序作为指导。本论文包括一个拒绝抽样推理元程序，它可以执行受“足够随机”约束的任意模型程序，即对具有已知边界的已知边际概率密度的模型程序所代表的随机选择的约束（作为函数的函数） 输入，用于固定输出）。本论文还提出了使用Metropolis-Hastings方法构建的推理元程序，包括特定模型的专用采样器以及适用于同一类推理问题的通用近似推理算法。</p>
+<p>与其他概率编程平台不同，Venture允许将模型程序，密度元程序和推理元程序编写为单个概率编程语言中的用户空间代码。通过这种方式，Venture旨在充分表达和扩展以用于通用目的。尽管Venture有一个用于建模和推理的内置标准库，但该库并不是为了提供高性能。相反，它旨在促进快速原型设计和运行时反射，以便进行测试和调试。一旦调试了概率计算，就可以通过用高性能本机代码替换关键组件来逐步优化它。这一目标仅在早期版本的Venture [6]中得到部分实现。</p>
+<ol>
+<li><p>概率执行痕迹（PET），有时也简称为“痕迹”。PET是第一类对象，表示概率程序产生的随机选择序列。PET在Venture中作为可变存储的唯一本机形式，并将在程序执行过程中分配的动态“地址”映射到程序在这些地址处采用的清单值。Venture支持“平面轨迹”，它简单地记录了从地址到值的映射，遵循[14]，以及“依赖图形轨迹”，可以看作是有向图形模型的扩展[10] [6] [2]。这些跟踪可以通过统一接口访问，以（重新）生成程序片段的跟踪，从而促进推理元程序的开发。平面轨迹和依赖图轨迹表现出不同的渐近缩放行为，并且还支持不同的常数因子优化和运行时，使它们适用于不同类别的推理策略。</p>
+</li>
+<li><p>随机程序（SP）。SP用于封装简单概率分布，以及用户空间VentureScript程序和外部概率对象。SP由一组链接的程序和元程序组成，这些程序和元程序共同描述概率程序的各个方面，这些方程对于其在建模和推理中的使用非常重要。例如，SP是将模型程序与其相关密度和推理元程序链接起来的主要手段。SP被设计为允许简单的概率分布，用户空间VentureScript和外部概率程序被统一地视为复杂概率计算的构建块。</p>
+</li>
+</ol>
+<p>本文描述了Venture的一个新的原型实现，其中包含了这些想法，并通过为Church [3]以及其他概率语言内置的原语和推理策略提供简洁的用户空间实现来说明Venture的灵活性。</p>
+<h1><span id="概率密度的元程序">概率密度的元程序</span></h1><p>概率建模和推理的数学处理使用概率分布的多个表示。最常见的选择是使用概率密度函数：计算特定输出值的概率密度的数学函数（可能给定输入参数）。</p>
+<p>在编程术语中，密度函数可以被视为从生成过程模拟的代码行为的不完整声明性规范。在Venture中，概率程序可以与表征其输入 - 输出密度的概率密度元程序相关联。这种关联对程序的行为进行了数学断言，后续的元程序如随机推理元程序可以依赖。</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca6da921cc37.png" alt="QQ截图20190405123250.png"></p>
+<p>本节的其余部分将介绍如何将概率程序与Venture中的概率密度元程序相关联，以便其他元程序可以利用此信息。</p>
+<h2><span id="21标准分布的密度和模拟器">2.1标准分布的密度和模拟器</span></h2><p>图2.1显示了表示标准正态分布的Venture程序，其中包括从分布模拟的过程和计算其（对数）概率密度函数的过程。 </p>
+<p>模拟过程使用众所周知的Box-Muller变换，该变换从标准正态分布生成示例X：</p>
+<p>以下是BoX-Muller变换，推导的x的概率分布的原文：</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca70351b7fd0.png" alt="QQ截图20190405152658.png"></p>
+<p><img src="https://i.loli.net/2019/04/05/5ca705a75559a.png" alt="程序1.png"></p>
+<p>作为第二个例子，图2.2显示了一个代表Gamma分布的Venture程序，包括模拟和密度程序。这里的模拟器是一个更复杂的程序，由于[8]实现了一个拒绝采样算法，用于生成具有形状参数α的Gamma随机变量y：</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca706385fa5d.png" alt="拒绝采样生成Gamma分布.png"></p>
+<p><img src="https://i.loli.net/2019/04/05/5ca7089cbd978.png" alt="程序2.png"></p>
+<p>采样得到的x服从如下的分布，经过变换可以得到y的分布，服从参数为α的Gamma分布</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca70a62f0abf.png" alt="采样的x和服从Gamma分布的y.png"></p>
+<p>在这些示例程序中，我们已经看到用于将模拟过程与密度相关联的原始make_elementary_sp。在后面的部分中，我们将看到这对于Venture的内置跟踪和推理工具进行互操作是如何有用的。同时，也可以编写直接使用密度模拟器的用户程序。</p>
+<h2><span id="22-贝叶斯规则作为概率元程序">2.2 贝叶斯规则作为概率元程序</span></h2><p>某些形式的贝叶斯规则可以理解为概率密度元程序。回想一下，贝叶斯规则给出了条件概率密度的公式<br><img src="https://i.loli.net/2019/04/05/5ca7101287fcf.png" alt="贝叶斯公式.png"></p>
+<p>就先前的p（x）而言，似然性p（y|x）和数据的边际概率p（y）。<br>通常，p（y）不是以闭合形式给出，而是可以用x上的蒙特卡罗积分近似：</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca7107009bf9.png" alt="Montecarlo的方法.png"></p>
+<p>图2.3显示了实施蒙特卡罗方法的Venture计划。先验分布通过随机过程表示，该过程生成样本并具有相关的密度; 贝叶斯规则元程序使用来自该过程的样本来形成蒙特卡罗估计。似然分布由另一个随机过程表示，该过程仅需要具有概率密度。</p>
+<p>为了说明，请考虑以下简单的正态-正态模型：</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca7116a3e3d2.png" alt="XY正态分布.png"></p>
+<p>图2.3 一个元程序，通过贝叶斯规则计算后验密度，使用蒙特卡罗估计来计算边际密度。</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca7158b7e2b0.png" alt="利用MonteCarlo的方法去计算后验概率分布.png"></p>
+<p>我们观察y的值，并对后验分布p（x|y）感兴趣。我们将使用它作为一个运行示例来演示各种推理元程序; 这个问题虽然简单，但它可以作为一个有用的最小测试用例来检查各种推理策略的工作情况。</p>
+<p>图2.4显示应用于此问题的贝叶斯规则元程序，观察值y = 4.0，使用N = 500个样本估算密度。</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca71ca5d36c6.png" alt="求后验概率的程序.png"></p>
+<p><img src="https://i.loli.net/2019/04/05/5ca716819fd26.png" alt="后验概率示例.png"></p>
+<h2><span id="23-隐藏马尔可夫模型的优化边缘密度">2.3 隐藏马尔可夫模型的优化边缘密度</span></h2><p>对于受限类别的概率模型，通常可以给出用于评估边际概率密度的优化算法。其中一些，例如隐马尔可夫模型的前向后向算法[12]，最初被视为具有里程碑意义的结果。Venture可以将这些算法创新表示为普通的用户空间元程序，并将它们附加到随机过程中。这样，无论何时请求随机过程的概率密度，都可以使用优化的算法。</p>
+<p>图2.5显示了描述HMM模型的模拟器和密度程序的集合，包括模拟隐藏状态和观察序列的程序; 评估隐藏状态和观察的联合概率的程序; 使用前向算法计算观测的精确边际概率的过程; 以及使用两个密度程序直接计算给定观察的状态的后验概率的过程。</p>
+<p>图2.5：一组元程序，用于从隐藏的马尔可夫模型进行模拟，并评估隐藏状态和观察结果的联合，边际和后验概率密度。</p>
+<p><strong>具体代码略，可以参考原论文</strong></p>
+<h1><span id="3probabilistic-execution-traces">3.Probabilistic execution traces</span></h1><p>对于做出许多随机选择的较大概率程序，我们通常有兴趣不仅仅是用密度程序表征其输入 - 输出行为。我们希望捕获有关程序中发生的所有随机选择的信息，以便我们可以对其他部分的程序调节部分进行推断。</p>
+<p>概率执行轨迹（PET），有时也缩写为“轨迹”，是一类新的第一类对象，表示概率程序所做的随机选择序列。PET明确表示概率程序对特定执行的明显行为。所有PET都包含从动态“地址”的映射，每个动态“地址”对应于执行某些概率程序的可区分位置，以及程序在这些地址处采用的清单值。因此，它们包含对程序源代码的补充信息，这隐含地表示程序的潜在行为。换句话说，程序的可能行为空间对应于可以通过跟踪其执行而生成的PET空间。</p>
+<p>这种“跟踪执行”的概念对于Venture的核心能力至关重要：能够将任何概率程序视为在程序可能执行的空间中定义的概率模型。概率模型程序在可能的PET空间上定义概率模型，该模型可以通过追踪其执行来产生。Venture将“跟踪执行”作为语言中的普通原始程序公开，允许用户运行Venture程序并记录程序所做的随机选择序列。PET中的值可以通过简单的界面进行变异，该界面会反射回用户空间。改变PET中的值的能力是用于概率推理的蒙特卡罗技术的核心，但也可用于调试。图3.1显示了运行模型程序，捕获其执行跟踪以及通过探索替代执行历史来执行推理的示例。</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca71ed2e73e7.png" alt="HMM的在Venture中的模型.png"></p>
+<p>Venture支持两种迹：</p>
+<ol>
+<li><p>扁平迹。这些记录了从地址到值的映射，如下[14]。因为它们不表示依赖性信息，所以它们消耗更少的内存并支持广泛的常量性能优化。但是，由于它们不表示依赖性信息，因此如果更改某个其他值，则很难确定平面跟踪中的哪些值可能会失效。最简单的一般策略是在更改单个值后始终重新执行整个跟踪程序。该策略导致关键推理操作的不利渐近缩放，尤其是对于局部采样和基于梯度的优化算法。有关示例模型程序及其相应扁平迹线的表示，请参见图3.2。</p>
+</li>
+<li><p>依赖关系图跟踪。这些可以看作是有向图形模型的扩展[10] [6] [2]。因为它们包含依赖性信息，所以它们可用于重新执行跟踪程序的片段而无需重新执行整个程序。有关示例，请参见图3.3。</p>
+</li>
+</ol>
+<p>图3.2 图3.2：示例tricky硬币模型程序和示例程序的平面跟踪数据结构的打印输出。/ 2/0/1表达式是地址; 看主要文字。<br><img src="https://i.loli.net/2019/04/05/5ca76aeef0c4d.png" alt="FlateTrace.png"></p>
+<p><img src="https://i.loli.net/2019/04/05/5ca76aeee83da.png" alt="依赖关系.png"></p>
+<p>在跟踪执行中，寻址方案用于为程序执行期间的每个随机选择分配名称，类似于[14]。在我们的方案中，为每个产生结果的子计算分配一个唯一的地址。地址是以下之一：</p>
+<ul>
+<li>Toplevel地址。每个顶层建模命令(assume, observe, or generate)触发跟踪子计算，该子计算与从1开始的递增序列号相关联。例如，在图3.2中的程序中，地址/ 1指的是假设表达式bernoulli（0.1 ），地址/ 3指的是观察到的表达bernoulli（weight）。</li>
+<li>Subexpression地址。<br>这对应于遍历抽象语法树中的边。子表达式地址由基地址后跟数字索引组成。当基地址引用过程应用程序的结果时，索引0选择正在应用的运符，索引1选择第一个操作数等。例如，/ 1/0指的是第一个顶层表达式的运算符 在程序中，和1/1到它的参数。</li>
+<li>请求地址。一些随机程序在应用时将“请求”执行另一个程序片段。最常见的例子是复合过程，它要求执行它们的过程体。当这样的过程发出执行请求时，它给请求一个唯一的ID，以便为所请求的子程序分配地址r（sp_address，request_id），其中sp_address是创建或定义请求过程的地址。在复合过程的情况下，请求ID是呼叫站点的地址，因此该地址类似于调用堆栈地址。例如，由于在/ 2处应用过程，r（/ 1，/ 2）指的是在/ 1处定义的过程的主体的执行。</li>
+</ul>
+<p>在依赖关系图跟踪中，依赖关系图中的节点与地址一一对应。因此，每个节点表示程序执行中的子计算的结果。</p>
+<p>值得注意的是，PET也是Venture中唯一的可变存储本地形式。通过跟踪随机选择的执行来分配新的存储位置，并且可以为了执行概率推断之外的目的而进行突变。例如，可交换耦合的基元可以使用跟踪来存储和更新足够的统计信息。这允许用户空间VentureScript程序模拟在其本机实现中使用变异操作的外来原语的行为。</p>
+<h2><span id="31-跟踪作为概率空间的元素">3.1 跟踪作为概率空间的元素</span></h2><p>执行跟踪代表一个点$\rho$在所有可能的程序执行的示例空间$\Omega$中。在形式上，我们定义为$\Omega$从所有可能的随机过程应用程序到这些应用程序的结果的映射空间：</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca81d7b77ec5.png" alt="映射.png"></p>
+<p>给定$\rho$，产生结果的每个程序子计算对应于随机变量$f:\Omega$V将样本空间中的点映射到可能值为V的空间。f（？）的值由程序以？为条件执行时对应于f的子计算结果确定，即使用？确定所有随机选择的结果。</p>
+<p>因为跟踪是Venture中的第一类对象，所以可以使用与随机变量相对应的表达式，这些随机变量本身具有值。这允许随机推断程序表示为输出其他程序的随机执行轨迹的程序，其通常从与模型程序的无条件分布不同的分布中进行采样。通常，所述不同分布是对感兴趣条件分布的近似。</p>
+<p>请注意，在上面的定义中，元素是抽象的无限维对象，它们代表潜在的程序执行，描述程序可以做出的每个可能的随机选择的结果。相反，通过跟踪执行Venture程序获得的PET对应于该程序的实现执行，其包含由程序做出的有限数量的随机选择（假设程序停止）。这两种追踪概念 - 粗略地说，执行“未来”和执行“历史” - 是不同的，但密切相关。鉴于未来的执行？和程序的源代码，有一个相应的执行历史，它是通过执行程序使用？获得的。<br>作为发生的所有随机选择的随机性来源并记录这些选择的结果。换句话说，执行历史是限制？在程序执行期间实际实现的随机选择集。相反，如果给定通过跟踪程序执行而获得的执行历史，则可以通过使用随机数生成器状态来增强它来构建执行未来，该随机数生成器状态用于生成程序执行过程中实现的随机选择以外的任何随机选择的结果。</p>
+<p>这两个跟踪概念一起提供了一个框架，用于修改程序的执行历史并根据这些修改重新运行程序。Venture以随机再生的形式提供此功能的一个版本（在第3.3节中描述）。随机再生可以被视为一种操作，它提取执行历史的一部分并将其转换为可能的执行未来的表示，然后对新的执行未来进行采样，然后可以将其合并回历史。</p>
+<p>在本论文的其余部分，PET和跟踪将用于指代实现的执行历史和表示它们的数据结构。跟踪“未来”目前在随机再生中使用的对象之外没有明确的表示; 进一步统一这些概念是未来工作的有趣基础，但超出了本论文的范围。</p>
+<h2><span id="32-概率执行跟踪的接口">3.2 概率执行跟踪的接口</span></h2><p>本节简要介绍Venture原型实现中概率执行跟踪支持的关键操作。在下文中，跟踪对象表示为T.</p>
+<ul>
+<li>a &lt;- next_base_address(T) 获取跟踪中的下一个未分配的基址，并递增下一个地址指针。</li>
+<li>T &lt;- global_env(T) 获取跟踪的全部环境。</li>
+<li>eval_request(T, base_address:a, expression: e, enviroment:T) 执行环境中表达式表示的程序片段并记录所有中间结果，将结果存储在给定的基址中。</li>
+<li>v &lt;- value_at(T, address:a) 获取给定地址处跟踪中记录的值。</li>
+<li>blind_global(T, symbol:s, address:a) 将跟踪的全局环境中的符号绑定到给定地址的结果。</li>
+<li>a &lt;- find_symbol(T, enviroment: T, symbol, s) 在给定环境中查找符号并返回相应的地址</li>
+<li>register_observation(T, address:a, value:v) 记录已观察到给定地址的结果为给定值。就其本身而言，这对执行跟踪没有影响，特别是不会修改存储在该地址的值以与观察一致。但是，各种元程序将检查不一致的跟踪并将它们视为零概率（例如，通过拒绝导致这种跟踪的转换）。</li>
+<li>{(address:a, value:v)} &lt;- get_observation{T} 获取已记录的观察列表。这可以与value_at一起使用，以检查跟踪是否与所有观察结果一致。</li>
+<li>set_value_at{T, address:a, value:v} 修改为地址结果存储的值。这主要用于低级推理程序而不是最终用户。</li>
+<li>T* &lt;- clone_trace(T) 创建当前跟踪的副本</li>
+<li>S &lt;- single_site_subproblem(T, address:a) 将跟踪的分区定义为子集，当重新生成单个随机选择（随机过程应用程序）时，这些子集将被重新生成并保留。这大致相当于[6,2]中“支架”的概念。</li>
+</ul>
+<p>表3.1给出了我们原型中定义的跟踪数据结构中这些操作的渐近运行时间。</p>
+<p>表3.1：跟踪操作的索引，具有渐近运行时。|e|是运行给定程序e所涉及的子操作的数量; |T|是概率执行轨迹的大小; |S|是子问题的大小，它由取决于建议值的下游随机选择的数量确定。</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca81d934f191.png" alt="表3.1.png"></p>
+<p><strong>使用这些跟踪原语，可以定义建模指令以及推理过程和实用程序。有关常见建模指令的实现</strong>，请参见图3.4。推理编程将在第4节中介绍。</p>
+<p>在我们的原型中，跟踪还提供了可以调用随机过程的关键行为的接口。<strong>例子包括应用随机程序; 评估对数密度; 还有模拟内核。这些实现细节超出了本论文的范围。</strong></p>
+<p>图3.4：假设，观察和生成的建模指令以宏的形式实现，扩展到上面定义的相应过程的应用程序。observe也是根据修改跟踪以使其满足给定约束的实用程序来定义的。该过程依赖于3.3节中描述的随机再生原语来修改跟踪并传播影响。</p>
+<p>图可以见原文</p>
+<h3><span id="33-stochastic-regeneration-of-trace-fragments">3.3 Stochastic regeneration of trace fragments</span></h3><p>可以通过统一接口访问跟踪，以便随机（重新）生成程序片段的跟踪，从而促进推理元程序的开发。平面跟踪和依赖关系图跟踪表现出不同的渐近扩展行为（参见表3.2），并且还支持不同的常数因子优化和运行时，使它们适用于不同类别的推理策略。由于这些操作部分地决定了随机过程的要求，因此本章简要介绍了每个关键的随机再生操作。有关随机再生的其他观点，请参见[6]和[2]。</p>
+<p>随机再生对子问题进行操作，子问题是跟踪的分区，用于重新生成和保留的随机选择的子集，以及重新生成的随机选择的提议分布。从概念上讲，子问题S将跟踪中的每个随机选择分配到三个集合中的一个（RS; CS; OS），其中</p>
+<ol>
+<li>RS是“重新生成”的集合，由正在提议的随机选择或可能因提案而改变的值组成。子问题引起提议分布q（RS）。</li>
+<li>CS是“约束”集合，由依赖于RS中的值的随机选择组成; 这些是依赖图中RS的子代。如果节点的输入可能因提议而改变，则节点成为CS的一部分，但它可以评估在给定新输入的情况下产生相同输出的密度或似然比。这些节点与评估提议的可能性相关。</li>
+<li>OS是跟踪中不参与提议的其他节点</li>
+</ol>
+<p>子问题以“局部后验”分布p（RS|CS; OS）$\propto$ p（RS|OS）p（CS|RS; OS）为目标，并引起与目标密度和提议密度之间的比率对应的权重函数</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca85abae7fa6.png" alt="权重w.png"></p>
+<p>请注意，此处理仅针对独立提案q。将非独立提案纳入该框架留待将来开展工作; 见[6]可能的方法</p>
+<p>在实践中，子问题表示为从跟踪地址到内核的有序映射，这是随机过程元程序。内核实现了与子问题非常相似的接口，但代表了单个随机过程应用程序上的提议分布。R和C中的节点通过后者与约束内核相关联来区分，约束内核是一种特殊类型的内核，其提议分布总是产生相同的输出值。第5节更详细地描述了随机过程的内核。</p>
+<p>与子问题交互的操作如下所述。在下面的描述中，ρ表示跟踪中的原始值，ξ表示建议的值，符号RS(ρ)表示对应于RS中的节点的ρ元素(类似的RS(ξ)。</p>
+<ul>
+<li>（weight：w, trace_frament:t）&lt;- exact(T, subproblem:S) 改变迹线以去除对应于子问题S所针对的随机选择的值RS（ρ）。提取这些值并将它们存储在新分配的迹线片段中。返回对应于原始完成迹线的目标和建议概率密度之间的比率的（log）权重。</li>
+</ul>
+<p><img src="https://i.loli.net/2019/04/06/5ca85afbbe52d.png" alt="QQ浏览器截图20190406154339.png"></p>
+<p>exact如图3.5所示。图3.5：Extract采用trace和子问题，从跟踪中提取子问题所针对的值，并返回对应于跟踪的目标和提议概率与原始值之间的比率的对数权重</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca85b61cc437.png" alt="图3.5.png"></p>
+<ul>
+<li>(weight:w) &lt;- regen(T, subproblem:S) 根据提议分布q（RS），对子问题S所针对的随机选择采样新值RS（ξ）。返回与新值的目标概率密度和提议概率密度之间的比率相对应的（log）权重.</li>
+</ul>
+<p><img src="https://i.loli.net/2019/04/06/5ca85b44c577e.png" alt="QQ浏览器截图20190406154605.png"></p>
+<p>与exact返回的权重一起，这使得能够基于独立提议q计算MetropolisHastings在ρ和ξ之间转换的接受率。</p>
+<p>图3.6：Regen采用跟踪和提取的子问题，使用新的随机性为目标变量建议新值，并返回跟踪的目标和建议概率与新值之间的比率的对数权重。</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca85ba593176.png" alt="图3.6.png"></p>
+<ul>
+<li>restore(T, subproblem:S, trace_fragment:t) 将t中的值返回到跟踪T中。这可以用于拒绝转换。restore如图3.7所示。</li>
+</ul>
+<p>图3.7：Restore执行跟踪，提取的子问题以及extract提取的跟踪片段，并从跟踪片段的内容恢复跟踪的状态。</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca85cc07d10a.png" alt="图3.7.png"></p>
+<ul>
+<li>w* &lt;- weight_bound(T,subproblem:S)</li>
+</ul>
+<p>返回T的再生权重的上限，适用于拒绝采样。</p>
+<p>图3.8展示了tricky硬币示例中的随机再生示例。图3.8：图3.2中示例Tricky硬币模型的随机再生描述</p>
+<h1><span id="4meta-programs-for-stochastic-inference">4.Meta-programs for stochastic inference</span></h1><p>大多数概率编程语言都带有用于执行推理的内置的、不变的元程序，即根据一组用户指定的约束来识别概率模型程序的可能执行。在Venture中，这是一种被称为随机推理的计算。这些元程序可以作为使用内置元编程工具的普通用户空间VentureScript程序编写。</p>
+<h2><span id="41-exact-stochastic-inference-via-rejection-sampling">4.1 Exact stochastic inference via rejection sampling</span></h2><p>本节描述了拒绝抽样推理元程序，它可以执行受“足够随机”约束的任意模型程序。“足够随机”约束是那些约束由模型程序表示的随机选择的约束，这些模型程序具有已知边界的已知边际概率密度（作为输入的函数，对于固定输出）。这个拒绝抽样元程序在图4.1中的norma-normal模型上进行了演示，表明拒绝抽样的结果与分析后验分布相匹配。</p>
+<p>图4.1：顶部：一个VentureScript程序，它定义一个简单的正态 - 正态模型，并使用拒绝采样得到一个观察到的y的x的后验样本。下图：从每个程序的500次独立运行中获得的样品的直方图，比较在拒绝取样引起的先前和后部分布下的x分布。真密度曲线以黄色显示：先前的N（0,1）和后$N(2, \sqrt(1/2))$</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca86204bb22d.png" alt="图4.1.png"></p>
+<p>图4.2显示了拒绝采样元程序的实现，它利用了3.3节中讨论的随机再生原语。特别地，回想一下regen（T, S）根据提议分布q（RS, CS）生成新值RS（ξ），并返回权重</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca8632c41e97.png" alt="返回的weight.png"></p>
+<p>此外，weight_bound（T; S）计算（保守的）上限w*，使得</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca863885aed7.png" alt="boundW.png"></p>
+<p>通过这两个操作，可以概述一个简单的拒绝采样算法，用于从子问题 - 局部后验p(RS|CS,OS)中进行采样：</p>
+<ol>
+<li>计算子问题S的权重约束w*。</li>
+<li>不断的执行（a）重新生成S，用新值ξ填充轨迹并获得权重w。（b）用概率exp（w-w <em>）= exp（w）= exp（w </em>），接受ξ。否则，拒绝并再试一次</li>
+</ol>
+<p>图4.2中的元程序遵循此模板，另外还检查建议值ξ是否与跟踪中记录的observe语句一致; 如果有任何违规行为，该提案将立即被拒绝。确保了拒绝采样步骤总是以观察为条件进行采样，即使所选择的子问题否则会导致观察到的表达式被重新模拟。使用实用程序check_consistent执行此检查，该程序具有如图4.3所示的简单定义。</p>
+<p>在normal-normal例子的情况下：</p>
+<ol>
+<li>RS是变量x，CS是观测变量y;</li>
+<li>提议分布q（RS）只是x，N（0,1）的先验分布;</li>
+<li>再生权重减小到对数似然log N（y; x, 1）;</li>
+<li>并且权重界限是可能性的密度函数的最大值，<br><img src="https://i.loli.net/2019/04/06/5ca866b32bf66.png" alt="最大化的值.png"></li>
+</ol>
+<p>因此，拒绝采样元程序通过将由包括模型程序的正常SP提供的元程序（例如，模拟器和密度）组合在一起来恢复该模型的有效且直接的推理算法。</p>
+<h2><span id="42-approximate-stochastic-inference-via-metropolis-hastings">4.2 Approximate stochastic inference via Metropolis-Hastings</span></h2><p>本节描述了一个基于Metropolis-Hastings方法构建的推理元程序，它适用于与之前的拒绝抽样元程序相同的推理问题。与拒绝采样不同，拒绝采样在每次调用时从目标条件分布p（RSjCS; OS）返回精确样本，此元数据的输出分布在重复应用下渐近收敛到条件分布。这个元程序在图4.4中的正常 - 正常示例模型上进行了演示，表明采样分布接近后验分布，迭代次数更多。</p>
+<p>图4.4：顶部：一个VentureScript程序，它在简单的normal-normal模型上使用重新模拟MH来获得x的近似后验样本。下图：通过对不同步数运行马尔可夫链获得的样本的直方图。随着步数的增加，分布接近目标后部（黄色）。</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca86963364ec.png" alt="图4.4.png"></p>
+<p>图4.5显示了Metropolis-Hastings元程序的实现。类似于拒绝元程序，它利用随机再生提出新的样本，但与拒绝不同的是，它不需要再生权重的绝对上界。相反，它使用Extract和regen返回的权重之间的比率(或在日志空间中的差值)：</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca869c4619ab.png" alt="返回的权重比例"></p>
+<p>图4.5：重新模拟MH元程序，根据推理子问题操作提取，重新生成和恢复来定义。</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca86cb6308a1.png" alt="图4.5.png"></p>
+<p>这可以用作接受率，产生在目标分布p（RS，CS|OS）上静止的马尔可夫链。图4.5中的实现遵循此方法。请注意，如果违反任何观察check_consistent将再次用于拒绝。此外，在拒绝转换的情况下，还原用于将跟踪返回到其原始状态。</p>
+<h2><span id="43-custom-model-specific-inference-meta-programs">4.3 Custom model-specific inference meta-programs</span></h2><p>因为可以在用户空间中编写推理，所以Venture可以将自定义推理算法编写为普通的用户空间程序。<br>用户可以根据通用推理元程序的需求调整对问题的需求，但是一旦他们开发了测试用例并且在准确性和运行时成本方面更好地理解功能需求，就可以进行优化。</p>
+<h3><span id="431-custom-metropolis-hastings-samplers">4.3.1 Custom Metropolis-Hastings samplers</span></h3><p>虽然Venture提供了一个基于子问题的随机再生建议的Metropolis-Hastings原语，但用户也可以编写他们自己的Metrois-Hastings程序，从而绕过Venture内置的子问题机制。定制过程可以通过避免一般重新生成策略的解释开销，或者利用分析(例如取消或简化接受率)来提高效率。</p>
+<p>图4.6显示了一个这样的自定义推理过程的示例应用，该过程使用专门用于我们正常模型的运行示例的自定义高斯drift提议来实现Metropolis-Hastings采样器。在这种情况下，自定义过程在计算上更有效，因为它的代码专用于模型，并且在推理时更有效，因为提议分布更适合推理问题。</p>
+<p>图4.6：顶部：VentureScript程序，它使用自定义用户定义的推理过程（如图4.7所示），用于具有高斯漂移建议的随机游走MH。下图：将从该推理程序获得的马尔可夫链的样本轨迹与图4.4中使用独立重新模拟提议的程序的样本轨迹进行比较的图。更高频率地接受高斯drift提议，这表明定制采样器更有效地探索迹线空间。</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca8a67ec5c99.png" alt="图4.6.png"></p>
+<p>自定义高斯drift过程的实现如图4.7所示。该实现利用了高斯drift提议是对称的事实所带来的接受率的抵消：</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca8a5a45e2e3.png" alt="Guaussian drift过程的对称性.png"></p>
+<p>图4.7：使用高斯漂移提议实现随机游走MH的自定义元程序，专门用于图4.6中的normal-normal模型。</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca8a7612e234.png" alt="图4.7.png"></p>
+<p>然后，通过从Venture中查询正常程序的对数密度，可以直接计算该简化比率。</p>
+<h2><span id="44-scaling-of-stochastic-regeneration-for-approximate-inference">4.4 Scaling of stochastic regeneration for approximate inference</span></h2><p>平面轨迹和依赖图轨迹实现了随机再生的不同算法; 因此，基于随机再生的推理策略在两种类型的迹线上表现出不同的渐近缩放行为和常数因子运行时间。</p>
+<p>图4.8比较了隐藏马尔可夫模型程序中基于单站点重新模拟的推理的每次迭代的运行时间，作为HMM中的时间步数的函数。</p>
+<p>图4.8：HMM模型程序的推理速度的比较，作为HMM中的时间步数的函数。模型程序显示在左侧，以及展开memoized循环的程序版本，显示HMM中的步骤数如何影响程序长度。对单站点子问题进行推断，其为所有其他变量条件下的状态序列的一个元素提出新值。右边的图显示了子问题构建步骤和重新模拟步骤的时间。计时是在展开的程序上执行的。</p>
+<p><img src="https://i.loli.net/2019/04/06/5ca8aaaa83ab4.png" alt="图4.8.png"></p>
+<p>推理的每次迭代涉及两种类型的操作：子问题构造，其中识别属于再生和约束集的节点; 和随机再生本身，它重放与这些节点对应的程序部分。</p>
+<p>在平坦迹线中，两个操作都需要完整遍历迹线，因此在迹线的大小上是线性的。在第一遍中，程序中的每个子表达以程序执行顺序遍历，标记依赖于所提出的值的所有值（即，重新生成的集合RS）。再生在第二遍中完成，模拟程序的新执行，其中RS中的随机选择使用新的随机性重新采样。尽管似乎可以合并两个通道以使再生步骤不需要再次遍历整个程序，但是整体算法仍将表现出相同的线性缩放。</p>
+<p>使用依存关系图跟踪，可以使用深度优先搜索从重新生成的节点到依赖它们的节点的依赖边来识别重新生成的集RS。一旦确认子问题，就可以使用只触及子问题所涉及的节点(及其父级)的遍历来进行重新生成。因此，推理的每次迭代只与子问题|S|的大小相同。然而，这是以更高的实现复杂性和内存开销为代价的。</p>
+<h1><span id="5-stochastic-procedures">5 Stochastic procedures</span></h1><p>随机过程（SP）用于封装简单的概率分布，以及用户空间VentureScript程序和外来概率对象。它们由程序和元程序的链接集合组成，这些程序和元程序共同描述概率程序的各个方面，这些程序对于其在建模和推理中的使用非常重要。例如，它们是将模型程序与其相关密度和推理元程序链接起来的主要手段。SP被设计为允许简单的概率分布，用户空间VentureScript和外部概率程序被统一地视为复杂概率计算的构建块。</p>
+<p>Church和其他先前的概率编程语言专注于简单的概率分布，这些概率分布完全由标量值模拟器程序和分析概率密度函数指定。BayesDB [7]允许将更大类的概率对象视为封装的基元 - 即生成种群模型，其描述可以有条件地和无条件地模拟（或评估其密度）的多变量联合分布。Venture封装的概率对象类包括这两个类作为适当的子集。</p>
+<p>本文主要研究三种随机过程。这些包括（i）适用于封装广泛类型的概率计算的通用接口，包括可交换随机过程，无可能性原语，以及（至少在原理上）其他概率编程语言的解释器和/或推理引擎; （ii）用于随机过程的简单接口，可以很容易地封装具有已知概率密度函数的概率对象; （iii）当该过程被称为“足够随机”时可以使用的简单接口的变体，即，具有输出本身是具有已知的有界概率密度的随机选择。</p>
+<p>与这些类型相关的关键方法可归纳如下：</p>
+<ol>
+<li>通用随机程序。这些包括（i）适用于随机生成输出的概率程序，（ii）用于提出新输出并使用旧输出评估其边际密度比的“提议核心”概率推理元程序，以及（iii）专门的“ 约束内核“概率推理元程序，它根据输出值与给定约束匹配的约束重新采样内部随机性。这三种功能允许SP封装任意概率程序，这些程序带有自己的内部潜在变量，以及自定义模拟，推理，密度评估和约束执行机制。</li>
+<li>“简单”随机过程。当随机过程在输出上具有已知的边际概率密度时，当再模拟是有效的推理建议策略时，就有可能提供通用SP接口的基线实现。<br>这个简化的接口还处理具有内部突变的SP，这些SPS导致对应于重复输出的随机变量之间的可交换耦合。</li>
+<li>“尾部可评估的”随机程序。一些随机程序 - 例如代表具有噪声数据可能性的复杂概率生成模型的程序 - 具有难以处理的边际输出密度，但确实以其内部潜在变量为条件诱导“足够随机”的可能性。这是一个非常重要的特殊情况，VentureScript将其用作默认的随机过程构造语法</li>
+</ol>
+<p>在UNIX环境中通过类比于软件包来考虑随机过程是有帮助的。这些包通常包括源代码，二进制文件，测试用例和文档的组合。所有这些组件的存在 - 远远不只是预编译的二进制文件 - 有助于最终用户重新组合软件，特别是熟悉相关约定的软件开发人员和系统管理员。在Venture的情况下，推理元程序和端到端应用程序可以扮演最终用户的角色，动态构建新的随机过程，修改源代码和/或运行时行为，以及使用和构建模型结果。</p>
+<h2><span id="51-generic-stochastic-procedures">5.1 Generic stochastic procedures</span></h2><p>随机过程定义了联合分布p（{yi}; z|{xi}），其中xi是过程的第i个应用程序的输入，yi是第i个应用程序的输出，z表示在第i个应用程序期间做出的任何潜在随机选择。除输出yi之外的SP的应用。</p>
+<p>在给定z的情况下，yi不需要是独立的，甚至是条件独立的; 这允许表示可交换耦合过程的SP，例如折叠共轭模型。然而，Venture的随机再生算法假设应用程序是可交换的，因此它们可以以不同的顺序重新生成，同时保留相同的分布属性。</p>
+<p>随机过程可以具有可变的内部状态，其可以用于记录潜在随机选择的结果或者通过维持先前应用的充分统计来实现可交换的耦合。虽然PET是Venture中直接可用的唯一本机形式的可变存储，但可以在内部绑定使用可变状态的外部过程，或者暴露用户定义的SP可以使用的可变状态源。</p>
+<p>SP可以通过提供一个或多个内核来促进推理编程，所述内核在其随机状态空间（fyig; z）的子集上操作。内核类似于跟踪子问题，并且具有非常相似的契约，允许在SP应用程序期间进行随机选择并重新提出。</p>
+<p>可以通过make_sp操作创建一般随机过程：</p>
+<ul>
+<li>P &lt;- make_sp(metadict_expression:e) 从e指定的元程序集合中创建一个随机过程，该过程应该计算为方法名称和值的字典。</li>
+</ul>
+<p>认可的方法包括：</p>
+<ul>
+<li>y &lt;- apply(p, trace_handle:H,application_id: i, input:x) 将过程应用于输入x，产生输出y并可能记录潜在的选择z。这导致分布p（yi; zi|xi; P）。</li>
+</ul>
+<p>跟踪句柄H是周围跟踪的接口，可用于对跟踪的执行引擎进行回调; 请参阅下面的跟踪句柄方法。</p>
+<ul>
+<li>l &lt;- log_density(P, output:y, inputs:x) （可选）评估对数密度log p（y|x, P）。并非所有随机程序都实现此方法; 那些被称为可评估程序。</li>
+<li><p>k &lt;- proposal_kernal(P, trace_handle:H, application_id:i) 构造一个内核，该内核对P的先前应用程序的结果进行操作（由应用程序id i给出），表示从该应用程序的可能结果的空间中采样的提议分布q。q的支持应该包括p的支持（仅限于与所选应用程序相关联的SP随机状态的子集）。准选择是q = p，即从先前提出。</p>
+<p>  内核K应该是符合内核接口的方法名称和值的字典（如下所述）。</p>
+</li>
+<li><p>K &lt;- constrain_kernal(P, trace_handle:H, application_id:i, constraint_value:y) 构造一个内核，该内核对P的先前应用程序的结果进行操作（由应用程序id i给出），表示其输出的边际分布是值y的delta分布的提议。换句话说，约束内核重新采样受输出值约束的内部随机性（如果有的话）。</p>
+</li>
+</ul>
+<p>内核K表示由SP做出的随机选择子集的提议分布，类似于跟踪的子问题。内核有以下方法：</p>
+<ul>
+<li>(log_weight:w, trace_fragment:F) &lt;- extract(K, output:y, input:x) 从SP的内部状态中提取目标随机选择的值。返回对应于原始值的目标和建议概率之间的比率的对数权重w（包括任何提取的潜在值）<br><img src="https://i.loli.net/2019/04/07/5ca965aeb05bb.png" alt></li>
+</ul>
+<p>以及跟踪片段F，它是一个对象，可用于恢复提取前存在的SP状态。</p>
+<ul>
+<li><p>(log_weight:w, output:y) &lt;- regen(K, inputs:x)  使用新的随机性为目标随机选择建议新值。返回日志权重w，以获取新值的目标和提议概率之间的比率 以及新的输出值y。<br><img src="https://i.loli.net/2019/04/07/5ca96665ad7ce.png" alt></p>
+</li>
+<li><p>（output:y） &lt;- restore(K, input:x, trace_frament:F) 使用extract返回的跟踪片段恢复SP的状态。</p>
+</li>
+<li><p>w* &lt;- weight_bound(K, input:x, input_mask: m) 返回此内核的再生权重w的上限，用于计算子问题的拒绝界限。 输入掩码m是布尔值的列表，其长度与x相同，其对于每个输入参数指示在计算边界时是否应该将其视为固定的或变化的。</p>
+</li>
+</ul>
+<p>跟踪句柄H提供以下与周围轨迹交互的方法：</p>
+<ul>
+<li>a &lt;- request_address(H, request_id:i) 返回从给定请求ID派生的跟踪地址，适合与以下方法一起使用。请求ID可以是SP用于识别其请求的子程序执行的任何Venture值。例如，复合过程使用调用站点的地址（即application_id）作为请求ID请求执行其正文，而mem（在5.5节中描述）使用输入参数的值作为请求ID。</li>
+<li>z &lt;- eval_request(H, request_id:i, expression:e, enviroment:T) 执行环境中表达式表示的程序片段。这是环境跟踪eval_request方法的接口，允许SP对跟踪的解释器进行回调。</li>
+<li>z &lt;- value_at(H, request_id:i) 获取给定地址处跟踪中记录的值。这是环境跟踪的value_at方法的接口。</li>
+<li>uneval_request(H, request_id:i) 撤消执行请求。这以反向执行顺序遍历程序片段，在所有SP应用程序上调用extract。</li>
+<li>z &lt;- restore_request(H, request_id:i) 恢复未评估的请求，以正向顺序遍历程序片段并在所有SP应用程序上调用还原。</li>
+</ul>
+<p>执行请求为SP提供了一个集成机制，可以对解释器进行回调，从而实现更高阶的过程，如mem（参见第5.5节），eval，apply和map。重要的是，这些回调由与原始SP应用程序相同的跟踪解释器执行，因此在执行期间进行的依赖关系和随机选择将被公开并可供跟踪元程序检查。例如，这允许依赖性信息通过复合过程的主体和高阶过程的应用来传播。</p>
+<h2><span id="52-simple-stochastic-procedures">5.2 “Simple” stochastic procedures</span></h2><p>当随机过程在输出上具有已知的边际概率密度时，并且当重新模拟是用于推断的有效提议策略时，可以提供通用SP接口的基线实现。</p>
+<p>可以使用make_elementary_sp过程创建这样的SP：</p>
+<ul>
+<li>p &lt;- make_elementary_sp(metadict_expression: e) 从e指定的元程序集合中创建随机过程。该集合预计将实现以下简化的界面，该界面假定SP没有“潜在”结构并且表示具有用于模拟和评估密度的过程的分布p（y|x）。</li>
+</ul>
+<p>make_elementary_sp期望的接口是：</p>
+<ul>
+<li>y &lt;- simulate(P, inputs:x) Return a sample y ~ p(.|x).</li>
+<li>l &lt;- log_density(P, output:y, input:x) Evaluate the log density log p(y|x).</li>
+<li>l* &lt;- log_density_bound(P, output: y, inputs: x, input_mask: m) 评估对数密度log p（y|x）的上限。 输入掩码m是布尔值的列表，其长度与x相同，其对于每个输入参数指示在计算边界时是否应该将其视为固定的或变化的。</li>
+<li>incorporate(P, output: y, inputs: x) 可选：对于维护其应用程序的足够统计信息的SP，记录输入 - 输出对（x; y）。这在每次apply，regen和restore时调用。</li>
+<li>unincorporate(P, output: y, inputs: x) 可选：合并的反转：删除输入 - 输出对（x; y），就好像该应用程序从未发生过一样。这在每个exact的开头都被调用。</li>
+</ul>
+<p>可以使用以下方法定义通用SP接口：粗略地，apply调用simulate; 提议内核使用模拟实现重新模拟提议，约束内核使用log_density返回可能性权重。如果定义了合并和非合并，则在每次apply/regen/restore结束时和每个extract的开头分别调用它们</p>
+<p>图5.1给出了一个随机过程的例子，该过程从beta分布中取样，首先作为“bare”复合过程，然后作为使用make_elementary_sp定义的过程，同时提供simulate和log_density。尽管两个过程在直接调用以生成样本时具有相同的输出行为，但是跟踪和推理元程序对它们的处理方式不同：</p>
+<ul>
+<li>裸复合程序my_beta_1被视为其各部分的总和，每次调用主体中的gamma作为单独的随机选择记录，并且beta程序的输出作为从两个gamma样本计算的值。该过程缺少任何有趣的辅助元程序，特别是输出密度或约束内核，因此其输出不能约束到给定值。</li>
+<li>相比之下，my_beta_2被视为单个单元。<br>即使它的模拟器主体仍然调用gamma，这些细节也封装在过程中而不是暴露给跟踪。Instead，它有一个log_density，它表征输出的边际分布，允许它接受输出的约束，并报告从给定输入获得输出值的相对可能性，就像密度函数附带的内置基元一样。</li>
+</ul>
+<p>通过这种方式，随机过程为跟踪程序提供了一种抽象方法，就像“normal”过程对未跟踪程序所做的那样。</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca973003d15f.png" alt="图5.1.png"></p>
+<h2><span id="53-tail-assessable-stochastic-procedures">5.3 “Tail-assessable” stochastic procedures</span></h2><p>上一节中描述的随机过程是“可评估的”随机过程，因为它们带有易于处理的程序来评估其输出的边际概率密度。</p>
+<p>一些随机程序 - 例如代表具有噪声数据可能性的复杂概率生成模型的程序 - 具有难以处理的边际输出密度，但确实以其内部潜在变量为条件诱导“足够随机”的可能性。这是一个非常重要的特殊情况，VentureScript将其用作默认的随机过程构造语法</p>
+<p>如果有以下条件，程序f被称为“tailor accessable”</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9ab421ca09.png" alt="tailorAccessable.png"></p>
+<p>这类程序很有意思，因为即使边际密度难以处理，仍然可以实现约束内核，允许在拒绝采样，重要性采样和Metropolis-Hastings样式提议中对输出y进行调节。</p>
+<p>要了解如何为第二种情况构造约束内核，请考虑联合空间（z，y），其目标分布由下式给出：</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9abf2abd61.png" alt="TargetDis.png"></p>
+<p>其中ph和pg分别是由h和g引起的概率密度（注意这些密度不一定易于计算）。然后在（z; y）上定义以下提案分布：<br><img src="https://i.loli.net/2019/04/07/5ca9ad8a98888.png" alt="提议分布.png"></p>
+<p>从这个分布中很容易模拟：采样一个新的z~h（x），并设置y = yobs。密度比是<br><img src="https://i.loli.net/2019/04/07/5ca9aebb14b4c.png" alt="DensityRatio.png"></p>
+<p>如果密度pg易于计算（即g是可评估的），那么我们就完成了 - 我们有一个从联合空间（z; y）提出样本的程序，我们可以评估我们的提案分布和 目标分布。如果不是，g是假设可以尾部评估的，所以我们也可以递归地为它的输出构造一个约束内核。在递归终止的任何地方，我们都可以模拟和评估密度比（可能在扩展空间（z; y; w; :: :)，如果g也有内部潜伏）。</p>
+<p>在VentureScript中，可以使用proc语句构造具有这些语义的复合过程：</p>
+<ul>
+<li>P &lt;- proc(parameters:p, body:e) 使用给定的参数和主体创建随机过程。这是来自Lisp类语言的lambda的概率类比。</li>
+</ul>
+<p>语法是：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proc(x)&#123;</span><br><span class="line">g(h(x))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中一般可能有零个或多个参数（这里，x是唯一的参数），而body是一个在尾部位置有一个过程调用的表达式，其运算符（此处为g）是一个可约束的过程</p>
+<p>图5.2显示了实现相同beta-bernoulli过程的两个随机过程定义，一个定义为“bare”复合过程，一个定义为使用proc的尾部可评估过程，以及使用通用make_sp接口的等效扩展定义，显示 差异。定义为裸复合过程的版本没有密度或约束内核元程序，因此其输出不受约束。相反，使用proc定义的版本可以通过委托给其程序体中调用的bernoulli SP的密度元程序来约束。</p>
+<p>图5.2：左：作为裸化合物的β-Bernoulli过程的朴素定义，它绘制θ~Beta（a; b）并返回一个翻转一个重量为θ的硬币的闭包。与图5.1中的my_beta_1一样，此闭包没有密度元程序，因此其输出不受约束。右：使用proc的等价定义，这是一个元程序，它采用可尾部评估的过程并为其生成约束内核，它将翻转过程的密度作为其权重返回。底部：使用完整的make_sp接口定义的结果SP的扩展版本</p>
+<p>图见原文</p>
+<h2><span id="tradeoffs-between-different-representations-of-the-beta-bernoulli-process">Tradeoffs between different representations of the Beta-Bernoulli process</span></h2><p>随机过程接口使得以多种不同方式表示单个随机过程变得容易。概率程序员可以选择将随机变量暴露给Venture; 代表他们，但保持他们的外围; 或通过边缘化将其摧毁。概率编程人员还可以在VentureScript和更快（但可能更不透明）的本机代码之间选择不同的边界。这种灵活性最终可能对可实现的推理性能产生重大影响。</p>
+<p>本节中的示例使用Beta-Bernoulli过程探索了这种自由度，可以根据单个潜在硬币重量来考虑这一过程，从而产生可数无限的硬币翻转序列。这个过程最直接的实现是图5.2中的版本，包含一个复合过程，它关闭一个表示硬币权重weight的变量theta。</p>
+<p>此外，我们考虑Beta-Bernoulli过程的两个优化实现。第一个，如图5.4所示，是一个“折叠”表示，其中潜在的硬币重量被整合出来。该程序保持了之前硬币翻转的足够统计数据，并使用它们来模拟（并评估）下一次硬币翻转的后期预测分布，利用Beta和Bernoulli分布的共轭。</p>
+<p>第二个实现，如图5.6所示，是一个未折叠的表示，因此它对潜在的硬币重量进行采样而不是将其整合出来。 然而，它还保留了足够的统计数据，并以不同的方式利用Beta-Bernoulli共轭，提供了一个自定义的元程序，可以根据需要从后缀共同重新计算硬币重量。</p>
+<p>图5.6：beta-Bernoulli模型的未折叠实现，作为具有共轭Gibbs核的有状态过程。与图5.4中的折叠版本一样，它保持了其应用程序的足够统计数据，这里用于从其共轭后验中精确地对θ进行采样。此Gibbs内核作为SP的自定义元程序提供，可以作为推理程序的一部分进行调用。</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9b82735ffd.png" alt="图5.6.png"></p>
+<p>图5.4：将collasped的β-Bernoulli模型实现为有状态过程，该过程维护足够的统计量N，应用过程的次数，以及K，过程返回的次数为真。该实现对其可变状态使用通用计数器数据结构，该结构公开了读取，递增和递减操作。</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9b97779089.png" alt="图5.4.png"></p>
+<p>表5.1展示了所描述和比较的表示的总结，图5.3比较了运行时和示例的准确度。</p>
+<p>表5.1：β-Bernoulli变体的比较。“Runtime”列描述了对θ进行一轮推断（如果适用）然后模拟或合并新观察的运行时复杂性，其中N是已合并的观测总数。<br><img src="https://i.loli.net/2019/04/07/5ca9b8af518bb.png" alt="表5.1.png"></p>
+<p>图5.3：top：beta-Bernoulli模型的示例应用。weight不详的硬币翻转五次。观察翻转并逐个合并，并保留所得的对数似然增量。下图：运行时与对数似然权重的图，改变了β-Bernoulli程序的实施以及每次观察之间进行的推断量。请注意，折叠实现获得模型下数据的真实边际可能性，而其他实现产生噪声近似值，通过更好的推断变得更准确。</p>
+<p>图见原文</p>
+<h2><span id="55-memoization-as-a-user-space-stochastic-procedure">5.5 Memoization as a user-space stochastic procedure</span></h2><p>Memoization是高阶程序的规范应用。memoizer是一个过程，它将一个过程作为输入，并返回一个新的过程，在计算它们时在内部缓存值。这可以节省计算时间，特别是对于递归过程，以空间为代价。在概率编程的设置中，memoization可以用作许多有趣的半参数贝叶斯模型的构建块[3]。然而，因为memoization是一个更高阶的过程，它不适合早期实现Church [3,14]的“基本随机过程”的简单模板。本节通过给出用户空间实现memoization来说明Venture的灵活性和随机过程接口。</p>
+<p>memoizer的实现如图5.7所示。当应用memoized SP时，它首先查找输入参数并返回现有值（如果有），否则委托给unmemoized SP</p>
+<p>图5.7：将memoization实现为用户空间过程，使用外部可变计数器实现引用计数，eval_request对原始未标记SP f进行跟踪调用</p>
+<p>图片见论文</p>
+<p>该实现依赖于前面描述的执行请求，该请求允许它对原始未标记的SP进行跟踪调用。这是通过在f绑定到原始SP的地址的环境中请求执行形式为f（x）的程序片段来完成的。</p>
+<p>使用执行请求允许已记忆的SP挂钩到依赖性跟踪机制，例如，当提交到备忘SP的主体中的随机选择时，该选择会影响将返回的值，SP的所有应用程序 通知相同的输入参数，以便它们可以传播新值。这种行为可以由SP定义一个额外的内核propagating_kernel来控制，该内核通过依赖关系跟踪实现用作优化</p>
+<p>图5.8显示了使用memoization定义HMM的隐藏状态序列的示例模型程序。 x（t）是一个记忆值，指的是第t个时间步的状态。 通过这种方式，memoization定义了一个无限延迟的随机变量序列，只有在必要时才会实例化。</p>
+<p>图5.8：具有二进制状态和观察的HMM的实现，使用mem来记忆状态序列</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9bc455c1a3.png" alt="图5.8.png"></p>
+<h1><span id="6-discussion">6 Discussion</span></h1><p>本文描述了Venture的一个新原型实现，Venture是一个概率元编程平台，解决了其他概率编程语言表达的基本限制。使用Venture，可以将用于描述概率密度函数和执行推理的元程序编写为普通用户空间代码。此外，该语言具有足够的表达能力，允许外国原语和中介语复合程序表示看似同类的概率对象。这些功能仅在早期版本的Venture中部分实现。通过展示如何为必须内置于其他概率语言的对象和操作的用户空间实现来说明所产生的灵活性。</p>
+<p>Venture的一个限制是它目前缺少（i）简单的元循环解释器和（ii）形式语义。这两者都是构建Venture行为不完整模型的补充方法。每一个都可以用来澄清语言的设计，帮助进行性能工程，并支持开发更复杂的建模和推理元程序。这两种方法也可以帮助揭示设计缺陷和实施缺陷，并为评估潜在的补救措施提供具体的基础。依赖跟踪和随机再生的元循环实现也可以为调试提供强大的工具。考虑到Venture程序员可以使用建模和推理来提供机器帮助，通过询问“哪些随机选择可能导致此推理元程序显示此特定模型程序跟踪？”来查找指示错误的不太可能的边缘情况。</p>
+<p>性能工程是未来工作的关键领域。VentureScript的当前原型实现比几个以前版本的Venture慢。这不是实际应用的基本障碍，但由于开发周期缓慢，它确实阻碍了应用工作。事实上，VentureScript是高阶的，并且在本机代码和VentureScript之间保持对称，这意味着增量编译 - 可能是VentureScript到VentureScript转换，除了VentureScript到本机代码编译器之外 - 可能是一种吸引人的策略。例如，许多模型具有相对静态的结构，因此Venture的通用子问题构造和再生算法总是在跟踪图中的节点上执行类似的遍历。专门的编译器可以消除该遍历，从而使更高效的程序专门用于该模型和推理子问题，使用较低级别的跟踪操作来直接读取和改变跟踪并计算适当的似然比。</p>
+<p>未来工作的另一个关键领域是开发特定于领域的语言和用于概率建模和推理的库。 VentureScript是目前唯一的内置语言，它实现了关于如何组合指定模型和推理方案的特定假设。 它为用户提供了一种用元数据注解模型，用元数据构造有意义的子问题，并结合通用推理库例程和自定义推理策略来解决这些子问题的方法。 VentureScript在很大程度上依赖于随机过程接口的约定，但它只是设计空间中的一点，而且这些约定本身可能不是最优的。 至少，需要扩展这些约定，以定义添加其他元程序(如梯度信息)的最佳实践，这些元程序是基于优化的推理和变分技术的关键。 还必须探讨推理程序的静态检查，并尝试开发具有适当的可靠性或完备性的正式保证的推理库。</p>
+<p>本文证明了用一种简单的高阶语言来表示随机变量、密度函数和推理算法的概率规划平台是可行的。 关键思想包括扩充Lisp以支持(I)对程序行为的具体化和反思，(Ii)将概率程序和元程序链接到单个包中。 与其他概率编程平台相比，这种对反射元编程的关注带来了更大的灵活性和可扩展性。 它还可能提出新的方法来理解概率规划的基本技术挑战。 考虑UNIX系列操作系统。 UNIX通常用于组装和维护交互程序的集合，包括监视和修改彼此的运行时行为的程序。 这些程序通过共享文件系统和显式回调等机制进行通信。 可以通过反射机制(如strace和gdb)检查正在运行的UNIX程序的内部行为和可变状态的关键方面。 其中一些机制与Venture中用于反射和元编程的工具非常相似，UNIX中的堆分配内存扮演着类似于概率执行跟踪的角色。 UNIX性能工程的思想因此可能与Venture相关。 也可能是来自操作系统和其他形式的系统软件的思想，而不仅仅是编程语言和单语言编程系统，可以帮助我们形式化和自动化概率建模和推理的关键方面。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/概率计算/">概率计算</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/04/04/Ubuntu_Linux使用笔记/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Ubuntu_Linux使用笔记</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/03/概率编程之PyMC3/">
+                <span class="level-item">概率编程之PyMC3</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/icon.jpg" alt="徐志康">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        徐志康
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        研三科研狗
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>四川成都</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        5
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/xuzhikang2018" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/xuzhikang2018">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">有道云笔记</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Intel与概率计算/">
+            <span class="level-start">
+                <span class="level-item">Intel与概率计算</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/probabilistic-programming/">
+            <span class="level-start">
+                <span class="level-item">probabilistic programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/其他/">
+            <span class="level-start">
+                <span class="level-item">其他</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数字IC设计/">
+            <span class="level-start">
+                <span class="level-item">数字IC设计</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/软件工具/">
+            <span class="level-start">
+                <span class="level-item">软件工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/概率计算/" style="font-size: 20px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu_Linux使用笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="has-link-black-ter is-size-6">Ubuntu_Linux使用笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="has-link-black-ter is-size-6">MIT论文1-Venture:用于概率元编程的可扩展平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/03/概率编程之PyMC3/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="概率编程之PyMC3">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-03T12:10:11.000Z">2019-04-03</time></div>
+                    <a href="/2019/04/03/概率编程之PyMC3/" class="has-link-black-ter is-size-6">概率编程之PyMC3</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/02/MIT概率计算小组/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT概率计算小组">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T03:08:22.000Z">2019-04-02</time></div>
+                    <a href="/2019/04/02/MIT概率计算小组/" class="has-link-black-ter is-size-6">MIT概率计算小组</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/02/实用工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="实用工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time></div>
+                    <a href="/2019/04/02/实用工具/" class="has-link-black-ter is-size-6">实用工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/软件工具/">软件工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux使用/">
+                        <span class="tag">Linux使用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/其他/">
+                        <span class="tag">其他</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/博客有关/">
+                        <span class="tag">博客有关</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/博客遇到的问题/">
+                        <span class="tag">博客遇到的问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/概率计算/">
+                        <span class="tag">概率计算</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/求职/">
+                        <span class="tag">求职</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/项目/">
+                        <span class="tag">项目</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu_Linux使用笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="has-link-black-ter is-size-6">Ubuntu_Linux使用笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="has-link-black-ter is-size-6">MIT论文1-Venture:用于概率元编程的可扩展平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/03/概率编程之PyMC3/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="概率编程之PyMC3">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-03T12:10:11.000Z">2019-04-03</time></div>
+                    <a href="/2019/04/03/概率编程之PyMC3/" class="has-link-black-ter is-size-6">概率编程之PyMC3</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/02/MIT概率计算小组/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT概率计算小组">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T03:08:22.000Z">2019-04-02</time></div>
+                    <a href="/2019/04/02/MIT概率计算小组/" class="has-link-black-ter is-size-6">MIT概率计算小组</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/02/实用工具/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="实用工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time></div>
+                    <a href="/2019/04/02/实用工具/" class="has-link-black-ter is-size-6">实用工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/软件工具/">软件工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux使用/">
+                        <span class="tag">Linux使用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/其他/">
+                        <span class="tag">其他</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/博客有关/">
+                        <span class="tag">博客有关</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/博客遇到的问题/">
+                        <span class="tag">博客遇到的问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/概率计算/">
+                        <span class="tag">概率计算</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/求职/">
+                        <span class="tag">求职</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/项目/">
+                        <span class="tag">项目</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 徐志康&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

@@ -16,7 +16,7 @@
 <meta property="og:description" content="主要来自知乎的整理">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-04T01:47:30.606Z">
+<meta property="og:updated_time" content="2019-04-07T02:14:30.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字IC设计面试100题">
 <meta name="twitter:description" content="主要来自知乎的整理">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 7693 个字)
+                    1 小时 读完 (大约 9207 个字)
                 </span>
                 
                 
@@ -207,6 +207,19 @@
 <li><a href="#35为什么一个标准的倒相器中p管的宽长比要比n管的宽长比大">35.为什么一个标准的倒相器中P管的宽长比要比N管的宽长比大？</a></li>
 <li><a href="#36用mos管搭出一个与非门">36.用mos管搭出一个与非门？</a></li>
 <li><a href="#37画出notnandnor的符号真值表还有transistor-level的电路">37.画出NOT,NAND,NOR的符号，真值表，还有transistor level的电路</a></li>
+<li><a href="#38画出cmos图画出two-to-one-mux-gate二选一电路">38.画出CMOS图，画出two-to-one mux gate(二选一电路)？</a></li>
+<li><a href="#39用一个二选一mux和一个inv实现异或">39.用一个二选一mux和一个inv实现异或？</a></li>
+<li><a href="#40画出cmos电路的晶体管架构实现yabcde画出yabc的cmos电路图画出yabcd的cmos电路图">40.画出CMOS电路的晶体管架构，实现Y=AB+C(D+E)?画出Y=AB+C的CMOS电路图，画出Y=AB+CD的CMOS电路图。</a></li>
+<li><a href="#41用与非门等设计全加法器">41.用与非门等设计全加法器？</a></li>
+<li><a href="#未解答42a-b-c-d-e进行投票少数服从多数输出是fabcde中1的个数比0的多输出1否则输出0用与非门实现输出数目没有限制">未解答*42.A、B、C、D、E进行投票，少数服从多数，输出是F(ABCDE中1的个数比0的多输出1，否则输出0)，用与非门实现，输出数目没有限制？</a></li>
+<li><a href="#未解答43画出一种cmos的d锁存器的电路图和版图">未解答*43.画出一种CMOS的D锁存器的电路图和版图？</a></li>
+<li><a href="#44latch和dff概念和区别">44.LATCH和DFF概念和区别？</a></li>
+<li><a href="#45latch和register的区别为什么现在多用register行为级描述中latch是如何产生的">45.latch和register的区别，为什么现在多用register.行为级描述中latch是如何产生的？</a></li>
+<li><a href="#46用d触发器做个二分频电路">46.用D触发器做个二分频电路</a></li>
+<li><a href="#47什么是状态图">47.什么是状态图？</a></li>
+<li><a href="#48用你熟悉的设计方式设计一个可以预置初值的7进制循环计数器15进制呢">48.用你熟悉的设计方式设计一个可以预置初值的7进制循环计数器，15进制呢？</a></li>
+<li><a href="#49你知道的可编程逻辑器件有哪些">49.你知道的可编程逻辑器件有哪些？</a></li>
+<li><a href="#50用verilog或vhdl写一段代码实现消除一个glitch毛刺">50.用Verilog或VHDL写一段代码，实现消除一个glitch(毛刺)？</a></li>
 </ul>
 <!-- tocstop -->
 <p>原文地址<a href="https://zhuanlan.zhihu.com/p/42201263" target="_blank" rel="noopener">ictown_数字IC设计工程师笔试面试经典100题-有答案陈恩</a></p>
@@ -374,6 +387,48 @@
 <p>参考博客：<a href="https://blog.csdn.net/gdaswater/article/details/4484705" target="_blank" rel="noopener">MOS管及简单的CMOS逻辑门电路原理图</a></p>
 <h3><span id="37画出notnandnor的符号真值表还有transistor-level的电路">37.画出NOT,NAND,NOR的符号，真值表，还有transistor level的电路</span></h3><p>答：NOT门,其他两个门参考题36</p>
 <p><img src="https://p-blog.csdn.net/images/p_blog_csdn_net/gdaswater/EntryImages/20090825/2633868341921718750.jpg" alt></p>
+<h3><span id="38画出cmos图画出two-to-one-mux-gate二选一电路">38.画出CMOS图，画出two-to-one mux gate(二选一电路)？</span></h3><p>答：CMOS图为</p>
+<p><img src="https://p-blog.csdn.net/images/p_blog_csdn_net/gdaswater/EntryImages/20090825/1633868341921250000.jpg" alt="MOS管"></p>
+<p>Y=SA+S’B利用与非门和反相器，进行变换后Y=((SA)’*(S’A)’)’，三个与非门，一个反相器。也可以用传输门来实现数据选择器或者异或门</p>
+<p><img src="https://i.loli.net/2019/04/05/5ca6c30d1e9ef.png" alt="QQ截图20190405105250.png"></p>
+<h3><span id="39用一个二选一mux和一个inv实现异或">39.用一个二选一mux和一个inv实现异或？</span></h3><p>答:异或的逻辑为Y=AB’+A’B，而二选一的逻辑为Y=SA+S’B,可以让选择S解B,输入信号分别接A和A’,Y=SA+S’B=BA’+B’A</p>
+<p><strong>利用四选一实现F(x,y,z)=xz+yz’</strong></p>
+<p><img src="https://gss0.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=70d951deb7de9c82a630f1895cb1ac32/faf2b2119313b07e2801e5ef08d7912396dd8c9d.jpg" alt="四选一数据选择器"></p>
+<p>F(x,y,z)=xyz + xy’z + xyz’ + x’yz’=x’y’0 + x’yz’ + xy’z + xy1</p>
+<p>Y = A’B’D0 + A’BD1 + AB’D2 + ABD3</p>
+<p>所以D0=0, D1=z’, D2=z, D3=1</p>
+<h3><span id="40画出cmos电路的晶体管架构实现yabcde画出yabc的cmos电路图画出yabcd的cmos电路图">40.画出CMOS电路的晶体管架构，实现Y=AB+C(D+E)?画出Y=AB+C的CMOS电路图，画出Y=AB+CD的CMOS电路图。</span></h3><p>答：CMOS电路和与非门的电路图在题38和题36，考虑用与非门实现上诉电路</p>
+<ol>
+<li>Y=AB+C(D+E)=((AB)’(CD)’(CE)’)’, 三个两输入与非门，一个三输入与非门</li>
+<li>Y=AB+C=((AB)’C’)’，两个与非门，两个反相器</li>
+<li>Y=AB+CD=((AB)’(CD)’)’，三个两输入与非门</li>
+</ol>
+<h3><span id="41用与非门等设计全加法器">41.用与非门等设计全加法器？</span></h3><p>答：    全加法器的输入为A, B, Cin。 A，B是加法的输入，Cin是进位输入。输出是Sum和Cout，Sum是加法输出，Cout是进位输出。</p>
+<p><img src="https://gss0.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=0350157c72310a55c471d6f287756f91/314e251f95cad1c853e073a8743e6709c83d51e2.jpg" alt></p>
+<h3><span id="未解答42a-b-c-d-e进行投票少数服从多数输出是fabcde中1的个数比0的多输出1否则输出0用与非门实现输出数目没有限制">未解答*42.A、B、C、D、E进行投票，少数服从多数，输出是F(ABCDE中1的个数比0的多输出1，否则输出0)，用与非门实现，输出数目没有限制？</span></h3><h3><span id="未解答43画出一种cmos的d锁存器的电路图和版图">未解答*43.画出一种CMOS的D锁存器的电路图和版图？</span></h3><h3><span id="44latch和dff概念和区别">44.LATCH和DFF概念和区别？</span></h3><p>答：DFF是边沿敏感，LATHC是电平敏感。</p>
+<p>latch（锁存器）与 DFF（D触发器）的区别</p>
+<ol>
+<li><p>latch由电平触发，非同步控制。在使能信号有效时latch相当于通路，在使能信号无效时latch保持输出状态。DFF由时钟沿触发，同步控制。</p>
+</li>
+<li><p>latch容易产生毛刺（glitch），DFF则不易产生毛刺。</p>
+</li>
+<li><p>如果<strong>使用门电路来搭建latch和DFF，则latch消耗的门资源比DFF要少，这是latch比DFF优越的地方</strong>。所以，在ASIC中使用latch的集成度比DFF高，但在FPGA中正好相反，因为FPGA中没有标准的latch单元，但有DFF单元，一个LATCH需要多个LE才能实现。</p>
+</li>
+<li><p>latch将静态时序分析变得极为复杂。</p>
+</li>
+</ol>
+<p>一般的设计规则是：在绝大多数设计中避免产生latch。它会让您设计的时序完蛋，并且它的隐蔽性很强，非老手不能查出。<strong>latch最大的危害在于不能过滤毛刺</strong>。这对于下一级电路是极其危险的。所以，只要能用D触发器的地方，就不用latch。</p>
+<h3><span id="45latch和register的区别为什么现在多用register行为级描述中latch是如何产生的">45.latch和register的区别，为什么现在多用register.行为级描述中latch是如何产生的？</span></h3><p>答： latch是电平敏感，register是边沿触发，register在同一时钟边沿边沿触发下动作，符合同步电路的设计思想，而Latch则属于异步电路设计，往往会导致时序分析困难，不适合的应用到Latch则会大量浪费芯片资源。</p>
+<figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> latch(Din, Dout, enable);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">input</span> enable;</span><br><span class="line"><span class="hljs-keyword">input</span> Din;</span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> Dout;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(enable <span class="hljs-keyword">or</span> Din)<span class="hljs-keyword">begin</span></span><br><span class="line">	<span class="hljs-keyword">if</span>(enable) Dout &lt;= Din;</span><br><span class="line">	<span class="hljs-keyword">else</span> Dout &lt;= Dout;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="46用d触发器做个二分频电路">46.用D触发器做个二分频电路</span></h3><p>答：由D触发器构建的二分频电路</p>
+<p><img src="http://s6.sinaimg.cn/middle/63fd6b77499f527c8af55&amp;690" alt></p>
+<p><img src="http://s15.sinaimg.cn/large/63fd6b77499f52843aaae&amp;690" alt></p>
+<p>现实工程中一般不采用这样的方式实现，二分频一般通过DCM或者PLL产生，这样得到的分频信号没有相位差</p>
+<h3><span id="47什么是状态图">47.什么是状态图？</span></h3><p>答：状态图是以几何图形的方式描述时序逻辑电路的状态转移规律以及输入和输出的关系。</p>
+<h3><span id="48用你熟悉的设计方式设计一个可以预置初值的7进制循环计数器15进制呢">48.用你熟悉的设计方式设计一个可以预置初值的7进制循环计数器，15进制呢？</span></h3><p>答：7位进制循环计数器<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> counter7(clk , rst_n, load, data_in, counter_out, carry_out);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;</span><br><span class="line"><span class="hljs-keyword">input</span> load; <span class="hljs-comment">//加载数字开始计数</span></span><br><span class="line"><span class="hljs-keyword">input</span>[<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] data_in;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] counter_out;</span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> carry_out; <span class="hljs-comment">//计数满输出</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">	counter_out &lt;= <span class="hljs-number">3'b0</span>;</span><br><span class="line">	carry_out &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(load) counter_out &lt;= data_in;</span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(counter_out=<span class="hljs-number">3'd6</span>) <span class="hljs-keyword">begin</span></span><br><span class="line">	counter_out &lt;= <span class="hljs-number">3'b0</span>;</span><br><span class="line">	carry_out &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span>  <span class="hljs-keyword">begin</span></span><br><span class="line">	counter_out &lt;= counter_out + <span class="hljs-number">3'b1</span>;</span><br><span class="line">	carry_out &lt;= <span class="hljs-number">1'b0</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
+<p>15进制循环计算器，对应的将上面位宽加1，计数满和达到计数值改为14</p>
+<h3><span id="49你知道的可编程逻辑器件有哪些">49.你知道的可编程逻辑器件有哪些？</span></h3><p>答：PAL，PLA，GAL，CPLD，FPGA</p>
+<h3><span id="50用verilog或vhdl写一段代码实现消除一个glitch毛刺">50.用Verilog或VHDL写一段代码，实现消除一个glitch(毛刺)？</span></h3><p>答：将通过传输过来的信号经过两级触发器就可以消除毛刺（这种消除毛刺的方式是需要满足一定的条件的，并不能保证一定可以消除）<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> (clk, rst_n, data_in, data_out);</span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;</span><br><span class="line"><span class="hljs-keyword">input</span> data_in;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">output</span> data_out;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">reg</span> data_r1, data_r2;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">	data_r1 &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">	data_r2 &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">	data_r1 &lt;= data_in;</span><br><span class="line">	data_r2 &lt;= data_r1;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">assign</span> data_out &lt;= data_r2;</span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -469,7 +524,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        9
                     </p>
                 </div>
             </div>
@@ -489,7 +544,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        7
                     </p>
                 </div>
             </div>
@@ -565,15 +620,15 @@
                 <span class="level-item">probabilistic programming</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/博客/">
+        <a class="level is-marginless" href="/categories/其他/">
             <span class="level-start">
-                <span class="level-item">博客</span>
+                <span class="level-item">其他</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/数字IC设计/">
@@ -603,7 +658,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/概率计算/" style="font-size: 20px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
     </div>
 </div>
 
@@ -617,6 +672,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu_Linux使用笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="has-link-black-ter is-size-6">Ubuntu_Linux使用笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="has-link-black-ter is-size-6">MIT论文1-Venture:用于概率元编程的可扩展平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -675,44 +768,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/01/Intel概率计算报道/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Intel概率计算报道">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T09:37:54.000Z">2019-04-01</time></div>
-                    <a href="/2019/04/01/Intel概率计算报道/" class="has-link-black-ter is-size-6">Intel概率计算报道</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/30/数字IC设计面试100题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="数字IC设计面试100题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-30T02:40:56.000Z">2019-03-30</time></div>
-                    <a href="/2019/03/30/数字IC设计面试100题/" class="has-link-black-ter is-size-6">数字IC设计面试100题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数字IC设计/">数字IC设计</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -731,7 +786,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -761,6 +816,13 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux使用/">
+                        <span class="tag">Linux使用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/其他/">
                         <span class="tag">其他</span>
                         <span class="tag is-grey">1</span>
@@ -784,7 +846,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/概率计算/">
                         <span class="tag">概率计算</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -827,6 +889,44 @@
         
         <article class="media">
             
+            <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu_Linux使用笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="has-link-black-ter is-size-6">Ubuntu_Linux使用笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="has-link-black-ter is-size-6">MIT论文1-Venture:用于概率元编程的可扩展平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/03/概率编程之PyMC3/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="概率编程之PyMC3">
@@ -882,44 +982,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/01/Intel概率计算报道/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Intel概率计算报道">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T09:37:54.000Z">2019-04-01</time></div>
-                    <a href="/2019/04/01/Intel概率计算报道/" class="has-link-black-ter is-size-6">Intel概率计算报道</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/30/数字IC设计面试100题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="数字IC设计面试100题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-30T02:40:56.000Z">2019-03-30</time></div>
-                    <a href="/2019/03/30/数字IC设计面试100题/" class="has-link-black-ter is-size-6">数字IC设计面试100题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/数字IC设计/">数字IC设计</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -938,7 +1000,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -968,6 +1030,13 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux使用/">
+                        <span class="tag">Linux使用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/其他/">
                         <span class="tag">其他</span>
                         <span class="tag is-grey">1</span>
@@ -991,7 +1060,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/概率计算/">
                         <span class="tag">概率计算</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
