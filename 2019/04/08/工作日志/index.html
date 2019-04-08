@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>分类: Intel与概率计算 - 徐志康的技术博客</title>
+<title>工作日志 - 徐志康的技术博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="徐志康的技术博客">
-<meta property="og:url" content="http://yoursite.com/categories/Intel与概率计算/index.html">
+    <meta name="description" content="从2019年4月8日开始的工作日志">
+<meta name="keywords" content="工作日志">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工作日志">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/工作日志/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-08T02:27:47.251Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="徐志康的技术博客">
+<meta name="twitter:title" content="工作日志">
+<meta name="twitter:description" content="从2019年4月8日开始的工作日志">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                <img src="/images/logo.svg" alt="工作日志" height="28">
             
             </a>
         </div>
@@ -133,134 +138,91 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-04-08T02:01:30.000Z">2019-04-08</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/工作周报与报告/">工作周报与报告</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 673 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                工作日志
+            
+        </h1>
+        <div class="content">
+            <p>从2019年4月8日开始的工作日志</p>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
+<ol>
+<li>整理了一下Intel有关概率计算的报道，其中包括3月1日，英特尔新上任的实验室主任Rich Uhlig接受IEEE Spectrum的访谈，从我理解的来看，概率计算（probabilistic computing）应该就是，概率机器学习，贝叶斯机器学习的内容，实现方式就是概率编程（probabilistic programming）,能够进行少样本的数据学习，理解并能处理自然数据中的不确定性。<a href="https://xuzhikang2018.github.io/2019/04/01/Intel%E6%A6%82%E7%8E%87%E8%AE%A1%E7%AE%97%E6%8A%A5%E9%81%93/" target="_blank" rel="noopener">Intel概率计算报道</a></li>
+<li>论文1<a href="https://xuzhikang2018.github.io/2019/04/03/%E6%A6%82%E7%8E%87%E7%BC%96%E7%A8%8B%E4%B9%8BPyMC3/" target="_blank" rel="noopener">《Probabilistic programming in Python using PyMC3》</a>概率编程允许用户定义概率模型进行自动贝叶斯推理。马尔可夫链蒙特卡罗(MCMC)抽样的最新进展允许对越来越复杂的模型进行推理。这类MCMC，称为哈密顿蒙特卡罗，需要梯度信息，而这往往是不容易获得的。PyMC3是用Python编写的一个新的开源概率编程框架，它使用Theano通过自动微分来计算梯度，并在运行时将概率程序编译到C中以提高速度。与其他概率编程语言相反，PyMC3允许直接在Python代码中进行模型定义。由于不需要特定于领域的语言，因此具有很大的灵活性和与模型的直接交互。本文是对此软件包的教程式介绍。</li>
+<li>论文2<a href="https://xuzhikang2018.github.io/2019/04/04/MIT%E8%AE%BA%E6%96%871-Venture-%E7%94%A8%E4%BA%8E%E6%A6%82%E7%8E%87%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%8F%AF%E6%89%A9%E5%B1%95%E5%B9%B3%E5%8F%B0/#more" target="_blank" rel="noopener">《Venture: an extensible platform for probabilistic meta-programming》</a>,该论文是MIT概率编程团队2016年，介绍了Venture这个概率编程平台，Venture和其他编程语言相比最大的特点<strong>是可定制性</strong>，它把程序执行过程中查看概率选择的迹（trace）,以及搭建推理程序的基本模块，封装成函数提供给用户，可以在这基础上搭建新的推理方法和进行模型验证</li>
+<li>在youtube看了有关概率编程的会议PROBPROG 2018，Talks前10个talk，有关介绍他们的编程库，还有关研究团队谈及他们对概率编程的应用。<a href="http://note.youdao.com/noteshare?id=056636027501ac32819dcf6859f70a08&amp;sub=0C87C1FDFCF641A7920012DAACAB885D" target="_blank" rel="noopener">我的简单笔记</a></li>
+</ol>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/工作日志/">工作日志</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
             
-            <li class="is-active"><a href="#" aria-current="page">Intel与概率计算</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-02T03:08:22.000Z">2019-04-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 127 个字)
-                </span>
-                
-                
-            </div>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/02/MIT概率计算小组/">MIT概率计算小组</a>
-            
-        </h1>
-        <div class="content">
-            <!-- toc -->
-<ul>
-<li><a href="#为什么intel的概率计算会和mit的概率计算挂钩呢">为什么Intel的概率计算会和MIT的概率计算挂钩呢</a></li>
-</ul>
-<!-- tocstop -->
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/02/MIT概率计算小组/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-01T09:37:54.000Z">2019-04-01</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    39 分钟 读完 (大约 5823 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/04/Ubuntu_Linux使用笔记/">
+                <span class="level-item">Ubuntu_Linux使用笔记</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/01/Intel概率计算报道/">Intel概率计算报道</a>
-            
-        </h1>
-        <div class="content">
-            <!-- toc -->
-<ul>
-<li><a href="#1英特尔实验室介绍">1.英特尔实验室介绍</a><ul>
-<li><a href="#神经拟态计算简介">神经拟态计算简介</a></li>
-<li><a href="#概率计算简介">概率计算简介</a></li>
-</ul>
-</li>
-<li><a href="#2概率计算使人工智能进入下一个时代">2.概率计算使人工智能进入下一个时代</a></li>
-<li><a href="#3英特尔开始为人工智能进行概率计算的研发工作">3.英特尔开始为人工智能进行概率计算的研发工作</a></li>
-<li><a href="#4英特尔实验室主任谈量子概率和神经拟态计算">4.英特尔实验室主任谈量子，概率和神经拟态计算</a></li>
-</ul>
-<!-- tocstop -->
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/01/Intel概率计算报道/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -891,7 +853,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                    <img src="/images/logo.svg" alt="工作日志" height="28">
                 
                 </a>
                 <p class="is-size-7">
