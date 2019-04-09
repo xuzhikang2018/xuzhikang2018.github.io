@@ -2,14 +2,14 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: 实用工具 - 徐志康的技术博客</title>
+<title>标签: 研电赛 - 徐志康的技术博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="徐志康的技术博客">
-<meta property="og:url" content="http://yoursite.com/tags/实用工具/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/研电赛/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
@@ -137,7 +137,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">实用工具</a></li>
+            <li class="is-active"><a href="#" aria-current="page">研电赛</a></li>
         </ul>
         </nav>
     </div>
@@ -149,7 +149,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time>
+                <time class="level-item has-text-grey" datetime="2019-04-08T06:59:22.000Z">2019-04-08</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/其他/">其他</a>
@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 184 个字)
+                    18 分钟 读完 (大约 2706 个字)
                 </span>
                 
                 
@@ -168,21 +168,45 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/04/02/实用工具/">实用工具</a>
+                <a class="has-link-black-ter" href="/2019/04/08/研电赛-语音合成/">研电赛_语音合成</a>
             
         </h1>
         <div class="content">
-            <p>推荐一下使用的软件</p>
+            <p>语音合成声码器从基频、频谱等声学特征中重构语音波形，是统计参数语音合成系统中不可或缺的一部分。</p>
+<p>但是以STRAIGHT为代表的传统源－滤波器结构声码器仍然存在频谱细节丢失、相位依赖人工设计以及线性滤波框架等问题。</p>
+<p>2016年， DeepMind研宄者提出了直接对语音波形建模与生成的深度卷积神经网络结构， 并将其用于从文本特征预测语音波形， 取得了优于传统统计参数方法的合成语音自然度。</p>
+<p>论文工作：</p>
+<ol>
+<li>设计实现了基于卷积神经网络的话者相关语音合成声码器</li>
+<li>提出了神经网络声码器的话者无关及自适应训练方法， 在目标语音数据有限情形下实现高质量声码器的训练；</li>
+<li>设计实现了多分辨率层级化网络结构， 提升语音合成声码器的生成效率。</li>
+</ol>
+<p>论文整体安排：<br>概述语音合成技术，<strong>波形拼接合成方法和统计参数合成方法</strong>， 然后回顾了常用的语音合成声码器并分析其优势和不足。</p>
+<p>DeepMing研宄者提出的WaveNet模型，卷积神经网络对语音波形建模的动机与出发点，并详细介绍本文设计实现的<strong>基于卷积神经网络的语音合成声码器模型。</strong>该模型构造了一个<strong>上采样网络实现了声学特征采样率与输出语音采样率的匹配</strong>， 然后将变换后的声学条件信息加入网络激活函数中指导语音的生成。</p>
+<p>第三章首先回顾了<strong>说话人自适应技术</strong>历史， 介绍了语音识别与语音合成任务中的自适应方法； 然后介绍了本文提出的<strong>神经网络语音合成声码器的话者无关及自适应训练方法</strong>； 最后利用自然声学特征和声学模型预测声学特征作为输入重构语音， 实验验证了自适应训练的有效性。</p>
+<p>第四章首先分析了神经网络语音合成声码器生成语音速度较慢的问题， 其次介绍了基于<strong>扩张卷积神经网络的语音频带扩展工作</strong>， 然后在此基础上提出了多分辨率层级化生成网络， 最后实验评估了该模型的效率提升结果以及合成语音质量</p>
+<h1><span id="绪论">绪论</span></h1><p>语音人机交互技术包含语音识别（将人类语音转换为文字) ,自然语音理解（理解自然语言的意思） 以及与<strong>语音合成（将文字转换为对应语音）</strong> 这三种高难度技术。技术上分为<strong>波形拼接语音合成方法和统计参数语音合成方法</strong>两大流派。在目前的统计参数语音合成系统中， 合成语音质量主要受<strong>声码器、声学模型建模精度以及过平滑效应影响</strong>。近年来， 随着深度神经网络（Deep Neural Network, DNN） 在语音合成声学建模中的广泛应用， 声学模型精度与合成语音自然度均得到了有效改善。但是在<strong>声码器特征提取与波形重构过程中的音质损失</strong>仍然制约着统计参数合成语音质量的进一步提升。研宄高质量的<strong>语音合成声码器</strong>对语音合成有至关重要的作用， 可以有效提升语音合成系统上限。</p>
+<h2><span id="11-语音合成技术概述">1.1 语音合成技术概述</span></h2><p>语音合成可以分为三类：</p>
+<ol>
+<li><strong>文字按规则映射到语音波形， 简称文语转换（Text-To-Speech,TTS)</strong></li>
+<li>概念按规则映射到语音</li>
+<li>意向按规则映射到语音</li>
+</ol>
+<p>图1.1展示了一个典型的语音合成系统。文语转换是一个层次化的信息处理过程，而且层次越高信息越丰富，这也是文字转换到语音的难点。首先，根据给定语言的词典和相应的<strong>语法规则在语言层、语法层和语义层分析</strong>，以获得不同层级的文本信息(包括<strong>词组，短语，句子和韵律划分信息等</strong>)：然后对不同层级的文本信息做韵律分析，获到语音级别的韵律信息(<strong>包括谱参数，基频，时长</strong>)；最后 根据预测的声学参数利用语音合成声码器合成语音波形或者从音库数据中挑选最优的波形单元拼接合成语音。</p>
+<p><img src="https://i.loli.net/2019/04/08/5caaf9f22bd97.png" alt="图1.1语音合成系统示意图.png"></p>
+<p>文语转换系统的层次化信息处理过程可以划分为<strong>前端的文本分析和后端的语音合成</strong>。前端文本分析将<strong>字符型文字转换为层次化的语音学中间表征</strong>；后端语音合成则<strong>将这些层次化表征映射到韵律特征，然后根据韵律信息利用合成声码器合成语音</strong>或者利用单元挑选与波形拼接方法合成语音。本文研宂工作聚焦在后端的语音合成部分，具体研宄<strong>高质量语音合成声码器的构造</strong>，将韵律参数转换成自然度高音质好的语音波形。</p>
+<h2><span id="12-语音信号的生成机理">1.2 语音信号的生成机理</span></h2><p>了解语音产生的物理过程, 然后才能用计算机精确地模拟语音信号产生过程，使得计算机像人类一样自如的说话。语音生成系统可以分为三个部分，如图1.2所示：</p>
+<p>(1)激励系统：人体肺部呼出的空气经过声门的快速开启闭合产生激励振动, 因此将声带以下部位称之为激励系统。<br>(2)声道系统：声门到嘴唇之间的气流通道被称之为声道，其形状主要由嘴唇、 颚和舌头等发音器官的位位置决定。气流撞击<strong>声门上的声带进行振动</strong>，然后 通过声道响应变为语音；颅神经会根据发音内容控制肌肉调整声道形状，从而发出不同的声音。<br>(3)辐射系统：指经过声道滤波后的忾流从嘴唇、鼻孔向空间辐射过程。</p>
+<p>对人发声的认识导致了对声道系统模型的不同建模</p>
+<h2><span id="13-现阶段主流语音合成方法">1.3 现阶段主流语音合成方法</span></h2><p>基于机器学习准则利用大量语音数据训练的语音模型是目前主流的语音合成方法，<strong>单元挑选与波形拼接方法和统计参数语音合成方法</strong>是当下应用最广泛的两种模型。<br><img src="https://i.loli.net/2019/04/08/5cab006e2be9a.png" alt></p>
+<p>波形拼接合成系统的优点是用于拼接的波形单元来自自然音库，所以其合 成的语音和自然语音比较接近，自然度比较高；但是它音库制作周期长，人工录音、标注成本较高，并且它对于不同语种、语言环境的推广能力差，系统占用空间大，魯棒性不好。缺点是：<strong>语库构建周期太长，合成语音质量不稳定以及合成系统的可扩展性太差。</strong></p>
+<p>音合成方法，其可以<strong>借助机器学习方法自动训练声学模型，进而构建TTS系统</strong>, 所以又被称为可训练的语音合成(Trainable TTS）。Trainable TTS首先利用<strong>声码器提取语咅波形的声学参数（基频、倒谱等参数)</strong>，然后将标注数据（主要包括 音段切分和韵律标注）作为输入、<strong>声学参数作为输出利用机器学习方法训练对应的声学模型</strong>，最后<strong>以声学模型为基础加上后端的合成声码器构成统计参数合成系统</strong>，该系统结构如图1.3所示。</p>
+<center> <img src="https://i.loli.net/2019/04/08/5cab046e90a2a.png" alt="QQ截图20190408162058.png"> </center>
+
+<p>研究者提出了若干种统计参数语音合成方法，其中基于隐马尔可夫模型 (Hidden Markov Model,HMM)的统计参数语音合成方法^得到了最为充分的发展，并取得了良好的效果。在人的发音过程中，人脑根据语言需求和语法规则发出一系列指令（不可观察的隐状态）指挥发音器官发出可观察的语音参数流，这是一种双重随机过程，与隐马尔可夫链非常类似。因此通常用隐马尔可夫模型对声学参数建模，近几十年来该模型在自动语音识别任务中取得很好的 效果。早期研宄者将HMM用于语音合成任务，由于其模型训练算法不成熟，语音合成声码器性能也比较差，导致其合成语音质童比较差，与波形拼接合成方法 相比有较大的差距。不过随着模型训练算法的改进以及<strong>高性能的STRAIGHT分析合成算法的提出</strong>，其合成效果有了明显的提高。相对于单元挑选与波形拼接合成系统，基于HMM的统计参数合成可以在短时间内、基本不需要人工干预的情况下自动构建一个新的系统，而且对于不同发音人、不同发音风格、甚至不同语种的依赖性非常小。但是它也有一些缺陷，如采用混合高斯模型（Gaussian Mixture Model, GMM)对声学参数建模，并且使用最火似然准则训练GMM-HMM 模型，导致模型精度不够、参数生成过平滑，并且最后合成语音波形很依赖声码器性能。这些问题使得基于HMM的统计参数合成系统合成语音质童较差，自然 度不够，人工痕迹明显。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/02/实用工具/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -238,7 +262,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        13
+                        11
                     </p>
                 </div>
             </div>
@@ -258,7 +282,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        10
+                        9
                     </p>
                 </div>
             </div>
@@ -334,7 +358,7 @@
                 <span class="level-item">probabilistic programming</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/其他/">
@@ -342,7 +366,7 @@
                 <span class="level-item">其他</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/工作周报与报告/">
@@ -372,7 +396,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率编程/" style="font-size: 20px;">概率编程</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/语音合成/" style="font-size: 20px;">语音合成</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率计算/" style="font-size: 20px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/研电赛/" style="font-size: 10px;">研电赛</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
     </div>
 </div>
 
@@ -386,44 +410,6 @@
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pyro:Deep Universal Probabilistic Programming">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T02:06:26.000Z">2019-04-09</time></div>
-                    <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="has-link-black-ter is-size-6">Pyro:Deep Universal Probabilistic Programming</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/08/语音合成论文/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="语音合成论文">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-08T12:53:22.000Z">2019-04-08</time></div>
-                    <a href="/2019/04/08/语音合成论文/" class="has-link-black-ter is-size-6">语音合成论文</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -482,6 +468,44 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="has-link-black-ter is-size-6">MIT论文1-Venture:用于概率元编程的可扩展平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/03/概率编程之PyMC3/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="概率编程之PyMC3">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-03T12:10:11.000Z">2019-04-03</time></div>
+                    <a href="/2019/04/03/概率编程之PyMC3/" class="has-link-black-ter is-size-6">概率编程之PyMC3</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -500,7 +524,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -565,16 +589,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/概率编程/">
-                        <span class="tag">概率编程</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/概率计算/">
                         <span class="tag">概率计算</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -586,9 +603,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/语音合成/">
-                        <span class="tag">语音合成</span>
-                        <span class="tag is-grey">2</span>
+                    <a class="tags has-addons" href="/tags/研电赛/">
+                        <span class="tag">研电赛</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -624,44 +641,6 @@
         
         <article class="media">
             
-            <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pyro:Deep Universal Probabilistic Programming">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T02:06:26.000Z">2019-04-09</time></div>
-                    <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="has-link-black-ter is-size-6">Pyro:Deep Universal Probabilistic Programming</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/08/语音合成论文/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="语音合成论文">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-08T12:53:22.000Z">2019-04-08</time></div>
-                    <a href="/2019/04/08/语音合成论文/" class="has-link-black-ter is-size-6">语音合成论文</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/04/08/研电赛-语音合成/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="研电赛_语音合成">
@@ -717,6 +696,44 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time></div>
+                    <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="has-link-black-ter is-size-6">MIT论文1-Venture:用于概率元编程的可扩展平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/03/概率编程之PyMC3/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="概率编程之PyMC3">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-03T12:10:11.000Z">2019-04-03</time></div>
+                    <a href="/2019/04/03/概率编程之PyMC3/" class="has-link-black-ter is-size-6">概率编程之PyMC3</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -735,7 +752,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -800,16 +817,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/概率编程/">
-                        <span class="tag">概率编程</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/概率计算/">
                         <span class="tag">概率计算</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -821,9 +831,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/语音合成/">
-                        <span class="tag">语音合成</span>
-                        <span class="tag is-grey">2</span>
+                    <a class="tags has-addons" href="/tags/研电赛/">
+                        <span class="tag">研电赛</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

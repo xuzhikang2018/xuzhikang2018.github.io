@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: 实用工具 - 徐志康的技术博客</title>
+<title>语音合成论文 - 徐志康的技术博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="徐志康的技术博客">
-<meta property="og:url" content="http://yoursite.com/tags/实用工具/index.html">
+    <meta name="description" content="《Efficiency Trainable Text-To-Speech System Based ON Deep Convolutional Networks With Guided Attention》">
+<meta name="keywords" content="语音合成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语音合成论文">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/语音合成论文/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="《Efficiency Trainable Text-To-Speech System Based ON Deep Convolutional Networks With Guided Attention》">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-09T00:42:57.863Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="徐志康的技术博客">
+<meta name="twitter:title" content="语音合成论文">
+<meta name="twitter:description" content="《Efficiency Trainable Text-To-Speech System Based ON Deep Convolutional Networks With Guided Attention》">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                <img src="/images/logo.svg" alt="语音合成论文" height="28">
             
             </a>
         </div>
@@ -133,23 +138,12 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">实用工具</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time>
+                <time class="level-item has-text-grey" datetime="2019-04-08T12:53:22.000Z">2019-04-08</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/其他/">其他</a>
@@ -159,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 184 个字)
+                    14 分钟 读完 (大约 2047 个字)
                 </span>
                 
                 
@@ -168,21 +162,52 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/04/02/实用工具/">实用工具</a>
+                语音合成论文
             
         </h1>
         <div class="content">
-            <p>推荐一下使用的软件</p>
+            <p>《Efficiency Trainable Text-To-Speech System Based ON Deep Convolutional Networks With Guided Attention》</p>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#abstrace">Abstrace</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#11-related-work">1.1 Related Work</a><ul>
+<li><a href="#111-deep-learning-and-tts">1.1.1 Deep Learning and TTS</a></li>
+<li><a href="#112-sequence-to-sequence-seq2seq-learning">1.1.2 Sequence to Sequence (seq2seq) Learning</a></li>
+</ul>
+</li>
+<li><a href="#2preliminary">2.PRELIMINARY</a><ul>
+<li><a href="#21-basic-knowledge-of-the-audio-spectrograms">2.1 Basic Knowledge of the Audio Spectrograms</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h2><span id="abstrace">Abstrace</span></h2><p>本文提出了一种新的基于深卷积神经网络(CNN)的文本语音转换(TTS)技术，该技术不需要任何递归单元。递归神经络(RecurrentNeuralNetwork，RNN)是近年来用于序列数据建模的一种标准技术，并已在一些前沿的神经TTS技术中得到应用。但是，训练RNN组件通常需要一台功能非常强大的计算机，或者需要很长的时间(通常是几天或几周)。另一方面，最近的其他研究表明，基于CNN的序列合成可以比基于RNN的技术快得多，因为它具有很高的并行性。本文的目的是提出一个替代的神经TTS系统，只基于CNN，可以减少这些经济成本的训练。在我们的实验中，使用配备两个GPU的普通游戏PC，仅在一晚(15小时)内就能充分训练所提出的深层卷积TTS，而合成语音的质量几乎可以接受。</p>
+<h2><span id="introduction">Introduction</span></h2><p>TTS(Text-to-Speech)正变得越来越普遍，并逐渐成为许多系统的基本用户界面。为了鼓励在各种系统中进一步使用TTS，开发一个方便的、可维护的、可扩展的TTS组件是非常重要的，该组件可供没有大型计算机的语音非专家、有需求的个人和小型团队访问。</p>
+<p>然而，传统的TTS系统对他们来说不一定是友好的，因为这些系统通常由许多特定于领域的模块组成。例如，一个典型的参数化TTS系统是许多模块的精细集成，如文本分析器、 $F_0$ 发生器、频谱发生器、暂停估计器和根据这些数据合成波形的声码器等。</p>
+<p>深度学习有时可以将这些内部构建块统一到一个模型中，并直接连接输入和输出；这种类型的技术有时被称为“端到端”学习(end-to-end Learning)。 尽管这种技术有时被批评为“黑匣子”，但是，名为Tacotron[2]的端到端TTS系统(直接从输入文本估计语谱图)最近取得了令人满意的性能，但没有基于领域特定知识的密集设计的参数化模型。 然而，Tacotron有一个缺点，就是它利用了许多经常性的设备，这些设备的培训成本很高，这使得没有豪华机器的普通实验室几乎不可能进一步研究和扩展它。 的确，有些人试图实现Tacotron的公开克隆，但他们正在努力复制出和人声一样清晰、令人满意的语音。</p>
+<p>本文的目的是提出一种新颖的、方便的全卷积神经TTS-深卷积TTS(DCTTS)。 该结构在很大程度上类似于Tacotron，但它是基于与文献[7]类似的完全卷积序列对序列学习模型。 我们展示了这个便捷的TTS实际上在一个合理的设置下工作。 本文的贡献有两个方面：(1)提出了一种完全基于CNN的TTS系统，该系统比基于RNN的最先进的神经TTS系统训练速度快得多，而声音质量仍然可以接受。(1)提出了一种完全基于CNN的TTS系统，该系统的训练速度比基于RNN的神经TTS系统要快得多。 (2)提出了一种快速训练注意力的思想，我们称之为“引导注意”。</p>
+<h2><span id="11-related-work">1.1 Related Work</span></h2><h3><span id="111-deep-learning-and-tts">1.1.1 Deep Learning and TTS</span></h3><p>近年来，基于深度学习的TTS系统得到了广泛的研究，并取得了令人惊讶的显著成果。 基于深度神经网络的TTS系统包括Zen在2013年的工作，基于RNN的研究，例如，以及最近提出的技术，如WaveNet，Char2wav，DeepVoice1&amp;2和Tacotron。</p>
+<p>他们中的一些人试图减少对手工设计的内部模块的依赖。 这一趋势中最极端的技术将是Tacotron[2]，它只依赖于MEL和线性谱图，而不依赖于任何其他语音特征，例如 $F_0$ 。 我们的方法在某种意义上接近Tacotron，因为它只依赖于这些音频信号的谱表示。</p>
+<p>现有的时间序列预测方法大多采用RNN，这是一种自然的时间序列预测方法。 WaveNet是一个例外，它是完全卷积的。 我们的方法也是基于CNN的，但是我们对CNN的使用将不同于WaveNet，因为WaveNet是一种声码器，或者说是一种后端，它由前端组件提供的一些条件信息合成波形。 另一方面，我们的是一个前端(和大部分后端处理)。 我们使用CNN来合成一个语谱图，一个简单的声码器就可以合成一个波形。</p>
+<h3><span id="112-sequence-to-sequence-seq2seq-learning">1.1.2 Sequence to Sequence (seq2seq) Learning</span></h3><p>近年来，递归神经网络(RecurrentNeuralNetwork，RNN)已经成为一种将一个序列转换成另一个序列的标准技术，特别是在自然语言处理领域，如机器翻译，对话系统[19，20]等。 另请参见.</p>
+<p>然而，基于RNN的seq2seq有一些缺点。一个是vanilla编码-译码器模型不能有效地将太长的序列编码成固定长度的向量。这个问题已经通过一种称为“注意”的机制[21]得到了解决，注意机制现在已经成为seq2seq学习技术中的一个标准概念；另见[1，sec]。</p>
+<p>另一个问题是RNN通常需要很多时间来训练，因为它不太适合使用GPU的并行计算。为了克服这一问题，一些人建议使用CNN，而不是RNN，例如。一些研究表明，基于CNN的替代网络可以训练得更快，甚至可以优于基于RNN的技术。</p>
+<p>Gehring等人。 [7]最近将seq2seq学习的这两个改进结合在一起。 他们提出了如何在基于CNN的seq2seq学习模型中使用注意机制的思想，并证明了该方法在机器翻译中的有效性。 实际上，我们提出的方法是基于与文献类似的思想。</p>
+<h2><span id="2preliminary">2.PRELIMINARY</span></h2><h3><span id="21-basic-knowledge-of-the-audio-spectrograms">2.1 Basic Knowledge of the Audio Spectrograms</span></h3><p>音频波形可以通过称为STFT和逆向STFT的线性映射相互转换成复谱图 $Z={Z_{f,t}} \in \mathbb{C}^{F’\times T’}$ ，其中 $F’$ 和 $T’$ 分别表示频率仓和时间仓的数目。通常只考虑震级jzj=fjZf；tjg，因为它仍然有用于许多用途的有用信息，而且jzj在某种意义上与Z几乎相同，即存在许多来自震级谱图的相位估计(波形合成)技术，例如著名的Griffin&amp;Lim算法[27]；也请参见例如[28]。<br>我们通常使用在线G&amp;L的RTISI-LA[29]来合成波形。<br>本文将STFT谱图归一化为jZj(jZj=max(JZj)。<br>，并转换回jzj jZj=。<br>当我们最终需要合成波形时，<br>；是强调前和强调后的因素。<br>通过对jZj应用MEL滤波器组，也可以考虑MEL谱图S2 RFT0，(F F0)。<br>这是语音处理中的一种标准降维技术。<br>本文还通过每四个时间帧提取一个时间帧，将时间维度从T0降低到dT0=4e=：t，以加速Text2MEL的训练，如下所示。<br>我们还将MEL谱图归一化为S(S=max(S)。<br>。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/02/实用工具/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/语音合成/">语音合成</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -190,9 +215,37 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Pyro:Deep Universal Probabilistic Programming</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/08/研电赛-语音合成/">
+                <span class="level-item">研电赛_语音合成</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -851,7 +904,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                    <img src="/images/logo.svg" alt="语音合成论文" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -16,7 +16,7 @@
 <meta property="og:description" content="主要来自知乎的整理">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-08T01:43:56.445Z">
+<meta property="og:updated_time" content="2019-04-09T01:43:05.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字IC设计面试100题">
 <meta name="twitter:description" content="主要来自知乎的整理">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 9950 个字)
+                    1 小时 读完 (大约 10668 个字)
                 </span>
                 
                 
@@ -224,7 +224,12 @@
 <li><a href="#52有四种复用方式频分多路复用写出另外三种">52.有四种复用方式，频分多路复用，写出另外三种？</a></li>
 <li><a href="#未解答53asic设计流程中什么时候修正setup-time-violation-和hold-time-violation如何修正解释setup和hold-time-violation画图说明并说明解决办法">未解答53.ASIC设计流程中什么时候修正Setup time violation 和Hold time violation?如何修正？解释setup和hold time violation，画图说明，并说明解决办法。</a></li>
 <li><a href="#54给出一个组合逻辑电路要求分析逻辑功能">54.给出一个组合逻辑电路，要求分析逻辑功能。</a></li>
-<li><a href="#55如何防止亚稳态">55：如何防止亚稳态？</a></li>
+<li><a href="#55如何防止亚稳态">55.如何防止亚稳态？</a></li>
+<li><a href="#56基尔霍夫定理的内容">56.基尔霍夫定理的内容</a></li>
+<li><a href="#57描述反馈电路的概念列举他们的应用">57.描述反馈电路的概念，列举他们的应用。</a></li>
+<li><a href="#58有源滤波器和无源滤波器的区别">58.有源滤波器和无源滤波器的区别</a></li>
+<li><a href="#59给出了reg的setuphold时间求中间组合逻辑的delay范围">59.给出了reg的Setup,Hold时间，求中间组合逻辑的delay范围</a></li>
+<li><a href="#60时钟周期为t触发器d1的寄存器到输出时间触发器延时tco最大为t1max最小为t1min-组合逻辑电路最大延迟为t2max最小为t2min-问触发器d2的建立时间t3和保持时间应满足什么条件">60.时钟周期为T,触发器D1的寄存器到输出时间（触发器延时Tco）最大为T1max，最小为T1min。组合逻辑电路最大延迟为T2max,最小为T2min。问，触发器D2的建立时间T3和保持时间应满足什么条件。</a></li>
 </ul>
 <!-- tocstop -->
 <p>原文地址<a href="https://zhuanlan.zhihu.com/p/42201263" target="_blank" rel="noopener">ictown_数字IC设计工程师笔试面试经典100题-有答案陈恩</a></p>
@@ -316,8 +321,8 @@
 <h3><span id="23寄生电容效应在ic设计中怎样克服和利用">*23.寄生电容效应在IC设计中怎样克服和利用</span></h3><p>或者，IC设计过程中将寄生效应怎样反馈影响设计师的设计方案？<br>答：所谓寄生效应就是那些溜进你的PCB并在电路中大破坏、令人头疼、原因不明的小故障。他们就是<u>渗入高速电路中隐藏的寄生电容和寄生电感。</u>其中包括由封装引脚和印制线过长形成的寄生电感；<strong>焊盘到地、焊盘到电源平面和焊盘到印制线之间形成的寄生电容</strong>；通孔之间的相互影响，以及许多其它可能的寄生效应。</p>
 <p>理想状态下，导线是没有电阻，电容和电感的。而在实际中，导线用到了金属铜，它有一定的电阻率，如果导线足够长，积累的电阻也相当可观。两条平行的导线，如果互相之间有电压差异，就相当于形成了一个<strong>平行板电容器</strong>。通电的导线周围会形成磁场（特别是电流变化时），磁场会产生感生电场，会对电子的移动产生影响，可以说每条实际的导线包括元器件的管脚都会产生<strong>感生电动势</strong>，这也就是寄生电感。</p>
 <p>在直流或者低频情况下，这种寄生效应看不太出来。<strong>而在交流特别是高频交流条件下，影响就非常巨大</strong>了。根据复阻抗公式，电容、电感会在交流情况下会对电流的移动产生巨大阻碍，也就可以折算成阻抗。这种寄生效应很难克服，也难摸到。只能通过<strong>优化线路，尽量使用管脚短的SMT元器件来减少其影响</strong>，要完全消除是不可能的。</p>
-<h3><span id="24设计题1用触发器和逻辑门设计一个一位加法器">24.设计题1–用触发器和逻辑门设计一个一位加法器</span></h3><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">module</span> (clk, rst_n, current_stage, carryin,next_stage,carryout);</span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;<span class="hljs-comment">//时钟和复位，复位低电平有效</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">input</span> current_stage; <span class="hljs-comment">//输人加数 </span></span><br><span class="line"><span class="hljs-keyword">input</span> carryin; <span class="hljs-comment">//输入进位</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> next_stage; <span class="hljs-comment">//加法输出</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> carryout;<span class="hljs-comment">// 输出进位标识</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> rst_n)<span class="hljs-keyword">begin</span><span class="hljs-comment">//触发器</span></span><br><span class="line">	<span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">		carryout &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">		next_stage &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">	<span class="hljs-keyword">end</span></span><br><span class="line">	<span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">		carryout &lt;= carryin &amp;&amp; current_stage; <span class="hljs-comment">//与门</span></span><br><span class="line">		next_stage &lt;= (~carryin&amp;&amp;current_stage)||(carryin&amp;&amp;~current_stage); <span class="hljs-comment">//两个与门加上或门</span></span><br><span class="line">		</span><br><span class="line">	<span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line">		</span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h3><span id="25-设计自动饮料贩卖机">25. 设计自动饮料贩卖机</span></h3><p>要求：饮料10分钱，硬币有5分钱和10分钱两种，并考虑找零 </p>
+<h3><span id="24设计题1用触发器和逻辑门设计一个一位加法器">24.设计题1–用触发器和逻辑门设计一个一位加法器</span></h3><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">module</span> (clk, rst_n, current_stage, carryin,next_stage,carryout);</span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;<span class="hljs-comment">//时钟和复位，复位低电平有效</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">input</span> current_stage; <span class="hljs-comment">//输人加数</span></span><br><span class="line"><span class="hljs-keyword">input</span> carryin; <span class="hljs-comment">//输入进位</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> next_stage; <span class="hljs-comment">//加法输出</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> carryout;<span class="hljs-comment">// 输出进位标识</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> rst_n)<span class="hljs-keyword">begin</span><span class="hljs-comment">//触发器</span></span><br><span class="line">	<span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">		carryout &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">		next_stage &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">	<span class="hljs-keyword">end</span></span><br><span class="line">	<span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">		carryout &lt;= carryin &amp;&amp; current_stage; <span class="hljs-comment">//与门</span></span><br><span class="line">		next_stage &lt;= (~carryin&amp;&amp;current_stage)||(carryin&amp;&amp;~current_stage); <span class="hljs-comment">//两个与门加上或门</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="25-设计自动饮料贩卖机">25. 设计自动饮料贩卖机</span></h3><p>要求：饮料10分钱，硬币有5分钱和10分钱两种，并考虑找零</p>
 <ol>
 <li>画出fsm(有限状态机)</li>
 <li>用verilog编程，语法要符合FPGA设计的要求</li>
@@ -329,7 +334,7 @@
 <li>画出电路的状态，S0表示没有进行投币，S1表示已有的5分硬币</li>
 <li>画出状态转移图</li>
 </ul>
-<figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">module</span> test(clk, rst_n, a, b, y, z);</span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;</span><br><span class="line"><span class="hljs-keyword">input</span> a, b; <span class="hljs-comment">//a, 投入5分；b, 投入10分</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> y; <span class="hljs-comment">//弹出饮料</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> z; <span class="hljs-comment">//找零</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">reg</span> state, next_state; <span class="hljs-comment">//两段式状态机写法</span></span><br><span class="line"><span class="hljs-keyword">parameter</span> s0 = <span class="hljs-number">1'b0</span>, s1 = <span class="hljs-number">1'b1</span>;<span class="hljs-comment">//s0: 没有进行投币， s1,已经有5分硬币</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) </span><br><span class="line">	state &lt;= s0; </span><br><span class="line"><span class="hljs-keyword">else</span> </span><br><span class="line">	state &lt;= next_state;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">	y &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">	z &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">	<span class="hljs-keyword">case</span>(state)</span><br><span class="line">		s0: <span class="hljs-keyword">if</span>(a&amp;&amp;!b) next_state &lt;= s1; <span class="hljs-comment">//投入了5分</span></span><br><span class="line">			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!a&amp;&amp;b) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//投入了10分</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span></span><br><span class="line">			<span class="hljs-keyword">else</span> next_state &lt;= s0;</span><br><span class="line">		s1: <span class="hljs-keyword">if</span>(a&amp;&amp;!b) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//再投入5分</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span>	</span><br><span class="line">			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!a&amp;&amp;b) <span class="hljs-keyword">begin</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">				z &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span></span><br><span class="line">			<span class="hljs-keyword">else</span> next_state &lt;= s1;</span><br><span class="line">		<span class="hljs-keyword">default</span> : next_state &lt;= s0;</span><br><span class="line">	<span class="hljs-keyword">endcase</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">module</span> test(clk, rst_n, a, b, y, z);</span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;</span><br><span class="line"><span class="hljs-keyword">input</span> a, b; <span class="hljs-comment">//a, 投入5分；b, 投入10分</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> y; <span class="hljs-comment">//弹出饮料</span></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> z; <span class="hljs-comment">//找零</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">reg</span> state, next_state; <span class="hljs-comment">//两段式状态机写法</span></span><br><span class="line"><span class="hljs-keyword">parameter</span> s0 = <span class="hljs-number">1'b0</span>, s1 = <span class="hljs-number">1'b1</span>;<span class="hljs-comment">//s0: 没有进行投币， s1,已经有5分硬币</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n)</span><br><span class="line">	state &lt;= s0;</span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">	state &lt;= next_state;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">	y &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line">	z &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">	<span class="hljs-keyword">case</span>(state)</span><br><span class="line">		s0: <span class="hljs-keyword">if</span>(a&amp;&amp;!b) next_state &lt;= s1; <span class="hljs-comment">//投入了5分</span></span><br><span class="line">			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!a&amp;&amp;b) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//投入了10分</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span></span><br><span class="line">			<span class="hljs-keyword">else</span> next_state &lt;= s0;</span><br><span class="line">		s1: <span class="hljs-keyword">if</span>(a&amp;&amp;!b) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//再投入5分</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span></span><br><span class="line">			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!a&amp;&amp;b) <span class="hljs-keyword">begin</span></span><br><span class="line">				next_state &lt;= s0;</span><br><span class="line">				y &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">				z &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line">			<span class="hljs-keyword">end</span></span><br><span class="line">			<span class="hljs-keyword">else</span> next_state &lt;= s1;</span><br><span class="line">		<span class="hljs-keyword">default</span> : next_state &lt;= s0;</span><br><span class="line">	<span class="hljs-keyword">endcase</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <p>状态转移图如下所示：<br><img src="https://i.loli.net/2019/04/01/5ca1c5cbcd28c.png" alt="状态转移图.png" title="状态转移图.png"></p>
 <h3><span id="26什么是线与逻辑要实现它在硬件特性上有什么具体要求">*26.什么是“线与逻辑”，要实现它，在硬件特性上有什么具体要求？</span></h3><p>答：<u>线与逻辑是两个输出信号相连可以实现与的功能。在硬件上，要用oc门来实现，由于不用oc门可能使灌电流过大，而烧坏逻辑门，同时在输出端口应加一个上拉电阻。</u>oc 门是集电极开路门。od门是漏机开路门。</p>
 <h3><span id="27什么是竞争冒险怎么判断如何消除">27.什么是竞争冒险？怎么判断？如何消除？</span></h3><p>答：在组合电路，门电路两个输入信号同时向相反的逻辑电平跳变称为竞争，某输入变量经过不同的路径传输后，到达电路中某一回合点的时间有先后，由于竞争而使电路输出发生错误的现象称为冒险。（也就是由于竞争产生的毛刺）</p>
@@ -447,7 +452,7 @@
 <li>根据输出函数的表达式列出真值表</li>
 <li>用文字概括电路的逻辑功能</li>
 </ol>
-<h3><span id="55如何防止亚稳态">55：如何防止亚稳态？</span></h3><p>答：亚稳态是指触发器无法在某个规定时间段内达到一个可以确认的状态，当一个触发器进入亚稳态时，即无法预测该单元的输出电平，也无法预测何时输出才能稳定在某个正确的电平。在这个稳定期间，触发器输出一些中间级电平，或者可能处于震荡状态，并且这种无用的输出电平可以沿信号通道上的各个触发器级联式传播下去。</p>
+<h3><span id="55如何防止亚稳态">55.如何防止亚稳态？</span></h3><p>答：亚稳态是指触发器无法在某个规定时间段内达到一个可以确认的状态，当一个触发器进入亚稳态时，即无法预测该单元的输出电平，也无法预测何时输出才能稳定在某个正确的电平。在这个稳定期间，触发器输出一些中间级电平，或者可能处于震荡状态，并且这种无用的输出电平可以沿信号通道上的各个触发器级联式传播下去。</p>
 <p>解决方法：</p>
 <ol>
 <li>降低系统的时钟频率</li>
@@ -455,6 +460,20 @@
 <li>引入同步机制，防止亚稳态（可以用两级触发器）</li>
 <li>改善时钟质量，用边沿变化更快的时钟信号</li>
 </ol>
+<h3><span id="56基尔霍夫定理的内容">56.基尔霍夫定理的内容</span></h3><p>答：基尔霍夫定理包括电流定律和电压定律：</p>
+<p>电流定律：在集总电路中，在任意一瞬间，流向某一节点的电流之和恒等于有该节点流出的电流之和。</p>
+<p>电压定律：在集总电路中，在任一瞬间，沿电路中任一回路绕行一周，在该回路上的电动势之和恒等于个电阻上的电压降之和。</p>
+<h3><span id="57描述反馈电路的概念列举他们的应用">57.描述反馈电路的概念，列举他们的应用。</span></h3><p>答：反馈，就是在电路系统中，把输出回路中的电量（电流或者电压），输出到输入回路中去。</p>
+<p>反馈的类型有：电压串联负反馈，电流串联负反馈，电压并联负反馈，电流并联负反馈。</p>
+<p>负反馈的优点：降低放大器的增益灵敏度，改变输入电阻和输出电阻，改善放大器的线性和非线性失真，有效地扩展放大器的通频带，自动调节的作用。</p>
+<p>电压负反馈的特点：电路的输出电压趋于维持恒定。</p>
+<p>电路负反馈的特点：电路的输出电流趋于维持恒定。</p>
+<h3><span id="58有源滤波器和无源滤波器的区别">58.有源滤波器和无源滤波器的区别</span></h3><p>答：无源滤波器：这种电路主要有无源元件R、L、C组成</p>
+<p>有源滤波器：集成运放和R、C组成，具有不用电感，体积小，重量轻等优点</p>
+<p><u>集成运放的开环电压增益和输入阻抗均很高，输出电阻小，构成有源滤波电路后还具有一定的电压放大和缓冲作用。但集成运放带宽有限，所以目前有源电路的工作频率难以做的很高</u></p>
+<h3><span id="59给出了reg的setuphold时间求中间组合逻辑的delay范围">59.给出了reg的Setup,Hold时间，求中间组合逻辑的delay范围</span></h3><p>答：<br>$$T_{delay} &lt;T_{period}-T_{setup}-T_{hold}\T_{period}&gt;T_{setup}+T_{hold}+T_{delay}(用来计算最高时钟频率)\T_{co}=T_{setup}+T_{hold}<br> $$<br> 触发器的传输延时</p>
+<h3><span id="60时钟周期为t触发器d1的寄存器到输出时间触发器延时tco最大为t1max最小为t1min-组合逻辑电路最大延迟为t2max最小为t2min-问触发器d2的建立时间t3和保持时间应满足什么条件">60.时钟周期为T,触发器D1的寄存器到输出时间（触发器延时Tco）最大为T1max，最小为T1min。组合逻辑电路最大延迟为T2max,最小为T2min。问，触发器D2的建立时间T3和保持时间应满足什么条件。</span></h3><p>答：T3setup&gt;T+T2max 时钟沿到来之前数据稳定的时间（越大越好），一个时钟周期T加上最大的逻辑延时。</p>
+<p> T3hold&gt;T1min+T2min 时钟沿到来之后数据保持的最短时间，一定要大于最小的延时也就是T1min+T2min</p>
 
         </div>
         
@@ -550,7 +569,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        10
+                        13
                     </p>
                 </div>
             </div>
@@ -570,7 +589,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        8
+                        10
                     </p>
                 </div>
             </div>
@@ -646,7 +665,7 @@
                 <span class="level-item">probabilistic programming</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/其他/">
@@ -654,7 +673,7 @@
                 <span class="level-item">其他</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/工作周报与报告/">
@@ -684,7 +703,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率计算/" style="font-size: 20px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率编程/" style="font-size: 20px;">概率编程</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/语音合成/" style="font-size: 20px;">语音合成</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
     </div>
 </div>
 
@@ -698,6 +717,63 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pyro:Deep Universal Probabilistic Programming">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T02:06:26.000Z">2019-04-09</time></div>
+                    <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="has-link-black-ter is-size-6">Pyro:Deep Universal Probabilistic Programming</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/08/语音合成论文/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="语音合成论文">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-08T12:53:22.000Z">2019-04-08</time></div>
+                    <a href="/2019/04/08/语音合成论文/" class="has-link-black-ter is-size-6">语音合成论文</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/08/研电赛-语音合成/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="研电赛_语音合成">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-08T06:59:22.000Z">2019-04-08</time></div>
+                    <a href="/2019/04/08/研电赛-语音合成/" class="has-link-black-ter is-size-6">研电赛_语音合成</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -737,63 +813,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time></div>
-                    <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="has-link-black-ter is-size-6">MIT论文1-Venture:用于概率元编程的可扩展平台</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/03/概率编程之PyMC3/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="概率编程之PyMC3">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-03T12:10:11.000Z">2019-04-03</time></div>
-                    <a href="/2019/04/03/概率编程之PyMC3/" class="has-link-black-ter is-size-6">概率编程之PyMC3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/02/MIT概率计算小组/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT概率计算小组">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T03:08:22.000Z">2019-04-02</time></div>
-                    <a href="/2019/04/02/MIT概率计算小组/" class="has-link-black-ter is-size-6">MIT概率计算小组</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -812,7 +831,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -877,9 +896,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/概率编程/">
+                        <span class="tag">概率编程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/概率计算/">
                         <span class="tag">概率计算</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -887,6 +913,13 @@
                     <a class="tags has-addons" href="/tags/求职/">
                         <span class="tag">求职</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/语音合成/">
+                        <span class="tag">语音合成</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -922,6 +955,63 @@
         
         <article class="media">
             
+            <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pyro:Deep Universal Probabilistic Programming">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T02:06:26.000Z">2019-04-09</time></div>
+                    <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="has-link-black-ter is-size-6">Pyro:Deep Universal Probabilistic Programming</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/08/语音合成论文/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="语音合成论文">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-08T12:53:22.000Z">2019-04-08</time></div>
+                    <a href="/2019/04/08/语音合成论文/" class="has-link-black-ter is-size-6">语音合成论文</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/08/研电赛-语音合成/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="研电赛_语音合成">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-08T06:59:22.000Z">2019-04-08</time></div>
+                    <a href="/2019/04/08/研电赛-语音合成/" class="has-link-black-ter is-size-6">研电赛_语音合成</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/08/工作日志/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="工作日志">
@@ -958,63 +1048,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT论文1-Venture:用于概率元编程的可扩展平台">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T09:50:35.000Z">2019-04-04</time></div>
-                    <a href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" class="has-link-black-ter is-size-6">MIT论文1-Venture:用于概率元编程的可扩展平台</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/03/概率编程之PyMC3/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="概率编程之PyMC3">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-03T12:10:11.000Z">2019-04-03</time></div>
-                    <a href="/2019/04/03/概率编程之PyMC3/" class="has-link-black-ter is-size-6">概率编程之PyMC3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/02/MIT概率计算小组/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MIT概率计算小组">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-02T03:08:22.000Z">2019-04-02</time></div>
-                    <a href="/2019/04/02/MIT概率计算小组/" class="has-link-black-ter is-size-6">MIT概率计算小组</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1033,7 +1066,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1098,9 +1131,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/概率编程/">
+                        <span class="tag">概率编程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/概率计算/">
                         <span class="tag">概率计算</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1108,6 +1148,13 @@
                     <a class="tags has-addons" href="/tags/求职/">
                         <span class="tag">求职</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/语音合成/">
+                        <span class="tag">语音合成</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

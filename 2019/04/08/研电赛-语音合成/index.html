@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: 实用工具 - 徐志康的技术博客</title>
+<title>研电赛_语音合成 - 徐志康的技术博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="徐志康的技术博客">
-<meta property="og:url" content="http://yoursite.com/tags/实用工具/index.html">
+    <meta name="description" content="论文《基于卷积神经网络的语音合成声码器研究》 中科大 2018年">
+<meta name="keywords" content="语音合成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="研电赛_语音合成">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/研电赛-语音合成/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="论文《基于卷积神经网络的语音合成声码器研究》 中科大 2018年">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-09T00:55:52.690Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="徐志康的技术博客">
+<meta name="twitter:title" content="研电赛_语音合成">
+<meta name="twitter:description" content="论文《基于卷积神经网络的语音合成声码器研究》 中科大 2018年">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                <img src="/images/logo.svg" alt="研电赛_语音合成" height="28">
             
             </a>
         </div>
@@ -133,23 +138,12 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">实用工具</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time>
+                <time class="level-item has-text-grey" datetime="2019-04-08T06:59:22.000Z">2019-04-08</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/其他/">其他</a>
@@ -159,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 184 个字)
+                    34 分钟 读完 (大约 5171 个字)
                 </span>
                 
                 
@@ -168,21 +162,100 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/04/02/实用工具/">实用工具</a>
+                研电赛_语音合成
             
         </h1>
         <div class="content">
-            <p>推荐一下使用的软件</p>
+            <p>论文《基于卷积神经网络的语音合成声码器研究》 中科大 2018年<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#第一章-绪论">第一章 绪论</a><ul>
+<li><a href="#11-语音合成技术概述">1.1 语音合成技术概述</a></li>
+<li><a href="#12-语音信号的生成机理">1.2 语音信号的生成机理</a></li>
+<li><a href="#13-现阶段主流语音合成方法">1.3 现阶段主流语音合成方法</a><ul>
+<li><a href="#132-统计参数语音合成">1.3.2 统计参数语音合成</a></li>
+</ul>
+</li>
+<li><a href="#14-语音合成声码器">1.4 语音合成声码器</a><ul>
+<li><a href="#141-线性预测分析合成器">1.4.1 线性预测分析合成器</a></li>
+<li><a href="#142-共振峰合成器">1.4.2 共振峰合成器</a></li>
+<li><a href="#143-straight分析合成算法">1.4.3 STRAIGHT分析合成算法</a></li>
+</ul>
+</li>
+<li><a href="#15-该论文的研究目标与内容">1.5 该论文的研究目标与内容</a></li>
+</ul>
+</li>
+<li><a href="#第二章-基于卷积神经网络的语音合成声码器">第二章 基于卷积神经网络的语音合成声码器</a><ul>
+<li><a href="#21-wavenet简介">2.1 WaveNet简介</a></li>
+<li><a href="#22">2.2</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>语音合成声码器从基频、频谱等声学特征中重构语音波形，是统计参数语音合成系统中不可或缺的一部分。</p>
+<p>但是以STRAIGHT为代表的传统源－滤波器结构声码器仍然存在频谱细节丢失、相位依赖人工设计以及线性滤波框架等问题。</p>
+<p>2016年， DeepMind研宄者提出了<strong>直接对语音波形建模与生成的深度卷积神经网络结构， 并将其用于从文本特征预测语音波形</strong>， 取得了优于传统统计参数方法的合成语音自然度。</p>
+<p>论文工作：</p>
+<ol>
+<li>设计实现了基于卷积神经网络的话者相关语音合成声码器</li>
+<li>提出了神经网络声码器的话者无关及自适应训练方法， 在目标语音数据有限情形下实现高质量声码器的训练；</li>
+<li>设计实现了多分辨率层级化网络结构， 提升语音合成声码器的生成效率。</li>
+</ol>
+<p>论文整体安排：<br>概述语音合成技术，<strong>波形拼接合成方法和统计参数合成方法</strong>， 然后回顾了常用的语音合成声码器并分析其优势和不足。</p>
+<p>DeepMing研宄者提出的WaveNet模型，卷积神经网络对语音波形建模的动机与出发点，并详细介绍本文设计实现的<strong>基于卷积神经网络的语音合成声码器模型。</strong>该模型构造了一个<strong>上采样网络实现了声学特征采样率与输出语音采样率的匹配</strong>， 然后将变换后的声学条件信息加入网络激活函数中指导语音的生成。</p>
+<p>第三章首先回顾了<strong>说话人自适应技术</strong>历史， 介绍了语音识别与语音合成任务中的自适应方法； 然后介绍了本文提出的<strong>神经网络语音合成声码器的话者无关及自适应训练方法</strong>； 最后利用自然声学特征和声学模型预测声学特征作为输入重构语音， 实验验证了自适应训练的有效性。</p>
+<p>第四章首先分析了神经网络语音合成声码器生成语音速度较慢的问题， 其次介绍了基于<strong>扩张卷积神经网络的语音频带扩展工作</strong>， 然后在此基础上提出了多分辨率层级化生成网络， 最后实验评估了该模型的效率提升结果以及合成语音质量</p>
+<h1><span id="第一章-绪论">第一章 绪论</span></h1><p>语音人机交互技术包含语音识别（将人类语音转换为文字) ,自然语音理解（理解自然语言的意思） 以及与<strong>语音合成（将文字转换为对应语音）</strong> 这三种高难度技术。技术上分为<strong>波形拼接语音合成方法和统计参数语音合成方法</strong>两大流派。在目前的统计参数语音合成系统中， 合成语音质量主要受<strong>声码器、声学模型建模精度以及过平滑效应影响</strong>。近年来， 随着深度神经网络（Deep Neural Network, DNN） 在语音合成声学建模中的广泛应用， 声学模型精度与合成语音自然度均得到了有效改善。但是在<strong>声码器特征提取与波形重构过程中的音质损失</strong>仍然制约着统计参数合成语音质量的进一步提升。研宄高质量的<strong>语音合成声码器</strong>对语音合成有至关重要的作用， 可以有效提升语音合成系统上限。</p>
+<h2><span id="11-语音合成技术概述">1.1 语音合成技术概述</span></h2><p>语音合成可以分为三类：</p>
+<ol>
+<li><strong>文字按规则映射到语音波形， 简称文语转换（Text-To-Speech,TTS)</strong></li>
+<li>概念按规则映射到语音</li>
+<li>意向按规则映射到语音</li>
+</ol>
+<p>图1.1展示了一个典型的语音合成系统。文语转换是一个层次化的信息处理过程，而且层次越高信息越丰富，这也是文字转换到语音的难点。首先，根据给定语言的词典和相应的<strong>语法规则在语言层、语法层和语义层分析</strong>，以获得不同层级的文本信息(包括<strong>词组，短语，句子和韵律划分信息等</strong>)：然后对不同层级的文本信息做韵律分析，获到语音级别的韵律信息(<strong>包括谱参数，基频，时长</strong>)；最后 根据预测的声学参数利用语音合成声码器合成语音波形或者从音库数据中挑选最优的波形单元拼接合成语音。</p>
+<p><img src="https://i.loli.net/2019/04/08/5caaf9f22bd97.png" alt="图1.1语音合成系统示意图.png"></p>
+<p>文语转换系统的层次化信息处理过程可以划分为<strong>前端的文本分析和后端的语音合成</strong>。前端文本分析将<strong>字符型文字转换为层次化的语音学中间表征</strong>；后端语音合成则<strong>将这些层次化表征映射到韵律特征，然后根据韵律信息利用合成声码器合成语音</strong>或者利用单元挑选与波形拼接方法合成语音。本文研究工作聚焦在后端的语音合成部分，具体研究<strong>高质量语音合成声码器的构造</strong>，将韵律参数转换成自然度高音质好的语音波形。</p>
+<h2><span id="12-语音信号的生成机理">1.2 语音信号的生成机理</span></h2><p>了解语音产生的物理过程, 然后才能用计算机精确地模拟语音信号产生过程，使得计算机像人类一样自如的说话。语音生成系统可以分为三个部分，如图1.2所示：</p>
+<p><img src="https://i.loli.net/2019/04/08/5cab006e2be9a.png" alt></p>
+<p>(1)激励系统：人体肺部呼出的空气经过声门的快速开启闭合产生激励振动, 因此将声带以下部位称之为激励系统。<br>(2)声道系统：声门到嘴唇之间的气流通道被称之为声道，其形状主要由嘴唇、 颚和舌头等发音器官的位位置决定。气流撞击<strong>声门上的声带进行振动</strong>，然后 通过声道响应变为语音；颅神经会根据发音内容控制肌肉调整声道形状，从而发出不同的声音。<br>(3)辐射系统：指经过声道滤波后的忾流从嘴唇、鼻孔向空间辐射过程。</p>
+<p>对人发声的认识导致了对声道系统模型的不同建模</p>
+<h2><span id="13-现阶段主流语音合成方法">1.3 现阶段主流语音合成方法</span></h2><p>基于机器学习准则利用大量语音数据训练的语音模型是目前主流的语音合成方法，<strong>单元挑选与波形拼接方法和统计参数语音合成方法</strong>是当下应用最广泛的两种模型。</p>
+<p>波形拼接合成系统的优点是用于拼接的波形单元来自自然音库，所以其合 成的语音和自然语音比较接近，自然度比较高；但是它音库制作周期长，人工录音、标注成本较高，并且它对于不同语种、语言环境的推广能力差，系统占用空间大，魯棒性不好。缺点是：<strong>语库构建周期太长，合成语音质量不稳定以及合成系统的可扩展性太差。</strong></p>
+<h3><span id="132-统计参数语音合成">1.3.2 统计参数语音合成</span></h3><p>语音合成方法，其可以<strong>借助机器学习方法自动训练声学模型，进而构建TTS系统</strong>, 所以又被称为可训练的语音合成(Trainable TTS）。Trainable TTS首先利用<strong>声码器提取语咅波形的声学参数（基频、倒谱等参数)</strong>，然后将标注数据（主要包括 音段切分和韵律标注）作为输入、<strong>声学参数作为输出利用机器学习方法训练对应的声学模型</strong>，最后<strong>以声学模型为基础加上后端的合成声码器构成统计参数合成系统</strong>，该系统结构如图1.3所示。</p>
+<p><img src="https://i.loli.net/2019/04/08/5cab046e90a2a.png" alt="QQ截图20190408162058.png"></p>
+<p>研究者提出了若干种统计参数语音合成方法，其中基于隐马尔可夫模型 (Hidden Markov Model,HMM)的统计参数语音合成方法得到了最为充分的发展，并取得了良好的效果。在人的发音过程中，人脑根据语言需求和语法规则发出一系列指令（不可观察的隐状态）指挥发音器官发出可观察的语音参数流，这是一种双重随机过程，与隐马尔可夫链非常类似。因此通常用隐马尔可夫模型对声学参数建模，近几十年来该模型在自动语音识别任务中取得很好的 效果。早期研究者将HMM用于语音合成任务，由于其模型训练算法不成熟，语音合成声码器性能也比较差，导致其合成语音质童比较差，与波形拼接合成方法 相比有较大的差距。不过随着模型训练算法的改进以及<strong>高性能的STRAIGHT分析合成算法的提出</strong>，其合成效果有了明显的提高。相对于单元挑选与波形拼接合成系统，基于HMM的统计参数合成可以在短时间内、基本不需要人工干预的情况下自动构建一个新的系统，而且对于不同发音人、不同发音风格、甚至不同语种的依赖性非常小。但是它也有一些缺陷，如采用混合高斯模型（Gaussian Mixture Model, GMM)对声学参数建模，并且使用最火似然准则训练GMM-HMM 模型，导致模型精度不够、参数生成过平滑，并且最后合成语音波形很依赖声码器性能。这些问题使得基于HMM的统计参数合成系统合成语音质童较差，自然度不够，人工痕迹明显。</p>
+<p>随着神经网络理论发展以及行之有效的训练方法引入,研究者将DNN 用于语音识别任务中并取得巨大成功。2013年谷歌学者将DNN用于语音 合成任务的声学建模，实验表明其声学模型精度与合成语音自然度相对于 基于HMM的统计参数建模方法均得到了有效改善。DNN是一种前馈神经网络 (FeedforwardNeural Network)，基于DNN的声学模型如图1.4所不，这种层级化结构和人类的发音过程有一定相似之处。==该模型的输入是–帧语音数值化的文本特征，包含该帧韵律信息对各音素的文本上下文问题的回答结果，还有当前<strong>音素时长信息以及该帧在当前音素的位罝</strong>信息：模型输出则是<strong>这一帧的声学特征参数（如基频、倒谱等)</strong>==。模型采用输出预测的声学参数与<strong>当前帧的真实声学参数的均方误差作为损失函数，采用反向传播算法优化网络参数，最小化模型预测声学参数的均方误差。</strong></p>
+<p><img src="https://i.loli.net/2019/04/08/5cab2f680c8a4.png" alt="图1.4.png"></p>
+<p>虽然利用DNN替换HMM对声学特征建模，改善了声学参数生成精度，但是合成声码器性能仍然停留在STRAIGHT分析合成算法阶段。<strong>STRAIGHT分析 合成算法是基于语音信号的诸多假设（如语音帧是平稳过程，相位依赖人工设计等)提出的模型</strong>，其重构语音与原始录音还有一些差别。本文研究基于<strong>卷积神经网络的语音合成声码器</strong>，有望提升统计参数语音合成系统的合成语音质量。</p>
+<h2><span id="14-语音合成声码器">1.4 语音合成声码器</span></h2><p>合成质量依赖于声学建模精度和对应的合成声码器性能。常用的合成声码器如下：</p>
+<p>源-滤波器思想设计的，声音由激励和相应的声道滤波器形成。其中激励通常分为类似噪声激励和周期性脉冲串，<strong>非浊音语音信号由类噪声激励形成，浊音信号由周期性脉冲串形成</strong>。但是某些浊辅音信号不能单纯由上述的某一种激励产生，需要两种激励共同作用形成。源-滤波器产生语音时，首先系统会<strong>预先准备好相应的激励特征和频谱特征</strong>，根据基频和淸浊标志生成相应的激励，然后根据频谱参数改变声道滤波器形状，以合成出指定的语音，其结构框图如图1.5所示。<strong>线性预测分析 (Linear Prediction Coefficient, LPC)合成、共振峰合成以及 STRAIGHT 分析合成</strong> 算法是这种思想衍生的比较常用的语音合成方法，下面将对这三种方法进行简单介绍。</p>
+<p><img src="https://i.loli.net/2019/04/08/5cab0e91e3222.png" alt="图1.5.png"></p>
+<h3><span id="141-线性预测分析合成器">1.4.1 线性预测分析合成器</span></h3><p>用线性误差滤波器来模型声道响应，详细描述见原文</p>
+<h3><span id="142-共振峰合成器">1.4.2 共振峰合成器</span></h3><p>人的声道模型其实看成一个谐振腔，这个腔体的谐振频率与语音信号的共 振峰一一对应，基于这种谐振腔思想的合成方法叫做共振峰合成。</p>
+<p>详细见原文</p>
+<p>相比于LPC方法，<strong>共振峰合成在参数调整合适的情况下，可以产生较高质量的合成语音</strong>。共振峰合成最大的优点是谐振器理论与人的发音机理契合，模型 参数都有明确的物理含义，通过调整模型参数可以改变共振峰位置，从而合成出不同发音风格的语音波形。然而由于共振峰合成器模型复杂，声道滤波器参数较多，很难将所有的谐振器参数都调整至最优，所以其实际合成音质往往也难以达到TTS系统的要求。</p>
+<h3><span id="143-straight分析合成算法">1.4.3 STRAIGHT分析合成算法</span></h3><p>前面介绍的线性预测分析合成器和共振峰合成器在<strong>输入自然声学参数时可以重构出音质不错的语音</strong>，但是在<strong>输入预测的声学参数时重构语音质最较差，不能满足实际语音合成系统的要求</strong>。STRAIGHT分析合成算法即使输入预测的声学参数也能重构音质不错的声音，该方法一定程度上提升了统计参数语音合成的语音质量。下面将介绍STRAIGHT分析合成算法及其算法流程。</p>
+<p>STRAIGHT算法利用源-滤波器的思想，通过<strong>提取语音信号中的基频以及谱信息</strong>，来重构语音信号；在重构的过程中，可以实现对基频、时长等参数进行有效的调整，同时保证语音音质损失较小。它包含下面三个重要环节：<strong>去除周期影响的谱估汁，平滑可靠的基频轨迹提取，基于听觉感知的合成器实现。</strong></p>
+<p>假设是浊音信号，其谱包络$S(w,t)$是频率轴与时间轴上二维信号。实际的语音信号可以用下式的调频调幅信号表达：</p>
+<p><img src="https://i.loli.net/2019/04/08/5cab151277660.png" alt></p>
+<p>其中 $\alpha_k(t)$。是第$k$个谐波的时变幅度， $w(\tau)$ 是时变的基频角频率， $w_k(\tau)$ 是第 $k$ 个谐波的基频扰动，$\phi_k$ 第 $k$ 个谐波在 $t_0$ 时刻的初始相位。在分析语音信号的谱结构时，加窗计算短时谱是一种常用的手段。而在对 $s(t)$ 进行短时傅立叶分析时，得到的短时谱由于受到加的时间窗的影响，在时间轴以及频率轴上都呈现出一定的周期性，并不能反应谱包络 $S(w,t)$ 的真实情况。因此需要去除 $F(w,t)$ 中的周期性影响，还原出满足要求的谱包络 $S(w,t)$ 首先采用基音同 步并叠加补偿窗的方法来计算频谱，并在时域上平滑，来消除时间轴的周期性影响：然后利用三角窗对谱参数进行频率轴上的一维平滑即可得到圾终的消除周 期性的谱包络。接下来需要对语音信号进行小波分析，得到信号的“基成分”即 谐波信号，从谐波信号中提取精确稳定的基频。最后在合成语音时，输入待合成 语音的蕋频曲线数值和经过时间轴和频率轴平滑后的二维谱包络，基于基音同 步叠加和最小相位冲击响应的方法合成目标语音。STRAIGHT分析合成算法在合成过程中还可以实现时长、基频和谱参数的灵活调整。</p>
+<p>在实际语音合成过程中，STRAIGHT算法提取的谱包络维数较高无法用于直接建模，因此研究将谱包络特征转换为维数较低的频谱特征参数。通常使 用的参数有线谱频率（Linear Spectral Frequencies, LSF)参数和Mel倒谱（Mel-Cepstrum)参数。</p>
+<h2><span id="15-该论文的研究目标与内容">1.5 该论文的研究目标与内容</span></h2><p>现阶段统计参数语音合成系统主要使用STRAIGHT声码器来实现从声学特 征到语音波形的重构。STRAIGHT声码器虽然能从模型预测的声学参数中恢复出较好的语音，但是其<strong>重构语音仍存在频谱细节丢失，相位依赖最小相位假设和人工设计等问题</strong>，导致重构语音自然度下降，和原始录音存在一定差距。</p>
+<p>本文以基于卷积祌经网络的语音合成声码器为研究目标。在第2章中先介 绍了WavcNetN络结构，然后构建了<strong>基于卷积神经网络的语音合成声码器</strong>。这种神经网络声码器直接在波形层面建模，避免了频谱细节丢失，较奸的恢复了语音相位信息，但是也存在一些不足。一方面利用目标说话人数据基于机器学习方法构建的话者相关神经网络声码器，<strong>模型泛化能力弱</strong>，同时对目标说话人数据量依赖较大；<strong>另一方面由于模型自回归的生成方式和网络参数规模较大，导致模型合成语音效率较低</strong>。在第3章和第4章中将分別对这两点不足提出改进方法。</p>
+<h1><span id="第二章-基于卷积神经网络的语音合成声码器">第二章 基于卷积神经网络的语音合成声码器</span></h1><p>STRAIGHT存在频谱细节丢失，语音相位依赖最小相位假设和人工设计等问题。DeepMing研究者提出的WaveNet模型，实现从==倒谱基频语音声学特征中重构语音波形==。</p>
+<h2><span id="21-wavenet简介">2.1 WaveNet简介</span></h2><p><img src="https://i.loli.net/2019/04/08/5cab390c95f31.png" alt="WaveNet简介.png"></p>
+<h2><span id="22">2.2</span></h2>
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/02/实用工具/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/语音合成/">语音合成</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -190,9 +263,37 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/04/08/语音合成论文/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">语音合成论文</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/08/工作日志/">
+                <span class="level-item">工作日志</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -851,7 +952,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                    <img src="/images/logo.svg" alt="研电赛_语音合成" height="28">
                 
                 </a>
                 <p class="is-size-7">
