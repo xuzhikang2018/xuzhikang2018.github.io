@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-08T02:27:47.251Z">
+<meta property="og:updated_time" content="2019-04-15T02:15:28.883Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 673 个字)
+                    15 分钟 读完 (大约 2262 个字)
                 </span>
                 
                 
@@ -171,6 +171,7 @@
 <!-- toc -->
 <ul>
 <li><a href="#2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</a></li>
+<li><a href="#2019年4月9日-2019年4月15日">2019年4月9日-2019年4月15日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -180,6 +181,19 @@
 <li>论文2<a href="https://xuzhikang2018.github.io/2019/04/04/MIT%E8%AE%BA%E6%96%871-Venture-%E7%94%A8%E4%BA%8E%E6%A6%82%E7%8E%87%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%8F%AF%E6%89%A9%E5%B1%95%E5%B9%B3%E5%8F%B0/#more" target="_blank" rel="noopener">《Venture: an extensible platform for probabilistic meta-programming》</a>,该论文是MIT概率编程团队2016年，介绍了Venture这个概率编程平台，Venture和其他编程语言相比最大的特点<strong>是可定制性</strong>，它把程序执行过程中查看概率选择的迹（trace）,以及搭建推理程序的基本模块，封装成函数提供给用户，可以在这基础上搭建新的推理方法和进行模型验证</li>
 <li>在youtube看了有关概率编程的会议PROBPROG 2018，Talks前10个talk，有关介绍他们的编程库，还有关研究团队谈及他们对概率编程的应用。<a href="http://note.youdao.com/noteshare?id=056636027501ac32819dcf6859f70a08&amp;sub=0C87C1FDFCF641A7920012DAACAB885D" target="_blank" rel="noopener">我的简单笔记</a></li>
 </ol>
+<h2><span id="2019年4月9日-2019年4月15日">2019年4月9日-2019年4月15日</span></h2><p>这周学习内容包括：</p>
+<ol>
+<li>谷歌基于Tensorflow开源的概率编程语言Edward <a href="https://xuzhikang2018.github.io/2019/04/09/Deep-Probabilitic-Programming/#more" target="_blank" rel="noopener">《Deep Probabilitic Programming》</a>。<br>Edward，一种图灵完备的概率编程语言。Edward定义了两种成分表征 - 随机变量和推理。通过将推理视为一流的公民，与建模相提并论，我们表明概率编程可以像传统的深度学习一样灵活，计算效率高。为了灵活性，Edward使用各种可组合的推理方法轻松地拟合相同的模型，从点估计到变分推理到MCMC。此外，Edward可以重复使用建模表示作为推理的一部分，促进<strong>丰富的变分模型和生成对抗网络</strong>的设计。为了提高效率，Edward被集成到TensorFlow中，为现有的概率系统提供了显着的加速。例如，我们在基准逻辑回归任务中表明，Edward比Stan快至少35倍，比PyMC3快6倍。此外，Edward不会产生运行时开销：它与手写的TensorFlow一样快。</li>
+<li>Facebook开源的基于Pyto <a href="https://xuzhikang2018.github.io/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/#more" target="_blank" rel="noopener">《Pyro:Deep Universal Probabilistic Programming》</a><br>Pyro是一种基于Python的概率编程语言，作为在AI研究中开发高级概率模型的平台。为了扩展到大型数据集和高维模型，Pyro使用基于PyTorch构建的随机变分推理算法和概率分布，PyTorch是一个现代GPU加速的深度学习框架。为了适应复杂或模型特定的算法行为，Pyro利用Poutine，一个可组合构建块库，用于修改概率程序的行为。</li>
+<li>学了一些关于语音合成的基本知识，找了几篇关于深度学习在语音合成上的应用，其中一篇谷歌2017年发表的《TACONTRON: A Fully End-to-End Text-To-Speech Synthesis Model》<br>通常的TTS模型包含许多模块，例如文本分析， 声学模型， 音频合成等。而构建这些模块需要大量专业相关的知识以及特征工程，这将花费大量的时间和精力，而且各个模块之间组合在一起也会产生很多新的问题。TACOTRON是一个端到端的深度学习TTS模型，它可以说是将这些模块都放在了一个黑箱子里，我们不用花费大量的时间去了解TTS中需要用的的模块或者领域知识，直接用深度学习的方法训练出一个TTS模型，模型训练完成后，给定input,模型就能生成对应的音频。<br>TACOTRON是一个端到端的TTS模型，模型核心是seq2seq + attention。模型的输入为一系列文本字向量，输出spectrogram frame, 然后在使用Griffin_lim算法生成对应音频。模型结构如下图：<br><img src="https://i.loli.net/2019/04/15/5cb3de881903c.png" alt="TACONTRON"></li>
+<li>对于深度学习中网络架构，激活函数，代价函数的选择有些疑惑。还是回过头翻阅了一下深度学习花皮书。</li>
+</ol>
+<ul>
+<li>一般来说参数模型定义了一个分布p,并且简单地使用最大似然原理，意味着我们使用训练数据和模型预测间的交叉熵作为代价函数。输出层的函数选择一般包括用于高斯输出的分布的线性单元，用于Bernoulli输出分布的sigmoid单元，用于Multinoulli输出分布的softmax单元。</li>
+<li>激活函数的常用选择是整流线性单元ReLu函数 $g(z)=max(0,z) $。整流线性单元易于优化，因为它们和线性单元非常类似。线性单元和整流线性单元的唯一区别在于整流线性单元在其一半的定义域上输出为零。这使得只要整流线性单元处于激活状态，它的导数都能保持较大。它的梯度不仅大而且一致。整流操作的二阶导数几乎处处为0，并且在整流线性单元处于激活状态时，它的一阶导数处处为1。这意味着相比于引入二阶效应的激活函数来说，它的梯度方向对于学习来说更加有用。<br>其他的典型激活函数还包括logistic sigmoid与双曲正切函数，径向基函数RBF,softplus函数，硬双曲正切函数</li>
+<li>架构设计：万能的近似性质和深度定理告诉我们，具有单层的前馈网络足够表示任何函数，但是网络层可能大的不可实现，并且无法正确的学习和泛化。在很多情况下,<strong>使用更深的模型能够减少表示期望函数所需的单元的数量,并且可以减少泛化误差</strong>。这就是为什么要选择深层模型的原因，<br><img src="https://i.loli.net/2019/04/15/5cb3e43e51e6e.png" alt="深度的影响"><br>但是用更深的网络训练带来的问题是，在梯度反向传播的时候，会出现梯度显示，而无法对模型正常训练，并达到收敛</li>
+</ul>
+<p>总结：这周在看了关于Edward，和Pyro的概率编程，能够支持贝叶斯深度学习，概率机器学习，想利用Tensorflow等平台提供的概率编程工具搭建概率编程与深度学习，解决的实例可以是语音合成等。当我看的谷歌等关于深度学习在语音合成上的应用，发现对深度学习里面的架构，激活函数等的选择不太理解，返回去补了下相关知识。另外团队购买的开发板ZCU104是可以做深度学习的《ug1327-DNNDK User Guide》，Xlinx给的Demo是包括ResNet-50物体识别，人脸识别，动作检查等，最近也在看它的手册</p>
 
         </div>
         
