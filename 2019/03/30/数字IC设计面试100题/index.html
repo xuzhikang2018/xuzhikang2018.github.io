@@ -16,7 +16,7 @@
 <meta property="og:description" content="主要来自知乎的整理">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-09T01:43:05.455Z">
+<meta property="og:updated_time" content="2019-04-11T01:43:21.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字IC设计面试100题">
 <meta name="twitter:description" content="主要来自知乎的整理">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 10668 个字)
+                    1 小时 读完 (大约 12413 个字)
                 </span>
                 
                 
@@ -230,6 +230,13 @@
 <li><a href="#58有源滤波器和无源滤波器的区别">58.有源滤波器和无源滤波器的区别</a></li>
 <li><a href="#59给出了reg的setuphold时间求中间组合逻辑的delay范围">59.给出了reg的Setup,Hold时间，求中间组合逻辑的delay范围</a></li>
 <li><a href="#60时钟周期为t触发器d1的寄存器到输出时间触发器延时tco最大为t1max最小为t1min-组合逻辑电路最大延迟为t2max最小为t2min-问触发器d2的建立时间t3和保持时间应满足什么条件">60.时钟周期为T,触发器D1的寄存器到输出时间（触发器延时Tco）最大为T1max，最小为T1min。组合逻辑电路最大延迟为T2max,最小为T2min。问，触发器D2的建立时间T3和保持时间应满足什么条件。</a></li>
+<li><a href="#61给出某个一般时序电路图有tsetup-tdelay-tclk-qtco还有clock的delay写出决定最大时钟的因素同时给出表达式">*61.给出某个一般时序电路图，有Tsetup, Tdelay, Tclk-&gt;q(Tco)，还有clock的delay，写出决定最大时钟的因素，同时给出表达式</a></li>
+<li><a href="#62实现三分频电路23分频电路偶数倍分频奇数倍分频">*62.实现三分频电路，2/3分频电路(偶数倍分频，奇数倍分频)</a></li>
+<li><a href="#63名词解释">63.名词解释</a></li>
+<li><a href="#64三极管的特性">64.三极管的特性</a></li>
+<li><a href="#65用波形表示d触发器的功能">65.用波形表示D触发器的功能</a></li>
+<li><a href="#66用传输门和倒向器搭建一个边沿触发器">66.用传输门和倒向器搭建一个边沿触发器</a></li>
+<li><a href="#67用逻辑门画出d触发器">67.用逻辑门画出D触发器。</a></li>
 </ul>
 <!-- tocstop -->
 <p>原文地址<a href="https://zhuanlan.zhihu.com/p/42201263" target="_blank" rel="noopener">ictown_数字IC设计工程师笔试面试经典100题-有答案陈恩</a></p>
@@ -393,7 +400,8 @@
 <h3><span id="33一个四级的mux其中第二级为关键信号如何改善timing">*33.一个四级的Mux，其中第二级为关键信号，如何改善timing?</span></h3><p>答：将第二级信号放到最后一级输出，同时注意改善片选信号，保证其优先级没有被修改。</p>
 <h3><span id="34给出一个门级图又给出了各个门的传输延时问关键路径是什么给出了输入使得输出依赖于关键路径">34.给出一个门级图，又给出了各个门的传输延时，问关键路径是什么？给出了输入，使得输出依赖于关键路径？</span></h3><p>答:关键路径就是输入到输出的延时路径的最大路径，找到了关键路径就能求最大时钟频率。</p>
 <h3><span id="35为什么一个标准的倒相器中p管的宽长比要比n管的宽长比大">35.为什么一个标准的倒相器中P管的宽长比要比N管的宽长比大？</span></h3><p>答：和载流子有关，P管是空穴导电，N管是电子导电，电子迁移率大于空穴，同样的电场下，N管的电流大于P管，因此要增大P管的宽长比，使之对称，这样才能使得两者上升时间下降时间相等、高低电平的噪声容限一样、充放电的时间相等。</p>
-<h3><span id="36用mos管搭出一个与非门">36.用mos管搭出一个与非门？</span></h3><p>答：与非门，上并下串。或非门，上串下并<br><img src="https://p-blog.csdn.net/images/p_blog_csdn_net/gdaswater/EntryImages/20090825/3633868341922031250.jpg" alt><br><img src="https://p-blog.csdn.net/images/p_blog_csdn_net/gdaswater/EntryImages/20090825/4633868341922656250.jpg" alt></p>
+<h3><span id="36用mos管搭出一个与非门">36.用mos管搭出一个与非门？</span></h3><p>答：与非门，上并下串。或非门，上串下并</p>
+<p><img src="https://p-blog.csdn.net/images/p_blog_csdn_net/gdaswater/EntryImages/20090825/3633868341922031250.jpg" alt><br><img src="https://p-blog.csdn.net/images/p_blog_csdn_net/gdaswater/EntryImages/20090825/4633868341922656250.jpg" alt></p>
 <p>参考博客：<a href="https://blog.csdn.net/gdaswater/article/details/4484705" target="_blank" rel="noopener">MOS管及简单的CMOS逻辑门电路原理图</a></p>
 <h3><span id="37画出notnandnor的符号真值表还有transistor-level的电路">37.画出NOT,NAND,NOR的符号，真值表，还有transistor level的电路</span></h3><p>答：NOT门,其他两个门参考题36</p>
 <p><img src="https://p-blog.csdn.net/images/p_blog_csdn_net/gdaswater/EntryImages/20090825/2633868341921718750.jpg" alt></p>
@@ -431,8 +439,7 @@
 <h3><span id="45latch和register的区别为什么现在多用register行为级描述中latch是如何产生的">45.latch和register的区别，为什么现在多用register.行为级描述中latch是如何产生的？</span></h3><p>答： latch是电平敏感，register是边沿触发，register在同一时钟边沿边沿触发下动作，符合同步电路的设计思想，而Latch则属于异步电路设计，往往会导致时序分析困难，不适合的应用到Latch则会大量浪费芯片资源。</p>
 <figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> latch(Din, Dout, enable);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">input</span> enable;</span><br><span class="line"><span class="hljs-keyword">input</span> Din;</span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> Dout;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(enable <span class="hljs-keyword">or</span> Din)<span class="hljs-keyword">begin</span></span><br><span class="line">	<span class="hljs-keyword">if</span>(enable) Dout &lt;= Din;</span><br><span class="line">	<span class="hljs-keyword">else</span> Dout &lt;= Dout;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <h3><span id="46用d触发器做个二分频电路">46.用D触发器做个二分频电路</span></h3><p>答：由D触发器构建的二分频电路</p>
-<p><img src="http://s6.sinaimg.cn/middle/63fd6b77499f527c8af55&amp;690" alt></p>
-<p><img src="http://s15.sinaimg.cn/large/63fd6b77499f52843aaae&amp;690" alt></p>
+<p><img src="http://s6.sinaimg.cn/middle/63fd6b77499f527c8af55&amp;690" alt><br><img src="http://s15.sinaimg.cn/large/63fd6b77499f52843aaae&amp;690" alt></p>
 <p>现实工程中一般不采用这样的方式实现，二分频一般通过DCM或者PLL产生，这样得到的分频信号没有相位差</p>
 <h3><span id="47什么是状态图">47.什么是状态图？</span></h3><p>答：状态图是以几何图形的方式描述时序逻辑电路的状态转移规律以及输入和输出的关系。</p>
 <h3><span id="48用你熟悉的设计方式设计一个可以预置初值的7进制循环计数器15进制呢">48.用你熟悉的设计方式设计一个可以预置初值的7进制循环计数器，15进制呢？</span></h3><p>答：7位进制循环计数器<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> counter7(clk , rst_n, load, data_in, counter_out, carry_out);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">input</span> clk, rst_n;</span><br><span class="line"><span class="hljs-keyword">input</span> load; <span class="hljs-comment">//加载数字开始计数</span></span><br><span class="line"><span class="hljs-keyword">input</span>[<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] data_in;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] counter_out;</span><br><span class="line"><span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> carry_out; <span class="hljs-comment">//计数满输出</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> rst_n)<span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(!rst_n) <span class="hljs-keyword">begin</span></span><br><span class="line">	counter_out &lt;= <span class="hljs-number">3'b0</span>;</span><br><span class="line">	carry_out &lt;= <span class="hljs-number">1'b0</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(load) counter_out &lt;= data_in;</span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(counter_out=<span class="hljs-number">3'd6</span>) <span class="hljs-keyword">begin</span></span><br><span class="line">	counter_out &lt;= <span class="hljs-number">3'b0</span>;</span><br><span class="line">	carry_out &lt;= <span class="hljs-number">1'b1</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">else</span>  <span class="hljs-keyword">begin</span></span><br><span class="line">	counter_out &lt;= counter_out + <span class="hljs-number">3'b1</span>;</span><br><span class="line">	carry_out &lt;= <span class="hljs-number">1'b0</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
@@ -474,6 +481,28 @@
 <h3><span id="59给出了reg的setuphold时间求中间组合逻辑的delay范围">59.给出了reg的Setup,Hold时间，求中间组合逻辑的delay范围</span></h3><p>答：<br>$$T_{delay} &lt;T_{period}-T_{setup}-T_{hold}\T_{period}&gt;T_{setup}+T_{hold}+T_{delay}(用来计算最高时钟频率)\T_{co}=T_{setup}+T_{hold}<br> $$<br> 触发器的传输延时</p>
 <h3><span id="60时钟周期为t触发器d1的寄存器到输出时间触发器延时tco最大为t1max最小为t1min-组合逻辑电路最大延迟为t2max最小为t2min-问触发器d2的建立时间t3和保持时间应满足什么条件">60.时钟周期为T,触发器D1的寄存器到输出时间（触发器延时Tco）最大为T1max，最小为T1min。组合逻辑电路最大延迟为T2max,最小为T2min。问，触发器D2的建立时间T3和保持时间应满足什么条件。</span></h3><p>答：T3setup&gt;T+T2max 时钟沿到来之前数据稳定的时间（越大越好），一个时钟周期T加上最大的逻辑延时。</p>
 <p> T3hold&gt;T1min+T2min 时钟沿到来之后数据保持的最短时间，一定要大于最小的延时也就是T1min+T2min</p>
+<h3><span id="61给出某个一般时序电路图有tsetup-tdelay-tclk-gtqtco还有clock的delay写出决定最大时钟的因素同时给出表达式">*61.给出某个一般时序电路图，有Tsetup, Tdelay, Tclk-&gt;q(Tco)，还有clock的delay，写出决定最大时钟的因素，同时给出表达式</span></h3><p> 答：T + Tclkdelay &gt; Tsetup + Tco + Tdelay</p>
+<p> Thold &gt; Tclkdelay + Tco + Tdelay;保持时间与时钟周期无关</p>
+<h3><span id="62实现三分频电路23分频电路偶数倍分频奇数倍分频">*62.实现三分频电路，2/3分频电路(偶数倍分频，奇数倍分频)</span></h3><p> 答：图2是3分频电路，用JK-FF实现3分频很方便，不需要附加任何逻辑电路就能实现同步计数分频。但用D-FF实现3分频时，必须附加译码反馈电路，如图2所示的译码复位电路，强制计数状态返回到初始全零状态，就是用NOR门电路把Q2，Q1=“11B”的状态译码产生“H”电平复位脉冲，强迫FF1和FF2同时瞬间（在下一时钟输入Fi的脉冲到来之前）复零，于是Q2，Q1=“11B”状态仅瞬间作为“毛刺”存在而不影响分频的周期，这种“毛刺”仅在Q1中存在，实用中可能会造成错误，应当附加时钟同步电路或阻容低通滤波电路来滤除，或者仅使用Q2作为输出。D-FF的3分频，还可以用AND门对Q2，Q1译码来实现返回复零。</p>
+<p><img src="https://i.loli.net/2019/04/10/5cad4399083f4.png" alt="3分频电路.png"></p>
+<h3><span id="63名词解释">63.名词解释</span></h3><p>答：CMOS（Complementary Metal Oxide Semiconductor），<u>互补金属氧化物半导体</u>，电压控制的一种放大器件。是组成CMOS数字集成电路的基本单元。</p>
+<p>MCU(Micro Controller Unit)中文名称为<u>微控制单元</u>，又称单片微型计算机(Single Chip Microcomputer)或者单片机，是指随着大规模集成电路的出现及其发展，将计算机的CPU、RAM、ROM、定时数计器和多种I/O接口集成在一片芯片上，形成芯片级的计算机，为不同的应用场合做不同组合控制。</p>
+<p>RISC（reduced instruction set computer，<u>精简指令集计算机</u>）是一种执行较少类型计算机指令的微处理器，起源于80年代的MIPS主机（即RISC机），RISC机中采用的微处理器统称RISC处理器。这样一来，它能够以更快的速度执行操作（每秒执行更多百万条指令，即MIPS）。因为计算机执行每个指令类型都需要额外的晶体管和电路元件，计算机指令集越大就会使微处理器更复杂，执行操作也会更慢。</p>
+<p>DSP（digital signal processor）是一种独特的微处理器，是以数字信号来处理大量信息的器件。其工作原理是接收模拟信号，转换为0或1的数字信号。再对数字信号进行修改、删除、强化，并在其他系统芯片中把数字数据解译回模拟数据或实际环境格式。它不仅具有可编程性，而且其实时运行速度可达每秒数以千万条复杂指令程序，远远超过通用微处理器，是数字化电子世界中日益重要的电脑芯片。它的强大数据处理能力和高运行速度，是最值得称道的两大特色。</p>
+<p>FPGA（Field－Programmable Gate Array），即现场可编程门阵列，它是在PAL、GAL、CPLD等可编程器件的基础上进一步发展的产物。它是作为专用集成电路（ASIC）领域中的一种半定制电路而出现的，既解决了定制电路的不足，又克服了原有可编程器件门电路数有限的缺点。</p>
+<p>ASIC:专用集成电路，它是面向专门用途的电路，专门为一个用户设计和制造的。根据一个用户的特定要求，能以低研制成本，短、交货周期供货的全定制，半定制集成电路。与门阵列等其它ASIC(Application Specific IC)相比，它们又具有设计开发周期短、设计制造成本低、开发工具先进、标准产品无需测试、质量稳定以及可实时在线检验等优点</p>
+<p>PCI(Peripheral Component Interconnect) 外围组件互连，一种由英特尔（Intel）公司1991年推出的用于定义局部总线的标准。</p>
+<p>ECC是“Error Correcting Code”的简写，中文名称是“错误检查和纠正”。ECC是一种能够实现“错误检查和纠正”的技术，ECC内存就是应用了这种技术的内存，一般多应用在服务器及图形工作站上，这将使整个电脑系统在工作时更趋于安全稳定。</p>
+<p>DDR=Double Data Rate双倍速率同步动态随机存储器。严格的说DDR应该叫DDR SDRAM，人们习惯称为DDR，其中，SDRAM 是Synchronous Dynamic Random Access Memory的缩写，即同步动态随机存取存储器。</p>
+<p>IRQ全称为Interrupt Request，即是“中断请求”的意思（以下使用IRQ称呼）。IRQ的作用就是在我们所用的电脑中，执行硬件中断请求的动作，用来停止其相关硬件的工作状态</p>
+<p>USB ,是英文Universal Serial BUS（通用串行总线）的缩写，而其中文简称为“通串线，是一个外部总线标准，用于规范电脑与外部设备的连接和通讯。</p>
+<p>BIOS是英文”Basic Input Output System”的缩略语，直译过来后中文名称就是”基本输入输出系统”。其实，它是一组固化到计算机内主板上一个ROM芯片上的程序，它保存着计算机最重要的基本输入输出的程序、系统设置信息、开机后自检程序和系统自启动程序。 其主要功能是为计算机提供最底层的、最直接的硬件设置和控制。</p>
+<h3><span id="64三极管的特性">64.三极管的特性</span></h3><p>答：</p>
+<p><img src="https://i.loli.net/2019/04/11/5cae9882303bb.png" alt="三极管特性曲线.png"></p>
+<h3><span id="65用波形表示d触发器的功能">65.用波形表示D触发器的功能</span></h3><p>答：<br><img src="https://i.loli.net/2019/04/11/5cae99dac4f8e.png" alt="D触发器功能.png"></p>
+<h3><span id="66用传输门和倒向器搭建一个边沿触发器">66.用传输门和倒向器搭建一个边沿触发器</span></h3><p>答：<br><img src="https://i.loli.net/2019/04/11/5cae9a5b90456.png" alt="边沿 触发器.png"></p>
+<h3><span id="67用逻辑门画出d触发器">67.用逻辑门画出D触发器。</span></h3><p>答：电平触发的D锁存器<br><img src="https://i.loli.net/2019/04/11/5cae9b2152f32.png" alt="D锁存器.png"></p>
+<p>边沿触发的,D触发器<br><img src="https://i.loli.net/2019/04/11/5cae9b2155c3b.png" alt="D触发器.png"></p>
 
         </div>
         
@@ -569,7 +598,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        13
+                        14
                     </p>
                 </div>
             </div>
@@ -665,7 +694,7 @@
                 <span class="level-item">probabilistic programming</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/其他/">
@@ -703,7 +732,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率编程/" style="font-size: 20px;">概率编程</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/语音合成/" style="font-size: 20px;">语音合成</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率编程/" style="font-size: 20px;">概率编程</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/语音合成/" style="font-size: 15px;">语音合成</a> <a href="/tags/项目/" style="font-size: 15px;">项目</a>
     </div>
 </div>
 
@@ -717,6 +746,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/09/Deep-Probabilitic-Programming/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Deep Probabilitic Programming">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T03:15:58.000Z">2019-04-09</time></div>
+                    <a href="/2019/04/09/Deep-Probabilitic-Programming/" class="has-link-black-ter is-size-6">Deep Probabilitic Programming</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -794,25 +842,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu_Linux使用笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time></div>
-                    <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="has-link-black-ter is-size-6">Ubuntu_Linux使用笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -831,7 +860,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -898,7 +927,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/概率编程/">
                         <span class="tag">概率编程</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -955,6 +984,25 @@
         
         <article class="media">
             
+            <a href="/2019/04/09/Deep-Probabilitic-Programming/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Deep Probabilitic Programming">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T03:15:58.000Z">2019-04-09</time></div>
+                    <a href="/2019/04/09/Deep-Probabilitic-Programming/" class="has-link-black-ter is-size-6">Deep Probabilitic Programming</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Pyro:Deep Universal Probabilistic Programming">
@@ -1029,25 +1077,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu_Linux使用笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time></div>
-                    <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="has-link-black-ter is-size-6">Ubuntu_Linux使用笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1066,7 +1095,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1133,7 +1162,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/概率编程/">
                         <span class="tag">概率编程</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 

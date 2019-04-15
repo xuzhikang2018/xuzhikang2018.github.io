@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>徐志康的技术博客</title>
+<title>Deep Probabilitic Programming - 徐志康的技术博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="徐志康的技术博客">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+    <meta name="description" content="Deep Probabilitic Programming">
+<meta name="keywords" content="概率编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Probabilitic Programming">
+<meta property="og:url" content="http://yoursite.com/2019/04/09/Deep-Probabilitic-Programming/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="Deep Probabilitic Programming">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-11T01:20:57.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="徐志康的技术博客">
+<meta name="twitter:title" content="Deep Probabilitic Programming">
+<meta name="twitter:description" content="Deep Probabilitic Programming">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                <img src="/images/logo.svg" alt="Deep Probabilitic Programming" height="28">
             
             </a>
         </div>
@@ -132,24 +137,23 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    <div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-01T09:37:54.000Z">2019-04-01</time>
+                <time class="level-item has-text-grey" datetime="2019-04-09T03:15:58.000Z">2019-04-09</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Intel与概率计算/">Intel与概率计算</a>
+                <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    39 分钟 读完 (大约 5823 个字)
+                    15 分钟 读完 (大约 2214 个字)
                 </span>
                 
                 
@@ -158,32 +162,46 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/04/01/Intel概率计算报道/">Intel概率计算报道</a>
+                Deep Probabilitic Programming
             
         </h1>
         <div class="content">
-            <!-- toc -->
+            <p>Deep Probabilitic Programming<br><a id="more"></a></p>
+<!-- toc -->
 <ul>
-<li><a href="#1英特尔实验室介绍">1.英特尔实验室介绍</a><ul>
-<li><a href="#神经拟态计算简介">神经拟态计算简介</a></li>
-<li><a href="#概率计算简介">概率计算简介</a></li>
-</ul>
-</li>
-<li><a href="#2概率计算使人工智能进入下一个时代">2.概率计算使人工智能进入下一个时代</a></li>
-<li><a href="#3英特尔开始为人工智能进行概率计算的研发工作">3.英特尔开始为人工智能进行概率计算的研发工作</a></li>
-<li><a href="#4英特尔实验室主任谈量子概率和神经拟态计算">4.英特尔实验室主任谈量子，概率和神经拟态计算</a></li>
+<li><a href="#absract">Absract</a></li>
+<li><a href="#1-introduction">1 INTRODUCTION</a></li>
+<li><a href="#2-related-work">2 RELATED WORK</a></li>
+<li><a href="#3compositional-representations-for-probabilistic-models">3.COMPOSITIONAL REPRESENTATIONS FOR PROBABILISTIC MODELS</a></li>
 </ul>
 <!-- tocstop -->
+<h2><span id="absract">Absract</span></h2><p>我们提出Edward，一种图灵完备的概率编程语言。Edward定义了两种成分表征 - 随机变量和推理。通过将推理视为一流的公民，与建模相提并论，我们表明概率编程可以像传统的深度学习一样灵活，计算效率高。为了灵活性，Edward使用各种可组合的推理方法轻松地拟合相同的模型，从点估计到变分推理到MCMC。此外，Edward可以重复使用建模表示作为推理的一部分，促进丰富的变分模型和生成对抗网络的设计。为了提高效率，Edward被集成到TensorFlow中，为现有的概率系统提供了显着的加速。例如，我们在基准逻辑回归任务中表明，Edward比Stan快至少35倍，比PyMC3快6倍。此外，Edward不会产生运行时开销：它与手写的TensorFlow一样快。</p>
+<h2><span id="1-introduction">1 INTRODUCTION</span></h2><p>深度神经网络的本质是组成。用户可以创造性地连接图层，而不必担心如何执行测试（向前传播）或推理（基于梯度的优化，具有反向传播和自动区分）。</p>
+<p>在本文中，我们设计了概率编程的组合表示。概率编程允许用户将生成概率模型指定为程序，然后将这些模型“编译”为推理过程。概率模型本质上也是成分的，并且许多工作通过随机变量的组合实现了丰富的概率程序(Goodman等人，2012; Ghahramani，2015; Lake等人，2016)。</p>
+<p>然而，较少的工作考虑了推理的类似组成。相反，许多现有的概率编程语言将推理引擎视为黑盒子，从模型中抽象出来。这些无法捕捉重用模型表示的概率推论 - 变量推理的最新进展中的一个关键思想（Kingma＆Welling，2014; Rezende＆Mohamed，2015; Tran等，2016b），生成对抗网络（Goodfellow等， 2014），以及更经典的推论（Dayan等，1995; Gutmann＆Hyvärinen，2010）。</p>
+<p>我们提出了Edward1，一种图灵完备的概率编程语言，它基于两个组合表示 - 一个用于随机变量，一个用于推理。通过将推理视为一流的公民，与建模相提并论，我们表明概率编程可以像传统的深度学习一样灵活，计算效率高。为了灵活性，我们展示了Edward如何使用各种可组合的推理方法轻松地拟合相同的模型，从点估计到变分推理到MCMC。为了提高效率，我们展示了如何将Edward集成到现有的计算图框架中，例如TensorFlow（Abadi等，2016）。像TensorFlow这样的框架提供了计算优势，如分布式训练，并行性，矢量化和“免费”GPU支持。例如，我们在基准测试任务中显示，Edward的哈密尔顿蒙特卡罗比现有软件快许多倍。此外，Edward不会产生运行时开销：它与手写的TensorFlow一样快。</p>
+<h2><span id="2-related-work">2 RELATED WORK</span></h2><p>概率编程语言（PPL）通常利用推理的计算效率来折衷语言的表达性。一方面，有一些语言<strong>强调表达能力</strong>（Pfeffer，2001; Milch等，2005; Pfeffer，2009; Goodman等，2012），代表了超越图形模型的丰富类。每个都使用通用推理引擎，但在模型和数据大小方面的扩展性很差。另一方面，有一些语言<strong>强调效率</strong>（Spiegelhalter等，1995; Murphy，2001; Plummer，2003; Salvatier等，2015; Carpenter等，2016）。PPL仅限于特定类型的模型，并且优化推理算法以使该类有效。例如，Infer.NET为图形模型实现了快速消息传递（Minka等，2014），而Augur使用GPU实现数据并行性，以便在贝叶斯网络中进行Gibbs采样（Tristan等，2014）。Edward填补了这一空白 图灵完备的 - 它支持任何可计算的概率分布 - 它支持有效的算法，例如利用模型结构的算法和扩展到海量数据的算法。</p>
+<p>先前对图灵完备语言中的高效算法进行了一些研究。Venture和Anglican设计推理作为局部推理问题的集合，在程序片段上定义（Mansinghka等，2014; Wood等，2014）。这产生了我们构建的快速程序特定的推理代码。两种系统都不支持推理方法，例如可编程后验近似，推理模型或数据子采样。与我们的工作同时，WebPPL以摊销推理为特色（Ritchie等，2016）。与Edward不同，WebPPL不重用模型的表示; 相反，它注释原始程序并利用辅助函数，这是一种不太灵活的策略。最后，推理被设计为Kiselyov＆Shan（2009）的程序转换; Scibior等人。（2015）; Zinkov＆Shan（2016）。这使得在其他概率程序内进行推理的灵活性成为可能。Edward建立在这个想法的基础上，不仅包括建模中的推理，还包括推理中的建模（例如，变分模型）。</p>
+<h2><span id="3compositional-representations-for-probabilistic-models">3.COMPOSITIONAL REPRESENTATIONS FOR PROBABILISTIC MODELS</span></h2><p>我们首先开发概率模型的组合表示。我们需要两个标准：（a）与计算图形集成，一个有效的框架，其中节点代表对数据的操作，边缘代表它们之间传递的数据（Culler，1986）; （b）图表下的表示的不变性，即表示可以在推理期间重复使用。</p>
+<p>Edward将随机变量定义为关键的组成表示。它们是具有方法的类对象，例如，用于计算对数密度和采样。此外，每个随机变量x与张量（多维阵列）x<em> 相关联，其表示单个样本x</em>~p（x）。该关联将随机变量嵌入到张量上的计算图上。</p>
+<p>该设计的简单性使得在计算图框架中开发概率程序变得容易。重要的是，所有计算都在图表上表示。这使得人们能够构建具有复杂确定性结构的随机变量，例如深度神经网络，多种数学运算以及构建在相同框架上的第三方库。该设计还使随机变量的组合能够捕获复杂的随机结构。</p>
+<p>作为一个例子，我们使用Beta-Bernoulli模型， $p(x,\theta)=\mathtt{Beta}(\theta,1,1)$ Bernoulli $(x_n,\theta)$，其中 $\theta$ 是在50个数据点x∈{0,1} 50之间共享的潜在概率。随机变量x是50维的，由随机张量θ*参数化。获取对象x运行图形：它从生成过程模拟并输出50个元素的二进制向量。</p>
+<p>图1：Beta-Bernoulli程序（左）及其计算图（右）。<br>从图中获取x会生成50个元素的二进制向量。<br><img src="https://i.loli.net/2019/04/09/5cac45bf8d87b.png" alt="图1.1.png"></p>
+<p>所有的计算都是象征性地登记在随机变量上，而不是在它们的执行过程中。符号表示不需要具体化整个模型，这会导致大型模型不合理的内存消耗(Tristan等人，2014)。此外，它使我们能够在执行任何代码之前，简化图中的确定性和随机性操作(Scibior等人，2015；Zinkov&amp;Shan，2016)。</p>
+<p>使用计算图，在概率程序中构建可变状态也是很自然的。作为计算图的典型用法，这种状态可以定义模型参数; 在TensorFlow中，这是由tf.Variable给出的。另一个用例是用于构建判别模型p（y | x），其中x是作为训练或测试数据输入的特征。程序可以独立于数据编写，在其图形中使用x的可变状态（tf.placeholder）。在训练和测试期间，我们为占位符提供适当的值。</p>
+<p>在附录A中，我们提供了用于分类的贝叶斯神经网络（A.1），潜隐Dirichlet分配（A.2）和高斯矩阵分解（A.3）的示例。<br>我们在下面介绍其他例子</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/01/Intel概率计算报道/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/概率编程/">概率编程</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -191,186 +209,32 @@
 
 
 
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-30T02:40:56.000Z">2019-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/数字IC设计/">数字IC设计</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 小时 读完 (大约 12413 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
             
-                <a class="has-link-black-ter" href="/2019/03/30/数字IC设计面试100题/">数字IC设计面试100题</a>
-            
-        </h1>
-        <div class="content">
-            <p>主要来自知乎的整理</p>
         </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/30/数字IC设计面试100题/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-30T01:33:01.000Z">2019-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 324 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/30/博客使用/">博客使用</a>
-            
-        </h1>
-        <div class="content">
-            <p>记录下博客使用过程中遇到的问题<br></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/30/博客使用/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-29T15:18:54.000Z">2019-03-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 720 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/29/博客搭建/">博客搭建</a>
-            
-        </h1>
-        <div class="content">
-            <p>2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/29/博客搭建/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/">
+                <span class="level-item">Pyro:Deep Universal Probabilistic Programming</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/3/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/">1</a></li>
-            
-            <li><a class="pagination-link is-current" href="/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -1027,7 +891,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                    <img src="/images/logo.svg" alt="Deep Probabilitic Programming" height="28">
                 
                 </a>
                 <p class="is-size-7">

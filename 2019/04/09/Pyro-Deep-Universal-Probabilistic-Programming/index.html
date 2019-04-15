@@ -16,7 +16,7 @@
 <meta property="og:description" content="Pyro:Deep Universal Probabilistic Programming">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-09T03:04:52.990Z">
+<meta property="og:updated_time" content="2019-04-09T03:05:48.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pyro:Deep Universal Probabilistic Programming">
 <meta name="twitter:description" content="Pyro:Deep Universal Probabilistic Programming">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    19 分钟 读完 (大约 2838 个字)
+                    19 分钟 读完 (大约 2835 个字)
                 </span>
                 
                 
@@ -195,7 +195,7 @@
 <p>Stan（Carpenter等人（2017）是一种领域特定语言，用于描述一类受限概率的程序并在这些模型中执行高质量的自动推理。Church（Goodman et al。（2008））是Scheme的概率语言，是一种早期的通用概率编程语言，能够表示任何可计算的概率分布。Venture（Mansinghka et al。（2018））是一种通用语言，专注于表现力和灵活性以及自定义语法和虚拟机。Anglican（Tolpin等人（2016））和webPPL（Goodman和Stuhlmuller（2014））是Church的轻量级后继者，在通用编程语言Clojure和JavaScript中作为句法子集（Wingate等人（2011））嵌入。<br>Edward（Tran et al。（2017））是一个基于静态TensorFlow图的PPL，它具有模型和推理的可组合表示。ProbTorch（Siddharth等人（2017））是一个建立在PyTorch上的PPL，专注于深度生成模型和开发变异推理的新目标。图灵（Ge et al。（2018））是一个嵌入Julia的PPL，具有可组合的MCMC算法</p>
 <h2><span id="5-experiments">5. Experiments</span></h2><p>为了证明Pyro符合我们的设计目标，我们实施了几个最先进的模型。这里我们专注于变分自动编码器（VAE; Kingma和Welling（2014））和深马尔可夫模型（DMM; Krishnan等人）（2017）），非线性状态空间模型。</p>
 <p>为了证明Pyro满足我们的设计目标，我们实现了几个最先进的模型。2这里我们重点介绍变分自动编码器(VAE；Kingma和Willing(2014)和DeepMarkovModel(DMM；Krishnan等人)。(2017)，这是一个非线性状态空间模型，已用于多种应用，<b>包括音频生成和因果推理</b>。<br>VAE是深度概率建模的标准例子，而DMM有几个特点使其成为理想的比较点：它是一个高维、非共轭的模型，设计为适合于大型数据集；序列中潜在变量的数量取决于输入数据；它使用手工设计的后验近似。</p>
-<p>Pyro派生的模型和推理程序几乎完全复制原始论文，除了我们使用蒙特卡罗估计而不是KL分歧项的精确解析表达式。我们使用MNIST数据集和2隐藏层MLP编码器和解码器网络，其中VAE的变化隐藏层大小#h和潜在代码大小#z以及数字化音乐3的相同数据集来训练DMM。</p>
+<p>Pyro派生的模型和推理程序几乎完全复制原始论文，除了我们使用蒙特卡罗估计而不是KL分歧项的精确解析表达式。我们使用MNIST数据集和2隐藏层MLP编码器和解码器网络，其中VAE的变化隐藏层大小#h和潜在代码大小#z以及digital music的相同数据集来训练DMM。</p>
 <p>为了证明Pyro的抽象不会通过引入太多开销来降低其可扩展性，我们将VAE实现与惯用的PyTorch实现进行了比较.4在验证它们收敛到相同的测试ELBO之后，我们比较了计算一个时钟所需的wall clock时间。梯度更新，在单个NVIDIA GTX 1080Ti上平均超过10个时期的GPU加速小批量随机梯度变化推断（批量大小128）。图3显示Pyro和PyTorch版本之间的相对性能差距是适中的，更重要的是，它随着执行张量操作所花费的总时间的增加而缩小。</p>
 <p>我们使用DMM来评估Pyro的灵活性和表现力。如图4所示，我们发现在5000个训练时期之后，我们能够快速简明地复制完整的DMM模型以及论文中报告的推理配置和定量结果。此外，由于Pyro的模块化设计，我们还能够通过自回归（（IAF）构建具有更具表现力的近似后验的DMM变体（Kingma等人（2016）），用几行代码改善结果，计算成本可忽略不计。<br><img src="https://i.loli.net/2019/04/09/5cac0bc24bfbf.png" alt="图3和图4.png"></p>
 
@@ -230,6 +230,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/04/09/Deep-Probabilitic-Programming/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Deep Probabilitic Programming</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -286,7 +293,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        13
+                        14
                     </p>
                 </div>
             </div>
@@ -382,7 +389,7 @@
                 <span class="level-item">probabilistic programming</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/其他/">
@@ -420,7 +427,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率编程/" style="font-size: 20px;">概率编程</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/语音合成/" style="font-size: 20px;">语音合成</a> <a href="/tags/项目/" style="font-size: 20px;">项目</a>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率编程/" style="font-size: 20px;">概率编程</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/语音合成/" style="font-size: 15px;">语音合成</a> <a href="/tags/项目/" style="font-size: 15px;">项目</a>
     </div>
 </div>
 
@@ -434,6 +441,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/09/Deep-Probabilitic-Programming/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Deep Probabilitic Programming">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T03:15:58.000Z">2019-04-09</time></div>
+                    <a href="/2019/04/09/Deep-Probabilitic-Programming/" class="has-link-black-ter is-size-6">Deep Probabilitic Programming</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -511,25 +537,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu_Linux使用笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time></div>
-                    <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="has-link-black-ter is-size-6">Ubuntu_Linux使用笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -548,7 +555,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -615,7 +622,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/概率编程/">
                         <span class="tag">概率编程</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -672,6 +679,25 @@
         
         <article class="media">
             
+            <a href="/2019/04/09/Deep-Probabilitic-Programming/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Deep Probabilitic Programming">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T03:15:58.000Z">2019-04-09</time></div>
+                    <a href="/2019/04/09/Deep-Probabilitic-Programming/" class="has-link-black-ter is-size-6">Deep Probabilitic Programming</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Pyro:Deep Universal Probabilistic Programming">
@@ -746,25 +772,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu_Linux使用笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time></div>
-                    <a href="/2019/04/04/Ubuntu_Linux使用笔记/" class="has-link-black-ter is-size-6">Ubuntu_Linux使用笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -783,7 +790,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -850,7 +857,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/概率编程/">
                         <span class="tag">概率编程</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
