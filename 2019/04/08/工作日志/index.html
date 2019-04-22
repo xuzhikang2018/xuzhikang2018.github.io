@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-15T02:15:28.883Z">
+<meta property="og:updated_time" content="2019-04-22T02:02:50.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    15 分钟 读完 (大约 2262 个字)
+                    17 分钟 读完 (大约 2570 个字)
                 </span>
                 
                 
@@ -172,6 +172,7 @@
 <ul>
 <li><a href="#2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</a></li>
 <li><a href="#2019年4月9日-2019年4月15日">2019年4月9日-2019年4月15日</a></li>
+<li><a href="#2019年4月16日-2019年4月22日">2019年4月16日-2019年4月22日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -194,6 +195,28 @@
 <li>架构设计：万能的近似性质和深度定理告诉我们，具有单层的前馈网络足够表示任何函数，但是网络层可能大的不可实现，并且无法正确的学习和泛化。在很多情况下,<strong>使用更深的模型能够减少表示期望函数所需的单元的数量,并且可以减少泛化误差</strong>。这就是为什么要选择深层模型的原因，<br><img src="https://i.loli.net/2019/04/15/5cb3e43e51e6e.png" alt="深度的影响"><br>但是用更深的网络训练带来的问题是，在梯度反向传播的时候，会出现梯度显示，而无法对模型正常训练，并达到收敛</li>
 </ul>
 <p>总结：这周在看了关于Edward，和Pyro的概率编程，能够支持贝叶斯深度学习，概率机器学习，想利用Tensorflow等平台提供的概率编程工具搭建概率编程与深度学习，解决的实例可以是语音合成等。当我看的谷歌等关于深度学习在语音合成上的应用，发现对深度学习里面的架构，激活函数等的选择不太理解，返回去补了下相关知识。另外团队购买的开发板ZCU104是可以做深度学习的《ug1327-DNNDK User Guide》，Xlinx给的Demo是包括ResNet-50物体识别，人脸识别，动作检查等，最近也在看它的手册</p>
+<h2><span id="2019年4月16日-2019年4月22日">2019年4月16日-2019年4月22日</span></h2><ol>
+<li>深度学习花皮书200页~400页</li>
+</ol>
+<ul>
+<li>深度学习中的正则化</li>
+<li>深度模型中的优化</li>
+<li>卷积神经网络</li>
+<li>序列建模：循环与递归网络</li>
+</ul>
+<ol start="2">
+<li>台湾大学李宏毅的深度学习课程</li>
+</ol>
+<ul>
+<li>Why deep structure</li>
+<li>Optimization</li>
+<li>Generalization</li>
+<li>Specical Network structure，Seq-to-Seq Learning</li>
+</ul>
+<p>总结：本周学的内容，让我对深度学习中防止过拟合，正则化手段包括参数范数惩罚，提前终止，Bagging集成方法，Dropout等有了较深的了解。</p>
+<p>深度学习中的学习算法的优化，算法主要使用的是，SGD,Momentum(动量)这两种，自适应学习率算法，包括AdaGrad,RMSProp,Adam，这些算法都是利用Heissian矩阵去优化学习率。<strong>现在用的比较多的是Adam+Momentum</strong></p>
+<p>卷积神经网络CNN与循环神经网络代表LSTM的基本架构。</p>
+<p>深度学习中的不稳定性，在ImageNet 上应用GoogLeNet (Szegedy et al., 2014a) 的对抗样本生成的演示。通过添加一个不可察觉的小向量。可以改变GoogLeNet 对此图像的分类结果。<br><img src="https://i.loli.net/2019/04/22/5cbd1d69813ea.png" alt="QQ截图20190422094757.png"></p>
 
         </div>
         
