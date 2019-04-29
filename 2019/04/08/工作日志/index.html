@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-22T02:02:50.912Z">
+<meta property="og:updated_time" content="2019-04-29T02:18:38.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    17 分钟 读完 (大约 2570 个字)
+                    29 分钟 读完 (大约 4411 个字)
                 </span>
                 
                 
@@ -173,6 +173,7 @@
 <li><a href="#2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</a></li>
 <li><a href="#2019年4月9日-2019年4月15日">2019年4月9日-2019年4月15日</a></li>
 <li><a href="#2019年4月16日-2019年4月22日">2019年4月16日-2019年4月22日</a></li>
+<li><a href="#2019年4月23日-2019年4月29日">2019年4月23日-2019年4月29日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -217,6 +218,53 @@
 <p>深度学习中的学习算法的优化，算法主要使用的是，SGD,Momentum(动量)这两种，自适应学习率算法，包括AdaGrad,RMSProp,Adam，这些算法都是利用Heissian矩阵去优化学习率。<strong>现在用的比较多的是Adam+Momentum</strong></p>
 <p>卷积神经网络CNN与循环神经网络代表LSTM的基本架构。</p>
 <p>深度学习中的不稳定性，在ImageNet 上应用GoogLeNet (Szegedy et al., 2014a) 的对抗样本生成的演示。通过添加一个不可察觉的小向量。可以改变GoogLeNet 对此图像的分类结果。<br><img src="https://i.loli.net/2019/04/22/5cbd1d69813ea.png" alt="QQ截图20190422094757.png"></p>
+<h2><span id="2019年4月23日-2019年4月29日">2019年4月23日-2019年4月29日</span></h2><p>这周主要在整理原来有关概率编程，贝叶斯深度学习的文章。关键点：== 机器知道学到了什么，也要知道没有学习什么，深度学习中的不确定性表征 ==。</p>
+<ol>
+<li>LeCun, Yann, Yoshua Bengio, and Geoffrey Hinton. “Deep learning.” Nature 521.7553 (2015): 436-44</li>
+</ol>
+<ul>
+<li><p>精读，深度学习的survey</p>
+</li>
+<li><p>这是深度学习几个大佬2015年发表在Nature上的Survey性质的文章，主要是介绍的是深度学习的基本理论知识，常见的两种架构DNN和RNN和他们的基本使用场景，文章的最后也提到了深度学习的未来包括Unsupervised learning，Natural language understanding，以及<strong>complex reasoning（机器怎么去在复杂环境下推理）</strong></p>
+</li>
+</ul>
+<ol start="2">
+<li>Ghahramani, Zoubin，”Probabilistic machine learning and artificial intelligence” 10.1038/nature14541(2015/05/27/online)</li>
+</ol>
+<ul>
+<li><p>精读 概率机器学习，机器学习中的概率框架的出发点</p>
+</li>
+<li><p>机器学习的概率框架的核心思想是：学习可以看做是推理合理模型以用于解释被观测的数据的过程。一台机器可以利用此模型去预测未来的数据，并基于这些预测进行理性的决策。不确定性在这一切中起了基础的作用，观测数据数据可以符合多个模型，因此那个模型适用于给定的数据是不确定的。相似的，未来数据和预测活动的结果也是不确定的。概率框架提供了对不确定性的建模。在科学数据分析，机器学习，机器人技术，认知科学和人工智能领域中扮演着重要的角色。这篇评论介绍了这种框架，并讨论的最新的进展——概率编程，贝叶斯优化，数据压缩以及模型自动发现</p>
+</li>
+</ul>
+<ol start="3">
+<li>Thomas Wiecki(2016,Jun 1).Bayesian Deep Learning Variational Inference: Bayesian Neural Networks.[Web Blog post].Retrieved from:<a href="https://twiecki.io/blog/2016/06/01/bayesian-deep-learning/" target="_blank" rel="noopener">https://twiecki.io/blog/2016/06/01/bayesian-deep-learning/</a></li>
+</ol>
+<ul>
+<li><p>精读，讨论了贝叶斯与深度学习的桥接</p>
+</li>
+<li><p>桥接深度学习与概率编程：一方面概率编程可以让我们以原则化和易于理解的方式构造比较小的，集中的模型来深入了解数据模型。另一方面，使用深度学习启发式方法来训练大量高度复杂的模型，这些模型的预测效果惊人。最近变分推理中的创新能够使概率编程扩大模型复杂性和数据的大小。概率编程可以被应用在广泛的问题中，在深度学习中，可以考虑一下几点。<strong>预测中的不确定性，表示中的不确定性，先验正则，知情先验的迁移学习，分层神经网络，其他混合架构</strong>。作者给出了一个简单的非线性可分的二分类问题，搭建简单的两层DNN,并为各层的权重赋以正态分布的先验，最后的输出层为Bernoulli分布，观测到样本数据后，利用ADVI变分推理算法计算各层权重的后验分布。结果上，训练的贝叶斯神经网络的预测效果十分的明显，有94.19%分类正确率。更多通过<strong>贝叶斯神经网络带来的是，后验分布预测的标准差，反映了预测中的不确定性</strong>。越接近决策边界，对哪个标签预测的不确定性越高。可以想象，将<strong>预测与不确定性联系起来是许多应用（如医疗，无人驾驶）的关键属性</strong>。为了进一步最大化准确度，可以根据来自高不确定区域的样本来重新训练模型。</p>
+</li>
+</ul>
+<ol start="4">
+<li>Thomas Wiecki(2016,July 05)Bayesian Deep Learning Part II: Bridging PyMC3 and Lasagne to build a Hierarchical Neural Network.[Web Blog post].Retrieved from:<a href="https://twiecki.io/blog/2016/07/05/bayesian-deep-learning/" target="_blank" rel="noopener">https://twiecki.io/blog/2016/07/05/bayesian-deep-learning/</a></li>
+</ol>
+<ul>
+<li><p>精度，讨论了贝叶斯深度学习中的分层神经网络，卷积贝叶斯网络</p>
+</li>
+<li><p>作者展示如何利用PyMC3和Lasagne以构建密集的2层ANN。使用mini-batch ADVI将模型拟合到MNIST手写数字数据集上。分层人工神经网络。利用Lasagne模块的功能，构建具有最大池层的分层贝叶斯卷积ANN，以在MNIST上实现98％的准确度。利用处于贝叶斯框架中的优势，<strong>能够探索预测中的不确定性</strong>。由于预测是类别，不能简单地计算后验预测标准偏差。<strong>取而代之的是，计算卡方统计量，能够知道样本预测结果的分布的均匀程度</strong>。越均匀，说明不确定性越高。当模型出错时，分类结果越不确定。</p>
+</li>
+</ul>
+<ol start="5">
+<li>Gal Y , Ghahramani Z . Bayesian Convolutional Neural Networks with Bernoulli Approximate Variational Inference[J]. Computer Science, 2015.</li>
+</ol>
+<ul>
+<li><p>精读，CNN的kernel为概率分布，能够有效的防止过拟合，提高系统的鲁棒性</p>
+</li>
+<li><p>CNN在小数据集上的学习容易过拟合，这是因为使用dropout在中间层中有效，当它放在kernel上时也会导致效果减少。为了解决这个问题，该论文提出了一种有效的贝叶斯卷积神经网络，<strong>通过在CNN内核上设计概率分布，能够有效的防止小数据的过拟合，为系统提供了更好的鲁棒性</strong>。论文作者假设该模型的复杂后验分布近似于伯努利变分分布，不需要给模型增加额外的学习参数。模型实现使用现有工具，几乎不需要任何开销。根据证明的理论，将casting dropout训练作为贝叶斯神经网络中的近似推断，使用蒙特卡罗MC dropout作为CNN中核的近似积分的理论依据。通过实验观察到MC dropout能够提高了模型架构的性能,而标准dropout近似不能。但这这带来了较慢的测试时间，因此推理近似的最佳选择应该取决于问题的类型与规模。</p>
+</li>
+</ul>
+<p>思考：通信中很多场景下的数据量不能称之为大数据，如果应用到深度学习上进行分类预测，容易造成过拟合。另外通信中信号的传输场景的不确定性，噪声的不确定性，给利用机器学习进行信号处理造成了很大的困难。从论文5可以知道，在CNN内核上假定伯努利变分分布，有类似Dropout的效果，能够有效的防止过拟合,提高小数据量下训练系统的鲁棒性。另外从论文3,4下能看到，利用贝叶斯深度学习进行训练预测，可以得到预测结果的不确定性，能够给噪声环境下的通信，提供有效的预测，与可解释的结果，以对信号进一步进行处理。</p>
 
         </div>
         
