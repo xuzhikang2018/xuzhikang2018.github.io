@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-29T02:18:38.803Z">
+<meta property="og:updated_time" content="2019-05-06T02:25:10.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    29 分钟 读完 (大约 4411 个字)
+                    38 分钟 读完 (大约 5673 个字)
                 </span>
                 
                 
@@ -174,6 +174,7 @@
 <li><a href="#2019年4月9日-2019年4月15日">2019年4月9日-2019年4月15日</a></li>
 <li><a href="#2019年4月16日-2019年4月22日">2019年4月16日-2019年4月22日</a></li>
 <li><a href="#2019年4月23日-2019年4月29日">2019年4月23日-2019年4月29日</a></li>
+<li><a href="#2019年4月30日-2019年5月5日">2019年4月30日-2019年5月5日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -265,6 +266,31 @@
 </li>
 </ul>
 <p>思考：通信中很多场景下的数据量不能称之为大数据，如果应用到深度学习上进行分类预测，容易造成过拟合。另外通信中信号的传输场景的不确定性，噪声的不确定性，给利用机器学习进行信号处理造成了很大的困难。从论文5可以知道，在CNN内核上假定伯努利变分分布，有类似Dropout的效果，能够有效的防止过拟合,提高小数据量下训练系统的鲁棒性。另外从论文3,4下能看到，利用贝叶斯深度学习进行训练预测，可以得到预测结果的不确定性，能够给噪声环境下的通信，提供有效的预测，与可解释的结果，以对信号进一步进行处理。</p>
+<h2><span id="2019年4月30日-2019年5月5日">2019年4月30日-2019年5月5日</span></h2><p>调研脉冲神经网络方面的论文，写了SNN的简单仿真，考虑接下来的安排</p>
+<ol>
+<li>Chen G K , Kumar R , Sumbul H E , et al. A 4096-Neuron 1M-Synapse 3.8-pJ/SOP Spiking Neural Network With On-Chip STDP Learning and Sparse Weights in 10-nm FinFET CMOS[J]. IEEE Journal of Solid-State Circuits, PP(99):1-11.<br>精读，2019年发表的在顶级期刊JOURNAL OF SOLID-STATE CIRCUITS上的脉冲神经网络芯片，关键词：Near-threshold voltage circuit optimizations,power gating, and clock gating,finegrained<br>structured sparsity</li>
+</ol>
+<ul>
+<li>该论文设计了包含4096神经元，一百万个突触，采用10-nm FinFET CMOS可重构的芯片，可用于加速多种脉冲神经网络（SNN）的推理和学习。SNN利用leaky integrate and fir神经元模型的数字电路，片上脉冲定时相关塑性（STDP）学习以及高扇出多播脉冲通信。结构化的<strong>细粒度权值weight稀疏性</strong>可将突触内存减少多达16倍，而存储连接的开销不到2％。近似计算共同优化了下降流量控制并从算法噪声中受益，以处理时空脉冲模式，能量可以低于原来的9.4倍。SNN在0.9 V时达到25.2 GSOP / s的峰值吞吐量，在525 mV时达到3.8 pJ / SOP的峰值能量效率，在450 mV时达到2.3-μW/神经元操作。片上无监督STDP训练，脉冲限制Boltzmann机去噪修改的MNIST数据集上，重建RMSE为0.036的自然场景图像。Nearthreshold操作与时间和空间稀疏性相结合，在236×20前馈网络中将能量减少17.4倍至1.0-μJ的每次分类，该网络经过训练以使用监督STDP对MNIST数字进行分类。具有50％稀疏权重的二元激活多层感知器在离线训练时具有反向误差传播，以对MNIST数字进行分类，每次分类消耗1.7-μJ，具有97.9％的准确度。</li>
+</ul>
+<ol start="2">
+<li>人工智能芯片技术白皮书<br>有关于SNN的章节，关键词，可缩放高并行的神经网络互联、众核结构、事件驱动、数据流计算</li>
+</ol>
+<ul>
+<li><p>IBM TrueNorth 芯片是异步- 同步混合（无全局时钟）数字电路的代表作，清华大学的天机系列芯片实现了纯同步数字电路的神经形态芯片；瑞士苏黎世联邦理工学院的ROLLS 芯片和海德堡大学的BrainScaleS 则是模拟集成电路的代表作品。而基于新型纳米器件的神经形态计算电路目前最受关注的方向是利用忆阻器等器件搭建的神经形态芯片。</p>
+<p>神经形态芯片在智能城市、自动驾驶的实时信息处理、人脸深度识别等领域都有出色的应用。如IBMTrueNorth 芯片可以用于检测图像中的行人、车辆等物体，且功耗极低（65mW）。它也可被用于语音、图像数据集识别等任务，准确性不逊于CNN 加速器芯片。此外，在线学习能力也是神经形态芯片的一大亮点。研究人员已证明，与其他典型的SNN 网络相比，在解决 MNIST 数字体识别问题上，英特尔Loihi 芯片将学习速度提高了100 万倍。</p>
+<p>在传统CMOS 工艺下，神经形态芯片的物理结构较为成熟，但对于可以仿真大规模神经网络而言（如大于人脑1% 规模的系统而言），仍存在很多挑战，包括（1）散热问题将导致单芯片规模无法继续增长，片上存储和积分计算单元的密度不够，导致集成的突触和神经元数量无法继续提升，功耗居高不下。（2）由于其阵列众核的特性，在片上、跨芯片、跨板、多机等尺度下的<strong>互联和同步问题</strong>突出。（3）为了提升密度，大多ASIC 芯片可模拟的神经形态<strong>算法过于单一或简化</strong>，缺乏灵活性和模仿真实生物神经元的能力。</p>
+</li>
+</ul>
+<ol start="3">
+<li>SNN的简单仿真：输入是16*16的像素图片<br><img src="https://i.loli.net/2019/05/06/5ccf98cca4b89.png" alt="QQ截图20190506101128.png">  </li>
+</ol>
+<ul>
+<li>网络只有两层，输入层256个神经元，输出层是3个神经元。输入层的处理，首先将图片和5*5的接受阈的核卷积，得到局部感受野。对于每个像素点，根据感受野的值，生成在0-150的时间戳上的脉冲序列。然后第二层的网络将根据接收到的脉冲序列，和分类的图片利用STDP算法修改突触权值。</li>
+</ul>
+<ol start="4">
+<li>讨论接下来的计划<br><img src="https://i.loli.net/2019/05/06/5ccf9af14ae54.png" alt="安排.png"></li>
+</ol>
 
         </div>
         

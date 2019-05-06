@@ -16,7 +16,7 @@
 <meta property="og:description" content="记录下python使用的小技巧等">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-26T03:00:50.318Z">
+<meta property="og:updated_time" content="2019-05-04T02:10:33.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python使用">
 <meta name="twitter:description" content="记录下python使用的小技巧等">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 218 个字)
+                    2 分钟 读完 (大约 263 个字)
                 </span>
                 
                 
@@ -174,6 +174,8 @@
 <li><a href="#2python安装包所在的路径">2.python安装包所在的路径</a></li>
 <li><a href="#3pip安装时候报错-a-distutils-installed-project">3.pip安装时候报错 a distutils installed project</a></li>
 <li><a href="#4安装时报错-environmenterror-winerror-5-拒绝访问">4.安装时报错 EnvironmentError: [WinError 5] 拒绝访问</a></li>
+<li><a href="#5更新某个包的版本">5.更新某个包的版本</a></li>
+<li><a href="#6安装了某个包还意外报错">6.安装了某个包，还意外报错</a></li>
 </ul>
 <!-- tocstop -->
 <h3><span id="1python查看包的版本">1.python查看包的版本</span></h3><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python -v <span class="hljs-comment">## 查看python的包的版本</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">## 进入python</span></span><br><span class="line"><span class="hljs-keyword">import</span> scipy</span><br><span class="line">scipy.__version__ <span class="hljs-comment">##两条下划线</span></span><br></pre></td></tr></table></figure>
@@ -182,6 +184,8 @@
 <p>解决方法：强行安装更新更高的版本<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --ignore-installed numpy</span><br></pre></td></tr></table></figure></p>
 <h3><span id="4安装时报错-environmenterror-winerror-5-拒绝访问">4.安装时报错 EnvironmentError: [WinError 5] 拒绝访问</span></h3><p>报错内容：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Could not install packages due to an EnvironmentError: [WinError 5] 拒绝访问。: &apos;c:\\users\\xuzhikang\\anaconda3\\Lib\\site-packages\\numpy\\.libs\\libopenblas.IPBC74C7KURV7CB2PKT5Z5FNR3SIBV4J.gfortran-win_amd64.dll&apos;</span><br><span class="line">Consider using the `--user` option or check the permissions.</span><br></pre></td></tr></table></figure></p>
 <p>解决方法：在pip安装命令后的install后面加上–user便可解决<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --user --ignore-installed scipy</span><br></pre></td></tr></table></figure></p>
+<h3><span id="5更新某个包的版本">5.更新某个包的版本</span></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade imageio</span><br></pre></td></tr></table></figure>
+<h3><span id="6安装了某个包还意外报错">6.安装了某个包，还意外报错</span></h3><p>可以试试，把程序关了重新执行，基于Jupyter的时候</p>
 
         </div>
         
