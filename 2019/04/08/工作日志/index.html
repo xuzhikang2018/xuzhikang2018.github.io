@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-06T02:25:10.375Z">
+<meta property="og:updated_time" content="2019-05-13T02:00:15.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    38 分钟 读完 (大约 5673 个字)
+                    1 小时 读完 (大约 7289 个字)
                 </span>
                 
                 
@@ -175,6 +175,7 @@
 <li><a href="#2019年4月16日-2019年4月22日">2019年4月16日-2019年4月22日</a></li>
 <li><a href="#2019年4月23日-2019年4月29日">2019年4月23日-2019年4月29日</a></li>
 <li><a href="#2019年4月30日-2019年5月5日">2019年4月30日-2019年5月5日</a></li>
+<li><a href="#2019年5月6日-2019年5月12日">2019年5月6日-2019年5月12日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -290,6 +291,38 @@
 </ul>
 <ol start="4">
 <li>讨论接下来的计划<br><img src="https://i.loli.net/2019/05/06/5ccf9af14ae54.png" alt="安排.png"></li>
+</ol>
+<h2><span id="2019年5月6日-2019年5月12日">2019年5月6日-2019年5月12日</span></h2><p>本周看了几篇脉冲神经网络的论文、规划项目安排、脉冲神经网络的仿真、如IBMTrueNorth架构仿真</p>
+<ol>
+<li>程龙, 刘洋. 脉冲神经网络:模型、学习算法与应用[J]. 控制与决策, 2018, v.33(05):158-172. 粗读，脉冲神经网络的模型，算法，应用的基本介绍</li>
+</ol>
+<ul>
+<li>本文综合介绍了<strong>脉冲神经网络的神经元模型、结构、学习算法、应用及硬件实现等基本内容</strong>,给出了近年来脉冲神经网络研究的整体情况,并简要分析了脉冲神经网络各类学习算法和应用中优缺点. 通过对当前脉冲神经网络研究的情况和各国脑计划的研究进展的分析,可以看出脉冲神经网络是未来人工智能的发展方向, 是实现智能化必不可少的一部分. 当前脉冲神经网络仍存在众多问题亟待解决, <strong>脉冲神经网络学习算法繁多,但未发现类似于传统神经网络BP算法这样高效的学习算法. 此外,目前脉冲神经元模型仍只关注于神经元膜电压的变化情况,尚不能完整描述生物神经元内部复杂的生理机制; 神经元之间突触的生长、消亡等复杂机理仍不明确</strong>;大脑神经网络如何针对信息进行编码等问题,仍然困扰着研究者, 这些问题是未来类脑智能研究的热点和重点. 另外,人工智能的热潮也将推动脉冲神经网络的蓬勃发展,高性能、低功耗的脉冲神经网络芯片必将是人工智能的重要实现平台.</li>
+</ul>
+<ol start="2">
+<li>J. Pu, V. P. Nambiar, A. T. Do and W. L. Goh, “Block-Based Spiking Neural Network Hardware with Deme Genetic Algorithm,” 2019 IEEE International Symposium on Circuits and Systems (ISCAS), Sapporo, Japan, 2019, pp. 1-5.<br>会议论文，SNN用SNN Deme genetic algorithm (GA), population encoding。实例是数字和鸢尾花分类。SNN简单实现架构可以参考。感觉这个有灌水的嫌疑，因为没有具体给用GA算法训练的方法，只是给了GA算法的模型。</li>
+</ol>
+<ul>
+<li>本文提出了一种基于块的SNN架构，该架构采用简单的脉冲神经元模型。与传统的脉冲神经元模型相比，所提出的模型<strong>简化了膜电位的方程，以便于硬件实现</strong>。基于块的SNN架构还使硬件实现更具可扩展性并简化了布局规划。应用Deme遗传算法（GA）训练SNN模型，采用种群编码方案进行脉冲时间转换。进行了两个案例研究以验证所提出模型的功能，即数字识别和Fisher Iris分类。实验结果表明，所提出的具有deme GA的SNN模型能够达到与以前的工作相当或更高的分类精度。</li>
+</ul>
+<ol start="3">
+<li>Lines A, Joshi P, Liu R, et al. Loihi Asynchronous Neuromorphic Research Chip[C]. ieee international symposium on asynchronous circuits and systems, 2018: 32-33.<br>论文只有两页，Loihi实现的技术问题，csp语言转化为RTL 布局布线时序约束</li>
+</ol>
+<ul>
+<li>Loihi 设计在通信顺序进程（CSP）语言中指定，并由自动流程实现，该流程生成具有脉冲锁存数据路径的两阶段捆绑数据（BD）异步流水线。它优化了面积和能量，同时使用了大多数标准的cell library，并简化了与同步的整合。通过静态限制分析，反标注门级仿真和FPGA仿真验证了预硅设计。可调谐延迟提供足够的时序余量，例如接近阈值电压。Loihi于2017年第四季度采用Intel 14nm ASIC工艺制造，电压范围为0.55V至1.25V。</li>
+</ul>
+<ol start="4">
+<li>Akopyan F, Sawada J, Cassidy A S, et al. TrueNorth: Design and Tool Flow of a 65 mW 1 Million Neuron Programmable Neurosynaptic Chip[J]. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 2015, 34(10): 1537-1557.<br>IBM发表的TrueNorth设计，该论文有21页双栏，内容很丰富，看了2天只能看个大概，包含了微体系结构，设计工具，时序，具体实例设计。精读，需要经常翻一下TrueNorth的设计，整体框架，微结构设计都可以参考</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/13/5cd8cba573b7373756.png" alt="QQ截图20190513094236.png"><br><img src="https://i.loli.net/2019/05/13/5cd8cf41626cc84785.png" alt="TrueNorth.png"></p>
+<ul>
+<li>论文介绍了突破性的TrueNorth芯片的设计和工具流程创新，该芯片实现了我们的大脑启发，事件驱动，非冯诺伊曼架构。<br>TrueNorth芯片是世界上第一个100万个神经元，2.56亿个突触全数字神经突触芯片，采用标准CMOS制造工艺实现。该芯片具有高度并行，容错性，可实时工作，典型功耗极低，仅为65 mW。在我们的低功耗TrueNorth芯片中，我们实现了架构创新和复杂的非常规事件驱动电路原语，主要设计原则。混合同步异步设计的设计方法。与针对高精度整数和浮点运算进行优化的通用冯·诺依曼机器相比，TrueNorth广泛使用突触操作来定位感官信息处理，机器学习和认知计算应用。然而，像早期的冯·诺依曼机器一样，现在的任务是创建有效的神经突触系统，并在编程模型，算法和架构特征方面对其进行优化。使TrueNorth芯片，可以通过架构的可扩展性性创建大规模和低功耗的认知系统。已经构建了第一个多芯TrueNorth基神经突触平台（具有多达1600万个神经元和40亿个突触），并演示了在这些平台上实时运行的视觉对象识别等示例应用程序，其功耗比传统的低几个数量级处理器。</li>
+</ul>
+<ol start="5">
+<li><p>项目安排初稿，已经发过去了</p>
+</li>
+<li><p>SNN的算法识别数字的调试，TrueNorth架构仿真的core头文件定义的内容<br><img src="https://i.loli.net/2019/05/13/5cd8ce386eac247044.png" alt="Core头文件.png"></p>
+</li>
 </ol>
 
         </div>
