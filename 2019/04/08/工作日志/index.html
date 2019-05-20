@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-13T02:00:15.614Z">
+<meta property="og:updated_time" content="2019-05-20T02:16:00.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 7289 个字)
+                    1 小时 读完 (大约 8328 个字)
                 </span>
                 
                 
@@ -176,6 +176,7 @@
 <li><a href="#2019年4月23日-2019年4月29日">2019年4月23日-2019年4月29日</a></li>
 <li><a href="#2019年4月30日-2019年5月5日">2019年4月30日-2019年5月5日</a></li>
 <li><a href="#2019年5月6日-2019年5月12日">2019年5月6日-2019年5月12日</a></li>
+<li><a href="#2019年5月13日-2019年5月20日">2019年5月13日-2019年5月20日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -322,6 +323,20 @@
 <li><p>项目安排初稿，已经发过去了</p>
 </li>
 <li><p>SNN的算法识别数字的调试，TrueNorth架构仿真的core头文件定义的内容<br><img src="https://i.loli.net/2019/05/13/5cd8ce386eac247044.png" alt="Core头文件.png"></p>
+</li>
+</ol>
+<h2><span id="2019年5月13日-2019年5月20日">2019年5月13日-2019年5月20日</span></h2><p>这周主要是通过阅读论文，较为深入地了解脉冲神经网络的已有的模型，常见的学习算法，对IBM的truenorth的基本架构搭建与仿真</p>
+<ol>
+<li>程龙, 刘洋. 脉冲神经网络:模型、学习算法与应用[J]. 控制与决策, 2018, v.33(05):158-172. 精读</li>
+<li>Ghoshdastidar S, Adeli H. SPIKING NEURAL NETWORKS[J]. International Journal of Neural Systems, 2009, 19(4): 295-308.</li>
+</ol>
+<ul>
+<li>对生物神经元的建模主要包括基于电导发放与阈值发放。基于电导对神经元电位变化的建模为，各种离子通道动态变化引起电势的变化。脉冲神经网络主要是基于阈值发放的模型，基于阈值发放的模型代表主要有2000年提出的LIF模型，2008年提出的SRM模型这两种，SRM可以看成是LIF模型的推广。脉冲神经网络的学习算法，从1999年脉冲神经网络的提出，我总结为主要经过了包括四类学习算法：<br>第一类：<strong>有监督梯度下降法</strong>。2002年到2012年这个时期，SpikePro算法从2002年开始就提出了，不过当时基于的模型是神经元只发出一个脉冲，神经元与神经元之间是多突触连接，后面到2006年左右，对神经元的建模为发出脉冲序列，SpikePro基于此进行改进。后面也有很多对SpikePro算法的改进，包括增加动量项加速算法的收敛、针对突触延迟、激活阈值等多参数的梯度下降。<br>第二类：<strong>无监督学习</strong>。代表是2007年提出的STDP算法。STDP算法每个神经元只需要知道前后相连的神经元点火发出脉冲的时间差，根据学习窗函数，去改变权重，这样的好处是方便硬件上实现，不需要复杂的计算梯度，反向传播过程。但缺点是学习的效率低，而且可扩展性低。<br>第三类：<strong>有监督STDP算法</strong>。结合STDP规则的监督学习算法是目前脉冲神经网络学习算法研究的热点,此类算法具有更好的生物解释性. 典型的监督STDP学习算法是2010年Ponulak等提出的远程监督学习算法,称为ReSuMe(Remote supervised method),该算法具有在线学习能力, 并且能够处理脉冲时间序列。ReSuMe算法中权重的调整为：<br><img src="https://i.loli.net/2019/05/20/5ce20678cb20c30310.png" alt="ReSuMe权重更新算法.png"><br>第四类：<strong>其他监督学习算法</strong>。包括基于脉冲序列卷积的学习算法，思想是将输入输出通过一个卷积核。次序学习算法，基于遗传算法，种群算法这类的SNN学习算法。这类算法的特点是，只在单层的神经网络上验证了算法的有效性，算法的通用性比较差。</li>
+</ul>
+<ol start="2">
+<li><p>TrueNorth的Core中的每个模块照着写了一遍，大致每个模块的函数功能都了解，并对整体架构进行仿真，仿真结果如下<br><img src="https://i.loli.net/2019/05/20/5ce20afce599588177.png" alt="TrueNorthsim.png"></p>
+</li>
+<li><p>10月份一期交给华为的报告：<br>Intel概率计算研究报告，包括他们的概率计算的出发点，与概率编程的关系，概率编程与深度学习结合的一些已有的研究。仿真为基于Python概率编程在ANN上的应用带来的可解释性。<br>脉冲神经网络研究报告，主要偏重于硬件实现的论文，SNN的芯片方面的新闻等,以及SNN的应用。脉冲神经网络典型的几种学习算法的仿真，包括基于梯度下降的SpikePro，ReSuMe, STDP算法在解决分类问题上的应用。IBMTrueNorth每个Core模块的基于C的算法仿真，框架仿真</p>
 </li>
 </ol>
 
