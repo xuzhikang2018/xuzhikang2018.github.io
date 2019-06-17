@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>分类: 其他 - 徐志康的技术博客</title>
+<title>脉冲神经网络机遇与挑战 - 徐志康的技术博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="徐志康的技术博客">
-<meta property="og:url" content="http://yoursite.com/categories/其他/index.html">
+    <meta name="description" content="《Deep Learning With Spiking Neurons:Opportunities and Challenges》">
+<meta name="keywords" content="SNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="脉冲神经网络机遇与挑战">
+<meta property="og:url" content="http://yoursite.com/2019/06/15/脉冲神经网络机遇与挑战/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="《Deep Learning With Spiking Neurons:Opportunities and Challenges》">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-06-15T13:22:00.494Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="徐志康的技术博客">
+<meta name="twitter:title" content="脉冲神经网络机遇与挑战">
+<meta name="twitter:description" content="《Deep Learning With Spiking Neurons:Opportunities and Challenges》">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                <img src="/images/logo.svg" alt="脉冲神经网络机遇与挑战" height="28">
             
             </a>
         </div>
@@ -133,275 +138,87 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-15T12:39:48.000Z">2019-06-15</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/脉冲神经网络/">脉冲神经网络</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1376 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                脉冲神经网络机遇与挑战
+            
+        </h1>
+        <div class="content">
+            <p>《Deep Learning With Spiking Neurons:Opportunities and Challenges》<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#1-abstract">1. ABSTRACT</a></li>
+<li><a href="#1-introduction">1. INTRODUCTION</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="1-abstract">1. ABSTRACT</span></h2><p>脉冲神经网络（SNN）的灵感来自生物学中的信息处理，其中稀疏和异步二进制信号以并行的方式传递和处理。神经形态硬件上的SNN表现出有利的特性，例如低功耗，快速推理和事件驱动的信息处理。这使它们成为有效实现深度神经网络的有趣候选者，深度神经网络是许多机器学习任务的首选方法。在该论文中，讨论了深度脉冲网络提供的机会，并详细研究了与训练SNN相关的挑战，使其与传统深度学习相比具有竞争力，同时允许有效映射到硬件。提出了各种针对SNN的训练方法，包括将常规深度网络转换为SNN，转换前的约束训练，反向传播的脉冲变体以及STDP的生物学动机变体。论文定义SNN训练方法的分类，并总结它们的优缺点。进一步讨论了SNN和二进制网络之间的关系，这些网络正在成为高效数字硬件实现的流行。神经形态硬件平台具有在实际应用中实现深度脉冲网络的巨大潜力。论文比较了过去几年开发的各种神经形态系统的适用性，并研究了潜在的使用案例。不应将神经形态方法和传统机器学习简单地视为同一类问题的两种解决方案，而是可以识别和利用其任务特定的优势。深度SNN为使用新型基于事件的传感器，利用时间编码和本地片上学习提供了很好的机会，到目前为止，只是在实际应用中实现了这些优势。</p>
+<h2><span id="1-introduction">1. INTRODUCTION</span></h2><p>深度神经网络（DNN）的训练和推理，通常称为深度学习，近年来为人工智能（AI）的许多成功做出了杰出贡献。。来自神经科学的皮质层次模型强烈启发了DNN背后的原理，但在实施层面，只有像大脑一样的计算和模拟神经网络（ANN）之间的边缘相似性，可以组织AI应用程序。一个明显的区别是人工神经网络中的神经元大部分是非线性，但是连续函数逼近器，它们在共同的时钟周期上运行，而生物神经元通过异步脉冲计算，通过数字和时间精确的动作电位来指示某些特征事件的发生。近年来，机器学习，计算神经科学，神经形态工程学和嵌入式系统设计领域研究人员一直试图弥合DNNs的人工智能应用的巨大成功和脉冲神经网络（SNNS）之间的差距。源于它们在诸如大脑之类的真实神经电路中展现的有利特性，例如模拟计算，低功耗，快速推理，事件驱动处理，在线学习和大规模并行。此外，基于事件的视觉和音频传感器已经达到了一个日益成熟的水平，而深度SNNS是为处理最有前途的概念之一有效的输入。这一系列的研究与对传统DNN的高效硬件实现的兴趣日益增加，因为对于计算资源的大量渴求已经成为一个主要障碍，因为深度学习正在向自动驾驶，机器人等现实应用方向发展，物联网（IoT）。诸如所谓的二进制网络之类的概念允许内存计算，与SNN共享二进制和可能稀疏的通信方案。然而，这种网络通常以同步方式执行，这与SNN中的事件驱动（异步）执行模式不同。因此，正在进行富有成效的跨学科思想交流，以便为这些概念建立神经形态系统。</p>
+<p>在本综述中，概述了深度SNN背后的几个关键思想，并讨论了SNN与其ANN相比的挑战和局限性，以及未来应用的机会，特别是与目前正在开发的新型计算模型和硬件相结合。本文的结构如下：第2节讨论了输入和输出的准备，以便用深度SNN进行推理。在第3节中，概述了如何训练SNN的深度，如何将其与训练常规DNN相关联，以及如何在脉冲上学习。第4节讨论了深度SNN在神经形态硬件上的有效实现及其局限性，并强调了与传统DNN的硬件高效解决方案的相似之处。在第5节中，介绍了深度SNN的可能用例，并认为它们的优势与传统DNN的优势相辅相成。最后，第6节提供了对最新技术的讨论，并展望了有前途的研究方向。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/SNN/">SNN</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
             
-            <li class="is-active"><a href="#" aria-current="page">其他</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-26T01:20:19.000Z">2019-04-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 263 个字)
-                </span>
-                
-                
-            </div>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/26/python使用/">python使用</a>
-            
-        </h1>
-        <div class="content">
-            <p>记录下python使用的小技巧等</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/26/python使用/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-04T15:18:27.000Z">2019-04-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 219 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/26/python使用/">
+                <span class="level-item">python使用</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/04/Ubuntu_Linux使用笔记/">Ubuntu_Linux使用笔记</a>
-            
-        </h1>
-        <div class="content">
-            <p>Ubuntu使用过程遇到的问题所做的笔记<br></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/04/Ubuntu_Linux使用笔记/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 184 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/02/实用工具/">实用工具</a>
-            
-        </h1>
-        <div class="content">
-            <p>推荐一下使用的软件</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/02/实用工具/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-30T01:33:01.000Z">2019-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 372 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/30/博客使用/">博客使用</a>
-            
-        </h1>
-        <div class="content">
-            <p>记录下博客使用过程中遇到的问题<br></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/30/博客使用/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-29T15:18:54.000Z">2019-03-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/其他/">其他</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 720 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/29/博客搭建/">博客搭建</a>
-            
-        </h1>
-        <div class="content">
-            <p>2019年3月29号星期五，我花了一个晚上的时间搭建个人的博客。用来记录下博客搭建过程中的坑。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/29/博客搭建/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
 
 </div>
@@ -1104,7 +921,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="徐志康的技术博客" height="28">
+                    <img src="/images/logo.svg" alt="脉冲神经网络机遇与挑战" height="28">
                 
                 </a>
                 <p class="is-size-7">
