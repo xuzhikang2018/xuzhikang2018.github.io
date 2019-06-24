@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-17T02:25:23.135Z">
+<meta property="og:updated_time" content="2019-06-24T02:25:18.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 9489 个字)
+                    1 小时 读完 (大约 9960 个字)
                 </span>
                 
                 
@@ -181,6 +181,7 @@
 <li><a href="#2019年5月28日-2019年6月3日">2019年5月28日-2019年6月3日</a></li>
 <li><a href="#2019年6月4日-2019年6月10日">2019年6月4日-2019年6月10日</a></li>
 <li><a href="#2019年6月11日-2019年6月17日">2019年6月11日-2019年6月17日</a></li>
+<li><a href="#2019年6月18日-2019年6月24日">2019年6月18日-2019年6月24日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -370,15 +371,24 @@
 </ol>
 <h2><span id="2019年6月11日-2019年6月17日">2019年6月11日-2019年6月17日</span></h2><ol>
 <li>把TrueNorth和Loihi的论文打印下来重新看了一遍</li>
-<li>论文《deep learning with spiking neural network Opportunities and challenges》马里兰大学帕克大学survey类型的论文</li>
+<li>论文《deep learning with spiking neural network Opportunities and challenges》马里兰大学帕克大学survey类型的论文2018</li>
 </ol>
 <p>回顾了最近的有监督和无监督的训练深度SNN的方法，包括binary deep Neural Network，Conversion of Deep Neural Networks, Training of Constained Networks, supervised learning with spike, Local learning rule并在准确性和计算成本方面进行了比较。SNN在准确性方面仍然落后于人工智能，但差距正在缩小，甚至可能在某些任务上不存在差距，而SNN通常需要更少的操作，并且是处理时空数据的有力工具。</p>
 <ol start="3">
-<li>论文《Flexon: A Flexible Digital Neuron for Efficient Spiking Neural Network Simulations》</li>
+<li>论文《Flexon: A Flexible Digital Neuron for Efficient Spiking Neural Network Simulations》首尔大学与加州伯克利分校2018</li>
 </ol>
 <p>论文介绍Flexon，一种灵活的数字神经元，利用不同神经元模型共同生物学特征，实现高效的SNN模拟。为了设计Flexon，<strong>从神经科学研究的先前工作中，分析SNN采用的神经元模型，观察到神经元模型共享一组生物学上的共同特征，并且这些特征可以组合以模拟比现有模型驱动设计更大的神经元行为集</strong>。此外，我们发现这些特征共享一小组计算原语，可以利用这些原语来进一步减少芯片面积。由此产生的数字神经元，Flexon和空间折叠的Flexon，灵活，高效，并且可以轻松地与现有硬件集成。我们使用TSMC 45 nm标准单元库的原型设计结果显示，12个神经元Flexon阵列分别在9.26 mm2的面积，在CPU和GPU上分别提高了6,186x和422x的能效。结果还表明，72个神经元空间折叠的Flexon阵列产生面积较小，为7.62 mm2，分别在CPU和GPU上实现了122.45x和9.83x的加速。<br><img src="https://i.loli.net/2019/06/17/5d06f91a4403e35115.png" alt="Flexon.png"><br><a href="https://i.loli.net/2019/06/17/5d06f93e422da23308.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/17/5d06f93e422da23308.png" alt="不同的神经元模型.png"></a></p>
 <p>Then, we profile the simulation latency of the SNNs on Intel Xeon E5-2630 v4 CPU (12- core, 2.2 GHz) and NVIDIA Titan X (Pascal) GPU. We use PyNN [38] to describe the SNNs, NEST [9] to simulate the SNNs on the CPU, and GeNN [15] for GPU simulations. Each SNN is configured to use a time step of 0.1 ms and to run for 100,000 time steps (i.e., 10 s in biological time).</p>
 <p>To support diverse neuron behaviors, general-purpose processors such as CPUs and GPUs are widely used to simulate SNNs. Examples of CPUbased frameworks include NEURON [8], NEST [9], Brian [10], [48], and Auryn [12]. SpiNNaker [11], [49]–[52], a custom-designed board for SNN simulations, is also a CPUbasedframework as it utilizes low-power ARM CPU cores for the simulations. GPU-based frameworks (e.g., CARLsim [14], [53]–[56], NeMo [13], GeNN [15]) exploit the high throughput of GPUs to achieve faster simulations. Despite their capabilities to support any neuron models, they all suffer from the high computational overheads of neuron computation (Section III-A).</p>
+<h2><span id="2019年6月18日-2019年6月24日">2019年6月18日-2019年6月24日</span></h2><ol>
+<li>这周参加了乐鑫的笔试，中兴微电子的面试，奕斯伟校园大使的面试</li>
+<li>论文《A 0.086-mm2 12.7-pJ/SOP 64k-Synapse 256-Neuron Online-Learning Digital Spiking Neuromorphic Processor in 28-nm CMOS》架构设计与实现部分。这篇文章的代码是开源的，开源地址<a href="https://github.com/xuzhikang2018/ODIN" target="_blank" rel="noopener">ODIN</a>，也在看它的文档，问题是文档比较少</li>
+</ol>
+<p>论文提出ODIN，一种0.086-mm2 64k-突触256神经元在线学习数字脉冲神经形态处理器，采用28-nm FDSOI CMOS，每突触操作（SOP）的最小能量为12.7 pJ。它利用针对高密度嵌入式在线学习的<strong>脉冲驱动突触可塑性（SDSP）学习规则</strong>的有效实现，每4位突触只有0.68μm2。神经元可以独立配置为标准的泄漏整合和LIF模型，或者作为定制现象学模型，模拟生物脉冲神经元中发现的20种Izhikevich行为。使用单个6k 16×16 MNIST训练图像到具有基于SDSP的片上学习的单层完全连接的10神经元网络，ODIN实现了84.5％的分类精度，而在0.55 V时仅消耗15 nJ /推理使用排序编码。因此，ODIN能够进一步开发用于低功率，自适应和低成本处理的认知神经形态设备。</p>
+<p><img src="https://i.loli.net/2019/06/24/5d10319370a7d78820.png" alt="QQ截图20190430113609.png"><br><img src="https://i.loli.net/2019/06/24/5d103463b314979078.png" alt="ODIN结构和文件树.png"></p>
+<ol start="3">
+<li>我的毕业论文打算为 基于FPGA的脉冲神经网络硬件实现研究，主要是针对传统基于软件仿真SNN速度慢，功耗高的缺点，画的当个处理核示意图<br><img src="https://i.loli.net/2019/06/24/5d1033f4caf9579586.png" alt="处理核示意图.png"></li>
+</ol>
 
         </div>
         
@@ -474,7 +484,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        14
+                        16
                     </p>
                 </div>
             </div>
@@ -494,7 +504,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        11
+                        13
                     </p>
                 </div>
             </div>
@@ -594,7 +604,7 @@
                 <span class="level-item">数字IC设计</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/脉冲神经网络/">
@@ -602,7 +612,7 @@
                 <span class="level-item">脉冲神经网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -616,7 +626,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/SNN/" style="font-size: 10px;">SNN</a> <a href="/tags/python使用过程中的记录/" style="font-size: 10px;">python使用过程中的记录</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率编程/" style="font-size: 20px;">概率编程</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/项目/" style="font-size: 15px;">项目</a>
+        <a href="/tags/Linux使用/" style="font-size: 10px;">Linux使用</a> <a href="/tags/ODIN/" style="font-size: 10px;">ODIN</a> <a href="/tags/SNN/" style="font-size: 10px;">SNN</a> <a href="/tags/python使用过程中的记录/" style="font-size: 10px;">python使用过程中的记录</a> <a href="/tags/博客有关/" style="font-size: 10px;">博客有关</a> <a href="/tags/博客遇到的问题/" style="font-size: 10px;">博客遇到的问题</a> <a href="/tags/实用工具/" style="font-size: 10px;">实用工具</a> <a href="/tags/工作日志/" style="font-size: 10px;">工作日志</a> <a href="/tags/概率编程/" style="font-size: 20px;">概率编程</a> <a href="/tags/概率计算/" style="font-size: 10px;">概率计算</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a> <a href="/tags/项目/" style="font-size: 15px;">项目</a>
     </div>
 </div>
 
@@ -630,6 +640,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/06/21/脉冲神经网络ODIN实现/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="脉冲神经网络ODIN实现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T03:22:23.000Z">2019-06-21</time></div>
+                    <a href="/2019/06/21/脉冲神经网络ODIN实现/" class="has-link-black-ter is-size-6">脉冲神经网络ODIN实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/脉冲神经网络/">脉冲神经网络</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/18/乐鑫2020成电站提前批笔试题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="乐鑫2020成电站提前批笔试题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T13:49:04.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/乐鑫2020成电站提前批笔试题/" class="has-link-black-ter is-size-6">乐鑫2020成电站提前批笔试题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数字IC设计/">数字IC设计</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -688,44 +736,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pyro:Deep Universal Probabilistic Programming">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T02:06:26.000Z">2019-04-09</time></div>
-                    <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="has-link-black-ter is-size-6">Pyro:Deep Universal Probabilistic Programming</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/08/工作日志/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="工作日志">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-08T02:01:30.000Z">2019-04-08</time></div>
-                    <a href="/2019/04/08/工作日志/" class="has-link-black-ter is-size-6">工作日志</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工作周报与报告/">工作周报与报告</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -744,7 +754,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -787,6 +797,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux使用/">
                         <span class="tag">Linux使用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ODIN/">
+                        <span class="tag">ODIN</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -850,6 +867,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/求职/">
                         <span class="tag">求职</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/面试/">
+                        <span class="tag">面试</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -886,6 +910,44 @@
         
         <article class="media">
             
+            <a href="/2019/06/21/脉冲神经网络ODIN实现/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="脉冲神经网络ODIN实现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-21T03:22:23.000Z">2019-06-21</time></div>
+                    <a href="/2019/06/21/脉冲神经网络ODIN实现/" class="has-link-black-ter is-size-6">脉冲神经网络ODIN实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/脉冲神经网络/">脉冲神经网络</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/18/乐鑫2020成电站提前批笔试题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="乐鑫2020成电站提前批笔试题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T13:49:04.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/乐鑫2020成电站提前批笔试题/" class="has-link-black-ter is-size-6">乐鑫2020成电站提前批笔试题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数字IC设计/">数字IC设计</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/06/15/脉冲神经网络机遇与挑战/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="脉冲神经网络机遇与挑战">
@@ -941,44 +1003,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pyro:Deep Universal Probabilistic Programming">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-09T02:06:26.000Z">2019-04-09</time></div>
-                    <a href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" class="has-link-black-ter is-size-6">Pyro:Deep Universal Probabilistic Programming</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/probabilistic-programming/">probabilistic programming</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/08/工作日志/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="工作日志">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-08T02:01:30.000Z">2019-04-08</time></div>
-                    <a href="/2019/04/08/工作日志/" class="has-link-black-ter is-size-6">工作日志</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工作周报与报告/">工作周报与报告</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -997,7 +1021,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1040,6 +1064,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux使用/">
                         <span class="tag">Linux使用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ODIN/">
+                        <span class="tag">ODIN</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1103,6 +1134,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/求职/">
                         <span class="tag">求职</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/面试/">
+                        <span class="tag">面试</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
