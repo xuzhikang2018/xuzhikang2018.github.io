@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-24T02:25:18.581Z">
+<meta property="og:updated_time" content="2019-07-01T01:50:21.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 9960 个字)
+                    1 小时 读完 (大约 10169 个字)
                 </span>
                 
                 
@@ -182,6 +182,7 @@
 <li><a href="#2019年6月4日-2019年6月10日">2019年6月4日-2019年6月10日</a></li>
 <li><a href="#2019年6月11日-2019年6月17日">2019年6月11日-2019年6月17日</a></li>
 <li><a href="#2019年6月18日-2019年6月24日">2019年6月18日-2019年6月24日</a></li>
+<li><a href="#2019年6月25日-2019年7月1日">2019年6月25日-2019年7月1日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -387,7 +388,13 @@
 <p>论文提出ODIN，一种0.086-mm2 64k-突触256神经元在线学习数字脉冲神经形态处理器，采用28-nm FDSOI CMOS，每突触操作（SOP）的最小能量为12.7 pJ。它利用针对高密度嵌入式在线学习的<strong>脉冲驱动突触可塑性（SDSP）学习规则</strong>的有效实现，每4位突触只有0.68μm2。神经元可以独立配置为标准的泄漏整合和LIF模型，或者作为定制现象学模型，模拟生物脉冲神经元中发现的20种Izhikevich行为。使用单个6k 16×16 MNIST训练图像到具有基于SDSP的片上学习的单层完全连接的10神经元网络，ODIN实现了84.5％的分类精度，而在0.55 V时仅消耗15 nJ /推理使用排序编码。因此，ODIN能够进一步开发用于低功率，自适应和低成本处理的认知神经形态设备。</p>
 <p><img src="https://i.loli.net/2019/06/24/5d10319370a7d78820.png" alt="QQ截图20190430113609.png"><br><img src="https://i.loli.net/2019/06/24/5d103463b314979078.png" alt="ODIN结构和文件树.png"></p>
 <ol start="3">
-<li>我的毕业论文打算为 基于FPGA的脉冲神经网络硬件实现研究，主要是针对传统基于软件仿真SNN速度慢，功耗高的缺点，画的当个处理核示意图<br><img src="https://i.loli.net/2019/06/24/5d1033f4caf9579586.png" alt="处理核示意图.png"></li>
+<li>我的毕业论文打算为 基于FPGA的脉冲神经网络硬件实现研究，主要是针对传统基于软件仿真SNN速度慢，功耗高的缺点，画的单个处理核示意图<br><img src="https://i.loli.net/2019/06/24/5d1033f4caf9579586.png" alt="处理核示意图.png"></li>
+</ol>
+<h2><span id="2019年6月25日-2019年7月1日">2019年6月25日-2019年7月1日</span></h2><ol>
+<li>两篇硕士论文，杭电《基于FPGA的脉冲神经网络加速器的设计<em>沈阳靖》，广西师范大学《基于FPGA器件的脉冲神经网络硬件实现研究</em>万雷》</li>
+<li>把LIF模型理解透彻，从最初的电容电阻等效，公式表示，Multi-spike Tempotron模型，PSP核函数这些</li>
+<li>画了几张图，作为以后毕业论文的材料<br><img src="https://i.loli.net/2019/07/01/5d1964a5a9cdd55940.png" alt="神经形态处理器系统框图.png"></li>
+<li>实现了一个简单的LIF神经元，并对其进行仿真，一个cycle实现神经元状态更新，包含泄露，整合，发放特性，仿真图如下<br><img src="https://i.loli.net/2019/07/01/5d1964a259c3325019.png" alt="简单的LIF状态更新.png"></li>
 </ol>
 
         </div>
