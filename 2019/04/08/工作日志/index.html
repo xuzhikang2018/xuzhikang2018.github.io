@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-01T01:50:21.222Z">
+<meta property="og:updated_time" content="2019-07-22T01:56:50.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 10169 个字)
+                    1 小时 读完 (大约 11531 个字)
                 </span>
                 
                 
@@ -183,6 +183,9 @@
 <li><a href="#2019年6月11日-2019年6月17日">2019年6月11日-2019年6月17日</a></li>
 <li><a href="#2019年6月18日-2019年6月24日">2019年6月18日-2019年6月24日</a></li>
 <li><a href="#2019年6月25日-2019年7月1日">2019年6月25日-2019年7月1日</a></li>
+<li><a href="#2019年7月2日-2019年7月8日">2019年7月2日-2019年7月8日</a></li>
+<li><a href="#2019年7月9日-2019年7月15日">2019年7月9日-2019年7月15日</a></li>
+<li><a href="#2019年7月16日-2019年7月22日">2019年7月16日-2019年7月22日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -396,6 +399,32 @@
 <li>画了几张图，作为以后毕业论文的材料<br><img src="https://i.loli.net/2019/07/01/5d1964a5a9cdd55940.png" alt="神经形态处理器系统框图.png"></li>
 <li>实现了一个简单的LIF神经元，并对其进行仿真，一个cycle实现神经元状态更新，包含泄露，整合，发放特性，仿真图如下<br><img src="https://i.loli.net/2019/07/01/5d1964a259c3325019.png" alt="简单的LIF状态更新.png"></li>
 </ol>
+<h2><span id="2019年7月2日-2019年7月8日">2019年7月2日-2019年7月8日</span></h2><p>本周看的论文：<br>[1] Wang, Qian (2016). Architectures and Design of VLSI Machine Learning Systems. Doctoral dissertation, Texas A &amp; M University. Available electronically from http : / /hdl .handle .net /1969 .1 /158093.</p>
+<p>[2] C. Frenkel, M. Lefebvre, J. Legat and D. Bol, “A 0.086-mm$^2$ 12.7-pJ/SOP 64k-Synapse 256-Neuron Online-Learning Digital Spiking Neuromorphic Processor in 28-nm CMOS,” in IEEE Transactions on Biomedical Circuits and Systems, vol. 13, no. 1, pp. 145-158, Feb. 2019.</p>
+<p>[3] Zhang S , Du Z , Zhang L , et al. Cambricon-X: An accelerator for sparse neural networks[C]// 2016 49th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO). ACM, 2016.<br>论文1 博士论文有部分是，利用 FPGA实现 SNN<br>论文2 SNN做成芯片，流片<br>论文3 是寒武纪校招，我看了下他们的论文，有关于深度神经网络稀疏化处理的内容<br>关注的重点在于最后的实验测试对比方面</p>
+<h2><span id="2019年7月9日-2019年7月15日">2019年7月9日-2019年7月15日</span></h2><p>本周工作总结：</p>
+<ol>
+<li>参照ODIN项目工程地址<a href="https://github.com/xuzhikang2018/ODIN的说明文档，模块的.v文件，深入了解每个模块的功能，新建了工程，并对其进行综合，综合资源报告" target="_blank" rel="noopener">https://github.com/xuzhikang2018/ODIN的说明文档，模块的.v文件，深入了解每个模块的功能，新建了工程，并对其进行综合，综合资源报告</a></li>
+<li>我写的IZH神经元特性的总结：<a href="https://blog.csdn.net/weixin_41701476/article/details/95917146" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41701476/article/details/95917146</a><br>参考论文：</li>
+</ol>
+<p>C. Frenkel, M. Lefebvre, J. Legat and D. Bol, “A 0.086-mm$^2$ 12.7-pJ/SOP 64k-Synapse 256-Neuron Online-Learning Digital Spiking Neuromorphic Processor in 28-nm CMOS,” in IEEE Transactions on Biomedical Circuits and Systems, vol. 13, no. 1, pp. 145-158, Feb. 2019.</p>
+<p>C. Frenkel, J. Legat and D. Bol, “A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors,” 2017 IEEE Biomedical Circuits and Systems Conference (BioCAS), Torino, 2017, pp. 1-4.</p>
+<p>E. M. Izhikevich, “Which model to use for cortical spiking neurons?,” in IEEE Transactions on Neural Networks, vol. 15, no. 5, pp. 1063-1070, Sept. 2004.</p>
+<h2><span id="2019年7月16日-2019年7月22日">2019年7月16日-2019年7月22日</span></h2><p>考虑如何将ODIN实现在ZCU104开发板上，看的资料包括：</p>
+<ol>
+<li>如何通过spi接口向FPGA开发板发送配置信息，查看综合实现的各种报告<br>《ZCU104 Evaluation Board user Guide》<br>《FPGA Configuration from SPI Flash Memory using a Microprocessor》<br><img src="https://i.loli.net/2019/07/22/5d351790cb68329031.png" alt="spiprogram.png"><br>《Vivado Design Suite Tutorial Design Flows Overview》<br><a href="https://www.sohu.com/a/213766665_292853" target="_blank" rel="noopener">为Zynq SoC和Zynq UltraScale+ MPSoC实现SPI接口（以Arty Z7为例)</a><br><img src="https://i.loli.net/2019/07/22/5d3517b9dfac930830.png" alt="spi接口.png"></li>
+</ol>
+<p>我写的关于ZCU板子的博客:<br><a href="https://blog.csdn.net/weixin_41701476/article/details/96287907" target="_blank" rel="noopener">ZCU104开发板：开发板介绍1</a><br><a href="https://blog.csdn.net/weixin_41701476/article/details/96320005" target="_blank" rel="noopener">ZCU104开发板：开发板设置和配置2</a><br><a href="https://blog.csdn.net/weixin_41701476/article/details/96424641" target="_blank" rel="noopener">ZCU104开发板：开发板组件描述3</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20190717164421257.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTcwMTQ3Ng==,size_16,color_FFFFFF,t_70" alt><br><img src="https://img-blog.csdnimg.cn/20190718160151339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTcwMTQ3Ng==,size_16,color_FFFFFF,t_70" alt></p>
+<ol start="2">
+<li>如何将图片转化为脉冲序列，我看的是一个关于SNN的仿真github,<a href="https://github.com/Shikhargupta/Spiking-Neural-Network" target="_blank" rel="noopener">https://github.com/Shikhargupta/Spiking-Neural-Network</a>  </li>
+</ol>
+<p>我写的几篇博客：<br><a href="https://blog.csdn.net/weixin_41701476/article/details/96155108" target="_blank" rel="noopener">脉冲神经网络2: SNN的仿真介绍</a><br><a href="https://blog.csdn.net/weixin_41701476/article/details/96183699" target="_blank" rel="noopener">脉冲神经网络2：SNN的仿真2—感受野</a><br><a href="https://blog.csdn.net/weixin_41701476/article/details/96355469" target="_blank" rel="noopener">脉冲神经网络2：SNN的仿真3-生成输入层序列</a></p>
+<ol start="3">
+<li>另外就是看了几篇关于SNN的论文：  </li>
+</ol>
+<p>[1] Yang S , Wang J , Deng B , et al. Real-Time Neuromorphic System for Large-Scale Conductance-Based Spiking Neural Networks[J]. IEEE Transactions on Cybernetics, 2018:1-14.<br>这篇讲的是天津大学的微电子学院做的SNN实现，高性能计算平台极大地促进了人类智能，认知系统和人脑功能复杂性的研究。<br>在本文中，我们提出了一种实时数字神经形态系统，用于模拟基于大规模电导的脉冲神经网络（LaCSNN），具有高生物学真实性和大网络规模的优点。使用该系统，使用可扩展的3-D片上网络（NoC）拓扑结构模拟详细的大规模皮质 - 基底神经节 - 丘脑皮质环，其中6个Altera Stratix III现场可编程门阵列模拟100万个神经元。提出了一种新的路由器体系结构来处理多核神经网络中多个数据流的通信，这在以前的NoC研究中尚未解决。在单神经元级别，提出了基于成本的电导神经元模型，使得无乘法器实现的平均利用率减少了95％，减少了100％的DSP资源，这是大规模实现的基础。。对改进模型进行了分析，包括分岔行为和离子动力学的研究，以更低的资源成本展示了所需的动力学范围。<br>所提出的LaCSNN系统表现优于先前用于实现大规模脉冲神经网络的替代现有技术方法，并且由于其实时计算能力而能够实现广泛的潜在应用。</p>
+<p>[2] Charlotte Frenkel∗, Giacomo Indiveri†, Jean-Didier Legat∗, et al. A Fully-Synthesized 20-Gate Digital Spike-Based Synapse with Embedded Online Learning[C]// IEEE International Symposium on Circuits &amp; Systems. 2017.<br>在这里，论文分析了脉冲驱动的突触可塑性（SDSP）学习规则，并表明它特别适用于高度紧凑的数字突触实现，特别是与传统的脉冲定时相关塑性（STDP）规则相比。此外，我们设计了一个异步的可完全合成的数字突触电路，该电路具有基于SDSP的嵌入式在线学习功能，并具有多功能计算的可编程选项。在28nm FDSOI CMOS工艺中，所提出的突触实现仅需要20个门用于25μm2的紧凑区域</p>
 
         </div>
         
