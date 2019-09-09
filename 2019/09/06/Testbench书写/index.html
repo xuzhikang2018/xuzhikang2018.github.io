@@ -2,24 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>实用工具 - 徐志康的技术博客</title>
+<title>Testbench书写 - 徐志康的技术博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="推荐一下使用的软件">
-<meta name="keywords" content="实用工具">
+    <meta name="description" content="来自深入浅出玩转FPGA">
+<meta name="keywords" content="Testbench">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实用工具">
-<meta property="og:url" content="http://yoursite.com/2019/04/02/实用工具/index.html">
+<meta property="og:title" content="Testbench书写">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/Testbench书写/index.html">
 <meta property="og:site_name" content="徐志康的技术博客">
-<meta property="og:description" content="推荐一下使用的软件">
+<meta property="og:description" content="来自深入浅出玩转FPGA">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-07T13:19:36.005Z">
+<meta property="og:updated_time" content="2019-09-06T08:58:13.125Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实用工具">
-<meta name="twitter:description" content="推荐一下使用的软件">
+<meta name="twitter:title" content="Testbench书写">
+<meta name="twitter:description" content="来自深入浅出玩转FPGA">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -94,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="实用工具" height="28">
+                <img src="/images/logo.svg" alt="Testbench书写" height="28">
             
             </a>
         </div>
@@ -143,17 +143,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-02T02:14:29.000Z">2019-04-02</time>
+                <time class="level-item has-text-grey" datetime="2019-09-06T02:14:30.000Z">2019-09-06</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/其他/">其他</a>
+                <a class="has-link-grey -link" href="/categories/数字IC/">数字IC</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 184 个字)
+                    8 分钟 读完 (大约 1170 个字)
                 </span>
                 
                 
@@ -162,24 +162,47 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                实用工具
+                Testbench书写
             
         </h1>
         <div class="content">
-            <p>推荐一下使用的软件</p>
-<a id="more"></a>
-<ol>
-<li><p>一键生成视频中的字幕，详细介绍<a href="http://www.pc6.com/softview/SoftView_169759.html" target="_blank" rel="noopener">字幕通Yee Caption v2.0.0.05官方版</a></p>
+            <p>来自深入浅出玩转FPGA<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#testbench书写技巧">Testbench书写技巧</a><ul>
+<li><a href="#1-复位信号封装成task">1. 复位信号封装成task</a></li>
+<li><a href="#2-封装有用的子程序">2. 封装有用的子程序</a></li>
+<li><a href="#3-关于变量的定义">3. 关于变量的定义</a></li>
+<li><a href="#4-结构化tesbech">4. 结构化Tesbech</a></li>
+<li><a href="#5-读写紊乱状态">5. 读/写紊乱状态</a></li>
+</ul>
 </li>
-<li><p>下载youtube（用浏览器自带的下载），网络上的视频，网站<a href="https://www.apowersoft.cn/online-video-downloader" target="_blank" rel="noopener">Apowersoft免费在线下载</a></p>
+<li><a href="#测试用例设计">测试用例设计</a><ul>
+<li><a href="#1-模拟串口自发通信">1. 模拟串口自发通信</a></li>
+<li><a href="#2-乘法器全覆盖测试">2. 乘法器全覆盖测试</a></li>
+<li><a href="#3-可重用mcu读写设计">3. 可重用MCU读/写设计</a></li>
+</ul>
 </li>
-<li><p>youtube视频支持双语字幕，<a href="https://chrome.google.com/webstore/detail/youtube%E5%8F%8C%E5%AD%97%E5%B9%95/pinbfcanggagdlikncmljamikccpkkon?hl=zh-CN" target="_blank" rel="noopener">YouTube双字幕Chrome插件地址</a></p>
+</ul>
+<!-- tocstop -->
+<h2><span id="testbench书写技巧">Testbench书写技巧</span></h2><h3><span id="1-复位信号封装成task">1. 复位信号封装成task</span></h3><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//复位信号的产生</span></span><br><span class="line"><span class="hljs-keyword">initial</span> <span class="hljs-keyword">begin</span></span><br><span class="line">  reset_task(<span class="hljs-number">100</span>);</span><br><span class="line">  ...</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line">  <span class="hljs-keyword">task</span> reset_task;</span><br><span class="line">  <span class="hljs-keyword">input</span> [<span class="hljs-number">15</span>:<span class="hljs-number">0</span>] reset_time;</span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    reset = <span class="hljs-number">0</span>;</span><br><span class="line">    #reset_time;</span><br><span class="line">    reset = <span class="hljs-number">1</span>;</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br></pre></td></tr></table></figure>
+<h3><span id="2-封装有用的子程序">2. 封装有用的子程序</span></h3><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//封装一些测试时有用的报告显示</span></span><br><span class="line"><span class="hljs-comment">//包括error, warning, fatal, terminate</span></span><br><span class="line"><span class="hljs-keyword">module</span> print_task();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//显示warning报告，同时包含显示当前时间的警告内容（由用户输入）</span></span><br><span class="line"><span class="hljs-keyword">task</span> warning;</span><br><span class="line">  <span class="hljs-keyword">input</span> [<span class="hljs-number">80</span>*<span class="hljs-number">8</span>:<span class="hljs-number">1</span>] msg;</span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-built_in">$write</span>(<span class="hljs-string">"WARNING at %t: %s"</span>, <span class="hljs-built_in">$time</span>, msg);</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//显示error报告，同时包含显示当前时间的警告内容（由用户输入）</span></span><br><span class="line"><span class="hljs-keyword">task</span> error;</span><br><span class="line">  <span class="hljs-keyword">input</span> [<span class="hljs-number">80</span>*<span class="hljs-number">8</span>:<span class="hljs-number">1</span>] msg;</span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-built_in">$write</span>(<span class="hljs-string">"-ERROR- at %t: %s"</span>, <span class="hljs-built_in">$time</span>, msg);</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//显示fatal报告，同时包含显示当前时间的警告内容（由用户输入）</span></span><br><span class="line"><span class="hljs-keyword">task</span> fatal;</span><br><span class="line">  <span class="hljs-keyword">input</span> [<span class="hljs-number">80</span>*<span class="hljs-number">8</span>:<span class="hljs-number">1</span>] msg;</span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-built_in">$write</span>(<span class="hljs-string">"*FATAL* at %t: %s"</span>, <span class="hljs-built_in">$time</span>, msg);</span><br><span class="line">    terminate;</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">task</span> terminate;</span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-built_in">$write</span>(<span class="hljs-string">"simulation completed\n"</span>);</span><br><span class="line">    <span class="hljs-built_in">$finish</span>;</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>在使用封装子程序时<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//使用print_task模块封装好的task</span></span><br><span class="line"><span class="hljs-keyword">module</span> test_case();</span><br><span class="line"><span class="hljs-comment">//例化已经编写好的print_task.v，后面就可以调用封装好的task了</span></span><br><span class="line">print_task print();</span><br><span class="line">...</span><br><span class="line"><span class="hljs-keyword">initial</span> <span class="hljs-keyword">begin</span></span><br><span class="line"><span class="hljs-keyword">if</span>(...) print<span class="hljs-variable">.error</span>(<span class="hljs-string">"unexpected response\n"</span>);</span><br><span class="line">...</span><br><span class="line">print<span class="hljs-variable">.terminate</span>;</span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br><span class="line">...</span><br><span class="line"><span class="hljs-keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
+<h3><span id="3-关于变量的定义">3. 关于变量的定义</span></h3><p>编写Testbench关于全局变量的错误是，一个定义好的全局变量应用到两个alaways块中，由于并行性的工作机制，可能导致意想不到的结果<br>可以在begin…end之间定义alaways块名block:block1, 这样两个alaways块内的变量i就互不相关了，全局变量变为局部变量</p>
+<h3><span id="4-结构化tesbech">4. 结构化Tesbech</span></h3><p>Testbench例化了三个子模块</p>
+<ul>
+<li>print_task print()包含常用的信息打印任务封装</li>
+<li>sys_ctrl_task sys_ctrl()包含系统时钟的产生和系统复位任务</li>
+<li>dsp_ctrl_task dsp_ctrl()包含DSP读写控制模拟<figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">initial</span> 可以在<span class="hljs-keyword">begin</span></span><br><span class="line">  sys_ctrl<span class="hljs-variable">.sys_reset</span>(<span class="hljs-number">32'd1000</span>)</span><br><span class="line">  #<span class="hljs-number">1000</span>;</span><br><span class="line">  dsp_ctrl<span class="hljs-variable">.task_dsp_write</span>(SELECT_STRB0, <span class="hljs-number">24</span>h'<span class="hljs-number">000001</span>, <span class="hljs-number">16'h00ff</span>);<span class="hljs-comment">//DSP写任务调用</span></span><br><span class="line">  #<span class="hljs-number">1000</span>;</span><br><span class="line">  dsp_ctrl<span class="hljs-variable">.task_dsp_read</span>(SELECT_STRB0, <span class="hljs-number">24</span>h'<span class="hljs-number">000008</span>, dsp_rd_data);<span class="hljs-comment">//DSP读任务调用</span></span><br><span class="line">  ....</span><br><span class="line">  print<span class="hljs-variable">.terminate</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>看论文时，复制粘贴英文论文到翻译工具时，会按照原格式换行，<a href="https://github.com/symaeh/Remove-line-breaks-" target="_blank" rel="noopener">原网站</a></p>
-</li>
-<li><p>另外一个自动翻译工具，调用google的API，CopyTranslate<a href="https://www.cnblogs.com/elliottzheng/p/9060159.html" target="_blank" rel="noopener">下载地址</a></p>
-</li>
-</ol>
+</ul>
+<figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">reg</span> h1; <span class="hljs-comment">// DSP时钟模拟，h1为dsp的指令周期</span></span><br><span class="line"><span class="hljs-keyword">initial</span> <span class="hljs-keyword">begin</span></span><br><span class="line">  h1 = <span class="hljs-number">1'b0</span>;</span><br><span class="line">  <span class="hljs-keyword">forever</span></span><br><span class="line">    #<span class="hljs-number">20</span> h1 = ~h1;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//模拟DSP读FPGA任务</span></span><br><span class="line"><span class="hljs-keyword">task</span> task_dsp_read;</span><br><span class="line">  <span class="hljs-keyword">input</span> [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] tcs; <span class="hljs-comment">//片选输入</span></span><br><span class="line">  <span class="hljs-keyword">input</span> [<span class="hljs-number">23</span>:<span class="hljs-number">0</span>] taddr; <span class="hljs-comment">//地址输入</span></span><br><span class="line">  <span class="hljs-keyword">output</span> [<span class="hljs-number">15</span>:<span class="hljs-number">0</span>] tdata; <span class="hljs-comment">//数据读出</span></span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//模拟DSP写FPGA任务</span></span><br><span class="line"><span class="hljs-keyword">task</span> task_dsp_write;</span><br><span class="line">  <span class="hljs-keyword">input</span> [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] tcs; <span class="hljs-comment">//片选输入</span></span><br><span class="line">  <span class="hljs-keyword">input</span> [<span class="hljs-number">23</span>:<span class="hljs-number">0</span>] taddr; <span class="hljs-comment">//地址输入</span></span><br><span class="line">  <span class="hljs-keyword">output</span> [<span class="hljs-number">15</span>:<span class="hljs-number">0</span>] tdata; <span class="hljs-comment">//数据读出</span></span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br></pre></td></tr></table></figure>
+<h3><span id="5-读写紊乱状态">5. 读/写紊乱状态</span></h3><p>同一个时刻对同一个寄存器进行读/写容易发生紊乱，阻塞赋值一个always块要对count写，另一个always块对count读，就会造成仿真器输出结果不确定。可以通过非阻塞赋值一个always块对count写，紊乱得以解决。</p>
+<p>我们定义了一个write的任务，调用wirte，如下所示，由于verilog的always和inital在执行时都是并行工作的，有可能两个initaial同时进行task的调用、同时需要些存储器，冲突的结果无法预料<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">initial</span> write(<span class="hljs-number">8'h5A</span>, <span class="hljs-number">8'h00</span>);</span><br><span class="line"><span class="hljs-keyword">initial</span> write(<span class="hljs-number">8'hAD</span>, <span class="hljs-number">8'h34</span>);</span><br></pre></td></tr></table></figure></p>
+<p>可以在write任务中加上这么两行<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">task</span> write;</span><br><span class="line">  ...</span><br><span class="line">  <span class="hljs-keyword">reg</span> in_use;</span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-keyword">if</span>(in_use==<span class="hljs-number">1'b1</span>) <span class="hljs-built_in">$stop</span>;</span><br><span class="line">    ....</span><br><span class="line">    in_use = <span class="hljs-number">1'b0</span>;</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br></pre></td></tr></table></figure></p>
+<h2><span id="测试用例设计">测试用例设计</span></h2><h3><span id="1-模拟串口自发通信">1. 模拟串口自发通信</span></h3><p>遍历测试与随机测试，对发送出去的数据和接收到的数据进行检测对比<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//遍历测试</span></span><br><span class="line"><span class="hljs-keyword">for</span>(cnt=<span class="hljs-number">0</span>; cnt&lt;<span class="hljs-number">255</span>; cnt=cnt+<span class="hljs-number">1'b1</span>) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//顺序发送0~255</span></span><br><span class="line"> tx_task(cnt);        <span class="hljs-comment">//调用发送任务发送数据</span></span><br><span class="line"> @(<span class="hljs-keyword">negedge</span> rx_flag);</span><br><span class="line">  <span class="hljs-keyword">if</span>(data_temp == cnt)</span><br><span class="line">    <span class="hljs-built_in">$write</span>(<span class="hljs-string">"transmit:%d, receive: %d; ture\n"</span>, cnt, data_temp);</span><br><span class="line">  <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-built_in">$write</span>(<span class="hljs-string">"transmit:%d, receive: %d; error\n"</span>, cnt, data_temp);</span><br><span class="line">    error(<span class="hljs-string">"false"</span>);    </span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//随机测试</span></span><br><span class="line"><span class="hljs-keyword">for</span>(cnt=<span class="hljs-number">0</span>; cnt&lt;<span class="hljs-number">255</span>; cnt=cnt+<span class="hljs-number">1'b1</span>) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//发送256次</span></span><br><span class="line"> tx_task(<span class="hljs-built_in">$random</span>);    <span class="hljs-comment">//发送随机数据                          </span></span><br><span class="line"> @(<span class="hljs-keyword">negedge</span> rx_flag);</span><br><span class="line">  <span class="hljs-keyword">if</span>(data_temp == cnt)</span><br><span class="line">    <span class="hljs-built_in">$write</span>(<span class="hljs-string">"transmit:%d, receive: %d; ture\n"</span>, cnt, data_temp);</span><br><span class="line">  <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-built_in">$write</span>(<span class="hljs-string">"transmit:%d, receive: %d; error\n"</span>, cnt, data_temp);</span><br><span class="line">    error(<span class="hljs-string">"false"</span>);    </span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<h3><span id="2-乘法器全覆盖测试">2. 乘法器全覆盖测试</span></h3><p>自动对比，并将结果保存至txt文件中<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">16'hffff</span>; i=i+<span class="hljs-number">1</span>)<span class="hljs-keyword">begin</span></span><br><span class="line">  <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">16'hffff</span>; j=j+<span class="hljs-number">1</span>)<span class="hljs-keyword">begin</span></span><br><span class="line">    mux_task(i,j);</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">task</span> mux_task;</span><br><span class="line">  <span class="hljs-keyword">input</span> mux_a;</span><br><span class="line">  <span class="hljs-keyword">input</span> mux_b;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    ain = mux_a; <span class="hljs-comment">//送乘数</span></span><br><span class="line">    bin = mux_b; <span class="hljs-comment">//送被乘数</span></span><br><span class="line">    @(<span class="hljs-keyword">posedge</span> clk)</span><br><span class="line">    #<span class="hljs-number">2</span> start = <span class="hljs-number">1</span>; <span class="hljs-comment">//启动乘法器</span></span><br><span class="line">    @(<span class="hljs-keyword">posedge</span> done) <span class="hljs-comment">//等待运算完成</span></span><br><span class="line">    @(<span class="hljs-keyword">posedge</span> clk);</span><br><span class="line">    #<span class="hljs-number">2</span> mux_result = yout; <span class="hljs-comment">//读出运算结果</span></span><br><span class="line">    @(<span class="hljs-keyword">posedge</span> clk);</span><br><span class="line">    #<span class="hljs-number">2</span> start = <span class="hljs-number">0</span>;</span><br><span class="line">    @(<span class="hljs-keyword">posedge</span> clk);</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> done)<span class="hljs-keyword">begin</span></span><br><span class="line">  @(<span class="hljs-keyword">posedge</span> clk);</span><br><span class="line">  @(<span class="hljs-keyword">posedge</span> clk); <span class="hljs-comment">//等待结果锁存完成</span></span><br><span class="line">  <span class="hljs-built_in">$fdisplay</span>(txt_file, <span class="hljs-string">"ain=%d, bin=%d, bin=%d, yout=%d\t"</span>, ain, bin, mux_result);</span><br><span class="line">  <span class="hljs-comment">//打印运算结果</span></span><br><span class="line">  <span class="hljs-keyword">if</span>(ain * bin == yout) <span class="hljs-built_in">$fdisplay</span>(txt_file, <span class="hljs-string">"right\n"</span>);</span><br><span class="line">  <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-built_in">$fdisplay</span>(txt_file, <span class="hljs-string">"right\n"</span>);</span><br><span class="line">    wrong_timer = wrong_timer + <span class="hljs-number">1</span>;</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br><span class="line">  @(<span class="hljs-keyword">posedge</span> clk);</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<h3><span id="3-可重用mcu读写设计">3. 可重用MCU读/写设计</span></h3><p>更新时序特性，编写测试模块<br><figure class="highlight verilog hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">task</span> mcu_wr_task;</span><br><span class="line">  <span class="hljs-keyword">input</span>[<span class="hljs-number">15</span>:<span class="hljs-number">0</span>] wraddr;</span><br><span class="line">  <span class="hljs-keyword">input</span>[<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] wrdata;</span><br><span class="line">  <span class="hljs-keyword">begin</span></span><br><span class="line">    <span class="hljs-variable">#(127-43)</span>;</span><br><span class="line">    mcu_p0_link = <span class="hljs-number">1</span>;</span><br><span class="line">    mcu_p0_out = waddr[<span class="hljs-number">7</span>:<span class="hljs-number">0</span>];</span><br><span class="line">    mcu_p1 = waddr[<span class="hljs-number">15</span>:<span class="hljs-number">8</span>];</span><br><span class="line">    #<span class="hljs-number">43</span>;</span><br><span class="line">    mcu_ale = <span class="hljs-number">0</span>;</span><br><span class="line">    #<span class="hljs-number">48</span>;</span><br><span class="line">    mcu_p0_out = &#123;<span class="hljs-built_in">$random</span>&#125;;</span><br><span class="line">    <span class="hljs-variable">#(250-48-23)</span>;</span><br><span class="line">    mcu_p0_out = wrdata;</span><br><span class="line">    ....</span><br><span class="line">  <span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -187,7 +210,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/实用工具/">实用工具</a>
+                    <a class="has-link-grey -link" href="/tags/Testbench/">Testbench</a>
                 </div>
             </div>
         </div>
@@ -213,17 +236,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/04/02/MIT概率计算小组/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">MIT概率计算小组</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/01/Intel概率计算报道/">
-                <span class="level-item">Intel概率计算报道</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/21/脉冲神经网络ODIN实现/">
+                <span class="level-item">脉冲神经网络ODIN实现</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1004,7 +1020,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="实用工具" height="28">
+                    <img src="/images/logo.svg" alt="Testbench书写" height="28">
                 
                 </a>
                 <p class="is-size-7">
