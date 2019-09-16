@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-09T02:14:13.099Z">
+<meta property="og:updated_time" content="2019-09-16T02:31:03.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 12049 个字)
+                    1 小时 读完 (大约 12797 个字)
                 </span>
                 
                 
@@ -189,6 +189,7 @@
 <li><a href="#2019年7月23日-2019年7月29日">2019年7月23日-2019年7月29日</a></li>
 <li><a href="#2019年7月30日-2019年8月12日">2019年7月30日-2019年8月12日</a></li>
 <li><a href="#2019年9月2日-2019年9月9日">2019年9月2日-2019年9月9日</a></li>
+<li><a href="#2019年9月10日-2019年9月16日">2019年9月10日-2019年9月16日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -452,6 +453,28 @@
 <li>有一些关于FPGA的知识还是不太好，在看《深入浅出玩转FPGA》《xilinx新一代FPGA设计套件Vivado应用指南》</li>
 <li>关于仿真测试那一部分，写了一篇Testbench书写技巧，见我的博客：,包含复位信号封装成task，封装有用的子程序（warning，error,fatal,terminate），关于变量的定义，结构化testbench,读写紊乱的问题与处理，测试用例1模拟串口通信：遍历测试、随机测试，测试用例2乘法器：全覆盖测试与结果打印输出到文本，测试用例3：模拟MCU读/写设计</li>
 <li>想到两个点子,一个是探讨将rank order code和rate code如何结合起来<br><img src="https://i.loli.net/2019/09/09/zZRdrcQwX4aO2bq.png" alt="QQ截图20190909101046.png"><br>另一个是利用FPGA可重构将LIF神经元重构替换成IZH神经元</li>
+</ol>
+<h2><span id="2019年9月10日-2019年9月16日">2019年9月10日-2019年9月16日</span></h2><ol>
+<li>对于计划安排，粗略的思考是这样的：</li>
+</ol>
+<p>① 争取在国庆节之后对ODIN仿真完，并在FPGA上综合实现<br>② 看论文提出无论是功能上，减少资源消耗，提高频率的创新点，并在ODIN的基础上实现，进行对比<br>③ 通过python在软件仿真，设计实现架构的具体参数和上，跑得到的分类准确度，和硬件进行对比</p>
+<ol start="2">
+<li><p>花了四天把《xilinx新一代FPGA设计套件Vivado应用指南》这本书基本看完了，包括章节：<br>①7系列FPGA架构与特性<br>②创建设计项目<br>③RTL级分析与设计网表文件<br>④设计综合和基本时序约束<br>⑤设计实现与静态时序分析<br>⑥Tcl设计项目<br>⑦同步设计技术<br>⑧HDL编码技巧<br>⑨时序收敛<br>⑩硬件诊断</p>
+</li>
+<li><p>仿真实现LIF神经元的SDSP学习算法模块<br>如下图所示，通过使能param_ca_en，启用SDSP学习算法，在0-0.16us期间，有输入脉冲信号spike_out，神经元离子变量state_calcium是将增加，神经元的膜电位state_core_next大于 $\theta_m$，钙离子的变量的大小，满足SDSP学习算法中的条件2，输出v_dwon_next为1，代表突触权重减1；在0.16us到0.27us期间，膜电位和钙离子变量的大小满足SDSP学习算法中的条件1，输出v_up_next为1.<br>而在0.43us-1.43us中，外部没有脉冲输入，时间参考事件event_tref有效时，神经元钙离子变量将根据钙离子泄露变量state_caleak_cnt的值减少，后面仿真分别是钙离子变量受输入脉冲与参考事件，以及神经元膜电位的影响，导致神经元根据SDSP学习算法指示突触权重的改变</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2019/09/16/brQ138AmLiZefXB.png" alt="SDSP学习算法仿真图.png"></p>
+<p>$\left{\begin{array}{l}{w \rightarrow w+1 \text { if } V_{\text {mem }}\left(t_{\text {pre }}\right) \geq \theta_{m}, \theta_{1} \leq \mathrm{Ca}\left(t_{\text {pre }}\right)&lt;\theta_{3}} \ {w \rightarrow w-1 \text { if } V_{\text {mem }}\left(t_{\text {pre }}\right)&lt;\theta_{m}, \theta_{1} \leq \mathrm{Ca}\left(t_{\text {pre }}\right)&lt;\theta_{2}}\end{array}\right.$</p>
+<ol start="4">
+<li><p>LIF神经元模块的仿真，包含了SDSP学习功能<br><img src="https://i.loli.net/2019/09/16/6xIZtDUcSCWNkfY.png" alt="LIF神经元仿真图.png"></p>
+</li>
+<li><p>IZH神经元的SDSP学习算法模块<br>和LIF的SDSP学习模块不同的是多了param_burst_incr，使能该信号，钙变量根据输入脉冲信号有一个突增的过程，如图红线所示</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2019/09/16/gj1mvCI3tkYiQ7Z.png" alt="IZH的SDSP学习模块.png"></p>
+<ol start="6">
+<li>现在看论文一般都会做总结，看能不能为我所用，《脉冲神经网络:模型、学习算法与应用》<br><img src="https://i.loli.net/2019/09/16/bXeA2nTkUg1BERv.png" alt="QQ截图20190916102957.png"></li>
 </ol>
 
         </div>
