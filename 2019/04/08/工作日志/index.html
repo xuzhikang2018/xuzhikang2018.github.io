@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-16T02:31:03.083Z">
+<meta property="og:updated_time" content="2019-09-23T02:23:19.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 12797 个字)
+                    2 小时 读完 (大约 13856 个字)
                 </span>
                 
                 
@@ -190,6 +190,7 @@
 <li><a href="#2019年7月30日-2019年8月12日">2019年7月30日-2019年8月12日</a></li>
 <li><a href="#2019年9月2日-2019年9月9日">2019年9月2日-2019年9月9日</a></li>
 <li><a href="#2019年9月10日-2019年9月16日">2019年9月10日-2019年9月16日</a></li>
+<li><a href="#2019年6月17日-2019年6月23日">2019年6月17日-2019年6月23日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -474,8 +475,17 @@
 </ol>
 <p><img src="https://i.loli.net/2019/09/16/gj1mvCI3tkYiQ7Z.png" alt="IZH的SDSP学习模块.png"></p>
 <ol start="6">
-<li>现在看论文一般都会做总结，看能不能为我所用，《脉冲神经网络:模型、学习算法与应用》<br><img src="https://i.loli.net/2019/09/16/bXeA2nTkUg1BERv.png" alt="QQ截图20190916102957.png"></li>
+<li>现在看论文一般都会做总结，看能不能为我所用，《脉冲神经网络:模型、学习算法与应用》<br><img src="https://i.loli.net/2019/09/16/bXeA2nTkUg1BERv.png" alt="QQ截图20190916102957.png"><h2><span id="2019年6月17日-2019年6月23日">2019年6月17日-2019年6月23日</span></h2>SRM模型[1][2]中突触后神经元膜电位的(spiking response model)表达式如下：<br>$p=\eta\left(t-t_{i}\right)+\sum_{j / t_{j}&gt;t} w_{j} \cdot \varepsilon\left(t-t_{j}\right)+\sum_{k / h&gt;t_{i}} \mu\left(t-t_{k}\right)$  </li>
 </ol>
+<p>第一项$\eta\left(t-t_{i}\right)$突触后神经元$i$发放后膜电位的变化函数，其中$\tau_m$和$\tau_s$分别为膜时间常数和突触时间常数，T是神经元发放的阈值，$K_1, K_2$都是常数，之所以这么复杂是因为反映了<strong>发放之后的不应期</strong>。<br>$\begin{aligned} \eta\left(t-t_{i}\right)=&amp; \mathrm{T} \cdot\left(K_{1} \cdot \exp \left(-\frac{t-t_{i}}{\tau_{m}}\right)-K_{2} \cdot\left(\exp \left(-\frac{t-t_{i}}{\tau_{m}}\right)\right.\right.\ &amp;\left.\left.-\exp \left(-\frac{t-t_{i}}{\tau_{s}}\right)\right)\right) \cdot \Theta\left(t-t_{i}\right) \end{aligned}$</p>
+<p>第二项$\varepsilon\left(t-t_{j}\right)$说明的是突触前神经元的脉冲对突触后神经元膜电位的影响，$w_j$表示的是权重的大小<br>$\varepsilon\left(t-t_{j}\right)=K \cdot\left(\exp \left(-\frac{t-t_{j}}{\tau_{m}}\right)-\exp \left(-\frac{t-t_{j}}{\tau_{s}}\right)\right) \cdot \Theta\left(t-t_{j}\right)$</p>
+<p>第三项是突触后神经元的<strong>侧向抑制</strong>(inhibitory postsynaptic potential (IPSP)),图形化的表述如下所示，相同连接层的神经元发放会对其他神经元有一个反向的抑制效果，抑制的值相当于脉冲的大小乘以一个系数。<strong>这个在神经元的学习研究中是很有用的</strong>，在论文[2]研究表明，单个模式学习下，神经元B学习神经元A已经学习过的模式比，比它学一个没有学习到模式更难，也就是说神经元更倾向于学习没有学过的模式。多模式学习下，多次出现的模式，不仅更容易学习，也将被处理，比不熟悉的更快。这最后一点和熟悉类别心理上的结果类似[3]，例如面部识别处理速度更快。</p>
+<p>$\mu\left(t-t_{k}\right)=-\alpha \cdot T \cdot \varepsilon\left(t-t_{k}\right)$<br><img src="https://i.loli.net/2019/09/23/gp7YjWAVi38xblZ.png" alt="QQ截图20190923095104.png"><br><img src="https://i.loli.net/2019/09/23/A9TUlKmVBvrj3IY.png" alt="神经元单个模式的学习.png"></p>
+<p>SRM模型的侧向抑制在很多论文算法研究也有使用。</p>
+<p>然而IZH模型[4]是不包括上面两个行为特性，它是神经元的计算特性，包含了神经元的20种计算行为特性，参见我的博客<a href="https://blog.csdn.net/weixin_41701476/article/details/95917146" target="_blank" rel="noopener">IZH模型介绍</a></p>
+<p>现在的神经元实现主要是基本的LIF神经元，例如Loihi,清华的天机[7]，而TrueNorth为神经元加入了随机特性，利用三个神经元可以体现IZH的行为特性，论文[6]搭建了Phenomenological Digital Neuron包含了20种IZH行为，目前我看的论文都没有搭建SRM脉冲响应特性+IZH计算行为特性的digital neuron, 那我的想法是在论文[6]的基础上，加入SRM的脉冲响应特性，同时考虑加入这个之后，不应期和侧向抑制对其他单元模块设计的影响。他们设计的神经元框图如下，代码我还没看<br><img src="https://i.loli.net/2019/09/23/LhNCgGlcrMSKzpY.png" alt="QQ截图20190923101030.png"></p>
+<p>接下来两周，就是针对调研其他论文佐证我的想法，去做架构框图，RTL代码设计，仿真，并且看需要测量哪些数据</p>
+<p>[1]Muntean I L , Peter R I , Joldos M . Dynamics Analysis of Parallel Simulations of the Spike Response Model[C]// Proceedings of the 2012 14th International Symposium on Symbolic and Numeric Algorithms for Scientific Computing. IEEE Computer Society, 2012.<br>[2]Masquelier, Timothée, Guyonneau R , Thorpe S J . Competitive STDP-Based Spike Pattern Learning[J]. Neural Computation, 2009, 21(5):1259-1276.<br>[3]Crouzet S , Thorpe S J , Kirchner H . Category-dependent variations in visual processing time[J]. Journal of Vision, 2010, 7(9):922-922.<br>[4]Izhikevich, E. M . Which Model to Use for Cortical Spiking Neurons?[J]. IEEE Transactions on Neural Networks, 2004, 15(5):1063-1070<br>[5]Pei, Jing &amp; Deng, Lei &amp; Song, Sen &amp; Zhao, Mingguo &amp; Zhang, Youhui &amp; Wu, Shuang &amp; Wang, Guanrui &amp; Zou, Zhe &amp; Wu, Zhenzhi &amp; He, Wei &amp; Chen, Feng &amp; Deng, Ning &amp; Wu, Si &amp; Wang, Yu &amp; wu, yj &amp; Yang, Zheyu &amp; Ma, Cheng &amp; Li, Guoqi &amp; Han, Wentao &amp; Shi, L.P.. (2019). Towards artificial general intelligence with hybrid Tianjic chip architecture. Nature. 572. 106. 10.1038/s41586-019-1424-8.<br>[6]Frenkel, Charlotte &amp; Legat, Jean-Didier &amp; Bol, David. (2017). A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors. 1-4. 10.1109/BIOCAS.2017.8325231.</p>
 
         </div>
         
