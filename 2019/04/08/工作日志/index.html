@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-23T02:23:19.371Z">
+<meta property="og:updated_time" content="2019-09-23T02:26:04.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -190,7 +190,7 @@
 <li><a href="#2019年7月30日-2019年8月12日">2019年7月30日-2019年8月12日</a></li>
 <li><a href="#2019年9月2日-2019年9月9日">2019年9月2日-2019年9月9日</a></li>
 <li><a href="#2019年9月10日-2019年9月16日">2019年9月10日-2019年9月16日</a></li>
-<li><a href="#2019年6月17日-2019年6月23日">2019年6月17日-2019年6月23日</a></li>
+<li><a href="#2019年9月17日-2019年9月23日">2019年9月17日-2019年9月23日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -475,7 +475,7 @@
 </ol>
 <p><img src="https://i.loli.net/2019/09/16/gj1mvCI3tkYiQ7Z.png" alt="IZH的SDSP学习模块.png"></p>
 <ol start="6">
-<li>现在看论文一般都会做总结，看能不能为我所用，《脉冲神经网络:模型、学习算法与应用》<br><img src="https://i.loli.net/2019/09/16/bXeA2nTkUg1BERv.png" alt="QQ截图20190916102957.png"><h2><span id="2019年6月17日-2019年6月23日">2019年6月17日-2019年6月23日</span></h2>SRM模型[1][2]中突触后神经元膜电位的(spiking response model)表达式如下：<br>$p=\eta\left(t-t_{i}\right)+\sum_{j / t_{j}&gt;t} w_{j} \cdot \varepsilon\left(t-t_{j}\right)+\sum_{k / h&gt;t_{i}} \mu\left(t-t_{k}\right)$  </li>
+<li>现在看论文一般都会做总结，看能不能为我所用，《脉冲神经网络:模型、学习算法与应用》<br><img src="https://i.loli.net/2019/09/16/bXeA2nTkUg1BERv.png" alt="QQ截图20190916102957.png"><h2><span id="2019年9月17日-2019年9月23日">2019年9月17日-2019年9月23日</span></h2>SRM模型[1][2]中突触后神经元膜电位的(spiking response model)表达式如下：<br>$p=\eta\left(t-t_{i}\right)+\sum_{j / t_{j}&gt;t} w_{j} \cdot \varepsilon\left(t-t_{j}\right)+\sum_{k / h&gt;t_{i}} \mu\left(t-t_{k}\right)$  </li>
 </ol>
 <p>第一项$\eta\left(t-t_{i}\right)$突触后神经元$i$发放后膜电位的变化函数，其中$\tau_m$和$\tau_s$分别为膜时间常数和突触时间常数，T是神经元发放的阈值，$K_1, K_2$都是常数，之所以这么复杂是因为反映了<strong>发放之后的不应期</strong>。<br>$\begin{aligned} \eta\left(t-t_{i}\right)=&amp; \mathrm{T} \cdot\left(K_{1} \cdot \exp \left(-\frac{t-t_{i}}{\tau_{m}}\right)-K_{2} \cdot\left(\exp \left(-\frac{t-t_{i}}{\tau_{m}}\right)\right.\right.\ &amp;\left.\left.-\exp \left(-\frac{t-t_{i}}{\tau_{s}}\right)\right)\right) \cdot \Theta\left(t-t_{i}\right) \end{aligned}$</p>
 <p>第二项$\varepsilon\left(t-t_{j}\right)$说明的是突触前神经元的脉冲对突触后神经元膜电位的影响，$w_j$表示的是权重的大小<br>$\varepsilon\left(t-t_{j}\right)=K \cdot\left(\exp \left(-\frac{t-t_{j}}{\tau_{m}}\right)-\exp \left(-\frac{t-t_{j}}{\tau_{s}}\right)\right) \cdot \Theta\left(t-t_{j}\right)$</p>
