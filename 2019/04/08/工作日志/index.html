@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-23T02:26:04.386Z">
+<meta property="og:updated_time" content="2019-09-30T02:25:41.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 小时 读完 (大约 13856 个字)
+                    2 小时 读完 (大约 14164 个字)
                 </span>
                 
                 
@@ -486,6 +486,8 @@
 <p>现在的神经元实现主要是基本的LIF神经元，例如Loihi,清华的天机[7]，而TrueNorth为神经元加入了随机特性，利用三个神经元可以体现IZH的行为特性，论文[6]搭建了Phenomenological Digital Neuron包含了20种IZH行为，目前我看的论文都没有搭建SRM脉冲响应特性+IZH计算行为特性的digital neuron, 那我的想法是在论文[6]的基础上，加入SRM的脉冲响应特性，同时考虑加入这个之后，不应期和侧向抑制对其他单元模块设计的影响。他们设计的神经元框图如下，代码我还没看<br><img src="https://i.loli.net/2019/09/23/LhNCgGlcrMSKzpY.png" alt="QQ截图20190923101030.png"></p>
 <p>接下来两周，就是针对调研其他论文佐证我的想法，去做架构框图，RTL代码设计，仿真，并且看需要测量哪些数据</p>
 <p>[1]Muntean I L , Peter R I , Joldos M . Dynamics Analysis of Parallel Simulations of the Spike Response Model[C]// Proceedings of the 2012 14th International Symposium on Symbolic and Numeric Algorithms for Scientific Computing. IEEE Computer Society, 2012.<br>[2]Masquelier, Timothée, Guyonneau R , Thorpe S J . Competitive STDP-Based Spike Pattern Learning[J]. Neural Computation, 2009, 21(5):1259-1276.<br>[3]Crouzet S , Thorpe S J , Kirchner H . Category-dependent variations in visual processing time[J]. Journal of Vision, 2010, 7(9):922-922.<br>[4]Izhikevich, E. M . Which Model to Use for Cortical Spiking Neurons?[J]. IEEE Transactions on Neural Networks, 2004, 15(5):1063-1070<br>[5]Pei, Jing &amp; Deng, Lei &amp; Song, Sen &amp; Zhao, Mingguo &amp; Zhang, Youhui &amp; Wu, Shuang &amp; Wang, Guanrui &amp; Zou, Zhe &amp; Wu, Zhenzhi &amp; He, Wei &amp; Chen, Feng &amp; Deng, Ning &amp; Wu, Si &amp; Wang, Yu &amp; wu, yj &amp; Yang, Zheyu &amp; Ma, Cheng &amp; Li, Guoqi &amp; Han, Wentao &amp; Shi, L.P.. (2019). Towards artificial general intelligence with hybrid Tianjic chip architecture. Nature. 572. 106. 10.1038/s41586-019-1424-8.<br>[6]Frenkel, Charlotte &amp; Legat, Jean-Didier &amp; Bol, David. (2017). A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors. 1-4. 10.1109/BIOCAS.2017.8325231.</p>
+<p>##2019年9月24日-2019年9月30日<br>这周主要是原来的几篇论文看了，重点把[]和以前的论文[1]归纳总结，做了一个ppt，我接下来的想法是在它的基础上，以SRM模型为基础设计重点是侧向抑制，并实现同时进行优化。<br>接下来三个月主要的工作是：<br>（1）软件实现的时间开销测量， CPU是：pyNN+NEST, GPU:GeNN, 国庆节前后基本看完文档手册<br>（2）设计加上SRM的侧向抑制的模块化神经元的设计， 两周左右<br>（3）设计的实现，用VCS进行仿真和DC工具进行综合看功耗和跑的速率，两周到三周<br>（4）与软件实现的的神经元进行对比，一周到两周<br>（5）上周提到的参数化设计的SRM模型和IZH神经元设计[2]（有部分代码），设计思路也比较完善，三周左右  </p>
+<p>[1] Lee D , Lee G , Kwon D , et al. Flexon: A Flexible Digital Neuron for Efficient Spiking Neural Network Simulations[C]// 2018 ACM/IEEE 45th Annual International Symposium on Computer Architecture (ISCA). ACM, 2018.<br>[2] Frenkel, Charlotte &amp; Legat, Jean-Didier &amp; Bol, David. (2017). A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors. 1-4. 10.1109/BIOCAS.2017.8325231.</p>
 
         </div>
         
