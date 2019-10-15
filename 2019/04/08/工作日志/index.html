@@ -16,7 +16,7 @@
 <meta property="og:description" content="从2019年4月8日开始的工作日志">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-30T02:27:32.663Z">
+<meta property="og:updated_time" content="2019-10-15T15:06:50.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作日志">
 <meta name="twitter:description" content="从2019年4月8日开始的工作日志">
@@ -153,7 +153,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 小时 读完 (大约 14164 个字)
+                    2 小时 读完 (大约 14848 个字)
                 </span>
                 
                 
@@ -191,6 +191,8 @@
 <li><a href="#2019年9月2日-2019年9月9日">2019年9月2日-2019年9月9日</a></li>
 <li><a href="#2019年9月10日-2019年9月16日">2019年9月10日-2019年9月16日</a></li>
 <li><a href="#2019年9月17日-2019年9月23日">2019年9月17日-2019年9月23日</a></li>
+<li><a href="#2019年9月24日-2019年9月30日">2019年9月24日-2019年9月30日</a></li>
+<li><a href="#2019年10月8日-2019年10月15日">2019年10月8日-2019年10月15日</a></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
@@ -486,8 +488,23 @@
 <p>现在的神经元实现主要是基本的LIF神经元，例如Loihi,清华的天机[7]，而TrueNorth为神经元加入了随机特性，利用三个神经元可以体现IZH的行为特性，论文[6]搭建了Phenomenological Digital Neuron包含了20种IZH行为，目前我看的论文都没有搭建SRM脉冲响应特性+IZH计算行为特性的digital neuron, 那我的想法是在论文[6]的基础上，加入SRM的脉冲响应特性，同时考虑加入这个之后，不应期和侧向抑制对其他单元模块设计的影响。他们设计的神经元框图如下，代码我还没看<br><img src="https://i.loli.net/2019/09/23/LhNCgGlcrMSKzpY.png" alt="QQ截图20190923101030.png"></p>
 <p>接下来两周，就是针对调研其他论文佐证我的想法，去做架构框图，RTL代码设计，仿真，并且看需要测量哪些数据</p>
 <p>[1]Muntean I L , Peter R I , Joldos M . Dynamics Analysis of Parallel Simulations of the Spike Response Model[C]// Proceedings of the 2012 14th International Symposium on Symbolic and Numeric Algorithms for Scientific Computing. IEEE Computer Society, 2012.<br>[2]Masquelier, Timothée, Guyonneau R , Thorpe S J . Competitive STDP-Based Spike Pattern Learning[J]. Neural Computation, 2009, 21(5):1259-1276.<br>[3]Crouzet S , Thorpe S J , Kirchner H . Category-dependent variations in visual processing time[J]. Journal of Vision, 2010, 7(9):922-922.<br>[4]Izhikevich, E. M . Which Model to Use for Cortical Spiking Neurons?[J]. IEEE Transactions on Neural Networks, 2004, 15(5):1063-1070<br>[5]Pei, Jing &amp; Deng, Lei &amp; Song, Sen &amp; Zhao, Mingguo &amp; Zhang, Youhui &amp; Wu, Shuang &amp; Wang, Guanrui &amp; Zou, Zhe &amp; Wu, Zhenzhi &amp; He, Wei &amp; Chen, Feng &amp; Deng, Ning &amp; Wu, Si &amp; Wang, Yu &amp; wu, yj &amp; Yang, Zheyu &amp; Ma, Cheng &amp; Li, Guoqi &amp; Han, Wentao &amp; Shi, L.P.. (2019). Towards artificial general intelligence with hybrid Tianjic chip architecture. Nature. 572. 106. 10.1038/s41586-019-1424-8.<br>[6]Frenkel, Charlotte &amp; Legat, Jean-Didier &amp; Bol, David. (2017). A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors. 1-4. 10.1109/BIOCAS.2017.8325231.</p>
-<p>##2019年9月24日-2019年9月30日<br>这周主要是原来的几篇论文看了，重点把[]和以前的论文[1]归纳总结，做了一个ppt，我接下来的想法是在它的基础上，以SRM模型为基础设计重点是侧向抑制，并实现同时进行优化。<br>接下来三个月主要的工作是：<br>（1）软件实现的时间开销测量， CPU是：pyNN+NEST, GPU:GeNN, 国庆节前后基本看完文档手册<br>（2）设计加上SRM的侧向抑制的模块化神经元的设计， 两周左右<br>（3）设计的实现，用VCS进行仿真和DC工具进行综合看功耗和跑的速率，两周到三周<br>（4）与软件实现的的神经元进行对比，一周到两周<br>（5）上周提到的参数化设计的SRM模型和IZH神经元设计[2]（有部分代码），设计思路也比较完善，三周左右  </p>
+<h2><span id="2019年9月24日-2019年9月30日">2019年9月24日-2019年9月30日</span></h2><p>这周主要是原来的几篇论文看了，重点把[]和以前的论文[1]归纳总结，做了一个ppt，我接下来的想法是在它的基础上，以SRM模型为基础设计重点是侧向抑制，并实现同时进行优化。<br>接下来三个月主要的工作是：<br>（1）软件实现的时间开销测量， CPU是：pyNN+NEST, GPU:GeNN, 国庆节前后基本看完文档手册<br>（2）设计加上SRM的侧向抑制的模块化神经元的设计， 两周左右<br>（3）设计的实现，用VCS进行仿真和DC工具进行综合看功耗和跑的速率，两周到三周<br>（4）与软件实现的的神经元进行对比，一周到两周<br>（5）上周提到的参数化设计的SRM模型和IZH神经元设计[2]（有部分代码），设计思路也比较完善，三周左右  </p>
 <p>[1] Lee D , Lee G , Kwon D , et al. Flexon: A Flexible Digital Neuron for Efficient Spiking Neural Network Simulations[C]// 2018 ACM/IEEE 45th Annual International Symposium on Computer Architecture (ISCA). ACM, 2018.<br>[2] Frenkel, Charlotte &amp; Legat, Jean-Didier &amp; Bol, David. (2017). A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors. 1-4. 10.1109/BIOCAS.2017.8325231.</p>
+<h2><span id="2019年10月8日-2019年10月15日">2019年10月8日-2019年10月15日</span></h2><p>在别的模型的基础上添加SRM模型的特性，这个创新点的确不好写，显得创新点不足。</p>
+<ol>
+<li><p>整理论文，对文献进行分类，便于引用<br><img src="https://i.loli.net/2019/10/15/AuLVZeJ3HW9Mc6E.png" alt="整理的文献1.png"><br><img src="https://i.loli.net/2019/10/15/F4huLgQbfS17PEj.png" alt="整理的文献2.png"></p>
+</li>
+<li><p>这周看论文，可以从另外一个角度出发，现在SNN的另一个应用脑机接口，假如哪一块人体组织甚至是脑组织出现了问题，可以用电子芯片去代替，这在未来疾病治疗，延长人类的寿命有很大的应用。已经有相关的论文发表的这方的研究如日本的东京大学和法国的波尔多大学[]，那以往的SNN神经元设计都是从<strong>计算效率</strong>出发，对脉冲神经元的简化，LIF神经元模型。但是，这些设计已实现用于计算目的，而没有考虑生物性。<br>那么相应的选择神经元选择IZH神经元模型，在实现性和神经元的生物精确性上折中</p>
+</li>
+</ol>
+<p>$\frac{d v}{d t}=0.04 v^{2}+5 v+140-u+I_{L h}$</p>
+<p>$\frac{d u}{d t}=a(b v-u)$</p>
+<p>if $\quad v \geq 30 m V \Rightarrow\left{\begin{array}{l}{v \leftarrow c} \ {u \leftarrow u+d}\end{array}\right.$</p>
+<p>考虑到生物上的真实性，那么突触也是基于电导的，也就是说脉冲对膜电位的影响，不只是瞬时累加，也是呈指数的效果<br>$I_{\exp }(t)=e^{\frac{-t}{\tau}}$</p>
+<p>那么我周将上诉的公式进行变化化简到可数字实现，如下所示<br>$v[n+1]=1 / 32v[n]^{2}+5 v[n]+109.375-u[n]+I_{s t a t}[n]+I_{e x c}[n]+I_{i n h}[n]$</p>
+<p>另一个就是突触：<br>$I_{\exp }(t+1)=\left(1-\frac{1}{\tau}\right) \cdot I_{\exp }(t)$</p>
+<p>画了各自对于的电路图，并写出了verilog文件，U变量和V变量是并行更新的，在神经元计算模块，该模块包括3个乘法计算单元，我设计的是18bit<em>18bit的乘法，在FPGA上综合利用dsp来做乘法，dsp最多也是支持18</em>18Bit的乘法，综合结果如下：<br><img src="https://i.loli.net/2019/10/15/YwWkoyc8ztUCs13.png" alt="FPAG综合的各个资源开销.png"></p>
+<p>在DC,给的时钟是25MHz（其实不需要这么高，如果是考虑高度的仿真性），90nm下的综合结果为：对于计算模块面积是0.181$mm^2$，功耗是23.9739mw；突触模块面积是0.111$mm^2$，功耗是19.74mw。<br>整个神经元模块的面积是0.388$mm^2$，功耗是44.68mw。</p>
 
         </div>
         
