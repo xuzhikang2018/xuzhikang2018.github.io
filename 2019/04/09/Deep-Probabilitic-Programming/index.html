@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content>
+    <link rel="shortcut icon" href="http://some.url/to/favicon.ico">
+    <title>Deep Probabilitic Programming-Adagio</title>
+    
+        
+            <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/academicons/1.8.6/css/academicons.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+        
+    
+    <link rel="stylesheet" href="/css/adagio.css">
+</head>
+<body>
+    <div class="container-fluid">
+    <nav class="nav">
+        <div class="collapse navbar-collapse" id="navbar-sm">
+            
+            
+            <div class="navbar-nav">
+                <a href="https://hexo.io" class="nav-item nav-link">Hexo</a>
+            </div>
+            
+            <div class="navbar-nav">
+                <a href="http://www.hanlindong.com" class="nav-item nav-link">Adagio's author</a>
+            </div>
+            
+        </div>
+    </nav>
+</div>
+
+<div class="d-flex d-md-none" style="width: 100%; background-color: #e9ecef">
+    
+    <div class="nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sm" aria-expanded="false" aria-label="Toggle Navigation">
+            <i class="fas fa-bars fa-lg"></i>
+        </button>
+    </div>
+    
+    <nav class="navbar ml-auto">
+        <a class="navbar-brand" href="/">
+            
+            <img class="logo" src="https://via.placeholder.com/100x50.png?text=logo">
+            
+        </a>
+    </nav>
+</div>
+
+
+<div class="container d-none d-md-block my-navbar">
+    <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
+        <a class="navbar-brand " href="/">
+            
+            <img class="logo" src="https://via.placeholder.com/100x50.png?text=logo">
+            
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" href="https://hexo.io">Hexo</a>
+                </li>
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" href="http://www.hanlindong.com">Adagio's author</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </nav>
+</div>
+
+
+
+
+    <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        
+        <h1 class="mt-4 article-title page-title">Deep Probabilitic Programming</h1>
+        
+        <p class="lead text-gray mt-3">By Anonymous; Published on 2019-04-09</p>
+        
+        <div class="tags">
+            <ul class="tag-list">
+                
+                <li class="tag-list-item">
+                    <a class="tag-list-link" href="/tags/概率编程/">概率编程</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 pt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <main>
+                            <article class="article-text page-content"><p>Deep Probabilitic Programming<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#absract">Absract</a></li>
+<li><a href="#1-introduction">1 INTRODUCTION</a></li>
+<li><a href="#2-related-work">2 RELATED WORK</a></li>
+<li><a href="#3compositional-representations-for-probabilistic-models">3.COMPOSITIONAL REPRESENTATIONS FOR PROBABILISTIC MODELS</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="absract">Absract</span></h2><p>我们提出Edward，一种图灵完备的概率编程语言。Edward定义了两种成分表征 - 随机变量和推理。通过将推理视为一流的公民，与建模相提并论，我们表明概率编程可以像传统的深度学习一样灵活，计算效率高。为了灵活性，Edward使用各种可组合的推理方法轻松地拟合相同的模型，从点估计到变分推理到MCMC。此外，Edward可以重复使用建模表示作为推理的一部分，促进丰富的变分模型和生成对抗网络的设计。为了提高效率，Edward被集成到TensorFlow中，为现有的概率系统提供了显着的加速。例如，我们在基准逻辑回归任务中表明，Edward比Stan快至少35倍，比PyMC3快6倍。此外，Edward不会产生运行时开销：它与手写的TensorFlow一样快。</p>
+<h2><span id="1-introduction">1 INTRODUCTION</span></h2><p>深度神经网络的本质是组成。用户可以创造性地连接图层，而不必担心如何执行测试（向前传播）或推理（基于梯度的优化，具有反向传播和自动区分）。</p>
+<p>在本文中，我们设计了概率编程的组合表示。概率编程允许用户将生成概率模型指定为程序，然后将这些模型“编译”为推理过程。概率模型本质上也是成分的，并且许多工作通过随机变量的组合实现了丰富的概率程序(Goodman等人，2012; Ghahramani，2015; Lake等人，2016)。</p>
+<p>然而，较少的工作考虑了推理的类似组成。相反，许多现有的概率编程语言将推理引擎视为黑盒子，从模型中抽象出来。这些无法捕捉重用模型表示的概率推论 - 变量推理的最新进展中的一个关键思想（Kingma＆Welling，2014; Rezende＆Mohamed，2015; Tran等，2016b），生成对抗网络（Goodfellow等， 2014），以及更经典的推论（Dayan等，1995; Gutmann＆Hyvärinen，2010）。</p>
+<p>我们提出了Edward1，一种图灵完备的概率编程语言，它基于两个组合表示 - 一个用于随机变量，一个用于推理。通过将推理视为一流的公民，与建模相提并论，我们表明概率编程可以像传统的深度学习一样灵活，计算效率高。为了灵活性，我们展示了Edward如何使用各种可组合的推理方法轻松地拟合相同的模型，从点估计到变分推理到MCMC。为了提高效率，我们展示了如何将Edward集成到现有的计算图框架中，例如TensorFlow（Abadi等，2016）。像TensorFlow这样的框架提供了计算优势，如分布式训练，并行性，矢量化和“免费”GPU支持。例如，我们在基准测试任务中显示，Edward的哈密尔顿蒙特卡罗比现有软件快许多倍。此外，Edward不会产生运行时开销：它与手写的TensorFlow一样快。</p>
+<h2><span id="2-related-work">2 RELATED WORK</span></h2><p>概率编程语言（PPL）通常利用推理的计算效率来折衷语言的表达性。一方面，有一些语言<strong>强调表达能力</strong>（Pfeffer，2001; Milch等，2005; Pfeffer，2009; Goodman等，2012），代表了超越图形模型的丰富类。每个都使用通用推理引擎，但在模型和数据大小方面的扩展性很差。另一方面，有一些语言<strong>强调效率</strong>（Spiegelhalter等，1995; Murphy，2001; Plummer，2003; Salvatier等，2015; Carpenter等，2016）。PPL仅限于特定类型的模型，并且优化推理算法以使该类有效。例如，Infer.NET为图形模型实现了快速消息传递（Minka等，2014），而Augur使用GPU实现数据并行性，以便在贝叶斯网络中进行Gibbs采样（Tristan等，2014）。Edward填补了这一空白 图灵完备的 - 它支持任何可计算的概率分布 - 它支持有效的算法，例如利用模型结构的算法和扩展到海量数据的算法。</p>
+<p>先前对图灵完备语言中的高效算法进行了一些研究。Venture和Anglican设计推理作为局部推理问题的集合，在程序片段上定义（Mansinghka等，2014; Wood等，2014）。这产生了我们构建的快速程序特定的推理代码。两种系统都不支持推理方法，例如可编程后验近似，推理模型或数据子采样。与我们的工作同时，WebPPL以摊销推理为特色（Ritchie等，2016）。与Edward不同，WebPPL不重用模型的表示; 相反，它注释原始程序并利用辅助函数，这是一种不太灵活的策略。最后，推理被设计为Kiselyov＆Shan（2009）的程序转换; Scibior等人。（2015）; Zinkov＆Shan（2016）。这使得在其他概率程序内进行推理的灵活性成为可能。Edward建立在这个想法的基础上，不仅包括建模中的推理，还包括推理中的建模（例如，变分模型）。</p>
+<h2><span id="3compositional-representations-for-probabilistic-models">3.COMPOSITIONAL REPRESENTATIONS FOR PROBABILISTIC MODELS</span></h2><p>我们首先开发概率模型的组合表示。我们需要两个标准：（a）与计算图形集成，一个有效的框架，其中节点代表对数据的操作，边缘代表它们之间传递的数据（Culler，1986）; （b）图表下的表示的不变性，即表示可以在推理期间重复使用。</p>
+<p>Edward将随机变量定义为关键的组成表示。它们是具有方法的类对象，例如，用于计算对数密度和采样。此外，每个随机变量x与张量（多维阵列）x<em> 相关联，其表示单个样本x</em>~p（x）。该关联将随机变量嵌入到张量上的计算图上。</p>
+<p>该设计的简单性使得在计算图框架中开发概率程序变得容易。重要的是，所有计算都在图表上表示。这使得人们能够构建具有复杂确定性结构的随机变量，例如深度神经网络，多种数学运算以及构建在相同框架上的第三方库。该设计还使随机变量的组合能够捕获复杂的随机结构。</p>
+<p>作为一个例子，我们使用Beta-Bernoulli模型， $p(x,\theta)=\mathtt{Beta}(\theta,1,1)$ Bernoulli $(x_n,\theta)$，其中 $\theta$ 是在50个数据点x∈{0,1} 50之间共享的潜在概率。随机变量x是50维的，由随机张量θ*参数化。获取对象x运行图形：它从生成过程模拟并输出50个元素的二进制向量。</p>
+<p>图1：Beta-Bernoulli程序（左）及其计算图（右）。<br>从图中获取x会生成50个元素的二进制向量。<br><img src="https://i.loli.net/2019/04/09/5cac45bf8d87b.png" alt="图1.1.png"></p>
+<p>所有的计算都是象征性地登记在随机变量上，而不是在它们的执行过程中。符号表示不需要具体化整个模型，这会导致大型模型不合理的内存消耗(Tristan等人，2014)。此外，它使我们能够在执行任何代码之前，简化图中的确定性和随机性操作(Scibior等人，2015；Zinkov&amp;Shan，2016)。</p>
+<p>使用计算图，在概率程序中构建可变状态也是很自然的。作为计算图的典型用法，这种状态可以定义模型参数; 在TensorFlow中，这是由tf.Variable给出的。另一个用例是用于构建判别模型p（y | x），其中x是作为训练或测试数据输入的特征。程序可以独立于数据编写，在其图形中使用x的可变状态（tf.placeholder）。在训练和测试期间，我们为占位符提供适当的值。</p>
+<p>在附录A中，我们提供了用于分类的贝叶斯神经网络（A.1），潜隐Dirichlet分配（A.2）和高斯矩阵分解（A.3）的示例。<br>我们在下面介绍其他例子</p>
+</article>
+                        </main>
+                        
+                        
+                    </div>
+                </div>
+                <div class="row mt-5 mb-5">
+                    <div class="col-12">
+                        <div class="row">
+    <div class="col">
+        <nav aria-label="paginator" class="paginator">
+            <ul class="pagination d-none d-md-flex pagination-lg justify-content-center">
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/04/26/python使用/" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;
+                            python使用</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" aria-label="Next">
+                        <span aria-hidden="true">Pyro:Deep Universal Probabilistic Programming
+                            &raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="pagination d-md-none justify-content-center">
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/04/26/python使用/" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;
+                            python使用</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" aria-label="Next">
+                        <span aria-hidden="true">Pyro:Deep Universal Probabilistic Programming
+                            &raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div id="vcomment"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="container pt-4 page-sidebar">
+                    
+                    <div class="row">
+    <div class="col">
+        <h6>APPLAUSE FOR ME</h6>
+        <div id="applause-easy"></div>
+    </div>
+</div>
+                    
+                    <hr class="row">
+                    <div class="row toc-container">
+                        <div class="col-12">
+                            <h6>NAVIGATION</h6>
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Absract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">1 INTRODUCTION</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2 RELATED WORK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">3.COMPOSITIONAL REPRESENTATIONS FOR PROBABILISTIC MODELS</span></a></li></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+    <div class="jumbotron jumbotron-fluid mb-0">
+        <div class="container-fluid">
+            <div class="col text-center">
+                <div class="bottom-social">
+                    <div class="row">
+    <div class="col text-center">
+        <ul class="list-inline">
+            
+            <li class="list-inline-item">
+                
+                <a href="https://github.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.facebook.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.pinterest.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-pinterest-p fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.linkedin.com/in/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+                </div>
+                <p class="copyright text-muted">
+                    Copyright &copy; 徐志康的技术博客
+                    <br>
+                    Thanks for coming!
+                    <br>
+                    <a href="https://github.com/Hanlin-Dong/hexo-theme-adagio">Adagio</a> - A <a href="https://hexo.io">Hexo</a> theme made with love by
+                    <a href="http://www.hanlindong.com">Hanlin Dong</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    
+    
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.bootcss.com/font-awesome/5.9.0/js/all.min.js"></script>
+         
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                    CommonHTML: { linebreaks: { automatic: true } },
+                    "HTML-CSS": { linebreaks: { automatic: true } },
+                    SVG: { linebreaks: { automatic: true } }
+                });
+            </script>
+            <script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+        
+    
+
+
+<script src="/js/av.min.js"></script>
+<script src="/js/valine.min.js"></script>
+<script src="/js/applause-easy.js"></script>
+
+<script>
+$(document).ready(function() {
+    var a = new ApplauseEasy({
+        id: 'applause-easy',
+        appId: "xxxxxxxxxx",
+        appKey: "xxxxxxxxxx",
+        img_src: "http://img.hanlindong.com/blog/site/clap.png",
+        img_width: "50px",
+        img_height: "50px"
+    })
+})
+</script>
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?123456789";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-11111111-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-11111111-1');
+</script>
+
+
+    
+    <script>
+    new Valine({
+        el: "#vcomment",
+        appId: "xxxxxxxxxx",
+        appKey: "xxxxxxxxxx",
+        notify: false,
+        varify: false,
+        avatar: 'identicon',
+        placeholder: "",
+        recordIP: true
+    })
+</script>
+    
+</body>
+</html>

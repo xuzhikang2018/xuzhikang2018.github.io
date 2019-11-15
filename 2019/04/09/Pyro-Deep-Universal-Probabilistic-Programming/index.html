@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content>
+    <link rel="shortcut icon" href="http://some.url/to/favicon.ico">
+    <title>Pyro:Deep Universal Probabilistic Programming-Adagio</title>
+    
+        
+            <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/academicons/1.8.6/css/academicons.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+        
+    
+    <link rel="stylesheet" href="/css/adagio.css">
+</head>
+<body>
+    <div class="container-fluid">
+    <nav class="nav">
+        <div class="collapse navbar-collapse" id="navbar-sm">
+            
+            
+            <div class="navbar-nav">
+                <a href="https://hexo.io" class="nav-item nav-link">Hexo</a>
+            </div>
+            
+            <div class="navbar-nav">
+                <a href="http://www.hanlindong.com" class="nav-item nav-link">Adagio's author</a>
+            </div>
+            
+        </div>
+    </nav>
+</div>
+
+<div class="d-flex d-md-none" style="width: 100%; background-color: #e9ecef">
+    
+    <div class="nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sm" aria-expanded="false" aria-label="Toggle Navigation">
+            <i class="fas fa-bars fa-lg"></i>
+        </button>
+    </div>
+    
+    <nav class="navbar ml-auto">
+        <a class="navbar-brand" href="/">
+            
+            <img class="logo" src="https://via.placeholder.com/100x50.png?text=logo">
+            
+        </a>
+    </nav>
+</div>
+
+
+<div class="container d-none d-md-block my-navbar">
+    <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
+        <a class="navbar-brand " href="/">
+            
+            <img class="logo" src="https://via.placeholder.com/100x50.png?text=logo">
+            
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" href="https://hexo.io">Hexo</a>
+                </li>
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" href="http://www.hanlindong.com">Adagio's author</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </nav>
+</div>
+
+
+
+
+    <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        
+        <h1 class="mt-4 article-title page-title">Pyro:Deep Universal Probabilistic Programming</h1>
+        
+        <p class="lead text-gray mt-3">By Anonymous; Published on 2019-04-09</p>
+        
+        <div class="tags">
+            <ul class="tag-list">
+                
+                <li class="tag-list-item">
+                    <a class="tag-list-link" href="/tags/概率编程/">概率编程</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 pt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <main>
+                            <article class="article-text page-content"><p>Pyro:Deep Universal Probabilistic Programming<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#absract">Absract</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#design-principle">Design Principle</a></li>
+<li><a href="#project-openness-and-development">Project Openness and Development</a></li>
+<li><a href="#4-existing-systems">4. Existing Systems</a></li>
+<li><a href="#5-experiments">5. Experiments</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="absract">Absract</span></h2><p>Pyro是一种基于Python的概率编程语言，作为在AI研究中开发高级概率模型的平台。为了扩展到大型数据集和高维模型，Pyro使用基于PyTorch构建的随机变分推理算法和概率分布，PyTorch是一个现代GPU加速的深度学习框架。为了适应复杂或模型特定的算法行为，Pyro利用Poutine，一个可组合构建块库，用于修改概率程序的行为。<br>关键词：概率编程，图形模型，近似贝叶斯推理，生成模型，深度学习</p>
+<h2><span id="introduction">Introduction</span></h2><p>近年来，结构丰富的概率模型已经在AI的许多基本问题上展示了有希望的结果（Ghahramani（2015））。但是，大多数这样的模型仍然是从零开始实现的系统，这减缓他们的发展，限制他们的范围和可扩展性。概率编程语言（PPL）有望减轻这种负担，但实际上，更高级的模型通常需要针对特定​​应用定制的高性能推理引擎。我们确定了设计原则，使PPL能够在保持灵活性的同时扩展到高级研究应用，我们认为这些原则在Pyro PPL中完全实现。</p>
+<h2><span id="design-principle">Design Principle</span></h2><p>首先，适合开发最先进的AI研究模型的PPL<b>应该具有表现力</b>：它应该能够简明地描述具有数据依赖内部控制流的模型或潜在变量，其存在取决于其他潜在变量的值 ，或仅以封闭形式定义为非标准化联合分布的模型。</p>
+<p>为了实现PPL，它必须是<b>可扩展的</b>：其近似推理算法必须能够无缝地处理AI研究中常见的大数据集和非共轭高维模型，并且应尽可能利用编译器加速。</p>
+<p>针对研究模型的PPL应该是<b>灵活的</b>：除了可扩展性之外，许多高级模型还需要具有复杂的模型特定行为的推理算法。PPL应该使研究人员能够快速，轻松地实现此类行为，并应在模型，推理和运行时实现之间强制分离关注点。</p>
+<p>最后，针对研究人员的PPL作为用户应力求<b>最小化</b>：为了最大限度地减少认知开销，它应该与现有语言和系统共享其大部分语法和语义，并与其他工具（如可视化库）配合使用。</p>
+<p>从表2中可以清楚地看出，这四个原则经常是冲突的，其中一个是以牺牲其他原则为代价的。例如，过于灵活的设计可能非常难以有效和可扩展地实现，尤其是在同时将新语言与现有工具集成的同时。类似地，启用自定义推理算法的开发可能是困难的，而不限制模型表达性。在本节中，我们描述了我们在Pyro中做出的设计选择，以平衡所有四个目标。</p>
+<p>Pyro嵌入在Python中，Pyro程序被编写为Python函数或callables，只有两个额外的语言原语（其行为被推理算法覆盖）：pyro.sample用于注释对具有内部随机性的函数的调用，以及pyro.param 用可以改变它们的推理算法学习参数。Pyro模型可能包含任意Python代码并以任意方式与其交互，包括通过pyro.sample的obs关键字参数表示非标准化模型。Pyro的语言原语可以与Python的所有控件构造一起使用，包括递归，循环和条件。因此，特定执行中随机变量的存在可能依赖于任何Python控件ow构造。</p>
+<p>Pyro实现了几种通用概率推理算法，包括No U-turn采样器（Hoffman和Gelman（2014）），哈密顿蒙特卡罗的变体。然而，主推理算法是基于梯度的随机变分推理（SVI）（Kingma和Welling（2014）），其使用随机梯度下降来优化近似和真实后验分布之间的发散度量的蒙特卡洛估计。<br>由于GPU加速的张量数学和通过PyTorch的反向模式自动分解，Pyro可以扩展到复杂的高维模型，并且由于在SVI中通过小批量数据计算的随机梯度估计，它可以扩展到大型数据集。</p>
+<p>Pyro中的一些推理算法，例如SVI和重要性采样，可以使用任意Pyro程序（称为<u>guide</u>，来自webPPL的概念）作为近似后验或提议分布。给定模型的guide必须采用与模型相同的输入参数，并为模型中的每个无约束样本语句包含相应的样本语句，否则不受限制。然后，用户可以自由地表达关于后验分布的复杂假设，例如， 有条件的独立结构。与webPPL和Anglican不同，Pyro guide可能不依赖于模型内部的值。</p>
+<p>最后，为了实现灵活性和关注点的分离，Pyro构建在Poutine上，这是一个效果处理程序库(Kammar et al)(2013)实现个人控制和簿记操作，用于检查和修改Pyro程序的行为，将推理算法实现与语言细节分离。</p>
+<h2><span id="project-openness-and-development">Project Openness and Development</span></h2><p>Pyro的源代码可以在MIT许可下免费获得，由作者和开源贡献者社区开发，网址为<a href="https://github.com/uber/pyro，文档，示例和讨论论坛都在https上在线托管：" target="_blank" rel="noopener">https://github.com/uber/pyro，文档，示例和讨论论坛都在https上在线托管：</a> //pyro.ai。在将代码合并到主代码库之前，通过持续集成服务自动运行全面的测试套件，以保持高水平的项目质量和可用性。</p>
+<p>我们还发现，虽然PyTorch是张量运算和自动微分的宝贵基础，但它缺少一个高性能的概率分布库。因此，几位作者在PyTorch分发的上游做了大量的开源贡献。1受TensorFlow分发的启发，一个新的PyTorch核心库(Dillon et al)(2017年)。</p>
+<h2><span id="4-existing-systems">4. Existing Systems</span></h2><p><img src="https://i.loli.net/2019/04/09/5cac049fd19be.png" alt="Existing System.png"></p>
+<p>概率编程和近似推理是积极研究的领域，因此存在许多现有的概率编程语言和系统。我们简单地提到几个在Pyro开发中特别有用的东西，遗憾地省略（由于空间限制）许多系统，简单的直接比较更加困难。我们还强调，与传统的编程语言开发一样，我们的设计决策并非普遍适用于概率编程，也不适用于概率编程，而其他系统则有目的地使不同的tradof来实现不同的目标。</p>
+<p>Stan（Carpenter等人（2017）是一种领域特定语言，用于描述一类受限概率的程序并在这些模型中执行高质量的自动推理。Church（Goodman et al。（2008））是Scheme的概率语言，是一种早期的通用概率编程语言，能够表示任何可计算的概率分布。Venture（Mansinghka et al。（2018））是一种通用语言，专注于表现力和灵活性以及自定义语法和虚拟机。Anglican（Tolpin等人（2016））和webPPL（Goodman和Stuhlmuller（2014））是Church的轻量级后继者，在通用编程语言Clojure和JavaScript中作为句法子集（Wingate等人（2011））嵌入。<br>Edward（Tran et al。（2017））是一个基于静态TensorFlow图的PPL，它具有模型和推理的可组合表示。ProbTorch（Siddharth等人（2017））是一个建立在PyTorch上的PPL，专注于深度生成模型和开发变异推理的新目标。图灵（Ge et al。（2018））是一个嵌入Julia的PPL，具有可组合的MCMC算法</p>
+<h2><span id="5-experiments">5. Experiments</span></h2><p>为了证明Pyro符合我们的设计目标，我们实施了几个最先进的模型。这里我们专注于变分自动编码器（VAE; Kingma和Welling（2014））和深马尔可夫模型（DMM; Krishnan等人）（2017）），非线性状态空间模型。</p>
+<p>为了证明Pyro满足我们的设计目标，我们实现了几个最先进的模型。2这里我们重点介绍变分自动编码器(VAE；Kingma和Willing(2014)和DeepMarkovModel(DMM；Krishnan等人)。(2017)，这是一个非线性状态空间模型，已用于多种应用，<b>包括音频生成和因果推理</b>。<br>VAE是深度概率建模的标准例子，而DMM有几个特点使其成为理想的比较点：它是一个高维、非共轭的模型，设计为适合于大型数据集；序列中潜在变量的数量取决于输入数据；它使用手工设计的后验近似。</p>
+<p>Pyro派生的模型和推理程序几乎完全复制原始论文，除了我们使用蒙特卡罗估计而不是KL分歧项的精确解析表达式。我们使用MNIST数据集和2隐藏层MLP编码器和解码器网络，其中VAE的变化隐藏层大小#h和潜在代码大小#z以及digital music的相同数据集来训练DMM。</p>
+<p>为了证明Pyro的抽象不会通过引入太多开销来降低其可扩展性，我们将VAE实现与惯用的PyTorch实现进行了比较.4在验证它们收敛到相同的测试ELBO之后，我们比较了计算一个时钟所需的wall clock时间。梯度更新，在单个NVIDIA GTX 1080Ti上平均超过10个时期的GPU加速小批量随机梯度变化推断（批量大小128）。图3显示Pyro和PyTorch版本之间的相对性能差距是适中的，更重要的是，它随着执行张量操作所花费的总时间的增加而缩小。</p>
+<p>我们使用DMM来评估Pyro的灵活性和表现力。如图4所示，我们发现在5000个训练时期之后，我们能够快速简明地复制完整的DMM模型以及论文中报告的推理配置和定量结果。此外，由于Pyro的模块化设计，我们还能够通过自回归（（IAF）构建具有更具表现力的近似后验的DMM变体（Kingma等人（2016）），用几行代码改善结果，计算成本可忽略不计。<br><img src="https://i.loli.net/2019/04/09/5cac0bc24bfbf.png" alt="图3和图4.png"></p>
+</article>
+                        </main>
+                        
+                        
+                    </div>
+                </div>
+                <div class="row mt-5 mb-5">
+                    <div class="col-12">
+                        <div class="row">
+    <div class="col">
+        <nav aria-label="paginator" class="paginator">
+            <ul class="pagination d-none d-md-flex pagination-lg justify-content-center">
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/04/09/Deep-Probabilitic-Programming/" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;
+                            Deep Probabilitic Programming</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/04/08/工作日志/" aria-label="Next">
+                        <span aria-hidden="true">工作日志
+                            &raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="pagination d-md-none justify-content-center">
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/04/09/Deep-Probabilitic-Programming/" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;
+                            Deep Probabilitic Programming</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/04/08/工作日志/" aria-label="Next">
+                        <span aria-hidden="true">工作日志
+                            &raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div id="vcomment"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="container pt-4 page-sidebar">
+                    
+                    <div class="row">
+    <div class="col">
+        <h6>APPLAUSE FOR ME</h6>
+        <div id="applause-easy"></div>
+    </div>
+</div>
+                    
+                    <hr class="row">
+                    <div class="row toc-container">
+                        <div class="col-12">
+                            <h6>NAVIGATION</h6>
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Absract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Design Principle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Project Openness and Development</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">4. Existing Systems</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">5. Experiments</span></a></li></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+    <div class="jumbotron jumbotron-fluid mb-0">
+        <div class="container-fluid">
+            <div class="col text-center">
+                <div class="bottom-social">
+                    <div class="row">
+    <div class="col text-center">
+        <ul class="list-inline">
+            
+            <li class="list-inline-item">
+                
+                <a href="https://github.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.facebook.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.pinterest.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-pinterest-p fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.linkedin.com/in/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+                </div>
+                <p class="copyright text-muted">
+                    Copyright &copy; 徐志康的技术博客
+                    <br>
+                    Thanks for coming!
+                    <br>
+                    <a href="https://github.com/Hanlin-Dong/hexo-theme-adagio">Adagio</a> - A <a href="https://hexo.io">Hexo</a> theme made with love by
+                    <a href="http://www.hanlindong.com">Hanlin Dong</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    
+    
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.bootcss.com/font-awesome/5.9.0/js/all.min.js"></script>
+         
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                    CommonHTML: { linebreaks: { automatic: true } },
+                    "HTML-CSS": { linebreaks: { automatic: true } },
+                    SVG: { linebreaks: { automatic: true } }
+                });
+            </script>
+            <script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+        
+    
+
+
+<script src="/js/av.min.js"></script>
+<script src="/js/valine.min.js"></script>
+<script src="/js/applause-easy.js"></script>
+
+<script>
+$(document).ready(function() {
+    var a = new ApplauseEasy({
+        id: 'applause-easy',
+        appId: "xxxxxxxxxx",
+        appKey: "xxxxxxxxxx",
+        img_src: "http://img.hanlindong.com/blog/site/clap.png",
+        img_width: "50px",
+        img_height: "50px"
+    })
+})
+</script>
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?123456789";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-11111111-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-11111111-1');
+</script>
+
+
+    
+    <script>
+    new Valine({
+        el: "#vcomment",
+        appId: "xxxxxxxxxx",
+        appKey: "xxxxxxxxxx",
+        notify: false,
+        varify: false,
+        avatar: 'identicon',
+        placeholder: "",
+        recordIP: true
+    })
+</script>
+    
+</body>
+</html>

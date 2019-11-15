@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content>
+    <link rel="shortcut icon" href="http://some.url/to/favicon.ico">
+    <title>脉冲神经网络ODIN实现-Adagio</title>
+    
+        
+            <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/academicons/1.8.6/css/academicons.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+        
+    
+    <link rel="stylesheet" href="/css/adagio.css">
+</head>
+<body>
+    <div class="container-fluid">
+    <nav class="nav">
+        <div class="collapse navbar-collapse" id="navbar-sm">
+            
+            
+            <div class="navbar-nav">
+                <a href="https://hexo.io" class="nav-item nav-link">Hexo</a>
+            </div>
+            
+            <div class="navbar-nav">
+                <a href="http://www.hanlindong.com" class="nav-item nav-link">Adagio's author</a>
+            </div>
+            
+        </div>
+    </nav>
+</div>
+
+<div class="d-flex d-md-none" style="width: 100%; background-color: #e9ecef">
+    
+    <div class="nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sm" aria-expanded="false" aria-label="Toggle Navigation">
+            <i class="fas fa-bars fa-lg"></i>
+        </button>
+    </div>
+    
+    <nav class="navbar ml-auto">
+        <a class="navbar-brand" href="/">
+            
+            <img class="logo" src="https://via.placeholder.com/100x50.png?text=logo">
+            
+        </a>
+    </nav>
+</div>
+
+
+<div class="container d-none d-md-block my-navbar">
+    <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
+        <a class="navbar-brand " href="/">
+            
+            <img class="logo" src="https://via.placeholder.com/100x50.png?text=logo">
+            
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" href="https://hexo.io">Hexo</a>
+                </li>
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" href="http://www.hanlindong.com">Adagio's author</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </nav>
+</div>
+
+
+
+
+    <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        
+        <h1 class="mt-4 article-title page-title">脉冲神经网络ODIN实现</h1>
+        
+        <p class="lead text-gray mt-3">By Anonymous; Published on 2019-06-21</p>
+        
+        <div class="tags">
+            <ul class="tag-list">
+                
+                <li class="tag-list-item">
+                    <a class="tag-list-link" href="/tags/ODIN/">ODIN</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 pt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <main>
+                            <article class="article-text page-content"><p>摘自github的文档翻译<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#1-结构">1. 结构</a><ul>
+<li><a href="#11-cross-architecture">1.1 Cross architecture</a></li>
+<li><a href="#12-结构框图和文件树">1.2 结构框图和文件树</a></li>
+</ul>
+</li>
+<li><a href="#2interfaces-and-commands">2.interfaces and commands</a><ul>
+<li><a href="#22-地址事件表示aer总线">2.2 地址事件表示（AER）总线</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="1-结构">1. 结构</span></h1><p>ODIN是一种在线学习数字脉冲神经形态处理器，在Universitécatholiquede Louvain（UCLouvain）的28-nm FDSOI CMOS中设计和制作原型，于2019年在 IEEE Transactions on Biomedical Circuits and Systems journal上发表。ODIN基于单个256神经元64k突触交叉神经突触核心，其交叉架构和框图分别在1.1节和1.2节中描述。ODIN具有以下主要功能：</p>
+<ul>
+<li>突触嵌入基于脉冲依赖突触可塑性（SDSP）的在线学习</li>
+<li>神经元可以单独选择作为标准的LIF模型或作为现象学Izhikevich（IZH）神经元模型来再现20 Izhikevich行为。</li>
+</ul>
+<p>因此，ODIN是用于边缘学习的多功能实验平台，同时展示（i）记录神经元和突触密度，与之前提出的所有脉冲神经网络（SNN）相比较，以及（ii）先前提出的数字中每个突触操作的最低能量SNNS。</p>
+<h2><span id="11-cross-architecture">1.1 Cross architecture</span></h2><p><img src="https://raw.githubusercontent.com/xuzhikang2018/ODIN/master/doc/figs/arch.png" alt></p>
+<center>图1  -  ODIN时间复用的交叉开关架构和由输入AER链路处理的关键事件类型。</center>  
+
+<p>ODIN模拟图1所示的交叉结构，其中每个神经元通过在线学习突触连接到交叉阵列中的所有256个神经元。因此，交叉结构中处理器中包括256×256 = 64k的突触。为了减少电路资源，通过时间复用来共享神经元和突触的更新逻辑：所有神经元和突触状态都存储在SRAM存储器中。来自/到交叉开关架构的输入和输出事件通过地址事件表示（AER）总线处理：</p>
+<h2><span id="12-结构框图和文件树">1.2 结构框图和文件树</span></h2><p><img src="https://raw.githubusercontent.com/xuzhikang2018/ODIN/master/doc/figs/block.png" alt><br>图2（a）带有主要verilog文件的ODIN框图（b）完整的verilog文件树，说明不同模块之间的依赖关系</p>
+<p>ODIN SNN处理器框图的概述如图2（a）所示，对应块的verilog文件在图2（a）中以橙色突出显示。src文件夹中可用的详细verilog文件树如图2（b）所示。关于ODIN的体系结构和时间复用操作的更多细节可以在相应论文中找到。<br>neuron.v 时间复用的256个神经元,各个状态和参数存储在4kB单端口中SRAM中，并在HDL中对其进行行为描述<br>synaptic_core.v 时分复用的64k个突触，各个状态和参数存储在32kB单端口中SRAM中，并在HDL中对其进行行为描述<br>sheduler.v 神经元和突触更新逻辑的时间复用由控制器处理<br>controller.v 来自输入AER总线的内部和外部事件由调度器处理。<br>spi.v SPI总线允许配置控制寄存器并访问单个神经元和突触状态。</p>
+<h1><span id="2interfaces-and-commands">2.interfaces and commands</span></h1><p>除了复位和时钟输入，顶层文件ODIN.v包含三个主要接口：SPI总线（第2.1节）和输入和输出AER总线（第2.2节）。</p>
+<p><img src="https://i.loli.net/2019/06/21/5d0c3dc8ac8ad81382.png" alt="spi.png"></p>
+<p>图3  - （a）写和（b）读操作的20位SPI时序图。</p>
+<p>ODIN通过以下接口实现20位从SPI bus：</p>
+<table>
+<thead>
+<tr>
+<th>Pin</th>
+<th>端口描述</th>
+<th>位宽</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>SCK</em></td>
+<td>输入</td>
+<td>1-bit</td>
+<td>由 SPI master产生的时钟.</td>
+</tr>
+<tr>
+<td><em>MOSI</em></td>
+<td>输入</td>
+<td>1-bit</td>
+<td>Master 输出, slave 输入.</td>
+</tr>
+<tr>
+<td><em>MISO</em></td>
+<td>输出</td>
+<td>1-bit</td>
+<td>Master 输入, slave 输出.</td>
+</tr>
+</tbody>
+</table>
+<p>使用SPI总线时，应声明<em>SPI_GATE_ACTIVITY</em>配置寄存器（第4节）。为确保正常工作，<em>SCK SPI</em>时钟的工作频率应至少比<em>ODIN</em>的时钟频率小4倍。SPI写和读操作遵循图4和图5中所示的时序图。分别如图3（a）和3（b）所示：在主机发送与该地址相关的数据（写入）或从ODIN（读取）接收的数据之前，首先由SPI主机发送20位地址字段。根据20位地址字段<em>a</em>的内容，SPI总线可用于访问配置寄存器，神经元存储器或突触存储器，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th><em>R</em> (<em>a<19></19></em>)</th>
+<th><em>W</em> (<em>a<18></18></em>)</th>
+<th><em>cmd&lt;1:0&gt;</em>    (<em>a&lt;17:16&gt;</em>)</th>
+<th><em>addr&lt;15:0&gt;</em> (<em>a&lt;15:0&gt;</em>)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N/A</td>
+<td>N/A</td>
+<td>00</td>
+<td>{<em>conf_addr&lt;15:0&gt;</em>}</td>
+<td>配置寄存器写入地址 <em>conf_addr</em>.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>01</td>
+<td>{n/a,<em>byte_addr&lt;3:0&gt;</em>,<em>word_addr&lt;7:0&gt;</em>}</td>
+<td>读入神经元memory（256个128位字）。搜索来自word_addr &lt;7：0&gt;的字节byte_addr&lt;3：0&gt;。</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>01</td>
+<td>{n/a,<em>byte_addr&lt;3:0&gt;</em>,<em>word_addr&lt;7:0&gt;</em>}</td>
+<td>写入神经元存储器（256个128位字）。写入字 <em>word_addr&lt;7：0&gt;</em> 的字节 <em>byte_addr&lt;3：0&gt;</em>。</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>10</td>
+<td>{n/a,<em>byte_addr&lt;1:0&gt;</em>,<em>word_addr&lt;12:0&gt;</em>}</td>
+<td>读取突触记忆（8192 32位字）。检索来自 <em>word_addr</em> &lt;12：0&gt;的字节<em>byte_addr&lt;1：0&gt;</em>。</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>10</td>
+<td>{n/a,<em>byte_addr&lt;1:0&gt;</em>,<em>word_addr&lt;12:0&gt;</em>}</td>
+<td>写入突触记忆（8192 32位字）。字节 <em>byte_addr &lt;1：0&gt;</em> 来自字 <em>word_addr &lt;12：0&gt;</em> 被写入。</td>
+</tr>
+</tbody>
+</table>
+<p>20位SPI数据字段d具有以下形式</p>
+<h2><span id="22-地址事件表示aer总线">2.2 地址事件表示（AER）总线</span></h2><table>
+<thead>
+<tr>
+<th><em>n/a&lt;3:0&gt;</em> (<em>d&lt;19:16&gt;</em>)</th>
+<th><em>mask&lt;7:0&gt;</em> (<em>d&lt;15:8&gt;</em>)</th>
+<th><em>byte&lt;7:0&gt;</em> (<em>d&lt;7:0&gt;</em>)</th>
+<th>Source</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td><em>w_mask&lt;7:0&gt;</em></td>
+<td><em>w_byte&lt;7:0&gt;</em></td>
+<td>SPI Master</td>
+<td>SPI写入 - 数据字节 <em>w_byte &lt;7：0&gt;</em> 被 <em>w_mask &lt;7：0&gt;</em> 屏蔽（1 =屏蔽，0 =非屏蔽）写入目标存储单元。</td>
+</tr>
+<tr>
+<td>-</td>
+<td>N/A</td>
+<td><em>r_byte&lt;7:0&gt;</em></td>
+<td>ODIN</td>
+<td>SPI读取 - 从ODIN检索与目标存储器位置相关联的数据字节 <em>r_byte &lt;7：0&gt;</em>。</td>
+</tr>
+</tbody>
+</table>
+</article>
+                        </main>
+                        
+                        
+                    </div>
+                </div>
+                <div class="row mt-5 mb-5">
+                    <div class="col-12">
+                        <div class="row">
+    <div class="col">
+        <nav aria-label="paginator" class="paginator">
+            <ul class="pagination d-none d-md-flex pagination-lg justify-content-center">
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/09/06/Testbench书写/" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;
+                            Testbench书写</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/06/18/乐鑫2020成电站提前批笔试题/" aria-label="Next">
+                        <span aria-hidden="true">乐鑫2020成电站提前批笔试题
+                            &raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="pagination d-md-none justify-content-center">
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/09/06/Testbench书写/" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;
+                            Testbench书写</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/2019/06/18/乐鑫2020成电站提前批笔试题/" aria-label="Next">
+                        <span aria-hidden="true">乐鑫2020成电站提前批笔试题
+                            &raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div id="vcomment"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="container pt-4 page-sidebar">
+                    
+                    <div class="row">
+    <div class="col">
+        <h6>APPLAUSE FOR ME</h6>
+        <div id="applause-easy"></div>
+    </div>
+</div>
+                    
+                    <hr class="row">
+                    <div class="row toc-container">
+                        <div class="col-12">
+                            <h6>NAVIGATION</h6>
+                            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">1. 结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">1.1 Cross architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">1.2 结构框图和文件树</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">2.interfaces and commands</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2.2 地址事件表示（AER）总线</span></a></li></ol></li></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+    <div class="jumbotron jumbotron-fluid mb-0">
+        <div class="container-fluid">
+            <div class="col text-center">
+                <div class="bottom-social">
+                    <div class="row">
+    <div class="col text-center">
+        <ul class="list-inline">
+            
+            <li class="list-inline-item">
+                
+                <a href="https://github.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.facebook.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.pinterest.com/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-pinterest-p fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a href="https://www.linkedin.com/in/xxxxx">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+                </div>
+                <p class="copyright text-muted">
+                    Copyright &copy; 徐志康的技术博客
+                    <br>
+                    Thanks for coming!
+                    <br>
+                    <a href="https://github.com/Hanlin-Dong/hexo-theme-adagio">Adagio</a> - A <a href="https://hexo.io">Hexo</a> theme made with love by
+                    <a href="http://www.hanlindong.com">Hanlin Dong</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    
+    
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.bootcss.com/font-awesome/5.9.0/js/all.min.js"></script>
+         
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                    CommonHTML: { linebreaks: { automatic: true } },
+                    "HTML-CSS": { linebreaks: { automatic: true } },
+                    SVG: { linebreaks: { automatic: true } }
+                });
+            </script>
+            <script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+        
+    
+
+
+<script src="/js/av.min.js"></script>
+<script src="/js/valine.min.js"></script>
+<script src="/js/applause-easy.js"></script>
+
+<script>
+$(document).ready(function() {
+    var a = new ApplauseEasy({
+        id: 'applause-easy',
+        appId: "xxxxxxxxxx",
+        appKey: "xxxxxxxxxx",
+        img_src: "http://img.hanlindong.com/blog/site/clap.png",
+        img_width: "50px",
+        img_height: "50px"
+    })
+})
+</script>
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?123456789";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-11111111-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-11111111-1');
+</script>
+
+
+    
+    <script>
+    new Valine({
+        el: "#vcomment",
+        appId: "xxxxxxxxxx",
+        appKey: "xxxxxxxxxx",
+        notify: false,
+        varify: false,
+        avatar: 'identicon',
+        placeholder: "",
+        recordIP: true
+    })
+</script>
+    
+</body>
+</html>
