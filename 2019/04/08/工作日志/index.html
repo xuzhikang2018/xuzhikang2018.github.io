@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <title>工作日志 | 徐志康的技术博客</title>
+  <meta name="keywords" content=" 工作日志 ">
+  <meta name="description" content="工作日志 | 徐志康的技术博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="来自深入浅出玩转FPGA">
+<meta name="keywords" content="Testbench">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Testbench书写">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/Testbench书写/index.html">
+<meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="来自深入浅出玩转FPGA">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-16T02:45:42.883Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Testbench书写">
+<meta name="twitter:description" content="来自深入浅出玩转FPGA">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>徐志康</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"/>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(17)</small></div></li>
+    
+        
+            
+            <li><div data-rel="probabilistic programming">probabilistic programming<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Intel与概率计算">Intel与概率计算<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数字IC设计">数字IC设计<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="其他">其他<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="脉冲神经网络">脉冲神经网络<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工作周报与报告">工作周报与报告<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url" href="/about">关于</a><a style="width: 50%" class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="17">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off" id="local-search-input">
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none">
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">概率编程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">项目</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Testbench</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Linux使用</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">python使用过程中的记录</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">博客遇到的问题</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">博客有关</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">实用工具</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ODIN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">求职</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">工作日志</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">概率计算</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a class="probabilistic programming " href="/2019/04/09/Deep-Probabilitic-Programming/" data-tag="概率编程" data-author>
+            <span class="post-title" title="Deep Probabilitic Programming">Deep Probabilitic Programming</span>
+            <span class="post-date" title="2019-04-09 11:15:58">2019/04/09</span>
+        </a>
+        
+        <a class="Intel与概率计算 " href="/2019/04/02/MIT概率计算小组/" data-tag="项目" data-author>
+            <span class="post-title" title="MIT概率计算小组">MIT概率计算小组</span>
+            <span class="post-date" title="2019-04-02 11:08:22">2019/04/02</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/09/06/Testbench书写/" data-tag="Testbench" data-author>
+            <span class="post-title" title="Testbench书写">Testbench书写</span>
+            <span class="post-date" title="2019-09-06 10:14:30">2019/09/06</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/04/Ubuntu_Linux使用笔记/" data-tag="Linux使用" data-author>
+            <span class="post-title" title="Ubuntu_Linux使用笔记">Ubuntu_Linux使用笔记</span>
+            <span class="post-date" title="2019-04-04 23:18:27">2019/04/04</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/26/python使用/" data-tag="python使用过程中的记录" data-author>
+            <span class="post-title" title="python使用">python使用</span>
+            <span class="post-date" title="2019-04-26 09:20:19">2019/04/26</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/06/18/乐鑫2020成电站提前批笔试题/" data-tag="面试" data-author>
+            <span class="post-title" title="乐鑫2020成电站提前批笔试题">乐鑫2020成电站提前批笔试题</span>
+            <span class="post-date" title="2019-06-18 21:49:04">2019/06/18</span>
+        </a>
+        
+        <a class="其他 " href="/2019/03/30/博客使用/" data-tag="博客遇到的问题" data-author>
+            <span class="post-title" title="博客使用">博客使用</span>
+            <span class="post-date" title="2019-03-30 09:33:01">2019/03/30</span>
+        </a>
+        
+        <a class="其他 " href="/2019/03/29/博客搭建/" data-tag="博客有关" data-author>
+            <span class="post-title" title="博客搭建">博客搭建</span>
+            <span class="post-date" title="2019-03-29 23:18:54">2019/03/29</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/02/实用工具/" data-tag="实用工具" data-author>
+            <span class="post-title" title="实用工具">实用工具</span>
+            <span class="post-date" title="2019-04-02 10:14:29">2019/04/02</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" data-tag="概率编程" data-author>
+            <span class="post-title" title="Pyro:Deep Universal Probabilistic Programming">Pyro:Deep Universal Probabilistic Programming</span>
+            <span class="post-date" title="2019-04-09 10:06:26">2019/04/09</span>
+        </a>
+        
+        <a class="脉冲神经网络 " href="/2019/06/21/脉冲神经网络ODIN实现/" data-tag="ODIN" data-author>
+            <span class="post-title" title="脉冲神经网络ODIN实现">脉冲神经网络ODIN实现</span>
+            <span class="post-date" title="2019-06-21 11:22:23">2019/06/21</span>
+        </a>
+        
+        <a class="脉冲神经网络 " href="/2019/06/15/脉冲神经网络机遇与挑战/" data-tag="SNN" data-author>
+            <span class="post-title" title="脉冲神经网络机遇与挑战">脉冲神经网络机遇与挑战</span>
+            <span class="post-date" title="2019-06-15 20:39:48">2019/06/15</span>
+        </a>
+        
+        <a class="Intel与概率计算 " href="/2019/04/01/Intel概率计算报道/" data-tag="项目" data-author>
+            <span class="post-title" title="Intel概率计算报道">Intel概率计算报道</span>
+            <span class="post-date" title="2019-04-01 17:37:54">2019/04/01</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/03/概率编程之PyMC3/" data-tag="概率编程" data-author>
+            <span class="post-title" title="概率编程之PyMC3">概率编程之PyMC3</span>
+            <span class="post-date" title="2019-04-03 20:10:11">2019/04/03</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/03/30/数字IC设计面试100题/" data-tag="求职" data-author>
+            <span class="post-title" title="数字IC设计面试100题">数字IC设计面试100题</span>
+            <span class="post-date" title="2019-03-30 10:40:56">2019/03/30</span>
+        </a>
+        
+        <a class="工作周报与报告 " href="/2019/04/08/工作日志/" data-tag="工作日志" data-author>
+            <span class="post-title" title="工作日志">工作日志</span>
+            <span class="post-date" title="2019-04-08 10:01:30">2019/04/08</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" data-tag="概率计算" data-author>
+            <span class="post-title" title="MIT论文1-Venture:用于概率元编程的可扩展平台">MIT论文1-Venture:用于概率元编程的可扩展平台</span>
+            <span class="post-date" title="2019-04-04 17:50:35">2019/04/04</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-工作日志" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">工作日志</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a data-rel="工作周报与报告">工作周报与报告</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">工作日志</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title="更新时间: 2019-10-15 23:06:50">2019-04-08 10:01</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年4月2日-2019年4月8日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年4月9日-2019年4月15日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年4月16日-2019年4月22日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年4月23日-2019年4月29日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年4月30日-2019年5月5日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年5月6日-2019年5月12日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年5月13日-2019年5月20日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年5月21日-2019年5月27日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年5月28日-2019年6月3日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年6月4日-2019年6月10日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年6月11日-2019年6月17日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年6月18日-2019年6月24日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年6月25日-2019年7月1日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年7月2日-2019年7月8日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年7月9日-2019年7月15日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年7月16日-2019年7月22日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年7月23日-2019年7月29日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年7月30日-2019年8月12日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年9月2日-2019年9月9日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年9月10日-2019年9月16日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年9月17日-2019年9月23日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年9月24日-2019年9月30日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">2019年10月8日-2019年10月15日</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从2019年4月8日开始的工作日志</p>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</a></li>
+<li><a href="#2019年4月9日-2019年4月15日">2019年4月9日-2019年4月15日</a></li>
+<li><a href="#2019年4月16日-2019年4月22日">2019年4月16日-2019年4月22日</a></li>
+<li><a href="#2019年4月23日-2019年4月29日">2019年4月23日-2019年4月29日</a></li>
+<li><a href="#2019年4月30日-2019年5月5日">2019年4月30日-2019年5月5日</a></li>
+<li><a href="#2019年5月6日-2019年5月12日">2019年5月6日-2019年5月12日</a></li>
+<li><a href="#2019年5月13日-2019年5月20日">2019年5月13日-2019年5月20日</a></li>
+<li><a href="#2019年5月21日-2019年5月27日">2019年5月21日-2019年5月27日</a></li>
+<li><a href="#2019年5月28日-2019年6月3日">2019年5月28日-2019年6月3日</a></li>
+<li><a href="#2019年6月4日-2019年6月10日">2019年6月4日-2019年6月10日</a></li>
+<li><a href="#2019年6月11日-2019年6月17日">2019年6月11日-2019年6月17日</a></li>
+<li><a href="#2019年6月18日-2019年6月24日">2019年6月18日-2019年6月24日</a></li>
+<li><a href="#2019年6月25日-2019年7月1日">2019年6月25日-2019年7月1日</a></li>
+<li><a href="#2019年7月2日-2019年7月8日">2019年7月2日-2019年7月8日</a></li>
+<li><a href="#2019年7月9日-2019年7月15日">2019年7月9日-2019年7月15日</a></li>
+<li><a href="#2019年7月16日-2019年7月22日">2019年7月16日-2019年7月22日</a></li>
+<li><a href="#2019年7月23日-2019年7月29日">2019年7月23日-2019年7月29日</a></li>
+<li><a href="#2019年7月30日-2019年8月12日">2019年7月30日-2019年8月12日</a></li>
+<li><a href="#2019年9月2日-2019年9月9日">2019年9月2日-2019年9月9日</a></li>
+<li><a href="#2019年9月10日-2019年9月16日">2019年9月10日-2019年9月16日</a></li>
+<li><a href="#2019年9月17日-2019年9月23日">2019年9月17日-2019年9月23日</a></li>
+<li><a href="#2019年9月24日-2019年9月30日">2019年9月24日-2019年9月30日</a></li>
+<li><a href="#2019年10月8日-2019年10月15日">2019年10月8日-2019年10月15日</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="2019年4月2日-2019年4月8日">2019年4月2日-2019年4月8日</span></h2><p>这周主要内容包括：</p>
+<ol>
+<li>整理了一下Intel有关概率计算的报道，其中包括3月1日，英特尔新上任的实验室主任Rich Uhlig接受IEEE Spectrum的访谈，从我理解的来看，概率计算（probabilistic computing）应该就是，概率机器学习，贝叶斯机器学习的内容，实现方式就是概率编程（probabilistic programming）,能够进行少样本的数据学习，理解并能处理自然数据中的不确定性。<a href="https://xuzhikang2018.github.io/2019/04/01/Intel%E6%A6%82%E7%8E%87%E8%AE%A1%E7%AE%97%E6%8A%A5%E9%81%93/" target="_blank" rel="noopener">Intel概率计算报道</a></li>
+<li>论文1<a href="https://xuzhikang2018.github.io/2019/04/03/%E6%A6%82%E7%8E%87%E7%BC%96%E7%A8%8B%E4%B9%8BPyMC3/" target="_blank" rel="noopener">《Probabilistic programming in Python using PyMC3》</a>概率编程允许用户定义概率模型进行自动贝叶斯推理。马尔可夫链蒙特卡罗(MCMC)抽样的最新进展允许对越来越复杂的模型进行推理。这类MCMC，称为哈密顿蒙特卡罗，需要梯度信息，而这往往是不容易获得的。PyMC3是用Python编写的一个新的开源概率编程框架，它使用Theano通过自动微分来计算梯度，并在运行时将概率程序编译到C中以提高速度。与其他概率编程语言相反，PyMC3允许直接在Python代码中进行模型定义。由于不需要特定于领域的语言，因此具有很大的灵活性和与模型的直接交互。本文是对此软件包的教程式介绍。</li>
+<li>论文2<a href="https://xuzhikang2018.github.io/2019/04/04/MIT%E8%AE%BA%E6%96%871-Venture-%E7%94%A8%E4%BA%8E%E6%A6%82%E7%8E%87%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%8F%AF%E6%89%A9%E5%B1%95%E5%B9%B3%E5%8F%B0/#more" target="_blank" rel="noopener">《Venture: an extensible platform for probabilistic meta-programming》</a>,该论文是MIT概率编程团队2016年，介绍了Venture这个概率编程平台，Venture和其他编程语言相比最大的特点<strong>是可定制性</strong>，它把程序执行过程中查看概率选择的迹（trace）,以及搭建推理程序的基本模块，封装成函数提供给用户，可以在这基础上搭建新的推理方法和进行模型验证</li>
+<li>在youtube看了有关概率编程的会议PROBPROG 2018，Talks前10个talk，有关介绍他们的编程库，还有关研究团队谈及他们对概率编程的应用。<a href="http://note.youdao.com/noteshare?id=056636027501ac32819dcf6859f70a08&amp;sub=0C87C1FDFCF641A7920012DAACAB885D" target="_blank" rel="noopener">我的简单笔记</a></li>
+</ol>
+<h2><span id="2019年4月9日-2019年4月15日">2019年4月9日-2019年4月15日</span></h2><p>这周学习内容包括：</p>
+<ol>
+<li>谷歌基于Tensorflow开源的概率编程语言Edward <a href="https://xuzhikang2018.github.io/2019/04/09/Deep-Probabilitic-Programming/#more" target="_blank" rel="noopener">《Deep Probabilitic Programming》</a>。<br>Edward，一种图灵完备的概率编程语言。Edward定义了两种成分表征 - 随机变量和推理。通过将推理视为一流的公民，与建模相提并论，我们表明概率编程可以像传统的深度学习一样灵活，计算效率高。为了灵活性，Edward使用各种可组合的推理方法轻松地拟合相同的模型，从点估计到变分推理到MCMC。此外，Edward可以重复使用建模表示作为推理的一部分，促进<strong>丰富的变分模型和生成对抗网络</strong>的设计。为了提高效率，Edward被集成到TensorFlow中，为现有的概率系统提供了显着的加速。例如，我们在基准逻辑回归任务中表明，Edward比Stan快至少35倍，比PyMC3快6倍。此外，Edward不会产生运行时开销：它与手写的TensorFlow一样快。</li>
+<li>Facebook开源的基于Pyto <a href="https://xuzhikang2018.github.io/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/#more" target="_blank" rel="noopener">《Pyro:Deep Universal Probabilistic Programming》</a><br>Pyro是一种基于Python的概率编程语言，作为在AI研究中开发高级概率模型的平台。为了扩展到大型数据集和高维模型，Pyro使用基于PyTorch构建的随机变分推理算法和概率分布，PyTorch是一个现代GPU加速的深度学习框架。为了适应复杂或模型特定的算法行为，Pyro利用Poutine，一个可组合构建块库，用于修改概率程序的行为。</li>
+<li>学了一些关于语音合成的基本知识，找了几篇关于深度学习在语音合成上的应用，其中一篇谷歌2017年发表的《TACONTRON: A Fully End-to-End Text-To-Speech Synthesis Model》<br>通常的TTS模型包含许多模块，例如文本分析， 声学模型， 音频合成等。而构建这些模块需要大量专业相关的知识以及特征工程，这将花费大量的时间和精力，而且各个模块之间组合在一起也会产生很多新的问题。TACOTRON是一个端到端的深度学习TTS模型，它可以说是将这些模块都放在了一个黑箱子里，我们不用花费大量的时间去了解TTS中需要用的的模块或者领域知识，直接用深度学习的方法训练出一个TTS模型，模型训练完成后，给定input,模型就能生成对应的音频。<br>TACOTRON是一个端到端的TTS模型，模型核心是seq2seq + attention。模型的输入为一系列文本字向量，输出spectrogram frame, 然后在使用Griffin_lim算法生成对应音频。模型结构如下图：<br><img src="https://i.loli.net/2019/04/15/5cb3de881903c.png" alt="TACONTRON"></li>
+<li>对于深度学习中网络架构，激活函数，代价函数的选择有些疑惑。还是回过头翻阅了一下深度学习花皮书。</li>
+</ol>
+<ul>
+<li>一般来说参数模型定义了一个分布p,并且简单地使用最大似然原理，意味着我们使用训练数据和模型预测间的交叉熵作为代价函数。输出层的函数选择一般包括用于高斯输出的分布的线性单元，用于Bernoulli输出分布的sigmoid单元，用于Multinoulli输出分布的softmax单元。</li>
+<li>激活函数的常用选择是整流线性单元ReLu函数 $g(z)=max(0,z) $。整流线性单元易于优化，因为它们和线性单元非常类似。线性单元和整流线性单元的唯一区别在于整流线性单元在其一半的定义域上输出为零。这使得只要整流线性单元处于激活状态，它的导数都能保持较大。它的梯度不仅大而且一致。整流操作的二阶导数几乎处处为0，并且在整流线性单元处于激活状态时，它的一阶导数处处为1。这意味着相比于引入二阶效应的激活函数来说，它的梯度方向对于学习来说更加有用。<br>其他的典型激活函数还包括logistic sigmoid与双曲正切函数，径向基函数RBF,softplus函数，硬双曲正切函数</li>
+<li>架构设计：万能的近似性质和深度定理告诉我们，具有单层的前馈网络足够表示任何函数，但是网络层可能大的不可实现，并且无法正确的学习和泛化。在很多情况下,<strong>使用更深的模型能够减少表示期望函数所需的单元的数量,并且可以减少泛化误差</strong>。这就是为什么要选择深层模型的原因，<br><img src="https://i.loli.net/2019/04/15/5cb3e43e51e6e.png" alt="深度的影响"><br>但是用更深的网络训练带来的问题是，在梯度反向传播的时候，会出现梯度显示，而无法对模型正常训练，并达到收敛</li>
+</ul>
+<p>总结：这周在看了关于Edward，和Pyro的概率编程，能够支持贝叶斯深度学习，概率机器学习，想利用Tensorflow等平台提供的概率编程工具搭建概率编程与深度学习，解决的实例可以是语音合成等。当我看的谷歌等关于深度学习在语音合成上的应用，发现对深度学习里面的架构，激活函数等的选择不太理解，返回去补了下相关知识。另外团队购买的开发板ZCU104是可以做深度学习的《ug1327-DNNDK User Guide》，Xlinx给的Demo是包括ResNet-50物体识别，人脸识别，动作检查等，最近也在看它的手册</p>
+<h2><span id="2019年4月16日-2019年4月22日">2019年4月16日-2019年4月22日</span></h2><ol>
+<li>深度学习花皮书200页~400页</li>
+</ol>
+<ul>
+<li>深度学习中的正则化</li>
+<li>深度模型中的优化</li>
+<li>卷积神经网络</li>
+<li>序列建模：循环与递归网络</li>
+</ul>
+<ol start="2">
+<li>台湾大学李宏毅的深度学习课程</li>
+</ol>
+<ul>
+<li>Why deep structure</li>
+<li>Optimization</li>
+<li>Generalization</li>
+<li>Specical Network structure，Seq-to-Seq Learning</li>
+</ul>
+<p>总结：本周学的内容，让我对深度学习中防止过拟合，正则化手段包括参数范数惩罚，提前终止，Bagging集成方法，Dropout等有了较深的了解。</p>
+<p>深度学习中的学习算法的优化，算法主要使用的是，SGD,Momentum(动量)这两种，自适应学习率算法，包括AdaGrad,RMSProp,Adam，这些算法都是利用Heissian矩阵去优化学习率。<strong>现在用的比较多的是Adam+Momentum</strong></p>
+<p>卷积神经网络CNN与循环神经网络代表LSTM的基本架构。</p>
+<p>深度学习中的不稳定性，在ImageNet 上应用GoogLeNet (Szegedy et al., 2014a) 的对抗样本生成的演示。通过添加一个不可察觉的小向量。可以改变GoogLeNet 对此图像的分类结果。<br><img src="https://i.loli.net/2019/04/22/5cbd1d69813ea.png" alt="QQ截图20190422094757.png"></p>
+<h2><span id="2019年4月23日-2019年4月29日">2019年4月23日-2019年4月29日</span></h2><p>这周主要在整理原来有关概率编程，贝叶斯深度学习的文章。关键点：== 机器知道学到了什么，也要知道没有学习什么，深度学习中的不确定性表征 ==。</p>
+<ol>
+<li>LeCun, Yann, Yoshua Bengio, and Geoffrey Hinton. “Deep learning.” Nature 521.7553 (2015): 436-44</li>
+</ol>
+<ul>
+<li><p>精读，深度学习的survey</p>
+</li>
+<li><p>这是深度学习几个大佬2015年发表在Nature上的Survey性质的文章，主要是介绍的是深度学习的基本理论知识，常见的两种架构DNN和RNN和他们的基本使用场景，文章的最后也提到了深度学习的未来包括Unsupervised learning，Natural language understanding，以及<strong>complex reasoning（机器怎么去在复杂环境下推理）</strong></p>
+</li>
+</ul>
+<ol start="2">
+<li>Ghahramani, Zoubin，”Probabilistic machine learning and artificial intelligence” 10.1038/nature14541(2015/05/27/online)</li>
+</ol>
+<ul>
+<li><p>精读 概率机器学习，机器学习中的概率框架的出发点</p>
+</li>
+<li><p>机器学习的概率框架的核心思想是：学习可以看做是推理合理模型以用于解释被观测的数据的过程。一台机器可以利用此模型去预测未来的数据，并基于这些预测进行理性的决策。不确定性在这一切中起了基础的作用，观测数据数据可以符合多个模型，因此那个模型适用于给定的数据是不确定的。相似的，未来数据和预测活动的结果也是不确定的。概率框架提供了对不确定性的建模。在科学数据分析，机器学习，机器人技术，认知科学和人工智能领域中扮演着重要的角色。这篇评论介绍了这种框架，并讨论的最新的进展——概率编程，贝叶斯优化，数据压缩以及模型自动发现</p>
+</li>
+</ul>
+<ol start="3">
+<li>Thomas Wiecki(2016,Jun 1).Bayesian Deep Learning Variational Inference: Bayesian Neural Networks.[Web Blog post].Retrieved from:<a href="https://twiecki.io/blog/2016/06/01/bayesian-deep-learning/" target="_blank" rel="noopener">https://twiecki.io/blog/2016/06/01/bayesian-deep-learning/</a></li>
+</ol>
+<ul>
+<li><p>精读，讨论了贝叶斯与深度学习的桥接</p>
+</li>
+<li><p>桥接深度学习与概率编程：一方面概率编程可以让我们以原则化和易于理解的方式构造比较小的，集中的模型来深入了解数据模型。另一方面，使用深度学习启发式方法来训练大量高度复杂的模型，这些模型的预测效果惊人。最近变分推理中的创新能够使概率编程扩大模型复杂性和数据的大小。概率编程可以被应用在广泛的问题中，在深度学习中，可以考虑一下几点。<strong>预测中的不确定性，表示中的不确定性，先验正则，知情先验的迁移学习，分层神经网络，其他混合架构</strong>。作者给出了一个简单的非线性可分的二分类问题，搭建简单的两层DNN,并为各层的权重赋以正态分布的先验，最后的输出层为Bernoulli分布，观测到样本数据后，利用ADVI变分推理算法计算各层权重的后验分布。结果上，训练的贝叶斯神经网络的预测效果十分的明显，有94.19%分类正确率。更多通过<strong>贝叶斯神经网络带来的是，后验分布预测的标准差，反映了预测中的不确定性</strong>。越接近决策边界，对哪个标签预测的不确定性越高。可以想象，将<strong>预测与不确定性联系起来是许多应用（如医疗，无人驾驶）的关键属性</strong>。为了进一步最大化准确度，可以根据来自高不确定区域的样本来重新训练模型。</p>
+</li>
+</ul>
+<ol start="4">
+<li>Thomas Wiecki(2016,July 05)Bayesian Deep Learning Part II: Bridging PyMC3 and Lasagne to build a Hierarchical Neural Network.[Web Blog post].Retrieved from:<a href="https://twiecki.io/blog/2016/07/05/bayesian-deep-learning/" target="_blank" rel="noopener">https://twiecki.io/blog/2016/07/05/bayesian-deep-learning/</a></li>
+</ol>
+<ul>
+<li><p>精度，讨论了贝叶斯深度学习中的分层神经网络，卷积贝叶斯网络</p>
+</li>
+<li><p>作者展示如何利用PyMC3和Lasagne以构建密集的2层ANN。使用mini-batch ADVI将模型拟合到MNIST手写数字数据集上。分层人工神经网络。利用Lasagne模块的功能，构建具有最大池层的分层贝叶斯卷积ANN，以在MNIST上实现98％的准确度。利用处于贝叶斯框架中的优势，<strong>能够探索预测中的不确定性</strong>。由于预测是类别，不能简单地计算后验预测标准偏差。<strong>取而代之的是，计算卡方统计量，能够知道样本预测结果的分布的均匀程度</strong>。越均匀，说明不确定性越高。当模型出错时，分类结果越不确定。</p>
+</li>
+</ul>
+<ol start="5">
+<li>Gal Y , Ghahramani Z . Bayesian Convolutional Neural Networks with Bernoulli Approximate Variational Inference[J]. Computer Science, 2015.</li>
+</ol>
+<ul>
+<li><p>精读，CNN的kernel为概率分布，能够有效的防止过拟合，提高系统的鲁棒性</p>
+</li>
+<li><p>CNN在小数据集上的学习容易过拟合，这是因为使用dropout在中间层中有效，当它放在kernel上时也会导致效果减少。为了解决这个问题，该论文提出了一种有效的贝叶斯卷积神经网络，<strong>通过在CNN内核上设计概率分布，能够有效的防止小数据的过拟合，为系统提供了更好的鲁棒性</strong>。论文作者假设该模型的复杂后验分布近似于伯努利变分分布，不需要给模型增加额外的学习参数。模型实现使用现有工具，几乎不需要任何开销。根据证明的理论，将casting dropout训练作为贝叶斯神经网络中的近似推断，使用蒙特卡罗MC dropout作为CNN中核的近似积分的理论依据。通过实验观察到MC dropout能够提高了模型架构的性能,而标准dropout近似不能。但这这带来了较慢的测试时间，因此推理近似的最佳选择应该取决于问题的类型与规模。</p>
+</li>
+</ul>
+<p>思考：通信中很多场景下的数据量不能称之为大数据，如果应用到深度学习上进行分类预测，容易造成过拟合。另外通信中信号的传输场景的不确定性，噪声的不确定性，给利用机器学习进行信号处理造成了很大的困难。从论文5可以知道，在CNN内核上假定伯努利变分分布，有类似Dropout的效果，能够有效的防止过拟合,提高小数据量下训练系统的鲁棒性。另外从论文3,4下能看到，利用贝叶斯深度学习进行训练预测，可以得到预测结果的不确定性，能够给噪声环境下的通信，提供有效的预测，与可解释的结果，以对信号进一步进行处理。</p>
+<h2><span id="2019年4月30日-2019年5月5日">2019年4月30日-2019年5月5日</span></h2><p>调研脉冲神经网络方面的论文，写了SNN的简单仿真，考虑接下来的安排</p>
+<ol>
+<li>Chen G K , Kumar R , Sumbul H E , et al. A 4096-Neuron 1M-Synapse 3.8-pJ/SOP Spiking Neural Network With On-Chip STDP Learning and Sparse Weights in 10-nm FinFET CMOS[J]. IEEE Journal of Solid-State Circuits, PP(99):1-11.<br>精读，2019年发表的在顶级期刊JOURNAL OF SOLID-STATE CIRCUITS上的脉冲神经网络芯片，关键词：Near-threshold voltage circuit optimizations,power gating, and clock gating,finegrained<br>structured sparsity</li>
+</ol>
+<ul>
+<li>该论文设计了包含4096神经元，一百万个突触，采用10-nm FinFET CMOS可重构的芯片，可用于加速多种脉冲神经网络（SNN）的推理和学习。SNN利用leaky integrate and fir神经元模型的数字电路，片上脉冲定时相关塑性（STDP）学习以及高扇出多播脉冲通信。结构化的<strong>细粒度权值weight稀疏性</strong>可将突触内存减少多达16倍，而存储连接的开销不到2％。近似计算共同优化了下降流量控制并从算法噪声中受益，以处理时空脉冲模式，能量可以低于原来的9.4倍。SNN在0.9 V时达到25.2 GSOP / s的峰值吞吐量，在525 mV时达到3.8 pJ / SOP的峰值能量效率，在450 mV时达到2.3-μW/神经元操作。片上无监督STDP训练，脉冲限制Boltzmann机去噪修改的MNIST数据集上，重建RMSE为0.036的自然场景图像。Nearthreshold操作与时间和空间稀疏性相结合，在236×20前馈网络中将能量减少17.4倍至1.0-μJ的每次分类，该网络经过训练以使用监督STDP对MNIST数字进行分类。具有50％稀疏权重的二元激活多层感知器在离线训练时具有反向误差传播，以对MNIST数字进行分类，每次分类消耗1.7-μJ，具有97.9％的准确度。</li>
+</ul>
+<ol start="2">
+<li>人工智能芯片技术白皮书<br>有关于SNN的章节，关键词，可缩放高并行的神经网络互联、众核结构、事件驱动、数据流计算</li>
+</ol>
+<ul>
+<li><p>IBM TrueNorth 芯片是异步- 同步混合（无全局时钟）数字电路的代表作，清华大学的天机系列芯片实现了纯同步数字电路的神经形态芯片；瑞士苏黎世联邦理工学院的ROLLS 芯片和海德堡大学的BrainScaleS 则是模拟集成电路的代表作品。而基于新型纳米器件的神经形态计算电路目前最受关注的方向是利用忆阻器等器件搭建的神经形态芯片。</p>
+<p>神经形态芯片在智能城市、自动驾驶的实时信息处理、人脸深度识别等领域都有出色的应用。如IBMTrueNorth 芯片可以用于检测图像中的行人、车辆等物体，且功耗极低（65mW）。它也可被用于语音、图像数据集识别等任务，准确性不逊于CNN 加速器芯片。此外，在线学习能力也是神经形态芯片的一大亮点。研究人员已证明，与其他典型的SNN 网络相比，在解决 MNIST 数字体识别问题上，英特尔Loihi 芯片将学习速度提高了100 万倍。</p>
+<p>在传统CMOS 工艺下，神经形态芯片的物理结构较为成熟，但对于可以仿真大规模神经网络而言（如大于人脑1% 规模的系统而言），仍存在很多挑战，包括（1）散热问题将导致单芯片规模无法继续增长，片上存储和积分计算单元的密度不够，导致集成的突触和神经元数量无法继续提升，功耗居高不下。（2）由于其阵列众核的特性，在片上、跨芯片、跨板、多机等尺度下的<strong>互联和同步问题</strong>突出。（3）为了提升密度，大多ASIC 芯片可模拟的神经形态<strong>算法过于单一或简化</strong>，缺乏灵活性和模仿真实生物神经元的能力。</p>
+</li>
+</ul>
+<ol start="3">
+<li>SNN的简单仿真：输入是16*16的像素图片<br><img src="https://i.loli.net/2019/05/06/5ccf98cca4b89.png" alt="QQ截图20190506101128.png">  </li>
+</ol>
+<ul>
+<li>网络只有两层，输入层256个神经元，输出层是3个神经元。输入层的处理，首先将图片和5*5的接受阈的核卷积，得到局部感受野。对于每个像素点，根据感受野的值，生成在0-150的时间戳上的脉冲序列。然后第二层的网络将根据接收到的脉冲序列，和分类的图片利用STDP算法修改突触权值。</li>
+</ul>
+<ol start="4">
+<li>讨论接下来的计划<br><img src="https://i.loli.net/2019/05/06/5ccf9af14ae54.png" alt="安排.png"></li>
+</ol>
+<h2><span id="2019年5月6日-2019年5月12日">2019年5月6日-2019年5月12日</span></h2><p>本周看了几篇脉冲神经网络的论文、规划项目安排、脉冲神经网络的仿真、如IBMTrueNorth架构仿真</p>
+<ol>
+<li>程龙, 刘洋. 脉冲神经网络:模型、学习算法与应用[J]. 控制与决策, 2018, v.33(05):158-172. 粗读，脉冲神经网络的模型，算法，应用的基本介绍</li>
+</ol>
+<ul>
+<li>本文综合介绍了<strong>脉冲神经网络的神经元模型、结构、学习算法、应用及硬件实现等基本内容</strong>,给出了近年来脉冲神经网络研究的整体情况,并简要分析了脉冲神经网络各类学习算法和应用中优缺点. 通过对当前脉冲神经网络研究的情况和各国脑计划的研究进展的分析,可以看出脉冲神经网络是未来人工智能的发展方向, 是实现智能化必不可少的一部分. 当前脉冲神经网络仍存在众多问题亟待解决, <strong>脉冲神经网络学习算法繁多,但未发现类似于传统神经网络BP算法这样高效的学习算法. 此外,目前脉冲神经元模型仍只关注于神经元膜电压的变化情况,尚不能完整描述生物神经元内部复杂的生理机制; 神经元之间突触的生长、消亡等复杂机理仍不明确</strong>;大脑神经网络如何针对信息进行编码等问题,仍然困扰着研究者, 这些问题是未来类脑智能研究的热点和重点. 另外,人工智能的热潮也将推动脉冲神经网络的蓬勃发展,高性能、低功耗的脉冲神经网络芯片必将是人工智能的重要实现平台.</li>
+</ul>
+<ol start="2">
+<li>J. Pu, V. P. Nambiar, A. T. Do and W. L. Goh, “Block-Based Spiking Neural Network Hardware with Deme Genetic Algorithm,” 2019 IEEE International Symposium on Circuits and Systems (ISCAS), Sapporo, Japan, 2019, pp. 1-5.<br>会议论文，SNN用SNN Deme genetic algorithm (GA), population encoding。实例是数字和鸢尾花分类。SNN简单实现架构可以参考。感觉这个有灌水的嫌疑，因为没有具体给用GA算法训练的方法，只是给了GA算法的模型。</li>
+</ol>
+<ul>
+<li>本文提出了一种基于块的SNN架构，该架构采用简单的脉冲神经元模型。与传统的脉冲神经元模型相比，所提出的模型<strong>简化了膜电位的方程，以便于硬件实现</strong>。基于块的SNN架构还使硬件实现更具可扩展性并简化了布局规划。应用Deme遗传算法（GA）训练SNN模型，采用种群编码方案进行脉冲时间转换。进行了两个案例研究以验证所提出模型的功能，即数字识别和Fisher Iris分类。实验结果表明，所提出的具有deme GA的SNN模型能够达到与以前的工作相当或更高的分类精度。</li>
+</ul>
+<ol start="3">
+<li>Lines A, Joshi P, Liu R, et al. Loihi Asynchronous Neuromorphic Research Chip[C]. ieee international symposium on asynchronous circuits and systems, 2018: 32-33.<br>论文只有两页，Loihi实现的技术问题，csp语言转化为RTL 布局布线时序约束</li>
+</ol>
+<ul>
+<li>Loihi 设计在通信顺序进程（CSP）语言中指定，并由自动流程实现，该流程生成具有脉冲锁存数据路径的两阶段捆绑数据（BD）异步流水线。它优化了面积和能量，同时使用了大多数标准的cell library，并简化了与同步的整合。通过静态限制分析，反标注门级仿真和FPGA仿真验证了预硅设计。可调谐延迟提供足够的时序余量，例如接近阈值电压。Loihi于2017年第四季度采用Intel 14nm ASIC工艺制造，电压范围为0.55V至1.25V。</li>
+</ul>
+<ol start="4">
+<li>Akopyan F, Sawada J, Cassidy A S, et al. TrueNorth: Design and Tool Flow of a 65 mW 1 Million Neuron Programmable Neurosynaptic Chip[J]. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 2015, 34(10): 1537-1557.<br>IBM发表的TrueNorth设计，该论文有21页双栏，内容很丰富，看了2天只能看个大概，包含了微体系结构，设计工具，时序，具体实例设计。精读，需要经常翻一下TrueNorth的设计，整体框架，微结构设计都可以参考</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/13/5cd8cba573b7373756.png" alt="QQ截图20190513094236.png"><br><img src="https://i.loli.net/2019/05/13/5cd8cf41626cc84785.png" alt="TrueNorth.png"></p>
+<ul>
+<li>论文介绍了突破性的TrueNorth芯片的设计和工具流程创新，该芯片实现了我们的大脑启发，事件驱动，非冯诺伊曼架构。<br>TrueNorth芯片是世界上第一个100万个神经元，2.56亿个突触全数字神经突触芯片，采用标准CMOS制造工艺实现。该芯片具有高度并行，容错性，可实时工作，典型功耗极低，仅为65 mW。在我们的低功耗TrueNorth芯片中，我们实现了架构创新和复杂的非常规事件驱动电路原语，主要设计原则。混合同步异步设计的设计方法。与针对高精度整数和浮点运算进行优化的通用冯·诺依曼机器相比，TrueNorth广泛使用突触操作来定位感官信息处理，机器学习和认知计算应用。然而，像早期的冯·诺依曼机器一样，现在的任务是创建有效的神经突触系统，并在编程模型，算法和架构特征方面对其进行优化。使TrueNorth芯片，可以通过架构的可扩展性性创建大规模和低功耗的认知系统。已经构建了第一个多芯TrueNorth基神经突触平台（具有多达1600万个神经元和40亿个突触），并演示了在这些平台上实时运行的视觉对象识别等示例应用程序，其功耗比传统的低几个数量级处理器。</li>
+</ul>
+<ol start="5">
+<li><p>项目安排初稿，已经发过去了</p>
+</li>
+<li><p>SNN的算法识别数字的调试，TrueNorth架构仿真的core头文件定义的内容<br><img src="https://i.loli.net/2019/05/13/5cd8ce386eac247044.png" alt="Core头文件.png"></p>
+</li>
+</ol>
+<h2><span id="2019年5月13日-2019年5月20日">2019年5月13日-2019年5月20日</span></h2><p>这周主要是通过阅读论文，较为深入地了解脉冲神经网络的已有的模型，常见的学习算法，对IBM的truenorth的基本架构搭建与仿真</p>
+<ol>
+<li>程龙, 刘洋. 脉冲神经网络:模型、学习算法与应用[J]. 控制与决策, 2018, v.33(05):158-172. 精读</li>
+<li>Ghoshdastidar S, Adeli H. SPIKING NEURAL NETWORKS[J]. International Journal of Neural Systems, 2009, 19(4): 295-308.</li>
+</ol>
+<ul>
+<li>对生物神经元的建模主要包括基于电导发放与阈值发放。基于电导对神经元电位变化的建模为，各种离子通道动态变化引起电势的变化。脉冲神经网络主要是基于阈值发放的模型，基于阈值发放的模型代表主要有2000年提出的LIF模型，2008年提出的SRM模型这两种，SRM可以看成是LIF模型的推广。脉冲神经网络的学习算法，从1999年脉冲神经网络的提出，我总结为主要经过了包括四类学习算法：<br>第一类：<strong>有监督梯度下降法</strong>。2002年到2012年这个时期，SpikePro算法从2002年开始就提出了，不过当时基于的模型是神经元只发出一个脉冲，神经元与神经元之间是多突触连接，后面到2006年左右，对神经元的建模为发出脉冲序列，SpikePro基于此进行改进。后面也有很多对SpikePro算法的改进，包括增加动量项加速算法的收敛、针对突触延迟、激活阈值等多参数的梯度下降。<br>第二类：<strong>无监督学习</strong>。代表是2007年提出的STDP算法。STDP算法每个神经元只需要知道前后相连的神经元点火发出脉冲的时间差，根据学习窗函数，去改变权重，这样的好处是方便硬件上实现，不需要复杂的计算梯度，反向传播过程。但缺点是学习的效率低，而且可扩展性低。<br>第三类：<strong>有监督STDP算法</strong>。结合STDP规则的监督学习算法是目前脉冲神经网络学习算法研究的热点,此类算法具有更好的生物解释性. 典型的监督STDP学习算法是2010年Ponulak等提出的远程监督学习算法,称为ReSuMe(Remote supervised method),该算法具有在线学习能力, 并且能够处理脉冲时间序列。ReSuMe算法中权重的调整为：<br><img src="https://i.loli.net/2019/05/20/5ce20678cb20c30310.png" alt="ReSuMe权重更新算法.png"><br>第四类：<strong>其他监督学习算法</strong>。包括基于脉冲序列卷积的学习算法，思想是将输入输出通过一个卷积核。次序学习算法，基于遗传算法，种群算法这类的SNN学习算法。这类算法的特点是，只在单层的神经网络上验证了算法的有效性，算法的通用性比较差。</li>
+</ul>
+<ol start="2">
+<li><p>TrueNorth的Core中的每个模块照着写了一遍，大致每个模块的函数功能都了解，并对整体架构进行仿真，仿真结果如下<br><img src="https://i.loli.net/2019/05/20/5ce20afce599588177.png" alt="TrueNorthsim.png"></p>
+</li>
+<li><p>10月份一期交给华为的报告：<br>Intel概率计算研究报告，包括他们的概率计算的出发点，与概率编程的关系，概率编程与深度学习结合的一些已有的研究。仿真为基于Python概率编程在ANN上的应用带来的可解释性。<br>脉冲神经网络研究报告，主要偏重于硬件实现的论文，SNN的芯片方面的新闻等,以及SNN的应用。脉冲神经网络典型的几种学习算法的仿真，包括基于梯度下降的SpikePro，ReSuMe, STDP算法在解决分类问题上的应用。IBMTrueNorth每个Core模块的基于C的算法仿真，框架仿真</p>
+</li>
+</ol>
+<h2><span id="2019年5月21日-2019年5月27日">2019年5月21日-2019年5月27日</span></h2><ol>
+<li>制作各芯片对比的数据</li>
+<li>一期项目报告提纲</li>
+<li>《脉冲神经网络原理与应用》前两章节</li>
+</ol>
+<h2><span id="2019年5月28日-2019年6月3日">2019年5月28日-2019年6月3日</span></h2><ol>
+<li>检索了有关spiking neural network关键词，共55篇左右，包括以下会议与期刊</li>
+</ol>
+<ul>
+<li>ISCAS2017-2019的会议论文，ISCA会议论文</li>
+<li>IEEE INTERNATIONAL SOLID-STATE CIRCUITS CONFERENCE会议论文</li>
+<li>CCF推荐的A类期刊计算机体系结构/并行分布与计算</li>
+<li>web of Science上统计的引用量高的review 6篇，以及其他高引用论文</li>
+<li>TrueNorth发表的期刊IEEE JOURANL OF SOLID-STATE CIRCUITS</li>
+<li>Loihi发表的期刊IEEE TRANSACTIONS ON COMPUTER-AIDED DESIGN OF INTEGRATED CIRCUITS AND SYSTEMS<br><img src="https://i.loli.net/2019/06/03/5cf478161a47215408.png" alt="download.png"></li>
+</ul>
+<ol start="2">
+<li>主要通过看论文的Abstract introduction，以及Conclusion部分，泛读论文做笔记，笔记主要包括论文题目、发表的时间、发表的刊物，作者信息、关键词、方法流程效果等，已经对ISCA17,18年进行统计<br><img src="https://i.loli.net/2019/06/03/5cf479f4ef5e210830.png" alt="Paperreading.png"></li>
+<li>接下来的安排是：尽快把剩余的论文按照上面的形式看完，进行总结、分析、归类，写一个研究报告，<strong>从50余篇的文章中摘选15篇左右，作为以后的精读内容</strong></li>
+</ol>
+<h2><span id="2019年6月4日-2019年6月10日">2019年6月4日-2019年6月10日</span></h2><ol>
+<li>这周把搜集SNN论文整理了，包括2019年的ISCAS，期刊等</li>
+<li>接下来对泛读的文章进一个综诉，脉冲神经网络的硬件实现与应用，包含以下三个方面：网络模型与改进与实现策略，实现的器件材料，SNN实现的应用。<strong>现在缺少一个整体性与关联性</strong></li>
+<li>准备挑选10篇左右的论文在三个星期左右精读</li>
+</ol>
+<h2><span id="2019年6月11日-2019年6月17日">2019年6月11日-2019年6月17日</span></h2><ol>
+<li>把TrueNorth和Loihi的论文打印下来重新看了一遍</li>
+<li>论文《deep learning with spiking neural network Opportunities and challenges》马里兰大学帕克大学survey类型的论文2018</li>
+</ol>
+<p>回顾了最近的有监督和无监督的训练深度SNN的方法，包括binary deep Neural Network，Conversion of Deep Neural Networks, Training of Constained Networks, supervised learning with spike, Local learning rule并在准确性和计算成本方面进行了比较。SNN在准确性方面仍然落后于人工智能，但差距正在缩小，甚至可能在某些任务上不存在差距，而SNN通常需要更少的操作，并且是处理时空数据的有力工具。</p>
+<ol start="3">
+<li>论文《Flexon: A Flexible Digital Neuron for Efficient Spiking Neural Network Simulations》首尔大学与加州伯克利分校2018</li>
+</ol>
+<p>论文介绍Flexon，一种灵活的数字神经元，利用不同神经元模型共同生物学特征，实现高效的SNN模拟。为了设计Flexon，<strong>从神经科学研究的先前工作中，分析SNN采用的神经元模型，观察到神经元模型共享一组生物学上的共同特征，并且这些特征可以组合以模拟比现有模型驱动设计更大的神经元行为集</strong>。此外，我们发现这些特征共享一小组计算原语，可以利用这些原语来进一步减少芯片面积。由此产生的数字神经元，Flexon和空间折叠的Flexon，灵活，高效，并且可以轻松地与现有硬件集成。我们使用TSMC 45 nm标准单元库的原型设计结果显示，12个神经元Flexon阵列分别在9.26 mm2的面积，在CPU和GPU上分别提高了6,186x和422x的能效。结果还表明，72个神经元空间折叠的Flexon阵列产生面积较小，为7.62 mm2，分别在CPU和GPU上实现了122.45x和9.83x的加速。<br><img src="https://i.loli.net/2019/06/17/5d06f91a4403e35115.png" alt="Flexon.png"><br><a href="https://i.loli.net/2019/06/17/5d06f93e422da23308.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/17/5d06f93e422da23308.png" alt="不同的神经元模型.png"></a></p>
+<p>Then, we profile the simulation latency of the SNNs on Intel Xeon E5-2630 v4 CPU (12- core, 2.2 GHz) and NVIDIA Titan X (Pascal) GPU. We use PyNN [38] to describe the SNNs, NEST [9] to simulate the SNNs on the CPU, and GeNN [15] for GPU simulations. Each SNN is configured to use a time step of 0.1 ms and to run for 100,000 time steps (i.e., 10 s in biological time).</p>
+<p>To support diverse neuron behaviors, general-purpose processors such as CPUs and GPUs are widely used to simulate SNNs. Examples of CPUbased frameworks include NEURON [8], NEST [9], Brian [10], [48], and Auryn [12]. SpiNNaker [11], [49]–[52], a custom-designed board for SNN simulations, is also a CPUbasedframework as it utilizes low-power ARM CPU cores for the simulations. GPU-based frameworks (e.g., CARLsim [14], [53]–[56], NeMo [13], GeNN [15]) exploit the high throughput of GPUs to achieve faster simulations. Despite their capabilities to support any neuron models, they all suffer from the high computational overheads of neuron computation (Section III-A).</p>
+<h2><span id="2019年6月18日-2019年6月24日">2019年6月18日-2019年6月24日</span></h2><ol>
+<li>这周参加了乐鑫的笔试，中兴微电子的面试，奕斯伟校园大使的面试</li>
+<li>论文《A 0.086-mm2 12.7-pJ/SOP 64k-Synapse 256-Neuron Online-Learning Digital Spiking Neuromorphic Processor in 28-nm CMOS》架构设计与实现部分。这篇文章的代码是开源的，开源地址<a href="https://github.com/xuzhikang2018/ODIN" target="_blank" rel="noopener">ODIN</a>，也在看它的文档，问题是文档比较少</li>
+</ol>
+<p>论文提出ODIN，一种0.086-mm2 64k-突触256神经元在线学习数字脉冲神经形态处理器，采用28-nm FDSOI CMOS，每突触操作（SOP）的最小能量为12.7 pJ。它利用针对高密度嵌入式在线学习的<strong>脉冲驱动突触可塑性（SDSP）学习规则</strong>的有效实现，每4位突触只有0.68μm2。神经元可以独立配置为标准的泄漏整合和LIF模型，或者作为定制现象学模型，模拟生物脉冲神经元中发现的20种Izhikevich行为。使用单个6k 16×16 MNIST训练图像到具有基于SDSP的片上学习的单层完全连接的10神经元网络，ODIN实现了84.5％的分类精度，而在0.55 V时仅消耗15 nJ /推理使用排序编码。因此，ODIN能够进一步开发用于低功率，自适应和低成本处理的认知神经形态设备。</p>
+<p><img src="https://i.loli.net/2019/06/24/5d10319370a7d78820.png" alt="QQ截图20190430113609.png"><br><img src="https://i.loli.net/2019/06/24/5d103463b314979078.png" alt="ODIN结构和文件树.png"></p>
+<ol start="3">
+<li>我的毕业论文打算为 基于FPGA的脉冲神经网络硬件实现研究，主要是针对传统基于软件仿真SNN速度慢，功耗高的缺点，画的单个处理核示意图<br><img src="https://i.loli.net/2019/06/24/5d1033f4caf9579586.png" alt="处理核示意图.png"></li>
+</ol>
+<h2><span id="2019年6月25日-2019年7月1日">2019年6月25日-2019年7月1日</span></h2><ol>
+<li>两篇硕士论文，杭电《基于FPGA的脉冲神经网络加速器的设计<em>沈阳靖》，广西师范大学《基于FPGA器件的脉冲神经网络硬件实现研究</em>万雷》</li>
+<li>把LIF模型理解透彻，从最初的电容电阻等效，公式表示，Multi-spike Tempotron模型，PSP核函数这些</li>
+<li>画了几张图，作为以后毕业论文的材料<br><img src="https://i.loli.net/2019/07/01/5d1964a5a9cdd55940.png" alt="神经形态处理器系统框图.png"></li>
+<li>实现了一个简单的LIF神经元，并对其进行仿真，一个cycle实现神经元状态更新，包含泄露，整合，发放特性，仿真图如下<br><img src="https://i.loli.net/2019/07/01/5d1964a259c3325019.png" alt="简单的LIF状态更新.png"></li>
+</ol>
+<h2><span id="2019年7月2日-2019年7月8日">2019年7月2日-2019年7月8日</span></h2><p>本周看的论文：<br>[1] Wang, Qian (2016). Architectures and Design of VLSI Machine Learning Systems. Doctoral dissertation, Texas A &amp; M University. Available electronically from http : / /hdl .handle .net /1969 .1 /158093.</p>
+<p>[2] C. Frenkel, M. Lefebvre, J. Legat and D. Bol, “A 0.086-mm$^2$ 12.7-pJ/SOP 64k-Synapse 256-Neuron Online-Learning Digital Spiking Neuromorphic Processor in 28-nm CMOS,” in IEEE Transactions on Biomedical Circuits and Systems, vol. 13, no. 1, pp. 145-158, Feb. 2019.</p>
+<p>[3] Zhang S , Du Z , Zhang L , et al. Cambricon-X: An accelerator for sparse neural networks[C]// 2016 49th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO). ACM, 2016.<br>论文1 博士论文有部分是，利用 FPGA实现 SNN<br>论文2 SNN做成芯片，流片<br>论文3 是寒武纪校招，我看了下他们的论文，有关于深度神经网络稀疏化处理的内容<br>关注的重点在于最后的实验测试对比方面</p>
+<h2><span id="2019年7月9日-2019年7月15日">2019年7月9日-2019年7月15日</span></h2><p>本周工作总结：</p>
+<ol>
+<li>参照ODIN项目工程地址<a href="https://github.com/xuzhikang2018/ODIN的说明文档，模块的.v文件，深入了解每个模块的功能，新建了工程，并对其进行综合，综合资源报告" target="_blank" rel="noopener">https://github.com/xuzhikang2018/ODIN的说明文档，模块的.v文件，深入了解每个模块的功能，新建了工程，并对其进行综合，综合资源报告</a></li>
+<li>我写的IZH神经元特性的总结：<a href="https://blog.csdn.net/weixin_41701476/article/details/95917146" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41701476/article/details/95917146</a><br>参考论文：</li>
+</ol>
+<p>C. Frenkel, M. Lefebvre, J. Legat and D. Bol, “A 0.086-mm$^2$ 12.7-pJ/SOP 64k-Synapse 256-Neuron Online-Learning Digital Spiking Neuromorphic Processor in 28-nm CMOS,” in IEEE Transactions on Biomedical Circuits and Systems, vol. 13, no. 1, pp. 145-158, Feb. 2019.</p>
+<p>C. Frenkel, J. Legat and D. Bol, “A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors,” 2017 IEEE Biomedical Circuits and Systems Conference (BioCAS), Torino, 2017, pp. 1-4.</p>
+<p>E. M. Izhikevich, “Which model to use for cortical spiking neurons?,” in IEEE Transactions on Neural Networks, vol. 15, no. 5, pp. 1063-1070, Sept. 2004.</p>
+<h2><span id="2019年7月16日-2019年7月22日">2019年7月16日-2019年7月22日</span></h2><p>考虑如何将ODIN实现在ZCU104开发板上，看的资料包括：</p>
+<ol>
+<li>如何通过spi接口向FPGA开发板发送配置信息，查看综合实现的各种报告<br>《ZCU104 Evaluation Board user Guide》<br>《FPGA Configuration from SPI Flash Memory using a Microprocessor》<br><img src="https://i.loli.net/2019/07/22/5d351790cb68329031.png" alt="spiprogram.png"><br>《Vivado Design Suite Tutorial Design Flows Overview》<br><a href="https://www.sohu.com/a/213766665_292853" target="_blank" rel="noopener">为Zynq SoC和Zynq UltraScale+ MPSoC实现SPI接口（以Arty Z7为例)</a><br><img src="https://i.loli.net/2019/07/22/5d3517b9dfac930830.png" alt="spi接口.png"></li>
+</ol>
+<p>我写的关于ZCU板子的博客:<br><a href="https://blog.csdn.net/weixin_41701476/article/details/96287907" target="_blank" rel="noopener">ZCU104开发板：开发板介绍1</a><br><a href="https://blog.csdn.net/weixin_41701476/article/details/96320005" target="_blank" rel="noopener">ZCU104开发板：开发板设置和配置2</a><br><a href="https://blog.csdn.net/weixin_41701476/article/details/96424641" target="_blank" rel="noopener">ZCU104开发板：开发板组件描述3</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20190717164421257.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTcwMTQ3Ng==,size_16,color_FFFFFF,t_70" alt><br><img src="https://img-blog.csdnimg.cn/20190718160151339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTcwMTQ3Ng==,size_16,color_FFFFFF,t_70" alt></p>
+<ol start="2">
+<li>如何将图片转化为脉冲序列，我看的是一个关于SNN的仿真github,<a href="https://github.com/Shikhargupta/Spiking-Neural-Network" target="_blank" rel="noopener">https://github.com/Shikhargupta/Spiking-Neural-Network</a>  </li>
+</ol>
+<p>我写的几篇博客：<br><a href="https://blog.csdn.net/weixin_41701476/article/details/96155108" target="_blank" rel="noopener">脉冲神经网络2: SNN的仿真介绍</a><br><a href="https://blog.csdn.net/weixin_41701476/article/details/96183699" target="_blank" rel="noopener">脉冲神经网络2：SNN的仿真2—感受野</a><br><a href="https://blog.csdn.net/weixin_41701476/article/details/96355469" target="_blank" rel="noopener">脉冲神经网络2：SNN的仿真3-生成输入层序列</a></p>
+<ol start="3">
+<li>另外就是看了几篇关于SNN的论文：  </li>
+</ol>
+<p>[1] Yang S , Wang J , Deng B , et al. Real-Time Neuromorphic System for Large-Scale Conductance-Based Spiking Neural Networks[J]. IEEE Transactions on Cybernetics, 2018:1-14.<br>这篇讲的是天津大学的微电子学院做的SNN实现，高性能计算平台极大地促进了人类智能，认知系统和人脑功能复杂性的研究。<br>在本文中，我们提出了一种实时数字神经形态系统，用于模拟基于大规模电导的脉冲神经网络（LaCSNN），具有高生物学真实性和大网络规模的优点。使用该系统，使用可扩展的3-D片上网络（NoC）拓扑结构模拟详细的大规模皮质 - 基底神经节 - 丘脑皮质环，其中6个Altera Stratix III现场可编程门阵列模拟100万个神经元。提出了一种新的路由器体系结构来处理多核神经网络中多个数据流的通信，这在以前的NoC研究中尚未解决。在单神经元级别，提出了基于成本的电导神经元模型，使得无乘法器实现的平均利用率减少了95％，减少了100％的DSP资源，这是大规模实现的基础。。对改进模型进行了分析，包括分岔行为和离子动力学的研究，以更低的资源成本展示了所需的动力学范围。<br>所提出的LaCSNN系统表现优于先前用于实现大规模脉冲神经网络的替代现有技术方法，并且由于其实时计算能力而能够实现广泛的潜在应用。</p>
+<p>[2] Charlotte Frenkel∗, Giacomo Indiveri†, Jean-Didier Legat∗, et al. A Fully-Synthesized 20-Gate Digital Spike-Based Synapse with Embedded Online Learning[C]// IEEE International Symposium on Circuits &amp; Systems. 2017.<br>在这里，论文分析了脉冲驱动的突触可塑性（SDSP）学习规则，并表明它特别适用于高度紧凑的数字突触实现，特别是与传统的脉冲定时相关塑性（STDP）规则相比。此外，我们设计了一个异步的可完全合成的数字突触电路，该电路具有基于SDSP的嵌入式在线学习功能，并具有多功能计算的可编程选项。在28nm FDSOI CMOS工艺中，所提出的突触实现仅需要20个门用于25μm2的紧凑区域</p>
+<h2><span id="2019年7月23日-2019年7月29日">2019年7月23日-2019年7月29日</span></h2><p>这周在准备找工作，做的准备包括：</p>
+<ol>
+<li>修改了一下简历，投递了几家公司，包括华为，海康威视，大疆，并做测评</li>
+<li>做了几套关于数字IC设计的题目<br><img src="https://i.loli.net/2019/07/29/5d3e50497058e83625.png" alt="笔试题.png"></li>
+<li>把所有的概率计算，脉冲神经网络做的笔记看了一遍，复习了相关的知识</li>
+<li>按照简历思考可能的提问，写成了一个word<br><img src="https://i.loli.net/2019/07/29/5d3e5102705b876569.png" alt="可能的提问.png"></li>
+</ol>
+<h2><span id="2019年7月30日-2019年8月12日">2019年7月30日-2019年8月12日</span></h2><ol>
+<li>准备笔试，笔试整理的题目<br><img src="https://i.loli.net/2019/08/12/7L8sYNBZRKn5cFk.png" alt="历年笔试.png"></li>
+</ol>
+<p>文档：IC笔试题整理<br>链接：<a href="https://dwz.cn/IV2AVdmS" target="_blank" rel="noopener">https://dwz.cn/IV2AVdmS</a>  </p>
+<ol start="2">
+<li><p>看IC learner的博客 <a href="https://www.cnblogs.com/IClearner/tag/" target="_blank" rel="noopener">https://www.cnblogs.com/IClearner/tag/</a><br><img src="https://i.loli.net/2019/08/12/Wa3wGOnEcyvthbR.png" alt="IC_Learner博客.png"></p>
+</li>
+<li><p>Eswin的活动</p>
+</li>
+<li><p>写给华为的报告</p>
+</li>
+</ol>
+<h2><span id="2019年9月2日-2019年9月9日">2019年9月2日-2019年9月9日</span></h2><ol>
+<li>重新看了一遍《A 0.086-mm2 12.7-pJ/SOP 64k-Synapse 256-Neuron Online-Learning Digital Spiking Neuromorphic Processor in 28-nm CMOS》<br>2.<br><img src="https://i.loli.net/2019/09/09/xuAGl5tVyELK4Bb.png" alt="QQ图片20190909095044.png"><br><img src="https://i.loli.net/2019/09/09/Sga6PNIOChJ9QBs.png" alt="QQ截图20190909095137.png"></li>
+<li>有一些关于FPGA的知识还是不太好，在看《深入浅出玩转FPGA》《xilinx新一代FPGA设计套件Vivado应用指南》</li>
+<li>关于仿真测试那一部分，写了一篇Testbench书写技巧，见我的博客：,包含复位信号封装成task，封装有用的子程序（warning，error,fatal,terminate），关于变量的定义，结构化testbench,读写紊乱的问题与处理，测试用例1模拟串口通信：遍历测试、随机测试，测试用例2乘法器：全覆盖测试与结果打印输出到文本，测试用例3：模拟MCU读/写设计</li>
+<li>想到两个点子,一个是探讨将rank order code和rate code如何结合起来<br><img src="https://i.loli.net/2019/09/09/zZRdrcQwX4aO2bq.png" alt="QQ截图20190909101046.png"><br>另一个是利用FPGA可重构将LIF神经元重构替换成IZH神经元</li>
+</ol>
+<h2><span id="2019年9月10日-2019年9月16日">2019年9月10日-2019年9月16日</span></h2><ol>
+<li>对于计划安排，粗略的思考是这样的：</li>
+</ol>
+<p>① 争取在国庆节之后对ODIN仿真完，并在FPGA上综合实现<br>② 看论文提出无论是功能上，减少资源消耗，提高频率的创新点，并在ODIN的基础上实现，进行对比<br>③ 通过python在软件仿真，设计实现架构的具体参数和上，跑得到的分类准确度，和硬件进行对比</p>
+<ol start="2">
+<li><p>花了四天把《xilinx新一代FPGA设计套件Vivado应用指南》这本书基本看完了，包括章节：<br>①7系列FPGA架构与特性<br>②创建设计项目<br>③RTL级分析与设计网表文件<br>④设计综合和基本时序约束<br>⑤设计实现与静态时序分析<br>⑥Tcl设计项目<br>⑦同步设计技术<br>⑧HDL编码技巧<br>⑨时序收敛<br>⑩硬件诊断</p>
+</li>
+<li><p>仿真实现LIF神经元的SDSP学习算法模块<br>如下图所示，通过使能param_ca_en，启用SDSP学习算法，在0-0.16us期间，有输入脉冲信号spike_out，神经元离子变量state_calcium是将增加，神经元的膜电位state_core_next大于 $\theta_m$，钙离子的变量的大小，满足SDSP学习算法中的条件2，输出v_dwon_next为1，代表突触权重减1；在0.16us到0.27us期间，膜电位和钙离子变量的大小满足SDSP学习算法中的条件1，输出v_up_next为1.<br>而在0.43us-1.43us中，外部没有脉冲输入，时间参考事件event_tref有效时，神经元钙离子变量将根据钙离子泄露变量state_caleak_cnt的值减少，后面仿真分别是钙离子变量受输入脉冲与参考事件，以及神经元膜电位的影响，导致神经元根据SDSP学习算法指示突触权重的改变</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2019/09/16/brQ138AmLiZefXB.png" alt="SDSP学习算法仿真图.png"></p>
+<p>$\left{\begin{array}{l}{w \rightarrow w+1 \text { if } V_{\text {mem }}\left(t_{\text {pre }}\right) \geq \theta_{m}, \theta_{1} \leq \mathrm{Ca}\left(t_{\text {pre }}\right)&lt;\theta_{3}} \ {w \rightarrow w-1 \text { if } V_{\text {mem }}\left(t_{\text {pre }}\right)&lt;\theta_{m}, \theta_{1} \leq \mathrm{Ca}\left(t_{\text {pre }}\right)&lt;\theta_{2}}\end{array}\right.$</p>
+<ol start="4">
+<li><p>LIF神经元模块的仿真，包含了SDSP学习功能<br><img src="https://i.loli.net/2019/09/16/6xIZtDUcSCWNkfY.png" alt="LIF神经元仿真图.png"></p>
+</li>
+<li><p>IZH神经元的SDSP学习算法模块<br>和LIF的SDSP学习模块不同的是多了param_burst_incr，使能该信号，钙变量根据输入脉冲信号有一个突增的过程，如图红线所示</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2019/09/16/gj1mvCI3tkYiQ7Z.png" alt="IZH的SDSP学习模块.png"></p>
+<ol start="6">
+<li>现在看论文一般都会做总结，看能不能为我所用，《脉冲神经网络:模型、学习算法与应用》<br><img src="https://i.loli.net/2019/09/16/bXeA2nTkUg1BERv.png" alt="QQ截图20190916102957.png"><h2><span id="2019年9月17日-2019年9月23日">2019年9月17日-2019年9月23日</span></h2>SRM模型[1][2]中突触后神经元膜电位的(spiking response model)表达式如下：<br>$p=\eta\left(t-t_{i}\right)+\sum_{j / t_{j}&gt;t} w_{j} \cdot \varepsilon\left(t-t_{j}\right)+\sum_{k / h&gt;t_{i}} \mu\left(t-t_{k}\right)$  </li>
+</ol>
+<p>第一项$\eta\left(t-t_{i}\right)$突触后神经元$i$发放后膜电位的变化函数，其中$\tau_m$和$\tau_s$分别为膜时间常数和突触时间常数，T是神经元发放的阈值，$K_1, K_2$都是常数，之所以这么复杂是因为反映了<strong>发放之后的不应期</strong>。<br>$\begin{aligned} \eta\left(t-t_{i}\right)=&amp; \mathrm{T} \cdot\left(K_{1} \cdot \exp \left(-\frac{t-t_{i}}{\tau_{m}}\right)-K_{2} \cdot\left(\exp \left(-\frac{t-t_{i}}{\tau_{m}}\right)\right.\right.\ &amp;\left.\left.-\exp \left(-\frac{t-t_{i}}{\tau_{s}}\right)\right)\right) \cdot \Theta\left(t-t_{i}\right) \end{aligned}$</p>
+<p>第二项$\varepsilon\left(t-t_{j}\right)$说明的是突触前神经元的脉冲对突触后神经元膜电位的影响，$w_j$表示的是权重的大小<br>$\varepsilon\left(t-t_{j}\right)=K \cdot\left(\exp \left(-\frac{t-t_{j}}{\tau_{m}}\right)-\exp \left(-\frac{t-t_{j}}{\tau_{s}}\right)\right) \cdot \Theta\left(t-t_{j}\right)$</p>
+<p>第三项是突触后神经元的<strong>侧向抑制</strong>(inhibitory postsynaptic potential (IPSP)),图形化的表述如下所示，相同连接层的神经元发放会对其他神经元有一个反向的抑制效果，抑制的值相当于脉冲的大小乘以一个系数。<strong>这个在神经元的学习研究中是很有用的</strong>，在论文[2]研究表明，单个模式学习下，神经元B学习神经元A已经学习过的模式比，比它学一个没有学习到模式更难，也就是说神经元更倾向于学习没有学过的模式。多模式学习下，多次出现的模式，不仅更容易学习，也将被处理，比不熟悉的更快。这最后一点和熟悉类别心理上的结果类似[3]，例如面部识别处理速度更快。</p>
+<p>$\mu\left(t-t_{k}\right)=-\alpha \cdot T \cdot \varepsilon\left(t-t_{k}\right)$<br><img src="https://i.loli.net/2019/09/23/gp7YjWAVi38xblZ.png" alt="QQ截图20190923095104.png"><br><img src="https://i.loli.net/2019/09/23/A9TUlKmVBvrj3IY.png" alt="神经元单个模式的学习.png"></p>
+<p>SRM模型的侧向抑制在很多论文算法研究也有使用。</p>
+<p>然而IZH模型[4]是不包括上面两个行为特性，它是神经元的计算特性，包含了神经元的20种计算行为特性，参见我的博客<a href="https://blog.csdn.net/weixin_41701476/article/details/95917146" target="_blank" rel="noopener">IZH模型介绍</a></p>
+<p>现在的神经元实现主要是基本的LIF神经元，例如Loihi,清华的天机[7]，而TrueNorth为神经元加入了随机特性，利用三个神经元可以体现IZH的行为特性，论文[6]搭建了Phenomenological Digital Neuron包含了20种IZH行为，目前我看的论文都没有搭建SRM脉冲响应特性+IZH计算行为特性的digital neuron, 那我的想法是在论文[6]的基础上，加入SRM的脉冲响应特性，同时考虑加入这个之后，不应期和侧向抑制对其他单元模块设计的影响。他们设计的神经元框图如下，代码我还没看<br><img src="https://i.loli.net/2019/09/23/LhNCgGlcrMSKzpY.png" alt="QQ截图20190923101030.png"></p>
+<p>接下来两周，就是针对调研其他论文佐证我的想法，去做架构框图，RTL代码设计，仿真，并且看需要测量哪些数据</p>
+<p>[1]Muntean I L , Peter R I , Joldos M . Dynamics Analysis of Parallel Simulations of the Spike Response Model[C]// Proceedings of the 2012 14th International Symposium on Symbolic and Numeric Algorithms for Scientific Computing. IEEE Computer Society, 2012.<br>[2]Masquelier, Timothée, Guyonneau R , Thorpe S J . Competitive STDP-Based Spike Pattern Learning[J]. Neural Computation, 2009, 21(5):1259-1276.<br>[3]Crouzet S , Thorpe S J , Kirchner H . Category-dependent variations in visual processing time[J]. Journal of Vision, 2010, 7(9):922-922.<br>[4]Izhikevich, E. M . Which Model to Use for Cortical Spiking Neurons?[J]. IEEE Transactions on Neural Networks, 2004, 15(5):1063-1070<br>[5]Pei, Jing &amp; Deng, Lei &amp; Song, Sen &amp; Zhao, Mingguo &amp; Zhang, Youhui &amp; Wu, Shuang &amp; Wang, Guanrui &amp; Zou, Zhe &amp; Wu, Zhenzhi &amp; He, Wei &amp; Chen, Feng &amp; Deng, Ning &amp; Wu, Si &amp; Wang, Yu &amp; wu, yj &amp; Yang, Zheyu &amp; Ma, Cheng &amp; Li, Guoqi &amp; Han, Wentao &amp; Shi, L.P.. (2019). Towards artificial general intelligence with hybrid Tianjic chip architecture. Nature. 572. 106. 10.1038/s41586-019-1424-8.<br>[6]Frenkel, Charlotte &amp; Legat, Jean-Didier &amp; Bol, David. (2017). A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors. 1-4. 10.1109/BIOCAS.2017.8325231.</p>
+<h2><span id="2019年9月24日-2019年9月30日">2019年9月24日-2019年9月30日</span></h2><p>这周主要是原来的几篇论文看了，重点把[]和以前的论文[1]归纳总结，做了一个ppt，我接下来的想法是在它的基础上，以SRM模型为基础设计重点是侧向抑制，并实现同时进行优化。<br>接下来三个月主要的工作是：<br>（1）软件实现的时间开销测量， CPU是：pyNN+NEST, GPU:GeNN, 国庆节前后基本看完文档手册<br>（2）设计加上SRM的侧向抑制的模块化神经元的设计， 两周左右<br>（3）设计的实现，用VCS进行仿真和DC工具进行综合看功耗和跑的速率，两周到三周<br>（4）与软件实现的的神经元进行对比，一周到两周<br>（5）上周提到的参数化设计的SRM模型和IZH神经元设计[2]（有部分代码），设计思路也比较完善，三周左右  </p>
+<p>[1] Lee D , Lee G , Kwon D , et al. Flexon: A Flexible Digital Neuron for Efficient Spiking Neural Network Simulations[C]// 2018 ACM/IEEE 45th Annual International Symposium on Computer Architecture (ISCA). ACM, 2018.<br>[2] Frenkel, Charlotte &amp; Legat, Jean-Didier &amp; Bol, David. (2017). A compact phenomenological digital neuron implementing the 20 Izhikevich behaviors. 1-4. 10.1109/BIOCAS.2017.8325231.</p>
+<h2><span id="2019年10月8日-2019年10月15日">2019年10月8日-2019年10月15日</span></h2><p>在别的模型的基础上添加SRM模型的特性，这个创新点的确不好写，显得创新点不足。</p>
+<ol>
+<li><p>整理论文，对文献进行分类，便于引用<br><img src="https://i.loli.net/2019/10/15/AuLVZeJ3HW9Mc6E.png" alt="整理的文献1.png"><br><img src="https://i.loli.net/2019/10/15/F4huLgQbfS17PEj.png" alt="整理的文献2.png"></p>
+</li>
+<li><p>这周看论文，可以从另外一个角度出发，现在SNN的另一个应用脑机接口，假如哪一块人体组织甚至是脑组织出现了问题，可以用电子芯片去代替，这在未来疾病治疗，延长人类的寿命有很大的应用。已经有相关的论文发表的这方的研究如日本的东京大学和法国的波尔多大学[]，那以往的SNN神经元设计都是从<strong>计算效率</strong>出发，对脉冲神经元的简化，LIF神经元模型。但是，这些设计已实现用于计算目的，而没有考虑生物性。<br>那么相应的选择神经元选择IZH神经元模型，在实现性和神经元的生物精确性上折中</p>
+</li>
+</ol>
+<p>$\frac{d v}{d t}=0.04 v^{2}+5 v+140-u+I_{L h}$</p>
+<p>$\frac{d u}{d t}=a(b v-u)$</p>
+<p>if $\quad v \geq 30 m V \Rightarrow\left{\begin{array}{l}{v \leftarrow c} \ {u \leftarrow u+d}\end{array}\right.$</p>
+<p>考虑到生物上的真实性，那么突触也是基于电导的，也就是说脉冲对膜电位的影响，不只是瞬时累加，也是呈指数的效果<br>$I_{\exp }(t)=e^{\frac{-t}{\tau}}$</p>
+<p>那么我周将上诉的公式进行变化化简到可数字实现，如下所示<br>$v[n+1]=1 / 32v[n]^{2}+5 v[n]+109.375-u[n]+I_{s t a t}[n]+I_{e x c}[n]+I_{i n h}[n]$</p>
+<p>另一个就是突触：<br>$I_{\exp }(t+1)=\left(1-\frac{1}{\tau}\right) \cdot I_{\exp }(t)$</p>
+<p>画了各自对于的电路图，并写出了verilog文件，U变量和V变量是并行更新的，在神经元计算模块，该模块包括3个乘法计算单元，我设计的是18bit<em>18bit的乘法，在FPGA上综合利用dsp来做乘法，dsp最多也是支持18</em>18Bit的乘法，综合结果如下：<br><img src="https://i.loli.net/2019/10/15/YwWkoyc8ztUCs13.png" alt="FPAG综合的各个资源开销.png"></p>
+<p>在DC,给的时钟是25MHz（其实不需要这么高，如果是考虑高度的仿真性），90nm下的综合结果为：对于计算模块面积是0.181$mm^2$，功耗是23.9739mw；突触模块面积是0.111$mm^2$，功耗是19.74mw。<br>整个神经元模块的面积是0.388$mm^2$，功耗是44.68mw。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>工作日志</p>
+    
+    <p><span class="copy-title">本文作者:</span><a title="徐志康">徐志康</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-04-08, 10:01:30</p>
+    <p><span class="copy-title">最后更新:</span>2019-10-15, 23:06:50</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/04/08/工作日志/" title="工作日志">http://yoursite.com/2019/04/08/工作日志/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class id="rocket"></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1"></script>
+
+<script src="/js/script.js?v=1.0.1"></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#概率编程','#项目','#Testbench','#Linux使用','#python使用过程中的记录','#面试','#博客遇到的问题','#博客有关','#实用工具','#ODIN','#SNN','#求职','#工作日志','#概率计算',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <title>Testbench书写 | 徐志康的技术博客</title>
+  <meta name="keywords" content=" Testbench ">
+  <meta name="description" content="Testbench书写 | 徐志康的技术博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="来自深入浅出玩转FPGA">
+<meta name="keywords" content="Testbench">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Testbench书写">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/Testbench书写/index.html">
+<meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="来自深入浅出玩转FPGA">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-16T02:45:42.883Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Testbench书写">
+<meta name="twitter:description" content="来自深入浅出玩转FPGA">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>徐志康</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"/>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(17)</small></div></li>
+    
+        
+            
+            <li><div data-rel="probabilistic programming">probabilistic programming<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Intel与概率计算">Intel与概率计算<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数字IC设计">数字IC设计<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="其他">其他<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="脉冲神经网络">脉冲神经网络<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工作周报与报告">工作周报与报告<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url" href="/about">关于</a><a style="width: 50%" class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="17">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off" id="local-search-input">
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none">
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">概率编程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">项目</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Testbench</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Linux使用</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">python使用过程中的记录</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">博客遇到的问题</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">博客有关</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">实用工具</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ODIN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">求职</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">工作日志</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">概率计算</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a class="probabilistic programming " href="/2019/04/09/Deep-Probabilitic-Programming/" data-tag="概率编程" data-author>
+            <span class="post-title" title="Deep Probabilitic Programming">Deep Probabilitic Programming</span>
+            <span class="post-date" title="2019-04-09 11:15:58">2019/04/09</span>
+        </a>
+        
+        <a class="Intel与概率计算 " href="/2019/04/02/MIT概率计算小组/" data-tag="项目" data-author>
+            <span class="post-title" title="MIT概率计算小组">MIT概率计算小组</span>
+            <span class="post-date" title="2019-04-02 11:08:22">2019/04/02</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/09/06/Testbench书写/" data-tag="Testbench" data-author>
+            <span class="post-title" title="Testbench书写">Testbench书写</span>
+            <span class="post-date" title="2019-09-06 10:14:30">2019/09/06</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/04/Ubuntu_Linux使用笔记/" data-tag="Linux使用" data-author>
+            <span class="post-title" title="Ubuntu_Linux使用笔记">Ubuntu_Linux使用笔记</span>
+            <span class="post-date" title="2019-04-04 23:18:27">2019/04/04</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/26/python使用/" data-tag="python使用过程中的记录" data-author>
+            <span class="post-title" title="python使用">python使用</span>
+            <span class="post-date" title="2019-04-26 09:20:19">2019/04/26</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/06/18/乐鑫2020成电站提前批笔试题/" data-tag="面试" data-author>
+            <span class="post-title" title="乐鑫2020成电站提前批笔试题">乐鑫2020成电站提前批笔试题</span>
+            <span class="post-date" title="2019-06-18 21:49:04">2019/06/18</span>
+        </a>
+        
+        <a class="其他 " href="/2019/03/30/博客使用/" data-tag="博客遇到的问题" data-author>
+            <span class="post-title" title="博客使用">博客使用</span>
+            <span class="post-date" title="2019-03-30 09:33:01">2019/03/30</span>
+        </a>
+        
+        <a class="其他 " href="/2019/03/29/博客搭建/" data-tag="博客有关" data-author>
+            <span class="post-title" title="博客搭建">博客搭建</span>
+            <span class="post-date" title="2019-03-29 23:18:54">2019/03/29</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/02/实用工具/" data-tag="实用工具" data-author>
+            <span class="post-title" title="实用工具">实用工具</span>
+            <span class="post-date" title="2019-04-02 10:14:29">2019/04/02</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" data-tag="概率编程" data-author>
+            <span class="post-title" title="Pyro:Deep Universal Probabilistic Programming">Pyro:Deep Universal Probabilistic Programming</span>
+            <span class="post-date" title="2019-04-09 10:06:26">2019/04/09</span>
+        </a>
+        
+        <a class="脉冲神经网络 " href="/2019/06/21/脉冲神经网络ODIN实现/" data-tag="ODIN" data-author>
+            <span class="post-title" title="脉冲神经网络ODIN实现">脉冲神经网络ODIN实现</span>
+            <span class="post-date" title="2019-06-21 11:22:23">2019/06/21</span>
+        </a>
+        
+        <a class="脉冲神经网络 " href="/2019/06/15/脉冲神经网络机遇与挑战/" data-tag="SNN" data-author>
+            <span class="post-title" title="脉冲神经网络机遇与挑战">脉冲神经网络机遇与挑战</span>
+            <span class="post-date" title="2019-06-15 20:39:48">2019/06/15</span>
+        </a>
+        
+        <a class="Intel与概率计算 " href="/2019/04/01/Intel概率计算报道/" data-tag="项目" data-author>
+            <span class="post-title" title="Intel概率计算报道">Intel概率计算报道</span>
+            <span class="post-date" title="2019-04-01 17:37:54">2019/04/01</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/03/概率编程之PyMC3/" data-tag="概率编程" data-author>
+            <span class="post-title" title="概率编程之PyMC3">概率编程之PyMC3</span>
+            <span class="post-date" title="2019-04-03 20:10:11">2019/04/03</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/03/30/数字IC设计面试100题/" data-tag="求职" data-author>
+            <span class="post-title" title="数字IC设计面试100题">数字IC设计面试100题</span>
+            <span class="post-date" title="2019-03-30 10:40:56">2019/03/30</span>
+        </a>
+        
+        <a class="工作周报与报告 " href="/2019/04/08/工作日志/" data-tag="工作日志" data-author>
+            <span class="post-title" title="工作日志">工作日志</span>
+            <span class="post-date" title="2019-04-08 10:01:30">2019/04/08</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" data-tag="概率计算" data-author>
+            <span class="post-title" title="MIT论文1-Venture:用于概率元编程的可扩展平台">MIT论文1-Venture:用于概率元编程的可扩展平台</span>
+            <span class="post-date" title="2019-04-04 17:50:35">2019/04/04</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Testbench书写" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Testbench书写</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a data-rel="数字IC设计">数字IC设计</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">Testbench</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title="更新时间: 2019-09-16 10:45:42">2019-09-06 10:14</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Testbench书写技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">1. 复位信号封装成task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">2. 封装有用的子程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">3. 关于变量的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">4. 结构化Testbech</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">5. 读/写紊乱状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">测试用例设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">1. 模拟串口自发通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">2. 乘法器全覆盖测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">3. 可重用MCU读/写设计</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>来自深入浅出玩转FPGA<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#testbench书写技巧">Testbench书写技巧</a><ul>
+<li><a href="#1-复位信号封装成task">1. 复位信号封装成task</a></li>
+<li><a href="#2-封装有用的子程序">2. 封装有用的子程序</a></li>
+<li><a href="#3-关于变量的定义">3. 关于变量的定义</a></li>
+<li><a href="#4-结构化testbech">4. 结构化Testbech</a></li>
+<li><a href="#5-读写紊乱状态">5. 读/写紊乱状态</a></li>
+</ul>
+</li>
+<li><a href="#测试用例设计">测试用例设计</a><ul>
+<li><a href="#1-模拟串口自发通信">1. 模拟串口自发通信</a></li>
+<li><a href="#2-乘法器全覆盖测试">2. 乘法器全覆盖测试</a></li>
+<li><a href="#3-可重用mcu读写设计">3. 可重用MCU读/写设计</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h2><span id="testbench书写技巧">Testbench书写技巧</span></h2><h3><span id="1-复位信号封装成task">1. 复位信号封装成task</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//复位信号的产生</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  reset_task(<span class="number">100</span>);</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">  <span class="keyword">task</span> reset_task;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">15</span>:<span class="number">0</span>] reset_time;</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    reset = <span class="number">0</span>;</span><br><span class="line">    #reset_time;</span><br><span class="line">    reset = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
+<h3><span id="2-封装有用的子程序">2. 封装有用的子程序</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//封装一些测试时有用的报告显示</span></span><br><span class="line"><span class="comment">//包括error, warning, fatal, terminate</span></span><br><span class="line"><span class="keyword">module</span> print_task();</span><br><span class="line"></span><br><span class="line"><span class="comment">//显示warning报告，同时包含显示当前时间的警告内容（由用户输入）</span></span><br><span class="line"><span class="keyword">task</span> warning;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">80</span>*<span class="number">8</span>:<span class="number">1</span>] msg;</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$write</span>(<span class="string">"WARNING at %t: %s"</span>, <span class="built_in">$time</span>, msg);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//显示error报告，同时包含显示当前时间的警告内容（由用户输入）</span></span><br><span class="line"><span class="keyword">task</span> error;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">80</span>*<span class="number">8</span>:<span class="number">1</span>] msg;</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$write</span>(<span class="string">"-ERROR- at %t: %s"</span>, <span class="built_in">$time</span>, msg);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//显示fatal报告，同时包含显示当前时间的警告内容（由用户输入）</span></span><br><span class="line"><span class="keyword">task</span> fatal;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">80</span>*<span class="number">8</span>:<span class="number">1</span>] msg;</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$write</span>(<span class="string">"*FATAL* at %t: %s"</span>, <span class="built_in">$time</span>, msg);</span><br><span class="line">    terminate;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">task</span> terminate;</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$write</span>(<span class="string">"simulation completed\n"</span>);</span><br><span class="line">    <span class="built_in">$finish</span>;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>在使用封装子程序时<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用print_task模块封装好的task</span></span><br><span class="line"><span class="keyword">module</span> test_case();</span><br><span class="line"><span class="comment">//例化已经编写好的print_task.v，后面就可以调用封装好的task了</span></span><br><span class="line">print_task print();</span><br><span class="line">...</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line"><span class="keyword">if</span>(...) print<span class="variable">.error</span>(<span class="string">"unexpected response\n"</span>);</span><br><span class="line">...</span><br><span class="line">print<span class="variable">.terminate</span>;</span><br><span class="line"><span class="keyword">endtask</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
+<h3><span id="3-关于变量的定义">3. 关于变量的定义</span></h3><p>编写Testbench关于全局变量的错误是，一个定义好的全局变量应用到两个alaways块中，由于并行性的工作机制，可能导致意想不到的结果<br>可以在begin…end之间定义alaways块名block:block1, 这样两个alaways块内的变量i就互不相关了，全局变量变为局部变量</p>
+<h3><span id="4-结构化testbech">4. 结构化Testbech</span></h3><p>Testbench例化了三个子模块</p>
+<ul>
+<li>print_task print()包含常用的信息打印任务封装</li>
+<li>sys_ctrl_task sys_ctrl()包含系统时钟的产生和系统复位任务</li>
+<li>dsp_ctrl_task dsp_ctrl()包含DSP读写控制模拟<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> 可以在<span class="keyword">begin</span></span><br><span class="line">  sys_ctrl<span class="variable">.sys_reset</span>(<span class="number">32'd1000</span>)</span><br><span class="line">  #<span class="number">1000</span>;</span><br><span class="line">  dsp_ctrl<span class="variable">.task_dsp_write</span>(SELECT_STRB0, <span class="number">24</span>h'<span class="number">000001</span>, <span class="number">16'h00ff</span>);<span class="comment">//DSP写任务调用</span></span><br><span class="line">  #<span class="number">1000</span>;</span><br><span class="line">  dsp_ctrl<span class="variable">.task_dsp_read</span>(SELECT_STRB0, <span class="number">24</span>h'<span class="number">000008</span>, dsp_rd_data);<span class="comment">//DSP读任务调用</span></span><br><span class="line">  ....</span><br><span class="line">  print<span class="variable">.terminate</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> h1; <span class="comment">// DSP时钟模拟，h1为dsp的指令周期</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  h1 = <span class="number">1'b0</span>;</span><br><span class="line">  <span class="keyword">forever</span></span><br><span class="line">    #<span class="number">20</span> h1 = ~h1;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//模拟DSP读FPGA任务</span></span><br><span class="line"><span class="keyword">task</span> task_dsp_read;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] tcs; <span class="comment">//片选输入</span></span><br><span class="line">  <span class="keyword">input</span> [<span class="number">23</span>:<span class="number">0</span>] taddr; <span class="comment">//地址输入</span></span><br><span class="line">  <span class="keyword">output</span> [<span class="number">15</span>:<span class="number">0</span>] tdata; <span class="comment">//数据读出</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//模拟DSP写FPGA任务</span></span><br><span class="line"><span class="keyword">task</span> task_dsp_write;</span><br><span class="line">  <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] tcs; <span class="comment">//片选输入</span></span><br><span class="line">  <span class="keyword">input</span> [<span class="number">23</span>:<span class="number">0</span>] taddr; <span class="comment">//地址输入</span></span><br><span class="line">  <span class="keyword">output</span> [<span class="number">15</span>:<span class="number">0</span>] tdata; <span class="comment">//数据读出</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure>
+<h3><span id="5-读写紊乱状态">5. 读/写紊乱状态</span></h3><p>同一个时刻对同一个寄存器进行读/写容易发生紊乱，阻塞赋值一个always块要对count写，另一个always块对count读，就会造成仿真器输出结果不确定。可以通过非阻塞赋值一个always块对count写，紊乱得以解决。</p>
+<p>我们定义了一个write的任务，调用wirte，如下所示，由于verilog的always和inital在执行时都是并行工作的，有可能两个initaial同时进行task的调用、同时需要些存储器，冲突的结果无法预料<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> write(<span class="number">8'h5A</span>, <span class="number">8'h00</span>);</span><br><span class="line"><span class="keyword">initial</span> write(<span class="number">8'hAD</span>, <span class="number">8'h34</span>);</span><br></pre></td></tr></table></figure></p>
+<p>可以在write任务中加上这么两行<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> write;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">reg</span> in_use;</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(in_use==<span class="number">1'b1</span>) <span class="built_in">$stop</span>;</span><br><span class="line">    ....</span><br><span class="line">    in_use = <span class="number">1'b0</span>;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br></pre></td></tr></table></figure></p>
+<h2><span id="测试用例设计">测试用例设计</span></h2><h3><span id="1-模拟串口自发通信">1. 模拟串口自发通信</span></h3><p>遍历测试与随机测试，对发送出去的数据和接收到的数据进行检测对比<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//遍历测试</span></span><br><span class="line"><span class="keyword">for</span>(cnt=<span class="number">0</span>; cnt&lt;<span class="number">255</span>; cnt=cnt+<span class="number">1'b1</span>) <span class="keyword">begin</span> <span class="comment">//顺序发送0~255</span></span><br><span class="line"> tx_task(cnt);        <span class="comment">//调用发送任务发送数据</span></span><br><span class="line"> @(<span class="keyword">negedge</span> rx_flag);</span><br><span class="line">  <span class="keyword">if</span>(data_temp == cnt)</span><br><span class="line">    <span class="built_in">$write</span>(<span class="string">"transmit:%d, receive: %d; ture\n"</span>, cnt, data_temp);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$write</span>(<span class="string">"transmit:%d, receive: %d; error\n"</span>, cnt, data_temp);</span><br><span class="line">    error(<span class="string">"false"</span>);    </span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//随机测试</span></span><br><span class="line"><span class="keyword">for</span>(cnt=<span class="number">0</span>; cnt&lt;<span class="number">255</span>; cnt=cnt+<span class="number">1'b1</span>) <span class="keyword">begin</span> <span class="comment">//发送256次</span></span><br><span class="line"> tx_task(<span class="built_in">$random</span>);    <span class="comment">//发送随机数据                          </span></span><br><span class="line"> @(<span class="keyword">negedge</span> rx_flag);</span><br><span class="line">  <span class="keyword">if</span>(data_temp == cnt)</span><br><span class="line">    <span class="built_in">$write</span>(<span class="string">"transmit:%d, receive: %d; ture\n"</span>, cnt, data_temp);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$write</span>(<span class="string">"transmit:%d, receive: %d; error\n"</span>, cnt, data_temp);</span><br><span class="line">    error(<span class="string">"false"</span>);    </span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<h3><span id="2-乘法器全覆盖测试">2. 乘法器全覆盖测试</span></h3><p>自动对比，并将结果保存至txt文件中<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">16'hffff</span>; i=i+<span class="number">1</span>)<span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">16'hffff</span>; j=j+<span class="number">1</span>)<span class="keyword">begin</span></span><br><span class="line">    mux_task(i,j);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">task</span> mux_task;</span><br><span class="line">  <span class="keyword">input</span> mux_a;</span><br><span class="line">  <span class="keyword">input</span> mux_b;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    ain = mux_a; <span class="comment">//送乘数</span></span><br><span class="line">    bin = mux_b; <span class="comment">//送被乘数</span></span><br><span class="line">    @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    #<span class="number">2</span> start = <span class="number">1</span>; <span class="comment">//启动乘法器</span></span><br><span class="line">    @(<span class="keyword">posedge</span> done) <span class="comment">//等待运算完成</span></span><br><span class="line">    @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    #<span class="number">2</span> mux_result = yout; <span class="comment">//读出运算结果</span></span><br><span class="line">    @(<span class="keyword">posedge</span> clk);</span><br><span class="line">    #<span class="number">2</span> start = <span class="number">0</span>;</span><br><span class="line">    @(<span class="keyword">posedge</span> clk);</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endtask</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> done)<span class="keyword">begin</span></span><br><span class="line">  @(<span class="keyword">posedge</span> clk);</span><br><span class="line">  @(<span class="keyword">posedge</span> clk); <span class="comment">//等待结果锁存完成</span></span><br><span class="line">  <span class="built_in">$fdisplay</span>(txt_file, <span class="string">"ain=%d, bin=%d, bin=%d, yout=%d\t"</span>, ain, bin, mux_result);</span><br><span class="line">  <span class="comment">//打印运算结果</span></span><br><span class="line">  <span class="keyword">if</span>(ain * bin == yout) <span class="built_in">$fdisplay</span>(txt_file, <span class="string">"right\n"</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$fdisplay</span>(txt_file, <span class="string">"right\n"</span>);</span><br><span class="line">    wrong_timer = wrong_timer + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  @(<span class="keyword">posedge</span> clk);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<h3><span id="3-可重用mcu读写设计">3. 可重用MCU读/写设计</span></h3><p>更新时序特性，编写测试模块<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> mcu_wr_task;</span><br><span class="line">  <span class="keyword">input</span>[<span class="number">15</span>:<span class="number">0</span>] wraddr;</span><br><span class="line">  <span class="keyword">input</span>[<span class="number">7</span>:<span class="number">0</span>] wrdata;</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="variable">#(127-43)</span>;</span><br><span class="line">    mcu_p0_link = <span class="number">1</span>;</span><br><span class="line">    mcu_p0_out = waddr[<span class="number">7</span>:<span class="number">0</span>];</span><br><span class="line">    mcu_p1 = waddr[<span class="number">15</span>:<span class="number">8</span>];</span><br><span class="line">    #<span class="number">43</span>;</span><br><span class="line">    mcu_ale = <span class="number">0</span>;</span><br><span class="line">    #<span class="number">48</span>;</span><br><span class="line">    mcu_p0_out = &#123;<span class="built_in">$random</span>&#125;;</span><br><span class="line">    <span class="variable">#(250-48-23)</span>;</span><br><span class="line">    mcu_p0_out = wrdata;</span><br><span class="line">    ....</span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Testbench书写</p>
+    
+    <p><span class="copy-title">本文作者:</span><a title="徐志康">徐志康</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-09-06, 10:14:30</p>
+    <p><span class="copy-title">最后更新:</span>2019-09-16, 10:45:42</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/06/Testbench书写/" title="Testbench书写">http://yoursite.com/2019/09/06/Testbench书写/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class id="rocket"></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1"></script>
+
+<script src="/js/script.js?v=1.0.1"></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#概率编程','#项目','#Testbench','#Linux使用','#python使用过程中的记录','#面试','#博客遇到的问题','#博客有关','#实用工具','#ODIN','#SNN','#求职','#工作日志','#概率计算',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

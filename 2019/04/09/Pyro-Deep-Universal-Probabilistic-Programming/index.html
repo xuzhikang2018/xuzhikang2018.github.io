@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <title>Pyro:Deep Universal Probabilistic Programming | 徐志康的技术博客</title>
+  <meta name="keywords" content=" 概率编程 ">
+  <meta name="description" content="Pyro:Deep Universal Probabilistic Programming | 徐志康的技术博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="来自深入浅出玩转FPGA">
+<meta name="keywords" content="Testbench">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Testbench书写">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/Testbench书写/index.html">
+<meta property="og:site_name" content="徐志康的技术博客">
+<meta property="og:description" content="来自深入浅出玩转FPGA">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-16T02:45:42.883Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Testbench书写">
+<meta name="twitter:description" content="来自深入浅出玩转FPGA">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>徐志康</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"/>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(17)</small></div></li>
+    
+        
+            
+            <li><div data-rel="probabilistic programming">probabilistic programming<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Intel与概率计算">Intel与概率计算<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数字IC设计">数字IC设计<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="其他">其他<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="脉冲神经网络">脉冲神经网络<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工作周报与报告">工作周报与报告<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url" href="/about">关于</a><a style="width: 50%" class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="17">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off" id="local-search-input">
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none">
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">概率编程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">项目</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Testbench</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Linux使用</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">python使用过程中的记录</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">博客遇到的问题</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">博客有关</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">实用工具</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ODIN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">求职</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">工作日志</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">概率计算</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a class="probabilistic programming " href="/2019/04/09/Deep-Probabilitic-Programming/" data-tag="概率编程" data-author>
+            <span class="post-title" title="Deep Probabilitic Programming">Deep Probabilitic Programming</span>
+            <span class="post-date" title="2019-04-09 11:15:58">2019/04/09</span>
+        </a>
+        
+        <a class="Intel与概率计算 " href="/2019/04/02/MIT概率计算小组/" data-tag="项目" data-author>
+            <span class="post-title" title="MIT概率计算小组">MIT概率计算小组</span>
+            <span class="post-date" title="2019-04-02 11:08:22">2019/04/02</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/09/06/Testbench书写/" data-tag="Testbench" data-author>
+            <span class="post-title" title="Testbench书写">Testbench书写</span>
+            <span class="post-date" title="2019-09-06 10:14:30">2019/09/06</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/04/Ubuntu_Linux使用笔记/" data-tag="Linux使用" data-author>
+            <span class="post-title" title="Ubuntu_Linux使用笔记">Ubuntu_Linux使用笔记</span>
+            <span class="post-date" title="2019-04-04 23:18:27">2019/04/04</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/26/python使用/" data-tag="python使用过程中的记录" data-author>
+            <span class="post-title" title="python使用">python使用</span>
+            <span class="post-date" title="2019-04-26 09:20:19">2019/04/26</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/06/18/乐鑫2020成电站提前批笔试题/" data-tag="面试" data-author>
+            <span class="post-title" title="乐鑫2020成电站提前批笔试题">乐鑫2020成电站提前批笔试题</span>
+            <span class="post-date" title="2019-06-18 21:49:04">2019/06/18</span>
+        </a>
+        
+        <a class="其他 " href="/2019/03/30/博客使用/" data-tag="博客遇到的问题" data-author>
+            <span class="post-title" title="博客使用">博客使用</span>
+            <span class="post-date" title="2019-03-30 09:33:01">2019/03/30</span>
+        </a>
+        
+        <a class="其他 " href="/2019/03/29/博客搭建/" data-tag="博客有关" data-author>
+            <span class="post-title" title="博客搭建">博客搭建</span>
+            <span class="post-date" title="2019-03-29 23:18:54">2019/03/29</span>
+        </a>
+        
+        <a class="其他 " href="/2019/04/02/实用工具/" data-tag="实用工具" data-author>
+            <span class="post-title" title="实用工具">实用工具</span>
+            <span class="post-date" title="2019-04-02 10:14:29">2019/04/02</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" data-tag="概率编程" data-author>
+            <span class="post-title" title="Pyro:Deep Universal Probabilistic Programming">Pyro:Deep Universal Probabilistic Programming</span>
+            <span class="post-date" title="2019-04-09 10:06:26">2019/04/09</span>
+        </a>
+        
+        <a class="脉冲神经网络 " href="/2019/06/21/脉冲神经网络ODIN实现/" data-tag="ODIN" data-author>
+            <span class="post-title" title="脉冲神经网络ODIN实现">脉冲神经网络ODIN实现</span>
+            <span class="post-date" title="2019-06-21 11:22:23">2019/06/21</span>
+        </a>
+        
+        <a class="脉冲神经网络 " href="/2019/06/15/脉冲神经网络机遇与挑战/" data-tag="SNN" data-author>
+            <span class="post-title" title="脉冲神经网络机遇与挑战">脉冲神经网络机遇与挑战</span>
+            <span class="post-date" title="2019-06-15 20:39:48">2019/06/15</span>
+        </a>
+        
+        <a class="Intel与概率计算 " href="/2019/04/01/Intel概率计算报道/" data-tag="项目" data-author>
+            <span class="post-title" title="Intel概率计算报道">Intel概率计算报道</span>
+            <span class="post-date" title="2019-04-01 17:37:54">2019/04/01</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/03/概率编程之PyMC3/" data-tag="概率编程" data-author>
+            <span class="post-title" title="概率编程之PyMC3">概率编程之PyMC3</span>
+            <span class="post-date" title="2019-04-03 20:10:11">2019/04/03</span>
+        </a>
+        
+        <a class="数字IC设计 " href="/2019/03/30/数字IC设计面试100题/" data-tag="求职" data-author>
+            <span class="post-title" title="数字IC设计面试100题">数字IC设计面试100题</span>
+            <span class="post-date" title="2019-03-30 10:40:56">2019/03/30</span>
+        </a>
+        
+        <a class="工作周报与报告 " href="/2019/04/08/工作日志/" data-tag="工作日志" data-author>
+            <span class="post-title" title="工作日志">工作日志</span>
+            <span class="post-date" title="2019-04-08 10:01:30">2019/04/08</span>
+        </a>
+        
+        <a class="probabilistic programming " href="/2019/04/04/MIT论文1-Venture-用于概率元编程的可扩展平台/" data-tag="概率计算" data-author>
+            <span class="post-title" title="MIT论文1-Venture:用于概率元编程的可扩展平台">MIT论文1-Venture:用于概率元编程的可扩展平台</span>
+            <span class="post-date" title="2019-04-04 17:50:35">2019/04/04</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Pyro-Deep-Universal-Probabilistic-Programming" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Pyro:Deep Universal Probabilistic Programming</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a data-rel="probabilistic programming">probabilistic programming</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">概率编程</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title="更新时间: 2019-04-09 11:05:48">2019-04-09 10:06</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Absract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Design Principle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Project Openness and Development</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">4. Existing Systems</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">5. Experiments</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Pyro:Deep Universal Probabilistic Programming<br><a id="more"></a></p>
+<!-- toc -->
+<ul>
+<li><a href="#absract">Absract</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#design-principle">Design Principle</a></li>
+<li><a href="#project-openness-and-development">Project Openness and Development</a></li>
+<li><a href="#4-existing-systems">4. Existing Systems</a></li>
+<li><a href="#5-experiments">5. Experiments</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="absract">Absract</span></h2><p>Pyro是一种基于Python的概率编程语言，作为在AI研究中开发高级概率模型的平台。为了扩展到大型数据集和高维模型，Pyro使用基于PyTorch构建的随机变分推理算法和概率分布，PyTorch是一个现代GPU加速的深度学习框架。为了适应复杂或模型特定的算法行为，Pyro利用Poutine，一个可组合构建块库，用于修改概率程序的行为。<br>关键词：概率编程，图形模型，近似贝叶斯推理，生成模型，深度学习</p>
+<h2><span id="introduction">Introduction</span></h2><p>近年来，结构丰富的概率模型已经在AI的许多基本问题上展示了有希望的结果（Ghahramani（2015））。但是，大多数这样的模型仍然是从零开始实现的系统，这减缓他们的发展，限制他们的范围和可扩展性。概率编程语言（PPL）有望减轻这种负担，但实际上，更高级的模型通常需要针对特定​​应用定制的高性能推理引擎。我们确定了设计原则，使PPL能够在保持灵活性的同时扩展到高级研究应用，我们认为这些原则在Pyro PPL中完全实现。</p>
+<h2><span id="design-principle">Design Principle</span></h2><p>首先，适合开发最先进的AI研究模型的PPL<b>应该具有表现力</b>：它应该能够简明地描述具有数据依赖内部控制流的模型或潜在变量，其存在取决于其他潜在变量的值 ，或仅以封闭形式定义为非标准化联合分布的模型。</p>
+<p>为了实现PPL，它必须是<b>可扩展的</b>：其近似推理算法必须能够无缝地处理AI研究中常见的大数据集和非共轭高维模型，并且应尽可能利用编译器加速。</p>
+<p>针对研究模型的PPL应该是<b>灵活的</b>：除了可扩展性之外，许多高级模型还需要具有复杂的模型特定行为的推理算法。PPL应该使研究人员能够快速，轻松地实现此类行为，并应在模型，推理和运行时实现之间强制分离关注点。</p>
+<p>最后，针对研究人员的PPL作为用户应力求<b>最小化</b>：为了最大限度地减少认知开销，它应该与现有语言和系统共享其大部分语法和语义，并与其他工具（如可视化库）配合使用。</p>
+<p>从表2中可以清楚地看出，这四个原则经常是冲突的，其中一个是以牺牲其他原则为代价的。例如，过于灵活的设计可能非常难以有效和可扩展地实现，尤其是在同时将新语言与现有工具集成的同时。类似地，启用自定义推理算法的开发可能是困难的，而不限制模型表达性。在本节中，我们描述了我们在Pyro中做出的设计选择，以平衡所有四个目标。</p>
+<p>Pyro嵌入在Python中，Pyro程序被编写为Python函数或callables，只有两个额外的语言原语（其行为被推理算法覆盖）：pyro.sample用于注释对具有内部随机性的函数的调用，以及pyro.param 用可以改变它们的推理算法学习参数。Pyro模型可能包含任意Python代码并以任意方式与其交互，包括通过pyro.sample的obs关键字参数表示非标准化模型。Pyro的语言原语可以与Python的所有控件构造一起使用，包括递归，循环和条件。因此，特定执行中随机变量的存在可能依赖于任何Python控件ow构造。</p>
+<p>Pyro实现了几种通用概率推理算法，包括No U-turn采样器（Hoffman和Gelman（2014）），哈密顿蒙特卡罗的变体。然而，主推理算法是基于梯度的随机变分推理（SVI）（Kingma和Welling（2014）），其使用随机梯度下降来优化近似和真实后验分布之间的发散度量的蒙特卡洛估计。<br>由于GPU加速的张量数学和通过PyTorch的反向模式自动分解，Pyro可以扩展到复杂的高维模型，并且由于在SVI中通过小批量数据计算的随机梯度估计，它可以扩展到大型数据集。</p>
+<p>Pyro中的一些推理算法，例如SVI和重要性采样，可以使用任意Pyro程序（称为<u>guide</u>，来自webPPL的概念）作为近似后验或提议分布。给定模型的guide必须采用与模型相同的输入参数，并为模型中的每个无约束样本语句包含相应的样本语句，否则不受限制。然后，用户可以自由地表达关于后验分布的复杂假设，例如， 有条件的独立结构。与webPPL和Anglican不同，Pyro guide可能不依赖于模型内部的值。</p>
+<p>最后，为了实现灵活性和关注点的分离，Pyro构建在Poutine上，这是一个效果处理程序库(Kammar et al)(2013)实现个人控制和簿记操作，用于检查和修改Pyro程序的行为，将推理算法实现与语言细节分离。</p>
+<h2><span id="project-openness-and-development">Project Openness and Development</span></h2><p>Pyro的源代码可以在MIT许可下免费获得，由作者和开源贡献者社区开发，网址为<a href="https://github.com/uber/pyro，文档，示例和讨论论坛都在https上在线托管：" target="_blank" rel="noopener">https://github.com/uber/pyro，文档，示例和讨论论坛都在https上在线托管：</a> //pyro.ai。在将代码合并到主代码库之前，通过持续集成服务自动运行全面的测试套件，以保持高水平的项目质量和可用性。</p>
+<p>我们还发现，虽然PyTorch是张量运算和自动微分的宝贵基础，但它缺少一个高性能的概率分布库。因此，几位作者在PyTorch分发的上游做了大量的开源贡献。1受TensorFlow分发的启发，一个新的PyTorch核心库(Dillon et al)(2017年)。</p>
+<h2><span id="4-existing-systems">4. Existing Systems</span></h2><p><img src="https://i.loli.net/2019/04/09/5cac049fd19be.png" alt="Existing System.png"></p>
+<p>概率编程和近似推理是积极研究的领域，因此存在许多现有的概率编程语言和系统。我们简单地提到几个在Pyro开发中特别有用的东西，遗憾地省略（由于空间限制）许多系统，简单的直接比较更加困难。我们还强调，与传统的编程语言开发一样，我们的设计决策并非普遍适用于概率编程，也不适用于概率编程，而其他系统则有目的地使不同的tradof来实现不同的目标。</p>
+<p>Stan（Carpenter等人（2017）是一种领域特定语言，用于描述一类受限概率的程序并在这些模型中执行高质量的自动推理。Church（Goodman et al。（2008））是Scheme的概率语言，是一种早期的通用概率编程语言，能够表示任何可计算的概率分布。Venture（Mansinghka et al。（2018））是一种通用语言，专注于表现力和灵活性以及自定义语法和虚拟机。Anglican（Tolpin等人（2016））和webPPL（Goodman和Stuhlmuller（2014））是Church的轻量级后继者，在通用编程语言Clojure和JavaScript中作为句法子集（Wingate等人（2011））嵌入。<br>Edward（Tran et al。（2017））是一个基于静态TensorFlow图的PPL，它具有模型和推理的可组合表示。ProbTorch（Siddharth等人（2017））是一个建立在PyTorch上的PPL，专注于深度生成模型和开发变异推理的新目标。图灵（Ge et al。（2018））是一个嵌入Julia的PPL，具有可组合的MCMC算法</p>
+<h2><span id="5-experiments">5. Experiments</span></h2><p>为了证明Pyro符合我们的设计目标，我们实施了几个最先进的模型。这里我们专注于变分自动编码器（VAE; Kingma和Welling（2014））和深马尔可夫模型（DMM; Krishnan等人）（2017）），非线性状态空间模型。</p>
+<p>为了证明Pyro满足我们的设计目标，我们实现了几个最先进的模型。2这里我们重点介绍变分自动编码器(VAE；Kingma和Willing(2014)和DeepMarkovModel(DMM；Krishnan等人)。(2017)，这是一个非线性状态空间模型，已用于多种应用，<b>包括音频生成和因果推理</b>。<br>VAE是深度概率建模的标准例子，而DMM有几个特点使其成为理想的比较点：它是一个高维、非共轭的模型，设计为适合于大型数据集；序列中潜在变量的数量取决于输入数据；它使用手工设计的后验近似。</p>
+<p>Pyro派生的模型和推理程序几乎完全复制原始论文，除了我们使用蒙特卡罗估计而不是KL分歧项的精确解析表达式。我们使用MNIST数据集和2隐藏层MLP编码器和解码器网络，其中VAE的变化隐藏层大小#h和潜在代码大小#z以及digital music的相同数据集来训练DMM。</p>
+<p>为了证明Pyro的抽象不会通过引入太多开销来降低其可扩展性，我们将VAE实现与惯用的PyTorch实现进行了比较.4在验证它们收敛到相同的测试ELBO之后，我们比较了计算一个时钟所需的wall clock时间。梯度更新，在单个NVIDIA GTX 1080Ti上平均超过10个时期的GPU加速小批量随机梯度变化推断（批量大小128）。图3显示Pyro和PyTorch版本之间的相对性能差距是适中的，更重要的是，它随着执行张量操作所花费的总时间的增加而缩小。</p>
+<p>我们使用DMM来评估Pyro的灵活性和表现力。如图4所示，我们发现在5000个训练时期之后，我们能够快速简明地复制完整的DMM模型以及论文中报告的推理配置和定量结果。此外，由于Pyro的模块化设计，我们还能够通过自回归（（IAF）构建具有更具表现力的近似后验的DMM变体（Kingma等人（2016）），用几行代码改善结果，计算成本可忽略不计。<br><img src="https://i.loli.net/2019/04/09/5cac0bc24bfbf.png" alt="图3和图4.png"></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Pyro:Deep Universal Probabilistic Programming</p>
+    
+    <p><span class="copy-title">本文作者:</span><a title="徐志康">徐志康</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-04-09, 10:06:26</p>
+    <p><span class="copy-title">最后更新:</span>2019-04-09, 11:05:48</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/" title="Pyro:Deep Universal Probabilistic Programming">http://yoursite.com/2019/04/09/Pyro-Deep-Universal-Probabilistic-Programming/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class id="rocket"></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1"></script>
+
+<script src="/js/script.js?v=1.0.1"></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#概率编程','#项目','#Testbench','#Linux使用','#python使用过程中的记录','#面试','#博客遇到的问题','#博客有关','#实用工具','#ODIN','#SNN','#求职','#工作日志','#概率计算',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
