@@ -208,7 +208,15 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(1)</small></div></li>
+    <li><div class="all active">全部文章<small>(2)</small></div></li>
+    
+        
+            
+            <li><div data-rel="其他">其他<small>(1)</small></div>
+                
+            </li>
+            
+        
     
         
             
@@ -228,7 +236,7 @@
     </div>
     <div><a class="about  hasFriend  site_url" href="/about">关于</a><a style="width: 50%" class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="1">
+<input type="hidden" id="yelog_site_posts_number" value="2">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -263,6 +271,10 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a class="color5">博客有关</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a class="color5">Testbench</a>
     </li>
     
@@ -271,6 +283,11 @@
 
     
     <nav id="title-list-nav">
+        
+        <a class="其他 " href="/2019/03/29/博客搭建/" data-tag="博客有关" data-author>
+            <span class="post-title" title="博客搭建">博客搭建</span>
+            <span class="post-date" title="2019-03-29 23:18:54">2019/03/29</span>
+        </a>
         
         <a class="数字IC设计 " href="/2019/09/06/Testbench书写/" data-tag="Testbench" data-author>
             <span class="post-title" title="Testbench书写">Testbench书写</span>
@@ -382,7 +399,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#Testbench',],
+            'data': ['#博客有关','#Testbench',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
